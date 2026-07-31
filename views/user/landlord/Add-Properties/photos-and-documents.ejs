@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../../partials/sidebar-landlord') %>
+    <!-- Shared landlord sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Shared landlord header -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-bold">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Property listing setup
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">
+                Photos &amp; documents
+              </h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Add images for the listing and any useful property documents.
+                You can save as a draft without completing every upload.
+              </p>
+            </div>
+            <button
+              class="self-start md:self-auto text-primary text-sm font-bold hover:underline"
+            >
+              Save draft
+            </button>
+          </div>
+
+          <!-- Compact five-step progress -->
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4"
+          >
+            <ol class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Address &amp; type</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Listing details</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Rent &amp; availability</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  >4</span
+                ><span class="text-xs font-bold">Photos &amp; documents</span>
+              </li>
+              <li class="flex items-center gap-2 text-on-surface-variant">
+                <span
+                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
+                  >5</span
+                ><span class="text-xs font-bold">Review &amp; publish</span>
+              </li>
+            </ol>
+          </section>
+
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+          >
+            <div class="px-5 py-4 border-b border-outline-variant">
+              <h2 class="text-sm font-bold">Step 4: Photos &amp; documents</h2>
+              <p class="text-xs text-on-surface-variant mt-1">
+                Upload property photos and add relevant documents. Required
+                items can be completed before publishing.
+              </p>
+            </div>
+
+            <form class="p-5 space-y-6">
+              <section class="space-y-4">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3"
+                >
+                  <div>
+                    <h3 class="text-sm font-bold">Property photos</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Add clear images of the exterior, rooms and key features.
+                      The first photo will be used as the listing cover.
+                    </p>
+                  </div>
+                  <span class="text-xs text-on-surface-variant"
+                    >0 photos added</span
+                  >
+                </div>
+
+                <label class="block cursor-pointer">
+                  <input
+                    class="sr-only"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                  />
+                  <span
+                    class="min-h-[180px] rounded-xl border-2 border-dashed border-outline-variant bg-surface flex flex-col items-center justify-center text-center px-6 hover:bg-surface-container-low hover:border-primary transition-colors"
+                  >
+                    <span
+                      class="w-11 h-11 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                      ><span class="material-symbols-outlined"
+                        >add_photo_alternate</span
+                      ></span
+                    >
+                    <span class="mt-3 text-sm font-bold text-on-surface"
+                      >Upload photos</span
+                    >
+                    <span class="mt-1 text-xs text-on-surface-variant"
+                      >Drag and drop images here, or select files from your
+                      device.</span
+                    >
+                    <span class="mt-2 text-xs text-on-surface-variant"
+                      >JPG, PNG or WEBP · Up to 10 MB each</span
+                    >
+                  </span>
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >photo_camera</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Cover photo</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Add at least one clear exterior or main-room photo.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >bed</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Rooms</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Include bedrooms, kitchen, bathroom and living space.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >floorplan</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Floorplan</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Optional, but useful for renters comparing layouts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Property documents</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Choose a document category before uploading. Documents can
+                    remain private or later be shared where appropriate.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="document-category"
+                      >Document category</label
+                    >
+                    <select
+                      id="document-category"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option value="">Select a category</option>
+                      <option>Energy performance certificate (EPC)</option>
+                      <option>Gas safety record</option>
+                      <option>Electrical safety certificate</option>
+                      <option>HMO licence</option>
+                      <option>Floorplan</option>
+                      <option>Property inventory</option>
+                      <option>Other property document</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="document-visibility"
+                      >Document visibility</label
+                    >
+                    <select
+                      id="document-visibility"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option value="">Select</option>
+                      <option>Private to landlord</option>
+                      <option>Share with applicants on request</option>
+                      <option>Show on listing</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label class="block cursor-pointer">
+                  <input
+                    class="sr-only"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    multiple
+                  />
+                  <span
+                    class="min-h-[128px] rounded-xl border-2 border-dashed border-outline-variant bg-surface flex flex-col items-center justify-center text-center px-6 hover:bg-surface-container-low hover:border-primary transition-colors"
+                  >
+                    <span
+                      class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                      ><span class="material-symbols-outlined"
+                        >upload_file</span
+                      ></span
+                    >
+                    <span class="mt-3 text-sm font-bold text-on-surface"
+                      >Upload document</span
+                    >
+                    <span class="mt-1 text-xs text-on-surface-variant"
+                      >PDF, JPG or PNG · Up to 10 MB each</span
+                    >
+                  </span>
+                </label>
+              </section>
+
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <p class="text-xs font-bold">Before you publish</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      HomiFund will show any remaining required listing
+                      information on the final review page.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </form>
+
+            <div
+              class="px-5 py-4 bg-surface-container-low border-t border-outline-variant flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <button onclick="window.location.href = '/user/landlord/properties/add/rent'"
+                class="self-start px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-sm font-bold flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_back</span
+                >Back to rent &amp; availability
+              </button>
+              <button class="self-end px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold flex items-center gap-2" onclick="window.location.href = '/user/landlord/properties/add/review'">
+                Continue to review &amp; publish
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="../../../js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

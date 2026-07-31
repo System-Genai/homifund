@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-renter') %>
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant shadow-sm"
+      >
+        <div class="flex items-center gap-4 flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            ><input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+              placeholder="Search documents, applications, properties..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span></button
+            ><button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span></button
+            ><button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3 pl-2">
+            <div class="text-right">
+              <p
+                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+              >
+                Marcus R.<span
+                  class="material-symbols-outlined text-primary text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </p>
+              <p class="text-label-sm text-on-surface-variant">
+                Premium Member
+              </p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden"
+            >
+              <img
+                class="w-full h-full object-cover"
+                alt="Renter profile"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-margin-desktop py-7 bg-surface">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-label-sm uppercase tracking-[0.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Secure rental document vault
+              </p>
+              <h2 class="text-headline-lg text-primary">Documents</h2>
+              <p class="text-body-md text-on-surface-variant mt-2">
+                Upload and manage the reusable documents that support your
+                affordability, rental history and applications.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+              >
+                Manage sharing</button
+              ><button
+                class="px-4 py-2.5 rounded-lg bg-primary text-on-primary text-label-sm font-bold hover:opacity-90 flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >upload_file</span
+                >Upload document
+              </button>
+            </div>
+          </div>
+
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >verified</span
+              >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Verified documents
+                </p>
+                <p class="text-label-sm font-bold text-on-surface mt-0.5">
+                  4 stored for applications
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-error">warning</span>
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Needs attention
+                </p>
+                <p class="text-label-sm font-bold text-on-surface mt-0.5">
+                  1 document expires soon
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-primary">lock</span>
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Application readiness
+                </p>
+                <p class="text-label-sm font-bold text-on-surface mt-0.5">
+                  3 of 4 requirements complete
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            <div class="lg:col-span-8 space-y-4">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 pt-4 border-b border-outline-variant/70 flex flex-wrap gap-x-5 gap-y-2"
+                >
+                  <button
+                    class="pb-3 text-label-sm font-bold text-primary border-b-2 border-primary"
+                  >
+                    All documents</button
+                  ><button
+                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                  >
+                    Identity</button
+                  ><button
+                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                  >
+                    Income</button
+                  ><button
+                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                  >
+                    Rental history</button
+                  ><button
+                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                  >
+                    Other
+                  </button>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full min-w-[780px] text-left">
+                    <thead class="bg-surface-container-low">
+                      <tr
+                        class="text-[10px] uppercase tracking-wider text-on-surface-variant"
+                      >
+                        <th class="px-4 py-3 font-bold">Document</th>
+                        <th class="px-3 py-3 font-bold">Category</th>
+                        <th class="px-3 py-3 font-bold">Status</th>
+                        <th class="px-3 py-3 font-bold">Last updated</th>
+                        <th class="px-3 py-3 font-bold">Expiry</th>
+                        <th class="px-4 py-3 font-bold text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/50">
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >business_center</span
+                            >
+                            <p class="text-label-sm font-bold text-on-surface">
+                              Employment Letter
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Income
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >verified</span
+                            >Verified</span
+                          >
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          04 Jun 2026
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          No expiry
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <div class="inline-flex items-center gap-2">
+                            <button
+                              class="text-primary text-label-sm font-bold hover:underline"
+                            >
+                              View
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Update
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Share
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >account_balance</span
+                            >
+                            <p class="text-label-sm font-bold text-on-surface">
+                              Bank Statements — May 2026
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Income
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex bg-surface-container text-on-surface-variant px-2 py-1 rounded-full text-[10px] font-bold"
+                            >Needs review</span
+                          >
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          01 Jun 2026
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          01 Sep 2026
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <div class="inline-flex items-center gap-2">
+                            <button
+                              class="text-primary text-label-sm font-bold hover:underline"
+                            >
+                              View
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Update
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Share
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >maps_home_work</span
+                            >
+                            <p class="text-label-sm font-bold text-on-surface">
+                              Previous Landlord Reference
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Rental history
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >verified</span
+                            >Verified</span
+                          >
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          21 May 2026
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          No expiry
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <div class="inline-flex items-center gap-2">
+                            <button
+                              class="text-primary text-label-sm font-bold hover:underline"
+                            >
+                              View
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Update
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Share
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >home_pin</span
+                            >
+                            <p class="text-label-sm font-bold text-on-surface">
+                              Proof of Address
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Other
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-error-container text-error px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span class="material-symbols-outlined text-[14px]"
+                              >warning</span
+                            >Expiring soon</span
+                          >
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          15 Mar 2026
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-error font-bold"
+                        >
+                          15 Sep 2026
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <div class="inline-flex items-center gap-2">
+                            <button
+                              class="text-primary text-label-sm font-bold hover:underline"
+                            >
+                              View
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Update
+                            </button>
+                            <button
+                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
+                            >
+                              Share
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3"
+                >
+                  <div>
+                    <h3 class="text-label-md font-bold text-on-surface">
+                      Add a new document
+                    </h3>
+                    <p class="text-label-sm text-on-surface-variant mt-1">
+                      PDF, JPG or PNG files up to 10 MB.
+                    </p>
+                  </div>
+                  <select
+                    class="border border-outline-variant bg-surface rounded-lg px-3 py-2 text-label-sm text-on-surface max-w-full"
+                  >
+                    <option selected>Choose document type</option>
+
+                    <optgroup label="Income & employment">
+                      <option>Employment contract</option>
+                      <option>Employment letter</option>
+                      <option>Recent payslips</option>
+                      <option>Bank statements</option>
+                      <option>HMRC Self Assessment / tax return</option>
+                      <option>Accountant’s certificate</option>
+                      <option>Business accounts</option>
+                      <option>Dividend vouchers</option>
+                      <option>Benefits award letter</option>
+                      <option>Pension income statement</option>
+                      <option>Scholarship or student funding letter</option>
+                      <option>Job offer letter</option>
+                    </optgroup>
+
+                    <optgroup label="Affordability & rent readiness">
+                      <option>
+                        Rent affordability calculator / budget statement
+                      </option>
+                      <option>Guarantor details and proof of income</option>
+                      <option>Guarantor agreement</option>
+                      <option>Savings statement</option>
+                      <option>Deposit evidence</option>
+                      <option>Rent payment history</option>
+                      <option>
+                        Universal Credit housing element statement
+                      </option>
+                    </optgroup>
+
+                    <optgroup label="Rental history & references">
+                      <option>Previous landlord reference</option>
+                      <option>Letting agent reference</option>
+                      <option>Tenancy agreement</option>
+                      <option>Rent account statement</option>
+                      <option>Notice to leave / end-of-tenancy letter</option>
+                      <option>Property inspection report</option>
+                      <option>Employer reference</option>
+                      <option>Character reference</option>
+                    </optgroup>
+
+                    <optgroup label="Household & application support">
+                      <option>Proof of address</option>
+                      <option>Household member details</option>
+                      <option>Child benefit letter</option>
+                      <option>Pet reference or pet profile</option>
+                      <option>Reasonable adjustment supporting document</option>
+                      <option>Other supporting document</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div
+                  class="border-2 border-dashed border-outline-variant rounded-lg px-4 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:border-primary transition-colors"
+                >
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="material-symbols-outlined text-primary text-[24px]"
+                      >upload_file</span
+                    >
+                    <p class="text-label-sm text-on-surface-variant">
+                      Drag and drop a file here, or choose one from your device.
+                    </p>
+                  </div>
+                  <button
+                    class="w-fit px-4 py-2 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary"
+                  >
+                    Browse files
+                  </button>
+                </div>
+              </section>
+            </div>
+
+            <aside class="lg:col-span-4 space-y-4">
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary"
+                      >checklist</span
+                    >
+                    <h3 class="text-label-md font-bold text-on-surface">
+                      Application readiness
+                    </h3>
+                  </div>
+                  <span class="text-label-sm font-bold text-primary"
+                    >3 of 4</span
+                  >
+                </div>
+                <div
+                  class="h-2 w-full bg-surface-container-high rounded-full mt-4 overflow-hidden"
+                >
+                  <div class="h-full bg-primary w-[75%] rounded-full"></div>
+                </div>
+                <div class="mt-4 space-y-2.5 text-label-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"
+                      ><span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >check_circle</span
+                      >Income evidence</span
+                    ><span class="text-primary font-bold">Complete</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"
+                      ><span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >check_circle</span
+                      >Bank statements</span
+                    ><span class="text-primary font-bold">Complete</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"
+                      ><span
+                        class="material-symbols-outlined text-primary text-[16px]"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >check_circle</span
+                      >Rental reference</span
+                    ><span class="text-primary font-bold">Complete</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="flex items-center gap-2"
+                      ><span
+                        class="material-symbols-outlined text-error text-[16px]"
+                        >warning</span
+                      >Proof of address</span
+                    ><span class="text-error font-bold">Update</span>
+                  </div>
+                </div>
+                <button
+                  class="w-full mt-4 py-2.5 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary"
+                >
+                  Complete requirements
+                </button>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary"
+                    >share</span
+                  >
+                  <h3 class="text-label-md font-bold text-on-surface">
+                    Document sharing
+                  </h3>
+                </div>
+                <p class="text-label-sm text-on-surface-variant mt-3">
+                  You control which documents are shared with landlords and
+                  applications.
+                </p>
+                <div class="mt-4 space-y-2.5 text-label-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="text-on-surface-variant"
+                      >Shared with active applications</span
+                    ><span class="font-bold text-on-surface">2</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-primary font-bold">
+                    <span
+                      class="material-symbols-outlined text-[16px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >verified</span
+                    >Secure sharing enabled
+                  </div>
+                  <div class="flex items-center gap-2 text-on-surface-variant">
+                    <span class="material-symbols-outlined text-[16px]"
+                      >undo</span
+                    >Access can be revoked anytime
+                  </div>
+                </div>
+                <button
+                  class="w-full mt-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+                >
+                  Manage sharing
+                </button>
+              </section>
+
+              <section
+                class="bg-surface-container-low rounded-xl border border-outline-variant/60 px-4 py-3 flex items-start gap-3"
+              >
+                <span class="material-symbols-outlined text-primary mt-0.5"
+                  >lock</span
+                >
+                <div>
+                  <h3 class="text-label-sm font-bold text-on-surface">
+                    Your documents stay protected
+                  </h3>
+                  <p class="text-label-sm text-on-surface-variant mt-1">
+                    Documents are stored securely and only shared when you
+                    approve an application or grant access.
+                  </p>
+                </div>
+              </section>
+            </aside>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.querySelectorAll("aside nav a").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          if (!item.classList.contains("bg-secondary-container"))
+            item.style.transform = "translateX(4px)";
+        });
+        item.addEventListener("mouseleave", () => {
+          item.style.transform = "translateX(0px)";
+        });
+      });
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

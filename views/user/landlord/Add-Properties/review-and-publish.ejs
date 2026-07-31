@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../../partials/sidebar-landlord') %>
+    <!-- Shared landlord sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Shared landlord header -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-bold">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Property listing setup
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">
+                Review &amp; publish
+              </h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Check your property listing before it goes live to renters.
+              </p>
+            </div>
+            <button
+              class="self-start md:self-auto text-primary text-sm font-bold hover:underline"
+            >
+              Save draft
+            </button>
+          </div>
+
+          <!-- Compact five-step progress -->
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4"
+          >
+            <ol class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Address &amp; type</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Listing details</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Rent &amp; availability</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Photos &amp; documents</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  >5</span
+                ><span class="text-xs font-bold">Review &amp; publish</span>
+              </li>
+            </ol>
+          </section>
+
+          <!-- Readiness notice -->
+          <section
+            class="rounded-xl border border-outline-variant bg-surface-container-low px-5 py-4"
+          >
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-primary mt-0.5"
+                >assignment_late</span
+              >
+              <div class="flex-1">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+                >
+                  <div>
+                    <h2 class="text-sm font-bold">
+                      Your listing is not ready to publish
+                    </h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Complete the required details below, then return here to
+                      publish.
+                    </p>
+                  </div>
+                  <span
+                    class="text-xs font-bold text-primary bg-secondary-container rounded-full px-3 py-1.5 whitespace-nowrap"
+                    >0 of 4 sections complete</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between gap-4"
+                >
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center"
+                      ><span class="material-symbols-outlined text-[18px]"
+                        >priority_high</span
+                      ></span
+                    >
+                    <div>
+                      <h2 class="text-sm font-bold">
+                        Address &amp; property type
+                      </h2>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Required to identify the property.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="text-primary text-xs font-bold hover:underline"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div
+                  class="px-5 py-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"
+                >
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Property name</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Property type</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Address</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Bedrooms</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between gap-4"
+                >
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center"
+                      ><span class="material-symbols-outlined text-[18px]"
+                        >priority_high</span
+                      ></span
+                    >
+                    <div>
+                      <h2 class="text-sm font-bold">Listing details</h2>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Required information renters will see.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="text-primary text-xs font-bold hover:underline"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div class="px-5 py-4 text-sm">
+                  <p class="text-xs text-on-surface-variant">
+                    Listing title and description
+                  </p>
+                  <p class="mt-1 font-semibold text-on-surface-variant">
+                    Not added
+                  </p>
+                  <p class="text-xs text-on-surface-variant mt-4">
+                    Features and property information
+                  </p>
+                  <p class="mt-1 font-semibold text-on-surface-variant">
+                    Not added
+                  </p>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between gap-4"
+                >
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center"
+                      ><span class="material-symbols-outlined text-[18px]"
+                        >priority_high</span
+                      ></span
+                    >
+                    <div>
+                      <h2 class="text-sm font-bold">Rent &amp; availability</h2>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Required rent and move-in information.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="text-primary text-xs font-bold hover:underline"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div
+                  class="px-5 py-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"
+                >
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Monthly rent</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">
+                      Available from
+                    </p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">
+                      Tenancy deposit
+                    </p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">
+                      Minimum tenancy
+                    </p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      Not added
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between gap-4"
+                >
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center"
+                      ><span class="material-symbols-outlined text-[18px]"
+                        >photo_library</span
+                      ></span
+                    >
+                    <div>
+                      <h2 class="text-sm font-bold">Photos &amp; documents</h2>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Photos and documents improve listing clarity.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="text-primary text-xs font-bold hover:underline"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div
+                  class="px-5 py-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm"
+                >
+                  <div>
+                    <p class="text-xs text-on-surface-variant">Photos</p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      0 added
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-on-surface-variant">
+                      Property documents
+                    </p>
+                    <p class="mt-1 font-semibold text-on-surface-variant">
+                      0 added
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-sm font-bold">Publishing checklist</h2>
+                <div class="mt-4 space-y-3">
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="text-xs text-on-surface-variant"
+                      >Property address and type</span
+                    ><span class="text-xs font-bold text-error">Required</span>
+                  </div>
+                  <div class="h-px bg-outline-variant"></div>
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="text-xs text-on-surface-variant"
+                      >Listing title and description</span
+                    ><span class="text-xs font-bold text-error">Required</span>
+                  </div>
+                  <div class="h-px bg-outline-variant"></div>
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="text-xs text-on-surface-variant"
+                      >Monthly rent and available date</span
+                    ><span class="text-xs font-bold text-error">Required</span>
+                  </div>
+                  <div class="h-px bg-outline-variant"></div>
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="text-xs text-on-surface-variant"
+                      >Photos and documents</span
+                    ><span class="text-xs font-bold text-on-surface-variant"
+                      >Recommended</span
+                    >
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary"
+                    >visibility</span
+                  >
+                  <div>
+                    <h2 class="text-sm font-bold">Renter view</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      When published, renters can view the listing and submit
+                      applications through HomiFund.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+          >
+            <button onclick="window.location.href = '/user/landlord/properties/add/photos'"
+              class="self-start px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-sm font-bold flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >arrow_back</span
+              >Back to photos &amp; documents
+            </button>
+            <button onclick="window.location.href = '/user/landlord/properties'"
+              class="self-end px-4 py-2.5 bg-surface-container-high text-on-surface-variant rounded-lg text-sm font-bold flex items-center gap-2 cursor-not-allowed"
+              disabled
+            >
+              <span class="material-symbols-outlined text-[18px]">publish</span
+              >Publish property
+            </button>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="../../../js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

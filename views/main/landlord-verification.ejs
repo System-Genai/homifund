@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body class="bg-background text-on-surface">
+    <%- include('partials/header') %>
+    
+    <main class="max-w-container-max mx-auto px-margin-desktop py-12">
+      <!-- Progress Stepper -->
+      <div class="w-full mb-12 overflow-x-auto">
+        <div class="flex items-center justify-between max-w-4xl mx-auto">
+          <!-- Step 1: Profile (Completed) -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-xl">check</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-primary"
+              >Profile Setup</span
+            >
+          </div>
+          <div class="flex-1 h-[2px] bg-primary mx-4 -mt-6"></div>
+          <!-- Step 2: Verification (Active) -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center ring-4 ring-primary-fixed"
+            >
+              <span class="font-label-md text-label-md">02</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-primary font-bold"
+              >Verification</span
+            >
+          </div>
+          <div class="flex-1 h-[2px] bg-surface-variant mx-4 -mt-6"></div>
+          <!-- Step 3: HomiScore -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center"
+            >
+              <span class="font-label-md text-label-md">03</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-on-surface-variant"
+              >HomiScore</span
+            >
+          </div>
+          <div class="flex-1 h-[2px] bg-surface-variant mx-4 -mt-6"></div>
+          <!-- Step 4: Dashboard -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center"
+            >
+              <span class="font-label-md text-label-md">04</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-on-surface-variant"
+              >Dashboard</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-desktop">
+        <!-- Left Column: Verification Sections -->
+        <div class="md:col-span-8 space-y-8">
+          <div class="mb-4">
+            <h1 class="font-headline-xl text-headline-xl text-primary mb-2">
+              Verification Centre
+            </h1>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl"
+            >
+              Confirm your institutional-grade credentials to start listing and
+              securing high-value tenancies.
+            </p>
+          </div>
+          <!-- 1. Identity Verification -->
+          <section
+            class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 verification-card"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-secondary-container rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="badge"
+                    >badge</span
+                  >
+                </div>
+                <div>
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Identity Verification
+                  </h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Verify your official personal credentials.
+                  </p>
+                </div>
+              </div>
+              <span
+                class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm text-label-sm"
+                >Pending</span
+              >
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <button
+                class="flex flex-col items-center gap-2 p-4 border border-outline-variant rounded-lg hover:border-primary hover:bg-primary-fixed transition-all"
+              >
+                <span class="material-symbols-outlined">password</span>
+                <span class="font-label-md text-label-md">Passport</span>
+              </button>
+              <button
+                class="flex flex-col items-center gap-2 p-4 border border-outline-variant rounded-lg hover:border-primary hover:bg-primary-fixed transition-all"
+              >
+                <span class="material-symbols-outlined">drive_eta</span>
+                <span class="font-label-md text-label-md">Driving Licence</span>
+              </button>
+              <button
+                class="flex flex-col items-center gap-2 p-4 border border-outline-variant rounded-lg hover:border-primary hover:bg-primary-fixed transition-all"
+              >
+                <span class="material-symbols-outlined">id_card</span>
+                <span class="font-label-md text-label-md">National ID</span>
+              </button>
+            </div>
+            <div
+              class="drag-drop-area p-10 flex flex-col items-center justify-center text-center cursor-pointer"
+            >
+              <span class="material-symbols-outlined text-outline text-5xl mb-4"
+                >cloud_upload</span
+              >
+              <p
+                class="font-body-md text-body-md text-on-surface font-semibold mb-1"
+              >
+                Click to upload or drag and drop
+              </p>
+              <p class="font-label-sm text-label-sm text-on-surface-variant">
+                PNG, JPG or PDF (max. 10MB)
+              </p>
+            </div>
+          </section>
+          <!-- 2. Address Verification -->
+          <section
+            class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 verification-card"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-secondary-container rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="home_pin"
+                    >home_pin</span
+                  >
+                </div>
+                <div>
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Address Verification
+                  </h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    A document showing your name and current address.
+                  </p>
+                </div>
+              </div>
+              <span
+                class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm text-label-sm"
+                >&nbsp;Pending</span
+              >
+            </div>
+            <div class="space-y-4">
+              <div class="relative">
+                <select
+                  class="w-full p-4 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md appearance-none"
+                >
+                  <option>Select document type...</option>
+                  <option>Utility Bill (Electricity, Water, Gas)</option>
+                  <option>Bank Statement</option>
+                  <option>Council Tax Statement</option>
+                </select>
+                <span
+                  class="material-symbols-outlined absolute right-4 top-4 text-outline pointer-events-none"
+                  >expand_more</span
+                >
+              </div>
+              <div
+                class="flex items-center justify-between p-4 bg-surface border border-outline-variant rounded-lg"
+              >
+                <span class="font-body-md text-body-md text-on-surface-variant"
+                  >No file selected</span
+                >
+                <button
+                  class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-label-md transition hover:bg-primary-container"
+                >
+                  Choose File
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- 3. Property Ownership Verification -->
+          <section
+            class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 verification-card"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-secondary-container rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="apartment"
+                    >apartment</span
+                  >
+                </div>
+                <div>
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Property Ownership Verification
+                  </h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Proof of legal title or management rights for your listings.
+                  </p>
+                </div>
+              </div>
+              <span
+                class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm text-label-sm"
+                >Pending</span
+              >
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <label
+                class="flex items-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition"
+              >
+                <input
+                  class="w-5 h-5 text-primary border-outline-variant focus:ring-primary mr-3"
+                  name="ownership"
+                  type="radio"
+                />
+                <span class="font-body-md text-body-md"
+                  >Land Registry Title</span
+                >
+              </label>
+              <label
+                class="flex items-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition"
+              >
+                <input
+                  class="w-5 h-5 text-primary border-outline-variant focus:ring-primary mr-3"
+                  name="ownership"
+                  type="radio"
+                />
+                <span class="font-body-md text-body-md"
+                  >Mortgage Statement</span
+                >
+              </label>
+              <label
+                class="flex items-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition"
+              >
+                <input
+                  class="w-5 h-5 text-primary border-outline-variant focus:ring-primary mr-3"
+                  name="ownership"
+                  type="radio"
+                />
+                <span class="font-body-md text-body-md"
+                  >Management Agreement</span
+                >
+              </label>
+              <label
+                class="flex items-center p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition"
+              >
+                <input
+                  class="w-5 h-5 text-primary border-outline-variant focus:ring-primary mr-3"
+                  name="ownership"
+                  type="radio"
+                />
+                <span class="font-body-md text-body-md">Lease Documents</span>
+              </label>
+            </div>
+            <div
+              class="bg-surface rounded-lg border border-outline-variant overflow-hidden"
+            >
+              <div
+                class="p-4 border-b border-outline-variant bg-surface-container-low font-label-sm text-label-sm uppercase text-on-surface-variant"
+              >
+                Upload Ownership Evidence
+              </div>
+              <div class="p-8 flex flex-col items-center">
+                <button
+                  class="bg-primary text-on-primary flex items-center gap-2 px-6 py-3 rounded-xl font-label-md text-label-md shadow-md hover:shadow-lg transition"
+                >
+                  <span class="material-symbols-outlined">upload_file</span>
+                  Upload Documents
+                </button>
+                <p
+                  class="mt-4 font-label-sm text-label-sm text-on-surface-variant"
+                >
+                  Multiple files allowed. PDF preferred.
+                </p>
+              </div>
+            </div>
+          </section>
+          <!-- 4. Business & Payment Verification -->
+          <section
+            class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 verification-card"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-secondary-container rounded-lg">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    data-icon="payments"
+                    >payments</span
+                  >
+                </div>
+                <div>
+                  <h2 class="font-headline-md text-headline-md text-on-surface">
+                    Business &amp; Payment
+                  </h2>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Connect your financial systems for secure automated payouts.
+                  </p>
+                </div>
+              </div>
+              <span
+                class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm text-label-sm"
+                >Pending</span
+              >
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  >Business Name (If applicable)</label
+                >
+                <input
+                  class="w-full p-4 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition"
+                  placeholder="e.g. Doe Real Estate Ltd"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  >Company Reg Number</label
+                >
+                <input
+                  class="w-full p-4 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition"
+                  placeholder="Enter Registration Number"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div
+              class="bg-primary-container p-6 rounded-xl text-on-primary-container"
+            >
+              <div class="flex items-start gap-4 mb-4">
+                <div class="bg-primary-fixed p-2 rounded-lg text-primary">
+                  <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <div>
+                  <h3 class="font-headline-md text-headline-md mb-1">
+                    Open Banking Connection
+                  </h3>
+                  <p class="font-body-md text-body-md opacity-90">
+                    Verify your bank account instantly and securely using Open
+                    Banking protocols. Recommended for faster HomiScore
+                    processing.
+                  </p>
+                </div>
+              </div>
+              <button
+                class="w-full bg-on-primary text-primary py-4 rounded-xl font-headline-md text-headline-md font-bold hover:bg-primary-fixed transition shadow-lg active:scale-[0.98]"
+              >
+                Connect Bank Account
+              </button>
+            </div>
+          </section>
+          <!-- Bottom Actions -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-6 py-12 border-t border-outline-variant"
+          >
+            <a
+              class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition font-label-md text-label-md"
+              href="/onboarding-landlord"
+            >
+              <span class="material-symbols-outlined">arrow_back</span>
+              Back
+            </a>
+            <a
+              class="text-primary font-bold underline font-label-md text-label-md"
+              href="/"
+              >Save and Finish Later</a
+            >
+            <a
+              class="flex items-center gap-3 bg-primary text-on-primary px-10 py-4 rounded-xl font-headline-md text-headline-md shadow-xl hover:bg-primary-container transition group"
+              href="#"
+            >
+              Continue to HomiScore
+              <span
+                class="material-symbols-outlined group-hover:translate-x-1 transition"
+                >arrow_forward</span
+              > </a
+            ><!-- TODO: target page not created yet -->
+          </div>
+        </div>
+        <!-- Right Column: Landlord Passport -->
+        <aside class="md:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <!-- Landlord Passport Card -->
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline shadow-xl overflow-hidden"
+            >
+              <!-- Passport Header -->
+              <div class="bg-primary p-6 text-on-primary relative">
+                <div class="absolute top-4 right-4 opacity-10">
+                  <span
+                    class="material-symbols-outlined text-6xl"
+                    style="font-size: 80px"
+                    >shield_person</span
+                  >
+                </div>
+                <div class="flex items-center gap-4 mb-4">
+                  <div
+                    class="w-16 h-16 rounded-full border-2 border-primary-fixed overflow-hidden bg-surface-container-high"
+                  >
+                    <img
+                      class="w-full h-full object-cover"
+                      data-alt="A professional studio portrait of a friendly male real estate professional in his 40s wearing a navy blue blazer and white shirt. The background is a soft, blurred modern architectural interior. The lighting is crisp and corporate, matching a clean high-end financial app aesthetic. High-fidelity reliability style."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAthP5kIc0M48SkAn8Rb1XaJTKJ3mKtQnmOmdcE09dlG9kYQFmdoCj1BXYQotjnPMIS9poUr0L-wEYz_JwnWyjhyFNiqETxERy7oHcNH8FQqyZzfj0Ob0Eivk3UTTAF3YWgH4OCXPjGwGTalrNZ1S0kLUuxfiS33o7btWyV9heCpnLyA9PTvUjh8sDEbGnrIUUoKi6yG1gb9j2F4DUIigOUEjqzTR_bDvlGlDALVLU5UPvCtrnjNzhe6XpNsP0dAyDlG2vpyl8-JBuk"
+                    />
+                  </div>
+                  <div>
+                    <h3 class="font-headline-md text-headline-md leading-tight">
+                      Jonathan Doe
+                    </h3>
+                    <p
+                      class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest"
+                    >
+                      Individual Landlord
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="bg-primary-container/40 p-3 rounded-lg border border-primary-fixed/20"
+                >
+                  <div
+                    class="flex justify-between font-label-sm text-label-sm mb-1.5"
+                  >
+                    <span class="">Verification Progress</span>
+                    <span class="">0%</span>
+                  </div>
+                  <div
+                    class="w-full h-2 bg-on-primary-container/20 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="w-0 h-full bg-on-primary transition-all duration-1000"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Passport Content -->
+              <div class="p-6 space-y-6">
+                <!-- Checklist -->
+                <div class="space-y-4">
+                  <h4
+                    class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider"
+                  >
+                    Verification Checklist
+                  </h4>
+                  <ul class="space-y-3">
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-outline"
+                          >pending</span
+                        >
+                        <span class="font-body-md text-body-md text-on-surface"
+                          >Identity</span
+                        >
+                      </div>
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Pending</span
+                      >
+                    </li>
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-outline"
+                          >pending</span
+                        >
+                        <span class="font-body-md text-body-md text-on-surface"
+                          >Address</span
+                        >
+                      </div>
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Pending</span
+                      >
+                    </li>
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-outline"
+                          >pending</span
+                        >
+                        <span class="font-body-md text-body-md text-on-surface"
+                          >Property Ownership</span
+                        >
+                      </div>
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Pending</span
+                      >
+                    </li>
+                    <li class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-outline"
+                          >pending</span
+                        >
+                        <span class="font-body-md text-body-md text-on-surface"
+                          >Payment Account</span
+                        >
+                      </div>
+                      <span class="font-label-sm text-label-sm text-outline"
+                        >Pending</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <hr class="border-outline-variant" />
+                <!-- HomiScore Status -->
+                <div
+                  class="text-center py-6 px-4 border-t border-b border-outline-variant"
+                >
+                  <div
+                    class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-3"
+                  >
+                    HomiScore Status
+                  </div>
+                  <div class="flex items-center justify-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-outline text-xl"
+                      >lock</span
+                    >
+                    <h5
+                      class="font-headline-md text-headline-md text-on-surface"
+                    >
+                      Verification Required
+                    </h5>
+                  </div>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    Complete all verification requirements to unlock your
+                    official Landlord HomiScore.
+                  </p>
+                </div>
+                <!-- Benefits -->
+                <div class="bg-tertiary-fixed/30 p-5 rounded-xl">
+                  <h4
+                    class="font-label-md text-label-md text-tertiary font-bold mb-3"
+                  >
+                    Why Verify?
+                  </h4>
+                  <ul class="space-y-2">
+                    <li
+                      class="flex items-start gap-2 font-label-sm text-label-sm text-tertiary-container"
+                    >
+                      <span class="material-symbols-outlined text-base mt-0.5"
+                        >verified</span
+                      >
+                      Attract 4x more qualified renters
+                    </li>
+                    <li
+                      class="flex items-start gap-2 font-label-sm text-label-sm text-tertiary-container"
+                    >
+                      <span class="material-symbols-outlined text-base mt-0.5"
+                        >verified</span
+                      >
+                      Higher listing ranking in search
+                    </li>
+                    <li
+                      class="flex items-start gap-2 font-label-sm text-label-sm text-tertiary-container"
+                    >
+                      <span class="material-symbols-outlined text-base mt-0.5"
+                        >verified</span
+                      >
+                      Automated rent collection trust
+                    </li>
+                  </ul>
+                </div>
+                <!-- Security Badges -->
+                <div
+                  class="flex justify-center gap-6 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500"
+                >
+                  <div class="flex flex-col items-center">
+                    <span class="material-symbols-outlined">security</span>
+                    <span class="font-label-sm text-[10px] uppercase"
+                      >AES-256</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <span class="font-label-sm text-[10px] uppercase"
+                      >AML/KYC</span
+                    >
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <span class="material-symbols-outlined">lock</span>
+                    <span class="font-label-sm text-[10px] uppercase"
+                      >Secure Pay</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <!-- Footer -->
+    <script>
+      // Micro-interaction for file inputs and drag/drop visuals
+      document.querySelectorAll(".drag-drop-area").forEach((area) => {
+        area.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          area.style.borderColor = "#00236f";
+          area.style.backgroundColor = "#dce1ff";
+        });
+        area.addEventListener("dragleave", () => {
+          area.style.borderColor = "#c5c5d3";
+          area.style.backgroundColor = "transparent";
+        });
+      });
+
+      // Simple button activation for radio cards
+      document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          document
+            .querySelectorAll('input[name="' + e.target.name + '"]')
+            .forEach((r) => {
+              r.parentElement.classList.remove(
+                "bg-primary-fixed",
+                "border-primary",
+              );
+            });
+          if (e.target.checked) {
+            e.target.parentElement.classList.add(
+              "bg-primary-fixed",
+              "border-primary",
+            );
+          }
+        });
+      });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

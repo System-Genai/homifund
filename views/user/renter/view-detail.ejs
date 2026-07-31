@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-renter') %>
+
+    <main class="lg:ml-[280px] min-h-screen">
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-6 lg:px-10 border-b border-outline-variant shadow-sm"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          ><input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div
+          class="hidden sm:flex items-center gap-5 ml-5 text-on-surface-variant"
+        >
+          <button
+            class="relative hover:bg-surface-container-low p-2 rounded-full"
+          >
+            <span class="material-symbols-outlined">notifications</span
+            ><span
+              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+            ></span></button
+          ><button class="hover:bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined">settings</span>
+          </button>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-label-md font-bold leading-none">
+                Marcus R.
+                <span
+                  class="material-symbols-outlined text-primary text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </p>
+              <p class="text-label-sm text-on-surface-variant">
+                Premium Member
+              </p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full border-2 border-primary-container bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-6 lg:px-10 py-8 lg:py-10">
+        <div class="max-w-[1280px] mx-auto">
+          <button
+            class="inline-flex items-center gap-2 text-primary text-sm font-bold mb-6"
+            onclick="window.location.href = 'dashboard'"
+          >
+            <span class="material-symbols-outlined text-[19px]">arrow_back</span
+            >Back to dashboard
+          </button>
+          <div class="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-7">
+            <div class="space-y-7">
+              <div
+                class="bg-white rounded-2xl border border-outline-variant shadow-sm overflow-hidden"
+              >
+                <div
+                  class="bg-primary px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                >
+                  <div class="flex items-center gap-3 text-white">
+                    <span class="material-symbols-outlined"
+                      >event_available</span
+                    >
+                    <div>
+                      <p
+                        class="text-[10px] uppercase tracking-[.16em] font-bold text-white/70"
+                      >
+                        Viewing confirmed
+                      </p>
+                      <h1 class="text-xl font-bold">The Sapphire Suites</h1>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex w-fit bg-white/15 border border-white/25 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wide"
+                    >Confirmed</span
+                  >
+                </div>
+                <div class="p-6 lg:p-8">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="rounded-xl bg-surface-container-low p-5">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary"
+                          >calendar_today</span
+                        >
+                        <div>
+                          <p
+                            class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold"
+                          >
+                            Date
+                          </p>
+                          <p class="text-base font-bold mt-1">
+                            Tuesday, 14 October
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rounded-xl bg-surface-container-low p-5">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary"
+                          >schedule</span
+                        >
+                        <div>
+                          <p
+                            class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold"
+                          >
+                            Time
+                          </p>
+                          <p class="text-base font-bold mt-1">
+                            2:00 PM – 2:30 PM
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rounded-xl bg-surface-container-low p-5">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary"
+                          >location_on</span
+                        >
+                        <div>
+                          <p
+                            class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold"
+                          >
+                            Address
+                          </p>
+                          <p class="text-base font-bold mt-1">
+                            Canary Wharf, London
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rounded-xl bg-surface-container-low p-5">
+                      <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary"
+                          >person</span
+                        >
+                        <div>
+                          <p
+                            class="text-[11px] uppercase tracking-wider text-on-surface-variant font-bold"
+                          >
+                            Host
+                          </p>
+                          <p class="text-base font-bold mt-1">
+                            Marcus Reed · Landlord
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-8">
+                    <h2 class="text-headline-md font-bold">
+                      Property overview
+                    </h2>
+                    <div
+                      class="mt-4 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-5"
+                    >
+                      <div
+                        class="h-48 md:h-full rounded-xl overflow-hidden bg-surface-container"
+                      >
+                        <img
+                          class="w-full h-full object-cover"
+                          alt="Modern luxury apartment interior"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuwWTNHD4HtAkdMFwEmx7fhevSnGWxUe8Oqe6sZRRv7l8CB1M4cYPKBAbw-l_uc-GR1RC6BLf6QKDyg6TOCl2dn0MRUgonsEhtqT6ZCiqVh6yK2jvRcO1OZXkKA6eoj4FlJ2X-rL2IltrijR0V4SPps2-bOx0rPwnKlYcKiEVBRdlPQenKTGAE2K6L3f_XD4r5GBeF5ppnbFNxOSt6mwZwJlzMRrZatUGXlvhtNYMnzHQlmAkgbInhGvDwlP_kq4IQPX-Az2BnFYvq"
+                        />
+                      </div>
+                      <div>
+                        <div
+                          class="flex flex-wrap items-start justify-between gap-3"
+                        >
+                          <div>
+                            <h3 class="text-lg font-bold">
+                              The Sapphire Suites
+                            </h3>
+                            <p class="text-sm text-on-surface-variant mt-1">
+                              2-bed apartment · Canary Wharf
+                            </p>
+                          </div>
+                          <p class="text-primary font-black text-lg">
+                            £3,200<span
+                              class="text-sm font-normal text-on-surface-variant"
+                              >/mo</span
+                            >
+                          </p>
+                        </div>
+                        <div
+                          class="flex flex-wrap gap-4 mt-5 text-sm text-on-surface-variant"
+                        >
+                          <span class="flex items-center gap-1"
+                            ><span class="material-symbols-outlined text-[18px]"
+                              >bed</span
+                            >2 Beds</span
+                          ><span class="flex items-center gap-1"
+                            ><span class="material-symbols-outlined text-[18px]"
+                              >bathtub</span
+                            >2 Baths</span
+                          ><span class="flex items-center gap-1"
+                            ><span class="material-symbols-outlined text-[18px]"
+                              >square_foot</span
+                            >1,040 sq ft</span
+                          >
+                        </div>
+                        <button
+                          class="mt-6 px-4 py-2.5 border border-primary text-primary rounded-lg text-sm font-bold hover:bg-secondary-container"
+                          onclick="window.location.href = '/user/renter/view-property'"
+                        >
+                          View property
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white rounded-2xl border border-outline-variant shadow-sm p-6 lg:p-8"
+              >
+                <h2 class="text-headline-md font-bold">Before you arrive</h2>
+                <div class="mt-6 space-y-4">
+                  <div class="flex gap-4">
+                    <div
+                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center flex-none"
+                    >
+                      <span class="material-symbols-outlined text-[19px]"
+                        >badge</span
+                      >
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm">
+                        Bring photo identification
+                      </p>
+                      <p class="text-sm text-on-surface-variant mt-1">
+                        The landlord or viewing agent may ask you to confirm
+                        your identity on arrival.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div
+                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center flex-none"
+                    >
+                      <span class="material-symbols-outlined text-[19px]"
+                        >description</span
+                      >
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm">
+                        Your application is already shared
+                      </p>
+                      <p class="text-sm text-on-surface-variant mt-1">
+                        Marcus can view your verified renter profile and
+                        HomiScore before the appointment.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div
+                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center flex-none"
+                    >
+                      <span class="material-symbols-outlined text-[19px]"
+                        >help</span
+                      >
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm">Need to make a change?</p>
+                      <p class="text-sm text-on-surface-variant mt-1">
+                        Use the request reschedule action and the landlord will
+                        receive your preferred times.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="space-y-6">
+              <div
+                class="bg-white rounded-2xl border border-outline-variant shadow-sm p-6"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary"
+                    >verified</span
+                  >
+                  <h2 class="text-base font-bold">Viewing status</h2>
+                </div>
+                <div
+                  class="mt-5 flex items-center gap-3 rounded-xl bg-secondary-container p-4"
+                >
+                  <span class="material-symbols-outlined text-primary"
+                    >check_circle</span
+                  >
+                  <div>
+                    <p class="text-sm font-bold text-primary">
+                      Your viewing is confirmed
+                    </p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      You will be notified if anything changes.
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-6 space-y-3">
+                  <button
+                    id="message-host"
+                    class="w-full py-3 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container-low"
+                  >
+                    Message landlord</button
+                  ><button
+                    id="reschedule"
+                    class="w-full py-3 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary-container"
+                  >
+                    Request reschedule</button
+                  ><button
+                    id="cancel-viewing"
+                    class="w-full py-2.5 text-sm text-on-surface-variant font-bold hover:bg-surface-container-low rounded-lg"
+                  >
+                    Cancel viewing
+                  </button>
+                </div>
+              </div>
+              <div
+                class="bg-white rounded-2xl border border-outline-variant shadow-sm p-6"
+              >
+                <p
+                  class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant"
+                >
+                  Your application
+                </p>
+                <h2 class="text-lg font-bold mt-2">
+                  Strong fit for this property
+                </h2>
+                <div
+                  class="mt-5 border-t border-outline-variant pt-4 space-y-3"
+                >
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant">HomiScore</span
+                    ><span class="font-bold text-primary">874 · Excellent</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Application</span
+                    ><span class="font-bold">Submitted</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Viewing</span
+                    ><span class="font-bold text-primary">Confirmed</span>
+                  </div>
+                </div>
+                <button
+                  class="mt-6 w-full py-2.5 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container-low"
+                  onclick="window.location.href = 'applications'"
+                >
+                  View application
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      id="modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/40 p-5"
+    >
+      <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold">Viewing message</h2>
+            <p id="modal-text" class="text-sm text-on-surface-variant mt-1"></p>
+          </div>
+          <button
+            id="modal-close"
+            class="w-9 h-9 rounded-full hover:bg-surface-container-low"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="modal-content" class="mt-5"></div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            id="modal-cancel"
+            class="px-4 py-2.5 rounded-lg text-primary text-sm font-bold hover:bg-surface-container-low"
+          >
+            Close</button
+          ><button
+            id="modal-confirm"
+            class="px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const modal = document.getElementById("modal"),
+          title = document.getElementById("modal-title"),
+          text = document.getElementById("modal-text"),
+          content = document.getElementById("modal-content"),
+          confirm = document.getElementById("modal-confirm");
+        const close = () => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        };
+        function open(type) {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          if (type === "message") {
+            title.textContent = "Message Marcus";
+            text.textContent = "Ask a question about your confirmed viewing.";
+            content.innerHTML =
+              '<textarea class="w-full min-h-28 p-3 border border-outline-variant rounded-lg text-sm" placeholder="Write your message..."></textarea>';
+            confirm.textContent = "Send message";
+          }
+          if (type === "reschedule") {
+            title.textContent = "Request reschedule";
+            text.textContent =
+              "Choose a preferred time and Marcus will be notified.";
+            content.innerHTML =
+              '<div class="space-y-3"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" type="date"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" type="time"><textarea class="w-full min-h-20 p-3 border border-outline-variant rounded-lg text-sm" placeholder="Optional note"></textarea></div>';
+            confirm.textContent = "Send request";
+          }
+          if (type === "cancel") {
+            title.textContent = "Cancel viewing?";
+            text.textContent =
+              "This will notify the landlord that you cannot attend.";
+            content.innerHTML =
+              '<div class="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">You can request another time later from your application page.</div>';
+            confirm.textContent = "Cancel viewing";
+          }
+        }
+        document
+          .getElementById("message-host")
+          .addEventListener("click", () => open("message"));
+        document
+          .getElementById("reschedule")
+          .addEventListener("click", () => open("reschedule"));
+        document
+          .getElementById("cancel-viewing")
+          .addEventListener("click", () => open("cancel"));
+        document.getElementById("modal-close").addEventListener("click", close);
+        document
+          .getElementById("modal-cancel")
+          .addEventListener("click", close);
+        confirm.addEventListener("click", close);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) close();
+        });
+      })();
+    </script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

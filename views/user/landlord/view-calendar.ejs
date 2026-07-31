@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface-bright text-on-surface">
+    <%- include('../partials/sidebar-landlord') %>
+
+    <header
+      class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant shadow-sm md:pl-[280px]"
+    >
+      <div class="relative w-full max-w-md">
+        <span
+          class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+          >search</span
+        ><input
+          class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none"
+          placeholder="Search properties, applications, documents..."
+          type="text"
+        />
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4 text-on-surface-variant">
+          <button
+            class="relative hover:bg-surface-container-low p-2 rounded-full"
+          >
+            <span class="material-symbols-outlined">notifications</span
+            ><span
+              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+            ></span></button
+          ><button
+            class="hover:bg-surface-container-low p-2 rounded-full"
+            onclick="window.location.href = 'settings'"
+          >
+            <span class="material-symbols-outlined">settings</span></button
+          ><button class="hover:bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </button>
+        </div>
+        <div class="h-8 w-px bg-outline-variant"></div>
+        <div
+          class="flex items-center gap-3 pl-2 cursor-pointer"
+          onclick="window.location.href = 'user-profile'"
+        >
+          <div class="text-right">
+            <p class="text-label-md font-bold leading-none">
+              Marcus R.
+              <span
+                class="material-symbols-outlined text-primary text-[16px]"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >verified</span
+              >
+            </p>
+            <p class="text-label-sm text-on-surface-variant">
+              Verified Landlord
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 rounded-full border-2 border-primary-container bg-secondary-container text-primary flex items-center justify-center font-bold"
+          >
+            MR
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="md:ml-[240px] pt-0 sm:pt-5 min-h-screen px-3 sm:px-5 pb-12">
+      <div class="max-w-7xl mx-auto space-y-7">
+        <div
+          class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+        >
+          <div>
+            <button
+              class="inline-flex items-center gap-2 text-primary text-sm font-bold mb-4"
+              onclick="window.location.href = 'dashboard'"
+            >
+              <span class="material-symbols-outlined text-[19px]"
+                >arrow_back</span
+              >Back to dashboard
+            </button>
+            <p
+              class="text-[11px] uppercase tracking-[.15em] text-on-surface-variant font-bold"
+            >
+              Landlord workspace
+            </p>
+            <h1 class="text-headline-lg text-primary mt-1">Viewing calendar</h1>
+            <p class="text-body-md text-secondary mt-2">
+              Manage confirmed viewings, proposed times and applicant
+              follow-ups.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="today-button"
+              class="px-4 py-2.5 rounded-lg border border-outline-variant bg-white text-primary text-label-md font-bold hover:bg-surface-container-low"
+            >
+              Today</button
+            ><button
+              id="new-viewing-button"
+              class="px-4 py-2.5 rounded-lg bg-primary text-white text-label-md font-bold flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px]">add</span
+              >Schedule viewing
+            </button>
+          </div>
+        </div>
+
+        <section class="grid grid-cols-1 lg:grid-cols-[1fr_330px] gap-6">
+          <div
+            class="bg-white rounded-2xl border border-outline-variant/30 shadow-sm overflow-hidden"
+          >
+            <div
+              class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/30"
+            >
+              <button
+                id="prev-month"
+                class="w-9 h-9 rounded-lg hover:bg-surface-container-low"
+              >
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <div class="text-center">
+                <h2 id="calendar-month" class="text-headline-md font-bold">
+                  October 2026
+                </h2>
+                <p class="text-label-sm text-on-surface-variant mt-1">
+                  Property viewings and applicant appointments
+                </p>
+              </div>
+              <button
+                id="next-month"
+                class="w-9 h-9 rounded-lg hover:bg-surface-container-low"
+              >
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+            <div
+              class="grid grid-cols-7 bg-surface-container-low border-b border-outline-variant/30"
+            >
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Mon
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Tue
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Wed
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Thu
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Fri
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Sat
+              </div>
+              <div
+                class="p-3 text-center text-[10px] uppercase font-bold text-on-surface-variant"
+              >
+                Sun
+              </div>
+            </div>
+            <div class="grid grid-cols-7">
+              <div
+                class="calendar-day calendar-day-muted border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs">28</span>
+              </div>
+              <div
+                class="calendar-day calendar-day-muted border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs">29</span>
+              </div>
+              <div
+                class="calendar-day calendar-day-muted border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs">30</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">1</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">2</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">3</span>
+              </div>
+              <div class="calendar-day border-b border-outline-variant/20 p-3">
+                <span class="text-xs font-semibold">4</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">5</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">6</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">7</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">8</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">9</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">10</span>
+              </div>
+              <div class="calendar-day border-b border-outline-variant/20 p-3">
+                <span class="text-xs font-semibold">11</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">12</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">13</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">14</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">15</span
+                ><button
+                  class="event-pill mt-2 w-full text-left rounded-md bg-primary px-2 py-1.5 text-[10px] font-bold text-white"
+                  data-event="James Carter · Canary Wharf Suite · 2:00 PM"
+                >
+                  2:00 PM · James Carter
+                </button>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">16</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">17</span>
+              </div>
+              <div class="calendar-day border-b border-outline-variant/20 p-3">
+                <span class="text-xs font-semibold">18</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">19</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">20</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">21</span
+                ><button
+                  class="event-pill mt-2 w-full text-left rounded-md bg-secondary-container px-2 py-1.5 text-[10px] font-bold text-primary"
+                  data-event="New enquiry · Hudson Lofts · Time to confirm"
+                >
+                  New enquiry
+                </button>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">22</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">23</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">24</span>
+              </div>
+              <div class="calendar-day border-b border-outline-variant/20 p-3">
+                <span class="text-xs font-semibold">25</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">26</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">27</span
+                ><button
+                  class="event-pill mt-2 w-full text-left rounded-md bg-primary px-2 py-1.5 text-[10px] font-bold text-white"
+                  data-event="Elena Rossi · Shoreditch Warehouse Loft · 11:00 AM"
+                >
+                  11:00 AM · Elena Rossi
+                </button>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">28</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">29</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">30</span>
+              </div>
+              <div
+                class="calendar-day border-r border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs font-semibold">31</span>
+              </div>
+              <div
+                class="calendar-day calendar-day-muted border-b border-outline-variant/20 p-3"
+              >
+                <span class="text-xs">1</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="space-y-6">
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/30 shadow-sm p-6"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <p
+                    class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                  >
+                    Next viewing
+                  </p>
+                  <h2 class="text-lg font-bold mt-1">James Carter</h2>
+                </div>
+                <span
+                  class="bg-secondary-container text-primary px-2.5 py-1 rounded-full text-[10px] font-black uppercase"
+                  >Confirmed</span
+                >
+              </div>
+              <div class="mt-5 space-y-4">
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary"
+                    >home_work</span
+                  >
+                  <div>
+                    <p class="text-sm font-bold">Canary Wharf Suite</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Canary Wharf, London
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary"
+                    >schedule</span
+                  >
+                  <div>
+                    <p class="text-sm font-bold">Thursday, 15 October</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      2:00 PM – 2:30 PM
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary"
+                    >verified</span
+                  >
+                  <div>
+                    <p class="text-sm font-bold">HomiScore 921</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Verified renter profile
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mt-6">
+                <button
+                  class="py-2.5 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container-low"
+                >
+                  Message</button
+                ><button
+                  class="py-2.5 bg-primary text-white rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'review-application'"
+                >
+                  Review application
+                </button>
+              </div>
+            </section>
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/30 shadow-sm p-6"
+            >
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary"
+                  >event_available</span
+                >
+                <h2 class="text-base font-bold">This month</h2>
+              </div>
+              <div class="mt-5 grid grid-cols-3 gap-3">
+                <div class="rounded-xl bg-surface-container-low p-3">
+                  <p
+                    class="text-[10px] text-on-surface-variant uppercase font-bold"
+                  >
+                    Confirmed
+                  </p>
+                  <p class="text-xl font-bold text-primary mt-1">2</p>
+                </div>
+                <div class="rounded-xl bg-surface-container-low p-3">
+                  <p
+                    class="text-[10px] text-on-surface-variant uppercase font-bold"
+                  >
+                    Pending
+                  </p>
+                  <p class="text-xl font-bold mt-1">1</p>
+                </div>
+                <div class="rounded-xl bg-surface-container-low p-3">
+                  <p
+                    class="text-[10px] text-on-surface-variant uppercase font-bold"
+                  >
+                    Completed
+                  </p>
+                  <p class="text-xl font-bold mt-1">8</p>
+                </div>
+              </div>
+              <p class="text-xs leading-5 text-on-surface-variant mt-5">
+                Viewing availability and confirmations are shown here for the
+                demo flow.
+              </p>
+            </section>
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <div
+      id="calendar-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/40 p-5"
+    >
+      <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold">Viewing details</h2>
+            <p id="modal-copy" class="text-sm text-on-surface-variant mt-1"></p>
+          </div>
+          <button
+            id="modal-close"
+            class="h-9 w-9 rounded-full hover:bg-surface-container-low"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="modal-content" class="mt-5"></div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            id="modal-cancel"
+            class="px-4 py-2.5 rounded-lg text-primary text-sm font-bold hover:bg-surface-container-low"
+          >
+            Close</button
+          ><button
+            id="modal-confirm"
+            class="px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const modal = document.getElementById("calendar-modal"),
+          title = document.getElementById("modal-title"),
+          copy = document.getElementById("modal-copy"),
+          content = document.getElementById("modal-content"),
+          confirm = document.getElementById("modal-confirm");
+        const close = () => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        };
+        const open = (type, details) => {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          if (type === "schedule") {
+            title.textContent = "Schedule viewing";
+            copy.textContent = "Create a proposed viewing for an applicant.";
+            content.innerHTML =
+              '<div class="space-y-3"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" placeholder="Property"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" placeholder="Applicant"><div class="grid grid-cols-2 gap-3"><input class="p-3 border border-outline-variant rounded-lg text-sm" type="date"><input class="p-3 border border-outline-variant rounded-lg text-sm" type="time"></div></div>';
+            confirm.textContent = "Create viewing";
+          } else {
+            title.textContent = "Viewing details";
+            copy.textContent = details;
+            content.innerHTML =
+              '<div class="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">This is a clickable calendar preview. Use the applicant profile to review the application or send a viewing message.</div>';
+            confirm.textContent = "Done";
+          }
+        };
+        document
+          .querySelectorAll(".event-pill")
+          .forEach((b) =>
+            b.addEventListener("click", () => open("event", b.dataset.event)),
+          );
+        document
+          .getElementById("new-viewing-button")
+          .addEventListener("click", () => open("schedule"));
+        document.getElementById("modal-close").addEventListener("click", close);
+        document
+          .getElementById("modal-cancel")
+          .addEventListener("click", close);
+        confirm.addEventListener("click", close);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) close();
+        });
+        document
+          .getElementById("today-button")
+          .addEventListener(
+            "click",
+            () =>
+              (document.getElementById("calendar-month").textContent =
+                "October 2026"),
+          );
+        document
+          .getElementById("prev-month")
+          .addEventListener(
+            "click",
+            () =>
+              (document.getElementById("calendar-month").textContent =
+                "September 2026"),
+          );
+        document
+          .getElementById("next-month")
+          .addEventListener(
+            "click",
+            () =>
+              (document.getElementById("calendar-month").textContent =
+                "November 2026"),
+          );
+      })();
+    </script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

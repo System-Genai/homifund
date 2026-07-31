@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-renter') %>
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          ><input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button class="p-2 rounded-full">
+              <span class="material-symbols-outlined"
+                >notifications</span
+              ></button
+            ><button class="p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span></button
+            ><button class="p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <button
+            class="flex items-center gap-3 hover:bg-surface-container-low rounded-lg px-2 py-1"
+          >
+            <div class="text-right">
+              <p class="text-sm font-bold">Alex S.</p>
+              <p class="text-xs text-on-surface-variant">Renter</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              AS
+            </div>
+          </button>
+        </div>
+      </header>
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div class="flex items-center justify-between gap-4">
+            <button
+              class="inline-flex items-center gap-2 text-primary text-sm font-bold"
+              onclick="window.location.href = 'dashboard'"
+            >
+              <span class="material-symbols-outlined text-[19px]"
+                >arrow_back</span
+              >Back to property matches</button
+            ><button
+              aria-pressed="false"
+              class="inline-flex items-center gap-2 px-3.5 py-2 border border-primary text-primary rounded-lg text-sm font-bold"
+              id="save-button"
+            >
+              <span class="material-symbols-outlined text-[19px]" id="save-icon"
+                >bookmark_border</span
+              ><span id="save-label">Save property</span>
+            </button>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <div class="lg:col-span-8">
+              <div
+                class="relative rounded-xl overflow-hidden border border-outline-variant bg-surface-container-low h-[360px]"
+              >
+                <img
+                  alt="Bright modern apartment living space"
+                  class="w-full h-full object-cover"
+                  id="main-image"
+                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&amp;fit=crop&amp;w=1500&amp;q=85"
+                />
+                <div class="absolute left-4 top-4 flex gap-2">
+                  <span
+                    class="bg-white/95 text-primary text-xs font-bold px-3 py-1.5 rounded-full"
+                    >98% match</span
+                  ><span
+                    class="bg-primary/90 text-white text-xs font-bold px-3 py-1.5 rounded-full"
+                    >Available to enquire</span
+                  >
+                </div>
+                <button
+                  class="absolute right-4 bottom-4 inline-flex items-center gap-2 bg-white/95 text-primary px-3 py-2 rounded-lg text-sm font-bold"
+                  id="gallery-next"
+                >
+                  <span class="material-symbols-outlined text-[19px]"
+                    >photo_library</span
+                  >View photos
+                </button>
+              </div>
+              <div class="grid grid-cols-4 gap-3 mt-3">
+                <button
+                  aria-pressed="true"
+                  class="gallery-thumb overflow-hidden rounded-lg border border-outline-variant h-20"
+                  data-alt="Bright modern apartment living space"
+                  data-image="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&amp;fit=crop&amp;w=1500&amp;q=85"
+                >
+                  <img
+                    alt=""
+                    class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&amp;fit=crop&amp;w=600&amp;q=75"
+                  />
+                </button>
+                <button
+                  aria-pressed="false"
+                  class="gallery-thumb overflow-hidden rounded-lg border border-outline-variant h-20"
+                  data-alt="Modern building exterior"
+                  data-image="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=1500&amp;q=85"
+                >
+                  <img
+                    alt=""
+                    class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=600&amp;q=75"
+                  />
+                </button>
+                <button
+                  aria-pressed="false"
+                  class="gallery-thumb overflow-hidden rounded-lg border border-outline-variant h-20"
+                  data-alt="Contemporary bedroom"
+                  data-image="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&amp;fit=crop&amp;w=1500&amp;q=85"
+                >
+                  <img
+                    alt=""
+                    class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&amp;fit=crop&amp;w=600&amp;q=75"
+                  />
+                </button>
+                <button
+                  aria-pressed="false"
+                  class="gallery-thumb overflow-hidden rounded-lg border border-outline-variant h-20"
+                  data-alt="Modern apartment kitchen"
+                  data-image="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=1500&amp;q=85"
+                >
+                  <img
+                    alt=""
+                    class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=600&amp;q=75"
+                  />
+                </button>
+              </div>
+            </div>
+            <aside
+              class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p
+                    class="text-xs uppercase tracking-[.14em] font-bold text-on-surface-variant"
+                  >
+                    Apartment
+                  </p>
+                  <h1
+                    class="text-2xl leading-8 font-semibold text-primary mt-1"
+                  >
+                    The Sapphire Suites
+                  </h1>
+                  <p
+                    class="mt-2 text-sm text-on-surface-variant flex items-center gap-1.5"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >location_on</span
+                    >Canary Wharf, London
+                  </p>
+                </div>
+                <span
+                  class="text-primary font-extrabold text-xl whitespace-nowrap"
+                  >£3,200<span
+                    class="text-xs font-medium text-on-surface-variant"
+                    >/mo</span
+                  ></span
+                >
+              </div>
+              <div
+                class="grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-outline-variant"
+              >
+                <div class="bg-surface rounded-lg p-3 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary text-[20px]"
+                    >bed</span
+                  >
+                  <p class="text-xs font-bold mt-1">2 beds</p>
+                </div>
+                <div class="bg-surface rounded-lg p-3 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary text-[20px]"
+                    >bathtub</span
+                  >
+                  <p class="text-xs font-bold mt-1">2 baths</p>
+                </div>
+                <div class="bg-surface rounded-lg p-3 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary text-[20px]"
+                    >chair</span
+                  >
+                  <p class="text-xs font-bold mt-1">Furnished</p>
+                </div>
+              </div>
+              <div class="mt-5 space-y-3">
+                <button
+                  class="w-full bg-primary text-white py-3 rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'applications'"
+                >
+                  Start application</button
+                ><button
+                  class="w-full border border-primary text-primary py-3 rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'messages'"
+                >
+                  Request a viewing
+                </button>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-3">
+                You can review the information included before submitting an
+                application.
+              </p>
+            </aside>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-base font-bold">About this property</h2>
+                <p class="mt-3 text-sm leading-6 text-on-surface-variant">
+                  A contemporary two-bedroom apartment in Canary Wharf with
+                  generous living space, modern finishes and access to shared
+                  resident amenities. Review the listing details before deciding
+                  whether to enquire or apply.
+                </p>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-base font-bold">Key details</h2>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 mt-3 divide-y divide-outline-variant"
+                >
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Property type</span
+                    ><span class="font-semibold">Apartment</span>
+                  </div>
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Available from</span
+                    ><span class="font-semibold">12 October</span>
+                  </div>
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Tenancy length</span
+                    ><span class="font-semibold">Ask listing contact</span>
+                  </div>
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Furnishing</span
+                    ><span class="font-semibold">Furnished</span>
+                  </div>
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Pets</span
+                    ><span class="font-semibold">Ask listing contact</span>
+                  </div>
+                  <div class="py-3 flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Smoking</span
+                    ><span class="font-semibold">Ask listing contact</span>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-base font-bold">Amenities</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >elevator</span
+                    >Lift access
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >local_laundry_service</span
+                    >Laundry
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >balcony</span
+                    >Private balcony
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >directions_car</span
+                    >Parking enquiry
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >pets</span
+                    >Pet policy enquiry
+                  </div>
+                  <div
+                    class="flex items-center gap-2 text-sm text-on-surface-variant"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >wifi</span
+                    >Internet enquiry
+                  </div>
+                </div>
+              </section>
+            </div>
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">contact_support</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">Property enquiries</h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Use the viewing or application actions to contact the listing
+                  team about this property.
+                </p>
+                <button
+                  class="w-full mt-4 border border-primary text-primary py-2.5 rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'messages'"
+                >
+                  Send an enquiry
+                </button>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">verified</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">Before you apply</h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Your HomiScore and verification information are managed
+                  separately. You can choose what to share for an application.
+                </p>
+                <a
+                  class="mt-4 flex items-center justify-between text-primary text-sm font-semibold"
+                  href="homiscore"
+                  ><span onclick="window.location.href = '/user/renter/homiscore'">View HomiScore</span
+                  ><span class="material-symbols-outlined text-[18px]"
+                    >arrow_forward</span
+                  ></a
+                >
+              </section>
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
+              >
+                <div class="flex gap-3">
+                  <span
+                    class="material-symbols-outlined text-primary text-[20px]"
+                    >info</span
+                  >
+                  <p class="text-xs leading-5 text-on-surface-variant">
+                    Details and availability can change. Confirm information
+                    with the listing contact before making a decision.
+                  </p>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        const image = document.getElementById("main-image"),
+          thumbs = [...document.querySelectorAll(".gallery-thumb")],
+          save = document.getElementById("save-button"),
+          icon = document.getElementById("save-icon"),
+          label = document.getElementById("save-label"),
+          next = document.getElementById("gallery-next");
+        let i = 0;
+        function set(t) {
+          image.src = t.dataset.image;
+          image.alt = t.dataset.alt;
+          thumbs.forEach((x) =>
+            x.setAttribute("aria-pressed", x === t ? "true" : "false"),
+          );
+          i = thumbs.indexOf(t);
+        }
+        thumbs.forEach((t) => t.addEventListener("click", () => set(t)));
+        next.addEventListener("click", () =>
+          set(thumbs[(i + 1) % thumbs.length]),
+        );
+        save.addEventListener("click", () => {
+          const on = save.getAttribute("aria-pressed") === "true";
+          save.setAttribute("aria-pressed", String(!on));
+          icon.textContent = on ? "bookmark_border" : "bookmark";
+          label.textContent = on ? "Save property" : "Saved";
+        });
+      })();
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

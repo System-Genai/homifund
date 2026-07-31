@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-renter') %>
+    <!-- Shared renter sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Shared renter header -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant shadow-sm"
+      >
+        <div class="flex items-center gap-4 flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+              placeholder="Search payments, documents, applications..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3 pl-2">
+            <div class="text-right">
+              <p
+                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+              >
+                Marcus R.<span
+                  class="material-symbols-outlined text-primary text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </p>
+              <p class="text-label-sm text-on-surface-variant">
+                Premium Member
+              </p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden"
+            >
+              <img
+                class="w-full h-full object-cover"
+                alt="Renter profile"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-margin-desktop py-7 bg-surface">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <!-- Page header -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-label-sm uppercase tracking-[0.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Rent and housing payments
+              </p>
+              <h2 class="text-headline-lg text-primary">Payments</h2>
+              <p class="text-body-md text-on-surface-variant mt-2">
+                Track upcoming rent, manage payment methods and keep your
+                payment records in one place.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+              >
+                Payment methods
+              </button>
+              <button
+                class="px-4 py-2.5 rounded-lg bg-primary text-on-primary text-label-sm font-bold hover:opacity-90 flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >credit_card</span
+                >Make a payment
+              </button>
+            </div>
+          </div>
+
+          <!-- Compact status strip -->
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >calendar_month</span
+              >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Next payment
+                </p>
+                <p class="text-label-sm font-bold text-on-surface mt-0.5">
+                  £1,450 due 1 Jul
+                </p>
+                <p class="text-label-sm text-on-surface-variant">
+                  The Glass House
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >task_alt</span
+              >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Payment status
+                </p>
+                <p class="text-label-sm font-bold text-on-surface mt-0.5">
+                  Up to date
+                </p>
+                <p class="text-label-sm text-on-surface-variant">
+                  No overdue payments
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            <!-- Main payment workspace -->
+            <div class="lg:col-span-8 space-y-4">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl overflow-hidden"
+              >
+                <div class="px-5 pt-4 border-b border-outline-variant/70">
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3"
+                  >
+                    <div>
+                      <h3 class="text-label-md font-bold">Payment activity</h3>
+                      <p class="text-label-sm text-on-surface-variant mt-1">
+                        View rent, deposit and other housing payments.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                    <button
+                      class="pb-3 text-label-sm font-bold text-primary border-b-2 border-primary"
+                    >
+                      All payments
+                    </button>
+                    <button
+                      class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                    >
+                      Rent
+                    </button>
+                    <button
+                      class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                    >
+                      Deposit
+                    </button>
+                    <button
+                      class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
+                    >
+                      Fees
+                    </button>
+                  </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                  <table class="w-full min-w-[780px] text-left">
+                    <thead class="bg-surface-container-low">
+                      <tr
+                        class="text-[10px] uppercase tracking-wider text-on-surface-variant"
+                      >
+                        <th class="px-4 py-3 font-bold">Payment</th>
+                        <th class="px-3 py-3 font-bold">Property</th>
+                        <th class="px-3 py-3 font-bold">Date</th>
+                        <th class="px-3 py-3 font-bold">Amount</th>
+                        <th class="px-3 py-3 font-bold">Method</th>
+                        <th class="px-3 py-3 font-bold">Status</th>
+                        <th class="px-4 py-3 font-bold text-right">Receipt</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/50">
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >home</span
+                            >
+                            <p class="text-label-sm font-bold">
+                              Rent — July 2026
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          The Glass House
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          1 Jul 2026
+                        </td>
+                        <td class="px-3 py-3.5 text-label-sm font-bold">
+                          £1,450
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Direct Debit
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-secondary-container text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span class="material-symbols-outlined text-[14px]"
+                              >calendar_month</span
+                            >Scheduled</span
+                          >
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <button
+                            class="text-primary text-label-sm font-bold hover:underline"
+                          >
+                            View receipt
+                          </button>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >home</span
+                            >
+                            <p class="text-label-sm font-bold">
+                              Rent — June 2026
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          The Glass House
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          1 Jun 2026
+                        </td>
+                        <td class="px-3 py-3.5 text-label-sm font-bold">
+                          £1,450
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Direct Debit
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >check_circle</span
+                            >Paid</span
+                          >
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <button
+                            class="text-primary text-label-sm font-bold hover:underline"
+                          >
+                            View receipt
+                          </button>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >shield</span
+                            >
+                            <p class="text-label-sm font-bold">
+                              Tenancy Deposit
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          The Glass House
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          28 May 2026
+                        </td>
+                        <td class="px-3 py-3.5 text-label-sm font-bold">
+                          £1,673
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Bank transfer
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >check_circle</span
+                            >Paid</span
+                          >
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <button
+                            class="text-primary text-label-sm font-bold hover:underline"
+                          >
+                            View receipt
+                          </button>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >credit_card</span
+                            >
+                            <p class="text-label-sm font-bold">
+                              Holding Deposit
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          The Glass House
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          20 May 2026
+                        </td>
+                        <td class="px-3 py-3.5 text-label-sm font-bold">
+                          £335
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          Card ending 4821
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >check_circle</span
+                            >Paid</span
+                          >
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <button
+                            class="text-primary text-label-sm font-bold hover:underline"
+                          >
+                            View receipt
+                          </button>
+                        </td>
+                      </tr>
+                      <tr class="hover:bg-surface-container-low/60">
+                        <td class="px-4 py-3.5">
+                          <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary"
+                              >assignment</span
+                            >
+                            <p class="text-label-sm font-bold">
+                              Application Fee
+                            </p>
+                          </div>
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          The Glass House
+                        </td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          20 May 2026
+                        </td>
+                        <td class="px-3 py-3.5 text-label-sm font-bold">£0</td>
+                        <td
+                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
+                        >
+                          —
+                        </td>
+                        <td class="px-3 py-3.5">
+                          <span
+                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                            ><span
+                              class="material-symbols-outlined text-[14px]"
+                              style="
+                                font-variation-settings: &quot;FILL&quot; 1;
+                              "
+                              >check_circle</span
+                            >Completed</span
+                          >
+                        </td>
+                        <td class="px-4 py-3.5 text-right">
+                          <button
+                            class="text-primary text-label-sm font-bold hover:underline"
+                          >
+                            View receipt
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Upcoming payment action -->
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center shrink-0"
+                    >
+                      <span class="material-symbols-outlined"
+                        >calendar_month</span
+                      >
+                    </div>
+                    <div>
+                      <p class="text-label-md font-bold">Upcoming payment</p>
+                      <p class="text-label-sm text-on-surface-variant mt-1">
+                        The Glass House · Rent for July 2026 · Due 1 Jul 2026
+                      </p>
+                      <p class="text-headline-md text-on-surface mt-1">
+                        £1,450
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-1">
+                        Direct Debit ending 4821
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <button
+                      class="px-3 py-2 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+                    >
+                      Change payment method
+                    </button>
+                    <button
+                      class="px-3 py-2 rounded-lg bg-primary text-on-primary text-label-sm font-bold hover:opacity-90"
+                    >
+                      Make payment
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Supporting cards -->
+            <aside class="lg:col-span-4 space-y-4">
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary"
+                    >account_balance_wallet</span
+                  >
+                  <h3 class="text-label-md font-bold">Payment method</h3>
+                </div>
+                <div
+                  class="mt-4 rounded-lg border border-outline-variant/70 p-3"
+                >
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <p class="text-label-sm font-bold">Direct Debit</p>
+                      <p class="text-label-sm text-on-surface-variant mt-1">
+                        Account ending 4821
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-1">
+                        Active for The Glass House
+                      </p>
+                    </div>
+                    <span
+                      class="bg-secondary-container text-primary px-2 py-1 rounded-full text-[10px] font-bold"
+                      >Default</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full mt-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+                >
+                  Change payment method
+                </button>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary"
+                    >shield</span
+                  >
+                  <h3 class="text-label-md font-bold">Deposit record</h3>
+                </div>
+                <div class="mt-4 space-y-2 text-label-sm">
+                  <div class="flex justify-between">
+                    <span class="text-on-surface-variant">Deposit paid</span
+                    ><span class="font-bold">£1,673</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-on-surface-variant">Property</span
+                    ><span class="font-bold">The Glass House</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-on-surface-variant">Status</span
+                    ><span class="text-primary font-bold">Protected</span>
+                  </div>
+                </div>
+                <p class="text-label-sm text-on-surface-variant mt-4">
+                  Your tenancy deposit record is stored with your tenancy
+                  documents.
+                </p>
+                <button
+                  class="w-full mt-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
+                >
+                  View deposit record
+                </button>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary"
+                    >contact_support</span
+                  >
+                  <h3 class="text-label-md font-bold">
+                    Need help with a payment?
+                  </h3>
+                </div>
+                <p class="text-label-sm text-on-surface-variant mt-3">
+                  Get support with a failed payment, payment date or receipt.
+                </p>
+                <button
+                  class="w-full mt-4 py-2.5 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary"
+                >
+                  Contact support
+                </button>
+              </section>
+
+              <section
+                class="bg-surface-container-low rounded-xl border border-outline-variant/60 px-4 py-3 flex items-start gap-3"
+              >
+                <span class="material-symbols-outlined text-primary mt-0.5"
+                  >receipt_long</span
+                >
+                <div>
+                  <h3 class="text-label-sm font-bold">
+                    Your payment records stay organised
+                  </h3>
+                  <p class="text-label-sm text-on-surface-variant mt-1">
+                    Receipts and payment records are stored securely in your
+                    HomiFund account.
+                  </p>
+                </div>
+              </section>
+            </aside>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll("aside nav a").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          if (!item.classList.contains("bg-secondary-container"))
+            item.style.transform = "translateX(4px)";
+        });
+        item.addEventListener(
+          "mouseleave",
+          () => (item.style.transform = "translateX(0px)"),
+        );
+      });
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-landlord') %>
+    <!-- Permanent renter dashboard sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Permanent renter dashboard header; profile is active -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              aria-label="Notifications"
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              aria-label="Settings"
+              class="hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button
+              aria-label="Messages"
+              class="hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <button
+            aria-current="page"
+            aria-label="Your profile"
+            class="flex items-center gap-3 bg-secondary-container rounded-lg px-3 py-2"
+          >
+            <div class="text-right">
+              <p class="text-sm font-bold text-on-surface">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </button>
+        </div>
+      </header>
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Landlord profile
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">Your profile</h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Manage your account details and the information used across your
+                HomiFund landlord account.
+              </p>
+            </div>
+            <button
+              class="px-4 py-2.5 border border-primary text-primary rounded-lg text-sm font-bold hover:bg-secondary-container"
+              onclick="window.location.href = 'settings'"
+            >
+              View landlord settings
+            </button>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Profile photo</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Personalise your account with a profile photo.
+                  </p>
+                </div>
+                <div
+                  class="mt-5 flex flex-col sm:flex-row sm:items-center gap-5"
+                >
+                  <div
+                    class="w-20 h-20 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold text-lg shrink-0 overflow-hidden"
+                    id="profile-photo-preview"
+                  >
+                    MR
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold">
+                      Add or update your photo
+                    </p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Your profile photo is for your HomiFund account and is not
+                      included in property listings by default.
+                    </p>
+                    <div class="mt-3 flex flex-wrap gap-3">
+                      <label
+                        class="profile-photo-label inline-flex items-center gap-2 px-3 py-2 border border-primary text-primary rounded-lg text-xs font-bold hover:bg-secondary-container"
+                        for="profile-photo-upload"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >upload</span
+                        >
+                        Upload photo
+                      </label>
+                      <input
+                        accept="image/png,image/jpeg,image/webp"
+                        class="profile-photo-input"
+                        id="profile-photo-upload"
+                        type="file"
+                      />
+                      <button
+                        class="px-3 py-2 text-on-surface-variant text-xs font-bold rounded-lg hover:bg-surface-container-low"
+                        id="remove-profile-photo"
+                        type="button"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-3">
+                      PNG, JPG or WEBP. This prototype previews the selected
+                      image only.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Account details</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Keep your personal and contact information up to date.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Full name</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your full name"
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Email address</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your email address"
+                      type="email"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Phone number</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your phone number"
+                      type="tel"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Preferred contact method</label
+                    >
+                    <select
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option>Email</option>
+                      <option>Phone</option>
+                    </select>
+                  </div>
+                </div>
+                <div
+                  class="flex justify-end gap-3 mt-5 pt-4 border-t border-outline-variant"
+                >
+                  <button
+                    class="px-4 py-2.5 text-primary text-sm font-bold rounded-lg hover:bg-surface-container-low"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
+                  >
+                    Save profile
+                  </button>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-3">
+                  Your contact information is only included when you choose to
+                  share it for a listing or application.
+                </p>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Profile actions</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Use Settings to manage listing, application review, sharing
+                    and communication choices.
+                  </p>
+                </div>
+                <div class="mt-4 divide-y divide-outline-variant">
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Landlord settings</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Manage listing preferences, application review, sharing
+                        and communication preferences.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Open settings
+                    </button>
+                  </div>
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Account security</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Update your password and review active sessions from
+                        Settings.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Open settings
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold text-sm"
+                >
+                  MR
+                </div>
+                <h2 class="text-sm font-bold mt-4">Marcus R.</h2>
+                <p class="text-xs text-on-surface-variant mt-1">Landlord</p>
+                <div
+                  class="mt-4 pt-4 border-t border-outline-variant space-y-3 text-sm"
+                >
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="settings"
+                    ><span>View landlord settings</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="homiscore"
+                    ><span onclick="window.location.href = '/user/landlord/homiscore'">View HomiScore</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">verified</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">
+                  HomiScore and verification
+                </h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Manage your HomiScore and verification information separately
+                  from your profile.
+                </p>
+                <div class="mt-4 space-y-3">
+                  <a
+                    class="flex items-center justify-between text-primary text-sm font-semibold"
+                    href="homiscore"
+                    ><span onclick="window.location.href = '/user/landlord/homiscore'">View HomiScore</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="flex items-center justify-between text-primary text-sm font-semibold"
+                    href="homiscore"
+                    ><span>Update verification</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">support_agent</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">
+                  Need help with your profile?
+                </h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Contact HomiFund support if you need help managing your
+                  landlord account details.
+                </p>
+                <button
+                  class="w-full mt-4 bg-primary text-white py-2.5 rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'support'"
+                >
+                  Go to Support
+                </button>
+              </section>
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <h2 class="text-xs font-bold">Before you publish</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Review the information you plan to share and make sure it
+                      is relevant to the property listing or application.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        const input = document.getElementById("profile-photo-upload");
+        const preview = document.getElementById("profile-photo-preview");
+        const remove = document.getElementById("remove-profile-photo");
+        const headerAvatar = document.querySelector(
+          "header .w-10.h-10.rounded-full",
+        );
+        const original = "MR";
+
+        function renderInitials() {
+          preview.innerHTML = original;
+          if (headerAvatar) headerAvatar.innerHTML = original;
+        }
+
+        function renderImage(file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const imageMarkup =
+              '<img src="' +
+              event.target.result +
+              '" alt="Profile photo preview" class="w-full h-full object-cover">';
+            preview.innerHTML = imageMarkup;
+            if (headerAvatar) headerAvatar.innerHTML = imageMarkup;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        input.addEventListener("change", function () {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
+            input.value = "";
+            return;
+          }
+          renderImage(file);
+        });
+
+        remove.addEventListener("click", function () {
+          input.value = "";
+          renderInitials();
+        });
+      })();
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

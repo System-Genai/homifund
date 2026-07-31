@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body
+    class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen"
+  >
+    <%- include('partials/header') %>
+    <!-- Main Content Area -->
+    <main class="flex-grow flex items-center justify-center py-16 px-4">
+      <div class="max-w-4xl w-full">
+        <div class="text-center mb-12">
+          <h1 class="font-headline-xl text-headline-xl text-primary mb-4">
+            Choose your journey
+          </h1>
+          <p class="text-body-lg text-secondary max-w-lg mx-auto">
+            Select the profile that best describes your goals. You can always
+            manage multi-role accounts later.
+          </p>
+        </div>
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="bg-error-container text-on-error-container px-4 py-3 rounded-lg text-label-md mb-6 text-center"><%= error %></div>
+        <% } %>
+        <form action="/role-selection" method="POST" id="role-form">
+          <input type="hidden" name="role" id="role-input" value="">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Renter Card -->
+            <div
+              class="glass-card role-card-hover group cursor-pointer rounded-xl p-8 transition-all duration-300 relative flex flex-col h-full border border-outline-variant"
+              id="role-renter"
+              onclick="selectRole('renter')"
+            >
+              <div
+                class="mb-6 h-16 w-16 bg-primary-fixed rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+              >
+                <span class="material-symbols-outlined text-[32px]"
+                  >person_pin_circle</span
+                >
+              </div>
+              <h2 class="font-headline-md text-headline-md text-primary mb-3">
+                I am a Renter
+              </h2>
+              <p class="text-on-surface-variant font-body-md mb-8 flex-grow">
+                Build your rental reputation, access verified listings, and secure
+                your next home with your HomiScore.
+              </p>
+              <div class="flex items-center text-primary font-label-md">
+                <span class="">Get Started</span>
+                <span
+                  class="material-symbols-outlined ml-2 text-sm transition-transform group-hover:translate-x-1"
+                  >arrow_forward</span
+                >
+              </div>
+              <div
+                class="selected-indicator absolute top-4 right-4 bg-primary text-white rounded-full p-1 hidden"
+              >
+                <span
+                  class="material-symbols-outlined text-sm"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check</span
+                >
+              </div>
+            </div>
+            <!-- Landlord Card -->
+            <div
+              class="glass-card role-card-hover group cursor-pointer rounded-xl p-8 transition-all duration-300 relative flex flex-col h-full border border-outline-variant role-card-selected"
+              id="role-landlord"
+              onclick="selectRole('landlord')"
+            >
+              <div
+                class="mb-6 h-16 w-16 bg-secondary-fixed rounded-lg flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+              >
+                <span class="material-symbols-outlined text-[32px]"
+                  >apartment</span
+                >
+              </div>
+              <h2 class="font-headline-md text-headline-md text-primary mb-3">
+                I am a Landlord
+              </h2>
+              <p class="text-on-surface-variant font-body-md mb-8 flex-grow">
+                Find trusted tenants faster, manage properties with institutional
+                precision, and automate rent collection.
+              </p>
+              <div class="flex items-center text-primary font-label-md">
+                <span class="">Setup Portfolio</span>
+                <span
+                  class="material-symbols-outlined ml-2 text-sm transition-transform group-hover:translate-x-1"
+                  >arrow_forward</span
+                >
+              </div>
+              <div
+                class="selected-indicator absolute top-4 right-4 bg-primary text-white rounded-full p-1"
+              >
+                <span
+                  class="material-symbols-outlined text-sm"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-6">
+            <button
+              type="submit"
+              class="w-full max-w-xs bg-primary text-on-primary font-label-md py-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl active:scale-95 disabled:hover:scale-100 hover:bg-primary-container"
+              id="continue-btn"
+            >
+              Continue
+            </button>
+            <p class="font-label-sm text-label-sm text-outline">
+              Already have an account?
+              <a class="text-primary hover:underline" href="/login">Log in</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script>
+      let selectedRole = "landlord";
+      document.getElementById("role-input").value = selectedRole;
+      function selectRole(role) {
+        selectedRole = role;
+        document.getElementById("role-input").value = role;
+        document.querySelectorAll(".glass-card").forEach((card) => {
+          card.classList.remove("role-card-selected");
+          card.querySelector(".selected-indicator").classList.add("hidden");
+        });
+        const activeCard = document.getElementById("role-" + role);
+        activeCard.classList.add("role-card-selected");
+        activeCard.querySelector(".selected-indicator").classList.remove("hidden");
+      }
+    </script>
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

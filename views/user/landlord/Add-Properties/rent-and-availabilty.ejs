@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../../partials/sidebar-landlord') %>
+    <!-- Shared landlord sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Shared landlord header -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-bold">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Property listing setup
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">
+                Rent &amp; availability
+              </h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Set the rent, tenancy terms and availability renters will see
+                before they apply.
+              </p>
+            </div>
+            <button
+              class="self-start md:self-auto text-primary text-sm font-bold hover:underline"
+            >
+              Save draft
+            </button>
+          </div>
+
+          <!-- Compact five-step progress -->
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4"
+          >
+            <ol class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Address &amp; type</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Listing details</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  >3</span
+                ><span class="text-xs font-bold">Rent &amp; availability</span>
+              </li>
+              <li class="flex items-center gap-2 text-on-surface-variant">
+                <span
+                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
+                  >4</span
+                ><span class="text-xs font-bold">Photos &amp; documents</span>
+              </li>
+              <li class="flex items-center gap-2 text-on-surface-variant">
+                <span
+                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
+                  >5</span
+                ><span class="text-xs font-bold">Review &amp; publish</span>
+              </li>
+            </ol>
+          </section>
+
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+          >
+            <div class="px-5 py-4 border-b border-outline-variant">
+              <h2 class="text-sm font-bold">Step 3: Rent &amp; availability</h2>
+              <p class="text-xs text-on-surface-variant mt-1">
+                Add the practical tenancy terms so renters can make an informed
+                application.
+              </p>
+            </div>
+
+            <form class="p-5 space-y-6">
+              <p class="text-xs text-on-surface-variant">
+                Fields marked <span class="text-error font-bold">*</span> are
+                required.
+              </p>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Rent and deposit</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    These amounts will be visible to renters on the listing.
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                >
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="monthly-rent"
+                      >Monthly rent <span class="text-error">*</span></label
+                    >
+                    <div class="relative">
+                      <span
+                        class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant"
+                        >£</span
+                      ><input
+                        id="monthly-rent"
+                        class="w-full pl-7 pr-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="0"
+                        inputmode="decimal"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold mb-1.5" for="deposit"
+                      >Tenancy deposit</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant"
+                        >£</span
+                      ><input
+                        id="deposit"
+                        class="w-full pl-7 pr-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="0"
+                        inputmode="decimal"
+                        type="text"
+                      />
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-1.5">
+                      Add the tenancy deposit amount for this property.
+                    </p>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="holding-deposit"
+                      >Holding deposit</label
+                    >
+                    <div class="relative">
+                      <span
+                        class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant"
+                        >£</span
+                      ><input
+                        id="holding-deposit"
+                        class="w-full pl-7 pr-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="0"
+                        inputmode="decimal"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Availability</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Tell renters when the home can be occupied and what is
+                    included.
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                >
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="available-date"
+                      >Available from <span class="text-error">*</span></label
+                    >
+                    <input
+                      id="available-date"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      type="date"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="tenancy-length"
+                      >Minimum tenancy length</label
+                    >
+                    <select
+                      id="tenancy-length"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
+                    >
+                      <option value="">Select</option>
+                      <option>6 months</option>
+                      <option>9 months</option>
+                      <option>12 months</option>
+                      <option>18 months</option>
+                      <option>24 months</option>
+                      <option>Flexible</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold mb-1.5" for="viewings"
+                      >Viewings</label
+                    >
+                    <select
+                      id="viewings"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
+                    >
+                      <option value="">Select</option>
+                      <option>Available now</option>
+                      <option>By appointment</option>
+                      <option>Open viewing</option>
+                      <option>Available after current tenancy</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Bills and services</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Select any bills or services included in the monthly rent.
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+                >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >water_drop</span
+                      ><span class="text-sm font-semibold">Water</span></span
+                    ></label
+                  >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >bolt</span
+                      ><span class="text-sm font-semibold"
+                        >Electricity</span
+                      ></span
+                    ></label
+                  >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >local_fire_department</span
+                      ><span class="text-sm font-semibold"
+                        >Gas / heating</span
+                      ></span
+                    ></label
+                  >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >wifi</span
+                      ><span class="text-sm font-semibold"
+                        >Broadband</span
+                      ></span
+                    ></label
+                  >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >cleaning_services</span
+                      ><span class="text-sm font-semibold">Cleaning</span></span
+                    ></label
+                  >
+                  <label class="cursor-pointer"
+                    ><input class="peer sr-only" type="checkbox" /><span
+                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
+                      ><span class="material-symbols-outlined text-primary"
+                        >recycling</span
+                      ><span class="text-sm font-semibold"
+                        >Council tax</span
+                      ></span
+                    ></label
+                  >
+                </div>
+              </section>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Application preferences</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    These preferences support matching and application review.
+                    They must not be used to exclude renters based on protected
+                    characteristics.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="guarantor"
+                      >Guarantor</label
+                    >
+                    <select
+                      id="guarantor"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
+                    >
+                      <option value="">Select</option>
+                      <option>Not required</option>
+                      <option>May be requested</option>
+                      <option>Required</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="income-guidance"
+                      >Affordability guidance</label
+                    >
+                    <select
+                      id="income-guidance"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
+                    >
+                      <option value="">Select</option>
+                      <option>Use HomiScore affordability check</option>
+                      <option>Landlord will review affordability</option>
+                      <option>Discuss during application</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold mb-1.5"
+                    for="availability-notes"
+                    >Availability notes</label
+                  >
+                  <textarea
+                    id="availability-notes"
+                    rows="3"
+                    class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm resize-y"
+                    placeholder="Add practical information about move-in dates, viewings or what renters should know before applying."
+                  ></textarea>
+                </div>
+              </section>
+            </form>
+
+            <div
+              class="px-5 py-4 bg-surface-container-low border-t border-outline-variant flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <button onclick="window.location.href = '/user/landlord/properties/add/listing-details'"
+                class="self-start px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-sm font-bold flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_back</span
+                >Back to listing details
+              </button>
+              <button class="self-end px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold flex items-center gap-2" onclick="window.location.href = '/user/landlord/properties/add/photos'">
+                Continue to photos &amp; documents
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="../../../js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

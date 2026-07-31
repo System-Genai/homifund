@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-renter') %>
+    <!-- Permanent renter dashboard sidebar -->
+
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- Permanent renter dashboard header; Settings is active -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+              aria-label="Notifications"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="bg-secondary-container text-primary p-2 rounded-full"
+              aria-label="Settings"
+              aria-current="page"
+            >
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button
+              class="hover:bg-surface-container-low p-2 rounded-full"
+              aria-label="Messages"
+            >
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <button
+            class="flex items-center gap-3 hover:bg-surface-container-low rounded-lg px-2 py-1"
+            aria-label="Your profile"
+          >
+            <div class="text-right">
+              <p class="text-sm font-bold text-on-surface">Alex S.</p>
+              <p class="text-xs text-on-surface-variant">Renter</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              AS
+            </div>
+          </button>
+        </div>
+      </header>
+
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div>
+            <p
+              class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+            >
+              Account settings
+            </p>
+            <h1 class="text-3xl font-semibold text-primary">Settings</h1>
+            <p class="text-sm text-on-surface-variant mt-2">
+              Manage your account, rental profile and application preferences.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <!-- Combined section keeps rental settings compact -->
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">
+                    Rental preferences and household details
+                  </h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Use these preferences to improve property matches and review
+                    the details you may choose to include in an application.
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                  <div class="md:col-span-2">
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Preferred areas</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Add areas or postcodes"
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Monthly rent budget</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your preferred budget"
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Property type</label
+                    >
+                    <select
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option>Apartment</option>
+                      <option>House</option>
+                      <option>Studio</option>
+                      <option>Room</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Bedrooms needed</label
+                    >
+                    <select
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option>Studio</option>
+                      <option>1 bedroom</option>
+                      <option>2 bedrooms</option>
+                      <option>3+ bedrooms</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Preferred move-in timeframe</label
+                    >
+                    <select
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option>As soon as possible</option>
+                      <option>Within 1 month</option>
+                      <option>Within 3 months</option>
+                      <option>Flexible</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mt-5 pt-5 border-t border-outline-variant">
+                  <p class="text-xs font-bold">Household details</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                      <label
+                        class="block text-xs font-semibold text-on-surface-variant mb-2"
+                        >Number of adults</label
+                      >
+                      <input
+                        class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="Enter number of adults"
+                        min="0"
+                        type="number"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-xs font-semibold text-on-surface-variant mb-2"
+                        >Number of children</label
+                      >
+                      <input
+                        class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="Enter number of children"
+                        min="0"
+                        type="number"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-xs font-semibold text-on-surface-variant mb-2"
+                        >Pets</label
+                      >
+                      <select
+                        class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      >
+                        <option>No pets</option>
+                        <option>I have pets</option>
+                        <option>Prefer not to say yet</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label
+                        class="block text-xs font-semibold text-on-surface-variant mb-2"
+                        >Smoking preference</label
+                      >
+                      <select
+                        class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      >
+                        <option>Non-smoker</option>
+                        <option>Smoker</option>
+                        <option>Prefer not to say yet</option>
+                      </select>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label
+                        class="block text-xs font-semibold text-on-surface-variant mb-2"
+                        >Accessibility requirements</label
+                      >
+                      <input
+                        class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        placeholder="Add any property access requirements you wish to share"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-4 rounded-lg bg-surface-container-low p-4 flex gap-3"
+                >
+                  <span
+                    class="material-symbols-outlined text-primary text-[19px]"
+                    >info</span
+                  >
+                  <p class="text-xs text-on-surface-variant">
+                    These details can improve matching and help explain an
+                    application. They do not guarantee availability or
+                    acceptance, and should only be shared when relevant.
+                  </p>
+                </div>
+                <div class="flex justify-end mt-4">
+                  <button
+                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
+                  >
+                    Save rental preferences
+                  </button>
+                </div>
+              </section>
+
+              <!-- Combined section keeps application setup in one place -->
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">
+                    Application profile and sharing
+                  </h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Prepare the information you may choose to use when applying
+                    for a property.
+                  </p>
+                </div>
+
+                <div class="mt-5">
+                  <label
+                    class="block text-xs font-semibold text-on-surface-variant mb-2"
+                    >Application introduction</label
+                  >
+                  <textarea
+                    class="w-full min-h-[116px] px-3 py-3 bg-surface border border-outline-variant rounded-lg text-sm resize-y focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    placeholder="Tell the landlord or letting agent a little about your move, household and what you are looking for."
+                  ></textarea>
+                  <div
+                    class="mt-3 rounded-lg bg-surface-container-low p-3 flex gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-[19px]"
+                      >info</span
+                    >
+                    <p class="text-xs text-on-surface-variant">
+                      <span class="font-bold text-on-surface"
+                        >Keep it relevant.</span
+                      >
+                      Focus on your move-in plans, household details and what
+                      makes the property suitable for you. Avoid sharing
+                      unnecessary personal or sensitive information.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-5 pt-5 border-t border-outline-variant">
+                  <p class="text-xs font-bold">
+                    Default application sharing preferences
+                  </p>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    You can review these again before submitting every
+                    application.
+                  </p>
+
+                  <div class="mt-3 divide-y divide-outline-variant">
+                    <div class="py-3 flex items-center justify-between gap-4">
+                      <div>
+                        <p class="text-sm font-semibold">Contact details</p>
+                        <p class="text-xs text-on-surface-variant mt-1">
+                          Include your chosen contact information when you
+                          submit an application.
+                        </p>
+                      </div>
+                      <input
+                        class="toggle shrink-0"
+                        type="checkbox"
+                        aria-label="Include contact details"
+                      />
+                    </div>
+                    <div class="py-3 flex items-center justify-between gap-4">
+                      <div>
+                        <p class="text-sm font-semibold">
+                          Rental preferences and household details
+                        </p>
+                        <p class="text-xs text-on-surface-variant mt-1">
+                          Include relevant move-in and household information
+                          when it helps explain your application.
+                        </p>
+                      </div>
+                      <input
+                        class="toggle shrink-0"
+                        type="checkbox"
+                        aria-label="Include rental preferences and household details"
+                      />
+                    </div>
+                    <div class="py-3 flex items-center justify-between gap-4">
+                      <div>
+                        <p class="text-sm font-semibold">
+                          HomiScore and verification information
+                        </p>
+                        <p class="text-xs text-on-surface-variant mt-1">
+                          Choose whether HomiScore and verification information
+                          can be included by default when you submit an
+                          application.
+                        </p>
+                      </div>
+                      <input
+                        class="toggle shrink-0"
+                        type="checkbox"
+                        aria-label="Include HomiScore and verification information"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-end gap-3 mt-5">
+                  <button
+                    class="px-4 py-2.5 text-primary text-sm font-bold rounded-lg hover:bg-surface-container-low"
+                  >
+                    Clear
+                  </button>
+                  <button
+                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
+                  >
+                    Save application preferences
+                  </button>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div class="flex items-end justify-between gap-4">
+                  <div>
+                    <h2 class="text-sm font-bold">Notifications</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Choose how you would like to receive updates from
+                      HomiFund.
+                    </p>
+                  </div>
+                  <div
+                    class="hidden sm:flex gap-4 text-xs font-semibold text-on-surface-variant"
+                  >
+                    <span class="w-10 text-center">In-app</span
+                    ><span class="w-10 text-center">Email</span>
+                  </div>
+                </div>
+
+                <div class="mt-4 divide-y divide-outline-variant">
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Application updates</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Updates about applications, viewings and landlord or
+                        letting-agent responses.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="In-app application updates"
+                      /><input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="Email application updates"
+                      />
+                    </div>
+                  </div>
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Property matches</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        New properties that may match your rental preferences.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="In-app property matches"
+                      /><input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="Email property matches"
+                      />
+                    </div>
+                  </div>
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Document reminders</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Reminders when documents may need updating or sharing
+                        for an application.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="In-app document reminders"
+                      /><input
+                        class="toggle"
+                        type="checkbox"
+                        aria-label="Email document reminders"
+                      />
+                    </div>
+                  </div>
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">
+                        HomiScore and verification updates
+                      </p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Updates about verification information and HomiScore
+                        activity.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="In-app HomiScore updates"
+                      /><input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="Email HomiScore updates"
+                      />
+                    </div>
+                  </div>
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">
+                        Payment record updates
+                      </p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Updates related to payment records and receipts.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        checked
+                        type="checkbox"
+                        aria-label="In-app payment record updates"
+                      /><input
+                        class="toggle"
+                        type="checkbox"
+                        aria-label="Email payment record updates"
+                      />
+                    </div>
+                  </div>
+                  <div class="py-3 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">
+                        Product updates
+                        <span class="font-normal text-on-surface-variant"
+                          >(optional)</span
+                        >
+                      </p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        News and optional updates about HomiFund.
+                      </p>
+                    </div>
+                    <div class="flex gap-4 shrink-0">
+                      <input
+                        class="toggle"
+                        type="checkbox"
+                        aria-label="In-app product updates"
+                      /><input
+                        class="toggle"
+                        type="checkbox"
+                        aria-label="Email product updates"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Account security</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Review the key settings used to protect access to your
+                    account.
+                  </p>
+                </div>
+                <div class="mt-4 divide-y divide-outline-variant">
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Password</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Update your password to keep your account secure.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Change password
+                    </button>
+                  </div>
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Email address</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Your account email is used for important account
+                        updates.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Update email
+                    </button>
+                  </div>
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Active sessions</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Review devices currently signed in to your HomiFund
+                        account.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Review sessions
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Account management</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Manage requests connected to your HomiFund account.
+                  </p>
+                </div>
+                <div class="mt-4 divide-y divide-outline-variant">
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">
+                        Request your information
+                      </p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Request a copy of information associated with your
+                        HomiFund account.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Request information
+                    </button>
+                  </div>
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Close account</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Closing your account may affect active applications and
+                        access to your HomiFund records.
+                      </p>
+                    </div>
+                    <button
+                      class="text-error text-xs font-bold whitespace-nowrap"
+                    >
+                      Contact support
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-sm font-bold">Your account</h2>
+                <div class="mt-4 space-y-3 text-sm">
+                  <div class="flex justify-between gap-3">
+                    <span class="text-on-surface-variant">Role</span
+                    ><span class="font-semibold">Renter</span>
+                  </div>
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="homiscore"
+                    ><span onclick="window.location.href = '/user/renter/homiscore'">View HomiScore</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="homiscore"
+                    ><span>Update verification</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">support_agent</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">Need help with settings?</h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Contact HomiFund support if you need help managing your
+                  account preferences.
+                </p>
+                <button
+                  class="w-full mt-4 bg-primary text-white py-2.5 rounded-lg text-sm font-bold"
+                >
+                  Go to Support
+                </button>
+              </section>
+
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <h2 class="text-xs font-bold">
+                      Before changing your details
+                    </h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Review information before you save it. You can also review
+                      details again before submitting an application.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

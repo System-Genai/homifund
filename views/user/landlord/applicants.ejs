@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-landlord') %>
+    <!-- SideNavBar Anchor -->
+
+    <!-- Main Viewport -->
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- TopNavBar Anchor -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant shadow-sm"
+      >
+        <div class="flex items-center gap-4 flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+              placeholder="Search applications, properties, renters..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <a href="/user/landlord/notification-bell" class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+                      </a>
+            <a href="/user/landlord/settings" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">settings</span>
+          </a>
+            <a href="/user/landlord/messages" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </a>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3 pl-2 group cursor-pointer">
+            <div class="text-right">
+              <p
+                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+              >
+                Alex S.
+                <span
+                  class="material-symbols-outlined text-primary text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </p>
+              <p class="text-label-sm text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="px-margin-desktop py-8 bg-surface">
+        <div class="max-w-container-max mx-auto space-y-6">
+          <!-- Page heading -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-label-sm uppercase tracking-[0.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Landlord workspace
+              </p>
+              <h2 class="text-headline-lg text-primary">Applications</h2>
+              <p class="text-body-md text-on-surface-variant mt-2">
+                Review verified renters and move the right applications forward.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low transition-colors flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >file_download</span
+                >
+                Export
+              </button>
+              <button
+                class="px-4 py-2.5 rounded-lg bg-primary text-on-primary text-label-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                Add Property
+              </button>
+            </div>
+          </div>
+
+          <!-- Compact balanced metrics -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 px-3 py-4 flex items-center justify-between"
+            >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Active applications
+                </p>
+                <p class="text-headline-md text-on-surface mt-1">37</p>
+                <p class="text-label-sm text-on-surface-variant mt-1">
+                  12% more this week
+                </p>
+              </div>
+              <span class="material-symbols-outlined text-primary text-[24px]"
+                >group</span
+              >
+            </div>
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 px-3 py-4 flex items-center justify-between"
+            >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Needs review
+                </p>
+                <p class="text-headline-md text-on-surface mt-1">12</p>
+                <p class="text-label-sm text-error mt-1">3 received today</p>
+              </div>
+              <span class="material-symbols-outlined text-error text-[24px]"
+                >priority_high</span
+              >
+            </div>
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 px-3 py-4 flex items-center justify-between"
+            >
+              <div>
+                <p
+                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+                >
+                  Portfolio Trust
+                </p>
+                <p class="text-headline-md text-on-surface mt-1">94%</p>
+                <p class="text-label-sm text-on-surface-variant mt-1">
+                  Average verified HomiScore
+                </p>
+              </div>
+              <span
+                class="material-symbols-outlined text-primary text-[24px]"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >verified</span
+              >
+            </div>
+          </section>
+
+          <!-- Clean table workspace -->
+          <section
+            class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 overflow-hidden"
+          >
+            <div class="p-5 border-b border-outline-variant/70">
+              <div
+                class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4"
+              >
+                <div>
+                  <h3 class="text-headline-md text-on-surface">
+                    Applicant pipeline
+                  </h3>
+                  <p class="text-label-sm text-on-surface-variant mt-1">
+                    Compare renter readiness, then review the full application.
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <button
+                    class="px-3 py-2 rounded-lg bg-secondary-container text-primary text-label-sm font-bold"
+                  >
+                    All
+                    <span
+                      class="ml-1 bg-primary/10 px-1.5 py-0.5 rounded-full text-[10px]"
+                      >37</span
+                    >
+                  </button>
+                  <button
+                    class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold"
+                  >
+                    Needs review
+                  </button>
+                  <button
+                    class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold"
+                  >
+                    Viewings
+                  </button>
+                  <button
+                    class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold"
+                  >
+                    Shortlisted
+                  </button>
+                  <button
+                    class="ml-1 px-3 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >filter_list</span
+                    >
+                    Filters
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[860px] text-left">
+                <thead class="bg-surface-container-low">
+                  <tr
+                    class="text-[10px] uppercase tracking-wider text-on-surface-variant"
+                  >
+                    <th class="px-3 py-3 font-bold">Applicant</th>
+                    <th class="px-3 py-3 font-bold">Property</th>
+                    <th class="px-3 py-3 font-bold text-center">HomiScore</th>
+                    <th class="px-3 py-3 font-bold">Affordability</th>
+                    <th class="px-3 py-3 font-bold">Move-in</th>
+                    <th class="px-3 py-3 font-bold">Status</th>
+                    <th class="px-3 py-3 font-bold text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/50">
+                  <tr
+                    class="hover:bg-surface-container-low/60 transition-colors"
+                  >
+                    <td class="px-3 py-4">
+                      <div class="flex items-center gap-2.5">
+                        <img
+                          class="w-10 h-10 rounded-full object-cover border border-outline-variant/60"
+                          alt="Sarah Mitchell"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCfBLdSLTt466TrkyHXWNulxXl4EwMByEI8sC4H1FYMcHPL_HmGDiGcCFtcyE7JK0modQ8ZeeEdmlvAH2AmQJsrm6CPBfsCldUuEF6YpbqD057zsb1jVCg3BTwaH17Ox83rGxPN7MapbdoPttS-xvHqegPSC69fB3TKMl8DAnP2AYSRG0Ch9ngMd2AjXpTaTleD1L9lmqSqOWQRPg5LKPg5IyaHfrrsqc4vhnxqfOOv0Q4hHZIyPV-Qw"
+                        />
+                        <div>
+                          <p class="text-label-md font-bold text-on-surface">
+                            Sarah Mitchell
+                          </p>
+                          <p
+                            class="text-label-sm text-on-surface-variant mt-0.5"
+                          >
+                            Applied 2 days ago
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-md text-on-surface">
+                        The Glass House
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Canary Wharf
+                      </p>
+                    </td>
+                    <td class="px-3 py-4 text-center">
+                      <span class="text-label-md font-bold text-primary"
+                        >865</span
+                      >
+                      <div
+                        class="mx-auto mt-1 h-1 w-12 bg-surface-container-high rounded-full overflow-hidden"
+                      >
+                        <div
+                          class="h-full w-[86%] bg-primary rounded-full"
+                        ></div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm font-bold text-on-surface">
+                        Verified
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Strong rent fit
+                      </p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm text-on-surface">1 Oct</p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <span
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed/60 text-primary text-[10px] uppercase font-bold tracking-wide"
+                        ><span
+                          class="material-symbols-outlined text-[14px]"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >verified</span
+                        >Verified</span
+                      >
+                    </td>
+                    <td class="px-3 py-4 text-right">
+                      <button
+                        class="px-2.5 py-2 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary transition-colors"
+                        onclick="window.location.href = 'review-application'"
+                      >
+                        Review application
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr
+                    class="hover:bg-surface-container-low/60 transition-colors"
+                  >
+                    <td class="px-3 py-4">
+                      <div class="flex items-center gap-2.5">
+                        <img
+                          class="w-10 h-10 rounded-full object-cover border border-outline-variant/60"
+                          alt="Marcus Chen"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxumPJ6siWAvQrEtQ13TveiaF_9EoZKk2_el9vQ-EHLXkCBGiKfj_TqTbVOWN_dM3Qbk1g-C6TJ3SyRN_Iw5_xeO2EfJNO3VyVr1X5evCKejnaCNyIwQZiEPOqmdgDWrv-0L6R43kzaTmUnKy6RZWZSEWGYdBj-YZZtZi_Cy7aEZRMOeO288Xx0ugf5JxNqod7CEBl7HcECgPp4m3d79e-fF3ZaUkcWoEoU7nrvPV9oEssQEusPE72-g"
+                        />
+                        <div>
+                          <p class="text-label-md font-bold text-on-surface">
+                            Marcus Chen
+                          </p>
+                          <p
+                            class="text-label-sm text-on-surface-variant mt-0.5"
+                          >
+                            Applied 5 hours ago
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-md text-on-surface">Hudson Lofts</p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Shoreditch
+                      </p>
+                    </td>
+                    <td class="px-3 py-4 text-center">
+                      <span class="text-label-md font-bold text-on-surface"
+                        >792</span
+                      >
+                      <div
+                        class="mx-auto mt-1 h-1 w-12 bg-surface-container-high rounded-full overflow-hidden"
+                      >
+                        <div
+                          class="h-full w-[79%] bg-secondary rounded-full"
+                        ></div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm font-bold text-on-surface">
+                        Verified
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Within budget
+                      </p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm text-on-surface">15 Oct</p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <span
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant text-[10px] uppercase font-bold tracking-wide"
+                        ><span class="material-symbols-outlined text-[14px]"
+                          >pending</span
+                        >Needs review</span
+                      >
+                    </td>
+                    <td class="px-3 py-4 text-right">
+                      <button
+                        class="px-2.5 py-2 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary transition-colors"
+                        onclick="window.location.href = 'review-application'"
+                      >
+                        Review application
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr
+                    class="hover:bg-surface-container-low/60 transition-colors"
+                  >
+                    <td class="px-3 py-4">
+                      <div class="flex items-center gap-2.5">
+                        <img
+                          class="w-10 h-10 rounded-full object-cover border border-outline-variant/60"
+                          alt="Elena Rodriguez"
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTD_SLdhhxXl1kaOXnlt_whOCv2U4uzr-Ah9zsokRGLUCFxAuF6k5caB7YGRmi4PGi9cS9mT821u1rChjOoF7Ux1qiReev81y3R87OiZN-NXqP4Uck5i8O3DnzcY_1pv-X_qeyvGXZg-s3BzLf0AAxgm4neN6pwRnSlqEp8OoHTuGTdeGm-NoBnwqYM9W_EwU8WZGD_9QxMebLqb3BuPKonEFRBXKC9WSsskNyXryZceyc2v_yyGvGxg"
+                        />
+                        <div>
+                          <p class="text-label-md font-bold text-on-surface">
+                            Elena Rodriguez
+                          </p>
+                          <p
+                            class="text-label-sm text-on-surface-variant mt-0.5"
+                          >
+                            Applied yesterday
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-md text-on-surface">
+                        The Glass House
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Canary Wharf
+                      </p>
+                    </td>
+                    <td class="px-3 py-4 text-center">
+                      <span class="text-label-md font-bold text-primary"
+                        >912</span
+                      >
+                      <div
+                        class="mx-auto mt-1 h-1 w-12 bg-surface-container-high rounded-full overflow-hidden"
+                      >
+                        <div
+                          class="h-full w-[91%] bg-primary rounded-full"
+                        ></div>
+                      </div>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm font-bold text-on-surface">
+                        Verified
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant mt-0.5">
+                        Strong rent fit
+                      </p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <p class="text-label-sm text-on-surface">Now</p>
+                    </td>
+                    <td class="px-3 py-4">
+                      <span
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-primary text-[10px] uppercase font-bold tracking-wide"
+                        ><span
+                          class="material-symbols-outlined text-[14px]"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >check_circle</span
+                        >Shortlisted</span
+                      >
+                    </td>
+                    <td class="px-3 py-4 text-right">
+                      <button
+                        class="px-2.5 py-2 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary transition-colors"
+                        onclick="window.location.href = 'review-application'"
+                      >
+                        Review application
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div
+              class="px-3 py-4 border-t border-outline-variant/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <p class="text-label-sm text-on-surface-variant">
+                Showing 1–10 of 37 applications
+              </p>
+              <div class="flex items-center gap-2">
+                <button
+                  class="w-8 h-8 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_left</span
+                  >
+                </button>
+                <button
+                  class="w-8 h-8 rounded-lg bg-secondary-container text-primary text-label-sm font-bold"
+                >
+                  1
+                </button>
+                <button
+                  class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold"
+                >
+                  2
+                </button>
+                <button
+                  class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-label-sm font-bold"
+                >
+                  3
+                </button>
+                <button
+                  class="w-8 h-8 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll("aside nav a").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          if (!item.classList.contains("bg-secondary-container"))
+            item.style.transform = "translateX(4px)";
+        });
+        item.addEventListener(
+          "mouseleave",
+          () => (item.style.transform = "translateX(0px)"),
+        );
+      });
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

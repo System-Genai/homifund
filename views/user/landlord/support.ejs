@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="bg-surface text-on-surface">
+    <%- include('../partials/sidebar-landlord') %>
+
+    <main class="md:ml-[240px] min-h-screen flex flex-col">
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
+      >
+        <div class="relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          ><input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span></button
+            ><button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span></button
+            ><button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-bold">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                HomiFund help
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">Support</h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Find answers or contact HomiFund about your account, properties,
+                applications or documents.
+              </p>
+            </div>
+            <button
+              class="self-start md:self-auto px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >support_agent</span
+              >Submit a support request
+            </button>
+          </div>
+
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+          >
+            <div class="relative max-w-2xl">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+                >search</span
+              ><input
+                class="w-full pl-10 pr-4 py-3 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="Search support guides"
+                type="text"
+              />
+            </div>
+          </section>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <h2 class="text-sm font-bold">
+                      What do you need help with?
+                    </h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Choose a topic to find relevant guidance.
+                    </p>
+                  </div>
+                  <span class="text-xs text-on-surface-variant"
+                    >Landlord guides</span
+                  >
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="dashboard"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >rocket_launch</span
+                      ><span class="text-sm font-semibold"
+                        >Getting started</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="homiscore"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >verified</span
+                      ><span class="text-sm font-semibold"
+                        >HomiScore &amp; verification</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="properties"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >apartment</span
+                      ><span class="text-sm font-semibold"
+                        >Properties &amp; listings</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="applicants"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >assignment</span
+                      ><span class="text-sm font-semibold"
+                        >Applications</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="documents"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >description</span
+                      ><span class="text-sm font-semibold"
+                        >Documents</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3"
+                    href="payments"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >account_balance_wallet</span
+                      ><span class="text-sm font-semibold"
+                        >Payments &amp; payment records</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low hover:border-primary transition-colors flex items-center justify-between gap-3 sm:col-span-2"
+                    href="settings"
+                    ><span class="flex items-center gap-3"
+                      ><span class="material-symbols-outlined text-primary"
+                        >security</span
+                      ><span class="text-sm font-semibold"
+                        >Account &amp; security</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div
+                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between gap-3"
+                >
+                  <div>
+                    <h2 class="text-sm font-bold">Popular support guides</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Common questions for landlords using HomiFund.
+                    </p>
+                  </div>
+                  <button
+                    class="text-primary text-xs font-bold hover:underline"
+                  >
+                    View all guides
+                  </button>
+                </div>
+                <div class="divide-y divide-outline-variant">
+                  <a
+                    class="px-5 py-4 flex items-center justify-between gap-4 hover:bg-surface-container-low"
+                    href="properties/add/address"
+                    ><span
+                      ><span class="block text-sm font-semibold"
+                        >How do I add a property listing?</span
+                      ><span class="block text-xs text-on-surface-variant mt-1"
+                        >Create a draft, add listing details, then review it
+                        before publishing.</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="px-5 py-4 flex items-center justify-between gap-4 hover:bg-surface-container-low"
+                    href="homiscore"
+                    ><span
+                      ><span class="block text-sm font-semibold"
+                        >How should I use HomiScore when reviewing
+                        applicants?</span
+                      ><span class="block text-xs text-on-surface-variant mt-1"
+                        >Use shared verification and readiness information
+                        alongside the full application.</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="px-5 py-4 flex items-center justify-between gap-4 hover:bg-surface-container-low"
+                    href="documents"
+                    ><span
+                      ><span class="block text-sm font-semibold"
+                        >How do I update a property document?</span
+                      ><span class="block text-xs text-on-surface-variant mt-1"
+                        >Go to Documents or open the property and update the
+                        relevant record.</span
+                      ></span
+                    ><span
+                      class="material-symbols-outlined text-on-surface-variant"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+              >
+                <div class="px-5 py-4 border-b border-outline-variant">
+                  <h2 class="text-sm font-bold">Frequently asked questions</h2>
+                </div>
+                <div class="divide-y divide-outline-variant">
+                  <details class="group">
+                    <summary
+                      class="flex justify-between items-center p-5 cursor-pointer text-sm font-semibold hover:bg-surface-container-low list-none"
+                    >
+                      <span>How does my landlord HomiScore work?</span
+                      ><span
+                        class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform"
+                        >expand_more</span
+                      >
+                    </summary>
+                    <div class="px-5 pb-5 text-sm text-on-surface-variant">
+                      Your landlord HomiScore reflects information you have
+                      completed or shared about your account, properties and
+                      rental activity. It is intended to help present trust and
+                      readiness information, not to replace proper property and
+                      application checks.
+                    </div>
+                  </details>
+                  <details class="group">
+                    <summary
+                      class="flex justify-between items-center p-5 cursor-pointer text-sm font-semibold hover:bg-surface-container-low list-none"
+                    >
+                      <span>How should I review a renter’s HomiScore?</span
+                      ><span
+                        class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform"
+                        >expand_more</span
+                      >
+                    </summary>
+                    <div class="px-5 pb-5 text-sm text-on-surface-variant">
+                      Review the verification and rental-readiness information
+                      the renter has chosen to share together with their
+                      complete application, references and your usual checks.
+                      HomiScore should not be the only decision factor.
+                    </div>
+                  </details>
+                  <details class="group">
+                    <summary
+                      class="flex justify-between items-center p-5 cursor-pointer text-sm font-semibold hover:bg-surface-container-low list-none"
+                    >
+                      <span>How long can verification take?</span
+                      ><span
+                        class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform"
+                        >expand_more</span
+                      >
+                    </summary>
+                    <div class="px-5 pb-5 text-sm text-on-surface-variant">
+                      Timing can vary depending on the information provided and
+                      whether anything else is needed to complete the review.
+                    </div>
+                  </details>
+                </div>
+              </section>
+            </div>
+
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">support_agent</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">Need more help?</h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Send a request to HomiFund support with the details of what
+                  you need help with.
+                </p>
+                <button
+                  class="w-full mt-4 bg-primary text-white py-2.5 rounded-lg text-sm font-bold"
+                >
+                  Submit a support request
+                </button>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <h2 class="text-sm font-bold">Your recent support requests</h2>
+                <div class="mt-4 text-center py-4">
+                  <span class="material-symbols-outlined text-primary"
+                    >inbox</span
+                  >
+                  <p class="text-sm font-semibold mt-2">
+                    No support requests yet
+                  </p>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    When you contact support, updates will appear here.
+                  </p>
+                </div>
+              </section>
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <h2 class="text-xs font-bold">Platform support only</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      HomiFund support can help with the platform and your
+                      account. For urgent property safety issues, contact the
+                      appropriate emergency or property service directly.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

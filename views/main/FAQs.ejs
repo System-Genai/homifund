@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body class="bg-background text-on-surface antialiased">
+    <%- include('partials/header') %>
+    <main>
+      <!-- Hero Section -->
+      <section
+        class="bg-surface-container-lowest py-20 md:py-32 border-b border-outline-variant"
+      >
+        <div class="max-w-container-max mx-auto px-margin-desktop text-center">
+          <h1 class="text-headline-xl font-headline-xl text-primary mb-6">
+            Frequently Asked Questions
+          </h1>
+          <p
+            class="text-body-lg font-body-lg text-secondary max-w-2xl mx-auto mb-12"
+          >
+            Everything you need to know about the HomiFund ecosystem. Find
+            answers about HomiScore, rent collection, and our security
+            protocols.
+          </p>
+          <!-- Search Bar -->
+          <div class="max-w-xl mx-auto relative group">
+            <div
+              class="flex items-center bg-white border border-outline-variant rounded-xl px-6 py-4 search-focus transition-all duration-300"
+            >
+              <span
+                class="material-symbols-outlined text-outline mr-4"
+                data-icon="search"
+                >search</span
+              >
+              <input
+                class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface placeholder-outline"
+                placeholder="Search for answers..."
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Categories Tabs -->
+      <section class="py-12 border-b border-outline-variant bg-surface">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+          <div class="flex flex-wrap justify-center gap-4 md:gap-12">
+            <button
+              class="text-primary border-b-2 border-primary font-bold pb-2 px-2 text-label-md font-label-md transition-all"
+            >
+              General
+            </button>
+            <button
+              class="text-on-surface-variant font-medium hover:text-primary pb-2 px-2 text-label-md font-label-md transition-all"
+            >
+              For Renters
+            </button>
+            <button
+              class="text-on-surface-variant font-medium hover:text-primary pb-2 px-2 text-label-md font-label-md transition-all"
+            >
+              For Landlords
+            </button>
+            <button
+              class="text-on-surface-variant font-medium hover:text-primary pb-2 px-2 text-label-md font-label-md transition-all"
+            >
+              Security &amp; Trust
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- FAQ Accordion -->
+      <section class="py-20 bg-background">
+        <div class="max-w-3xl mx-auto px-margin-mobile md:px-0">
+          <div class="space-y-4">
+            <!-- Item 1 -->
+            <div
+              class="accordion-item glass-accordion rounded-xl overflow-hidden active"
+            >
+              <button
+                class="w-full flex justify-between items-center px-8 py-6 text-left group"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="text-headline-md font-headline-md text-primary"
+                  >What is a HomiScore?</span
+                >
+                <span
+                  class="material-symbols-outlined chevron transition-transform duration-300 text-primary"
+                  data-icon="expand_more"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content px-8">
+                <div
+                  class="pb-8 text-body-md font-body-md text-secondary leading-relaxed"
+                >
+                  The HomiScore is our proprietary trust metric designed to
+                  validate rental reliability. It aggregates payment history,
+                  verified identity data, and professional references into a
+                  single, portable score. This allows high-quality renters to
+                  stand out and provides landlords with institutional-grade risk
+                  assessment.
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 -->
+            <div
+              class="accordion-item glass-accordion rounded-xl overflow-hidden"
+            >
+              <button
+                class="w-full flex justify-between items-center px-8 py-6 text-left group"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="text-headline-md font-headline-md text-primary"
+                  >How does Direct Debit rent collection work?</span
+                >
+                <span
+                  class="material-symbols-outlined chevron transition-transform duration-300 text-primary"
+                  data-icon="expand_more"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content px-8">
+                <div
+                  class="pb-8 text-body-md font-body-md text-secondary leading-relaxed"
+                >
+                  Our automated system uses encrypted Direct Debit protocols to
+                  transfer rent directly from the tenant's account to the
+                  landlord's bank on the scheduled date. This eliminates manual
+                  transfers, reduces late payment risk, and provides a clear
+                  digital ledger of every transaction.
+                </div>
+              </div>
+            </div>
+            <!-- Item 3 -->
+            <div
+              class="accordion-item glass-accordion rounded-xl overflow-hidden"
+            >
+              <button
+                class="w-full flex justify-between items-center px-8 py-6 text-left group"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="text-headline-md font-headline-md text-primary"
+                  >How is my data protected?</span
+                >
+                <span
+                  class="material-symbols-outlined chevron transition-transform duration-300 text-primary"
+                  data-icon="expand_more"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content px-8">
+                <div
+                  class="pb-8 text-body-md font-body-md text-secondary leading-relaxed"
+                >
+                  Data security is our highest priority. We utilize AES-256
+                  bank-level encryption, multi-factor authentication (MFA), and
+                  strictly adhere to GDPR and local privacy regulations. Your
+                  sensitive information is never shared without explicit
+                  permission, and our infrastructure is monitored 24/7.
+                </div>
+              </div>
+            </div>
+            <!-- Item 4 -->
+            <div
+              class="accordion-item glass-accordion rounded-xl overflow-hidden"
+            >
+              <button
+                class="w-full flex justify-between items-center px-8 py-6 text-left group"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="text-headline-md font-headline-md text-primary"
+                  >Can I use HomiFund for international properties?</span
+                >
+                <span
+                  class="material-symbols-outlined chevron transition-transform duration-300 text-primary"
+                  data-icon="expand_more"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content px-8">
+                <div
+                  class="pb-8 text-body-md font-body-md text-secondary leading-relaxed"
+                >
+                  Currently, HomiFund is optimized for regional markets where we
+                  can ensure full regulatory compliance. We are actively
+                  expanding our cross-border payment capabilities. Please check
+                  our "Legal Mentions" for a current list of supported
+                  jurisdictions.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- CTA Section -->
+      <section class="py-20 bg-surface-container-lowest">
+        <div class="max-w-container-max mx-auto px-margin-desktop">
+          <div
+            class="bg-primary rounded-2xl p-12 text-center text-on-primary shadow-xl relative overflow-hidden"
+          >
+            <div class="absolute inset-0 opacity-10 pointer-events-none"></div>
+            <h2 class="text-headline-lg font-headline-lg mb-4 relative z-10">
+              Still have questions?
+            </h2>
+            <p
+              class="text-body-lg font-body-lg mb-8 opacity-90 max-w-xl mx-auto relative z-10"
+            >
+              Our support team is available 24/7 to help you navigate the
+              HomiFund ecosystem.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row justify-center gap-4 relative z-10"
+            >
+              <button
+                class="bg-white text-primary px-8 py-3 rounded-lg font-bold text-label-md font-label-md hover:bg-opacity-95 transition-all"
+              >
+                Contact Support
+              </button>
+              <button
+                class="bg-transparent border-2 border-white/30 text-white px-8 py-3 rounded-lg font-bold text-label-md font-label-md hover:bg-white/10 transition-all"
+              >
+                View Help Center
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <script>
+      function toggleAccordion(button) {
+        const item = button.parentElement;
+        const isActive = item.classList.contains("active");
+
+        // Close all items
+        document.querySelectorAll(".accordion-item").forEach((acc) => {
+          acc.classList.remove("active");
+        });
+
+        // If it wasn't active, open it
+        if (!isActive) {
+          item.classList.add("active");
+        }
+      }
+
+      // Search bar micro-interaction
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase();
+        document.querySelectorAll(".accordion-item").forEach((item) => {
+          const text = item.innerText.toLowerCase();
+          if (text.includes(query)) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    </script>
+    <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

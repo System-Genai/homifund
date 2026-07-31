@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md min-h-screen flex flex-col"
+  >
+    <%- include('partials/header') %>
+    <main
+      class="flex-grow flex flex-col py-12 px-4 md:px-margin-desktop max-w-container-max mx-auto w-full"
+    >
+      <!-- Premium Progress Indicator -->
+      <div class="w-full max-w-4xl mx-auto mb-16">
+        <div class="relative flex justify-between items-center">
+          <!-- Progress Line Background -->
+          <div
+            class="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0"
+          ></div>
+          <!-- Active Progress Line -->
+          <div
+            class="absolute top-1/2 left-0 w-1/4 h-1 bg-primary -translate-y-1/2 z-0 transition-all duration-700"
+            id="progress-bar-line"
+          ></div>
+          <!-- Steps -->
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold shadow-lg ring-4 ring-background"
+            >
+              1
+            </div>
+            <span class="mt-2 font-label-sm text-label-sm text-primary"
+              >Profile Setup</span
+            >
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background"
+            >
+              2
+            </div>
+            <span
+              class="mt-2 font-label-sm text-label-sm text-on-surface-variant"
+              >Verification</span
+            >
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background"
+            >
+              3
+            </div>
+            <span
+              class="mt-2 font-label-sm text-label-sm text-on-surface-variant"
+              >HomiScore</span
+            >
+          </div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background"
+            >
+              4
+            </div>
+            <span
+              class="mt-2 font-label-sm text-label-sm text-on-surface-variant"
+              >Dashboard</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-12 items-start">
+        <!-- Main Form Canvas -->
+        <div class="w-full lg:w-2/3 space-y-8">
+          <!-- Section 1: Personal & Household -->
+          <section
+            class="step-transition bg-surface-container-lowest p-8 md:p-12 rounded-xl border border-outline-variant shadow-sm opacity-100 scale-[1.01]"
+            id="section-1"
+          >
+            <div class="mb-8">
+              <h2 class="font-headline-md text-headline-md text-primary mb-2">
+                Personal &amp; Household
+              </h2>
+              <p class="text-on-surface-variant">
+                Tell us a bit about who will be living in your next home.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Full Legal Name</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-name"
+                  placeholder="Johnathan Doe"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Phone Number (UK)</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-phone"
+                  placeholder="+44 (000) 0000000"
+                  type="tel"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Household Size</label
+                >
+                <select
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none"
+                  id="input-household"
+                >
+                  <option>1 person</option>
+                  <option>2 people</option>
+                  <option>3 people</option>
+                  <option>4+ people</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Pets</label
+                >
+                <select
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none"
+                  id="input-pets"
+                >
+                  <option>No pets</option>
+                  <option>1 Pet</option>
+                  <option>Multiple Pets</option>
+                </select>
+              </div>
+            </div>
+          </section>
+          <!-- Section 2: Employment & Income -->
+          <section
+            class="step-transition bg-surface-container-lowest p-8 md:p-12 rounded-xl border border-outline-variant shadow-sm opacity-100 scale-[1.01]"
+            id="section-2"
+          >
+            <div class="mb-8">
+              <h2 class="font-headline-md text-headline-md text-primary mb-2">
+                Employment &amp; Income
+              </h2>
+              <p class="text-on-surface-variant">
+                This information helps calculate your preliminary HomiScore.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Job Title</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-job"
+                  placeholder="Senior Financial Analyst"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Current Employer</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-employer"
+                  placeholder="Global Tech Corp"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2 md:col-span-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Annual Gross Income</label
+                >
+                <div class="relative">
+                  <span
+                    class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant"
+                    >£</span
+                  >
+                  <input
+                    class="w-full bg-white border border-outline rounded-lg pl-8 pr-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                    id="input-income"
+                    placeholder="120,000"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Section 3: Housing Preferences -->
+          <section
+            class="step-transition bg-surface-container-lowest p-8 md:p-12 rounded-xl border border-outline-variant shadow-sm opacity-100 scale-[1.01]"
+            id="section-3"
+          >
+            <div class="mb-8">
+              <h2 class="font-headline-md text-headline-md text-primary mb-2">
+                Housing Preferences
+              </h2>
+              <p class="text-on-surface-variant">
+                Where and what are you looking for?
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Budget Range (Monthly)</label
+                >
+                <select
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-budget"
+                >
+                  <option class="">£2,000 - £3,000</option>
+                  <option class="">£3,000 - £4,500</option>
+                  <option class="">£4,500 - £6,000</option>
+                  <option class="">£6,000+</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Preferred Locations</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-location"
+                  placeholder="e.g. Manhattan, Brooklyn"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Property Type</label
+                >
+                <select
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-type"
+                >
+                  <option>Apartment</option>
+                  <option>Townhouse</option>
+                  <option>Single Family Home</option>
+                  <option>Loft / Studio</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="font-label-md text-label-md text-secondary"
+                  >Desired Move-in Date</label
+                >
+                <input
+                  class="bg-white border border-outline rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                  id="input-date"
+                  type="date"
+                />
+              </div>
+            </div>
+          </section>
+          <!-- Actions -->
+          <div
+            class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant gap-4"
+          >
+            <a
+              class="text-primary font-label-md text-label-md hover:underline order-2 md:order-1"
+              href="/"
+              >Save and Finish Later</a
+            >
+            <a
+              class="w-full md:w-auto bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary px-10 py-4 rounded-xl font-bold transition-all shadow-md flex items-center justify-center gap-2 order-1 md:order-2 group"
+              href="/tenant-verification"
+            >
+              Continue to Verification
+              <span
+                class="material-symbols-outlined group-hover:translate-x-1 transition-transform"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+        </div>
+        <!-- Profile Summary Card (Sticky) -->
+        <aside class="w-full lg:w-1/3 sticky top-24">
+          <div
+            class="bg-primary text-on-primary p-8 rounded-xl shadow-2xl relative overflow-hidden"
+          >
+            <!-- Subtle Background Decoration -->
+            <div
+              class="absolute -right-12 -top-12 w-48 h-48 bg-white/5 rounded-full blur-3xl"
+            ></div>
+            <div
+              class="absolute -left-12 -bottom-12 w-48 h-48 bg-primary-container/20 rounded-full blur-3xl"
+            ></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-8">
+                <h3
+                  class="font-label-md text-label-md tracking-widest uppercase opacity-80"
+                >
+                  Rental Passport
+                </h3>
+                <div
+                  class="bg-tertiary-container/50 px-2 py-1 rounded text-[10px] font-bold border border-white/20"
+                >
+                  PRE-DRAFT
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mb-8">
+                <div
+                  class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-inner text-primary"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    style="font-size: 32px"
+                    >person</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="font-headline-md text-headline-md leading-tight"
+                    id="summary-name"
+                  >
+                    Your Name
+                  </h4>
+                  <p
+                    class="text-on-primary/70 font-label-sm text-label-sm"
+                    id="summary-job"
+                  >
+                    Professional Profile
+                  </p>
+                </div>
+              </div>
+              <div class="space-y-4 pt-6 border-t border-white/10">
+                <div class="flex justify-between items-center">
+                  <span class="text-on-primary/60 font-label-sm text-label-sm"
+                    >Verification Status</span
+                  >
+                  <span
+                    class="flex items-center gap-1 text-[11px] font-bold text-secondary-fixed"
+                  >
+                    <span class="material-symbols-outlined text-[14px]"
+                      >pending</span
+                    >
+                    Pending
+                  </span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-on-primary/60 font-label-sm text-label-sm"
+                    >Projected HomiScore</span
+                  >
+                  <span class="text-tertiary-fixed-dim font-bold">---</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-on-primary/60 font-label-sm text-label-sm"
+                    >Annual Income</span
+                  >
+                  <span class="font-bold" id="summary-income">£0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-on-primary/60 font-label-sm text-label-sm"
+                    >Household</span
+                  >
+                  <span class="font-bold" id="summary-household">Not Set</span>
+                </div>
+              </div>
+              <div
+                class="mt-8 bg-white/10 p-4 rounded-lg border border-white/5 backdrop-blur-sm"
+              >
+                <div class="flex items-center gap-3 mb-2">
+                  <span
+                    class="material-symbols-outlined text-secondary-fixed"
+                    data-weight="fill"
+                    >verified</span
+                  >
+                  <p class="text-label-sm font-bold text-white">
+                    Trust-Verified by HomiFund
+                  </p>
+                </div>
+                <p class="text-[11px] leading-relaxed opacity-70">
+                  Once verified, this Institutional Grade Rental Profile can be
+                  shared with premium landlords to fast-track your applications.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Guidance Tip -->
+          <div
+            class="mt-6 p-6 bg-secondary-container/30 border border-secondary-container rounded-xl flex gap-4"
+          >
+            <span
+              class="material-symbols-outlined text-primary"
+              data-weight="fill"
+              >lightbulb</span
+            >
+            <div>
+              <p class="text-label-md font-bold text-primary mb-1">
+                Why do we need this?
+              </p>
+              <p class="text-label-sm text-on-secondary-container">
+                Detailed data results in a 40% higher 'HomiScore', making your
+                application significantly more attractive to landlords.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <!-- Footer -->
+    <script>
+      // Real-time Update Logic for the Rental Profile Card
+      const inputs = {
+        name: document.getElementById("input-name"),
+        job: document.getElementById("input-job"),
+        income: document.getElementById("input-income"),
+        household: document.getElementById("input-household"),
+      };
+
+      const summary = {
+        name: document.getElementById("summary-name"),
+        job: document.getElementById("summary-job"),
+        income: document.getElementById("summary-income"),
+        household: document.getElementById("summary-household"),
+      };
+
+      inputs.name.addEventListener("input", (e) => {
+        summary.name.textContent = e.target.value || "Your Name";
+      });
+
+      inputs.job.addEventListener("input", (e) => {
+        summary.job.textContent = e.target.value || "Professional Profile";
+      });
+
+      inputs.income.addEventListener("input", (e) => {
+        const val = e.target.value;
+        summary.income.textContent = val
+          ? `$${Number(val).toLocaleString()}`
+          : "$0";
+      });
+
+      inputs.household.addEventListener("change", (e) => {
+        summary.household.textContent = e.target.value;
+      });
+
+      // Simple visibility observer for scroll-based emphasis
+      const sections = document.querySelectorAll("section");
+      const observerOptions = {
+        threshold: 0.5,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("opacity-40");
+            entry.target.classList.add("opacity-100", "scale-[1.01]");
+          } else {
+            entry.target.classList.add("opacity-40");
+            entry.target.classList.remove("scale-[1.01]");
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
+
+    <script>
+      const continueLink = document.querySelector(
+        'a[href="/tenant-verification"]',
+      );
+      if (continueLink) {
+        continueLink.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.location.href = "tenant-verification";
+        });
+      }
+    </script>
+    <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

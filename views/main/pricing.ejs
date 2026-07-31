@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body class="bg-background text-on-background">
+    <%- include('partials/header') %>
+    <!-- Hero Section -->
+    <header
+      class="pt-40 pb-20 px-margin-desktop bg-surface-container-lowest overflow-hidden relative"
+    >
+      <div class="max-w-container-max mx-auto text-center relative z-10">
+        <span
+          class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm font-label-sm mb-6"
+        >
+          <span class="material-symbols-outlined text-[16px]">verified</span>
+          HomiScore Trusted Pricing
+        </span>
+        <h1 class="text-headline-xl font-headline-xl text-primary mb-6">
+          Simple, Transparent Pricing
+        </h1>
+        <p
+          class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto"
+        >
+          Choose the plan that fits your portfolio scale. High-fidelity property
+          management backed by institutional-grade verification.
+        </p>
+      </div>
+      <!-- Subtle decorative element mimicking Renters page -->
+      <div
+        class="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none"
+      ></div>
+    </header>
+    <!-- Pricing Tiers -->
+    <section class="py-20 px-margin-desktop">
+      <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+          <!-- Tier 1: Individual -->
+          <div
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 pricing-card-shadow flex flex-col hover:border-primary/30 transition-colors duration-300"
+          >
+            <div class="mb-8">
+              <h3 class="text-headline-md font-headline-md text-primary mb-2">
+                Individual
+              </h3>
+              <p class="text-label-md font-label-md text-on-surface-variant">
+                For landlords with 1-3 properties.
+              </p>
+            </div>
+            <div class="mb-8">
+              <span class="text-headline-xl font-headline-xl text-primary"
+                >$29</span
+              >
+              <span class="text-label-md font-label-md text-on-surface-variant"
+                >/month</span
+              >
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow">
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                HomiScore access
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Basic listings (up to 3)
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Standard background checks
+              </li>
+              <li
+                class="flex items-center gap-3 text-on-surface-variant opacity-50 line-through"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >check_circle</span
+                >
+                Direct Debit automation
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 border border-primary text-primary font-bold rounded-lg hover:bg-primary-fixed transition-colors text-label-md font-label-md"
+            >
+              Get Started
+            </button>
+          </div>
+          <!-- Tier 2: Professional (Featured) -->
+          <div
+            class="bg-surface-container-lowest border-2 border-primary rounded-xl p-8 pricing-card-shadow flex flex-col relative scale-105 z-10 shadow-xl shadow-primary/10"
+          >
+            <div
+              class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 rounded-full text-label-sm font-label-sm"
+            >
+              MOST POPULAR
+            </div>
+            <div class="mb-8">
+              <h3 class="text-headline-md font-headline-md text-primary mb-2">
+                Professional
+              </h3>
+              <p class="text-label-md font-label-md text-on-surface-variant">
+                For growing portfolios.
+              </p>
+            </div>
+            <div class="mb-8">
+              <span class="text-headline-xl font-headline-xl text-primary"
+                >$89</span
+              >
+              <span class="text-label-md font-label-md text-on-surface-variant"
+                >/month</span
+              >
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow">
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Unlimited properties
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Direct Debit automation
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Priority tenant support
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Advanced risk analytics
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-all text-label-md font-label-md shadow-lg shadow-primary/20"
+            >
+              Upgrade Now
+            </button>
+          </div>
+          <!-- Tier 3: Institutional -->
+          <div
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 pricing-card-shadow flex flex-col hover:border-primary/30 transition-colors duration-300"
+          >
+            <div class="mb-8">
+              <h3 class="text-headline-md font-headline-md text-primary mb-2">
+                Institutional
+              </h3>
+              <p class="text-label-md font-label-md text-on-surface-variant">
+                For large-scale management.
+              </p>
+            </div>
+            <div
+              class="mb-8 text-primary text-headline-md font-headline-md mt-4"
+            >
+              Custom
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow">
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Full API access
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Dedicated Account Manager
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Custom legal templates
+              </li>
+              <li
+                class="flex items-center gap-3 text-body-md font-body-md text-on-surface"
+              >
+                <span
+                  class="material-symbols-outlined text-primary text-[20px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >check_circle</span
+                >
+                Multi-seat permissions
+              </li>
+            </ul>
+            <button
+              class="w-full py-4 border border-primary text-primary font-bold rounded-lg hover:bg-primary-fixed transition-colors text-label-md font-label-md"
+            >
+              Contact Sales
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Comparison Table -->
+    <section class="py-20 px-margin-desktop bg-surface-container-low">
+      <div class="max-w-container-max mx-auto">
+        <h2
+          class="text-headline-lg font-headline-lg text-primary mb-12 text-center"
+        >
+          Detailed Plan Comparison
+        </h2>
+        <div
+          class="overflow-x-auto bg-surface-container-lowest rounded-xl border border-outline-variant"
+        >
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-surface-container-high">
+                <th
+                  class="p-6 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Features
+                </th>
+                <th
+                  class="p-6 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-center"
+                >
+                  Individual
+                </th>
+                <th
+                  class="p-6 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-center"
+                >
+                  Professional
+                </th>
+                <th
+                  class="p-6 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-center"
+                >
+                  Institutional
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant/30">
+              <tr>
+                <td class="p-6">
+                  <p
+                    class="text-body-md font-body-md font-semibold text-primary"
+                  >
+                    HomiScore Verification
+                  </p>
+                  <p
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    Core trust metric for all applicants
+                  </p>
+                </td>
+                <td class="p-6 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </td>
+                <td class="p-6 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </td>
+                <td class="p-6 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6">
+                  <p
+                    class="text-body-md font-body-md font-semibold text-primary"
+                  >
+                    Rent Collection Automation
+                  </p>
+                  <p
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    Direct debit and ledger sync
+                  </p>
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Standard
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Advanced
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Enterprise API
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6">
+                  <p
+                    class="text-body-md font-body-md font-semibold text-primary"
+                  >
+                    Priority Support
+                  </p>
+                  <p
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    Response time guarantees
+                  </p>
+                </td>
+                <td class="p-6 text-center text-on-surface-variant">—</td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  4 Hours
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Instant / Dedicated
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6">
+                  <p
+                    class="text-body-md font-body-md font-semibold text-primary"
+                  >
+                    Risk Mitigation Tools
+                  </p>
+                  <p
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    Predictive tenant behavior modeling
+                  </p>
+                </td>
+                <td class="p-6 text-center text-on-surface-variant">—</td>
+                <td class="p-6 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </td>
+                <td class="p-6 text-center">
+                  <span
+                    class="material-symbols-outlined text-primary"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6">
+                  <p
+                    class="text-body-md font-body-md font-semibold text-primary"
+                  >
+                    Asset Portfolio Reports
+                  </p>
+                  <p
+                    class="text-label-sm font-label-sm text-on-surface-variant"
+                  >
+                    Quarterly institutional-grade PDFs
+                  </p>
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Basic
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Standard
+                </td>
+                <td
+                  class="p-6 text-center text-on-surface-variant text-label-sm font-label-sm"
+                >
+                  Custom Branded
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Trusted By Section -->
+    <section class="py-20 px-margin-desktop bg-surface-container-lowest">
+      <div class="max-w-container-max mx-auto text-center">
+        <h3
+          class="text-label-sm font-label-sm text-outline uppercase tracking-[0.2em] mb-12"
+        >
+          Secured by Industry Leaders
+        </h3>
+        <div
+          class="flex flex-wrap justify-center items-center gap-12 grayscale opacity-60"
+        >
+          <div
+            class="w-32 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-on-surface-variant"
+          >
+            PROPTAX
+          </div>
+          <div
+            class="w-32 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-on-surface-variant"
+          >
+            SECURELY
+          </div>
+          <div
+            class="w-32 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-on-surface-variant"
+          >
+            FUNDRAISE
+          </div>
+          <div
+            class="w-32 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-on-surface-variant"
+          >
+            TRUSTO
+          </div>
+          <div
+            class="w-32 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-on-surface-variant"
+          >
+            NODES
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Call to Action -->
+    <section class="py-20 px-margin-desktop bg-primary text-on-primary">
+      <div
+        class="max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
+      >
+        <div>
+          <h2 class="text-headline-lg font-headline-lg mb-2">
+            Ready to verify your portfolio?
+          </h2>
+          <p class="text-body-lg font-body-lg opacity-80">
+            Join 15,000+ landlords securing their future with HomiFund.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <button
+            class="bg-on-primary text-primary px-8 py-4 rounded-lg font-bold text-label-md font-label-md hover:bg-primary-fixed transition-all"
+          >
+            Start Free Trial
+          </button>
+          <button
+            class="border-2 border-on-primary px-8 py-4 rounded-lg font-bold text-label-md font-label-md hover:bg-on-primary hover:text-primary transition-all"
+          >
+            Schedule Demo
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Footer: {{DATA:COMPONENTS:COMPONENTS_31}} -->
+    <script>
+      // Micro-interaction: Pricing toggle effect (visual only for this demo)
+      document
+        .querySelectorAll(".bg-surface-container-lowest")
+        .forEach((card) => {
+          card.addEventListener("mouseenter", () => {
+            if (!card.classList.contains("border-primary")) {
+              card.style.transform = "translateY(-4px)";
+            }
+          });
+          card.addEventListener("mouseleave", () => {
+            if (!card.classList.contains("border-primary")) {
+              card.style.transform = "translateY(0)";
+            }
+          });
+        });
+    </script>
+    <script src="/js/main.js"></script>
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
