@@ -3,96 +3,17 @@
   <head>
     <%- include('partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <% const adminUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
-    <% const displayName = adminUser.fullName || adminUser.email || 'Administrator'; %>
+  <body class="">
     <%- include('partials/sidebar-admin') %>
-
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0">
-        <p class="truncate text-label-sm font-bold text-secondary">Admin workspace</p>
-        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
-      </div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/admin/verification-review" aria-label="Verification review" title="Verification review"><span class="material-symbols-outlined" aria-hidden="true">fact_check</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/logout" aria-label="Log out" title="Log out"><span class="material-symbols-outlined" aria-hidden="true">logout</span></a>
-      </div>
-    </header>
-
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p class="mb-1 text-label-md font-bold text-secondary">Administration</p>
-            <h1 class="text-headline-lg font-bold text-primary">Management overview</h1>
-            <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review administration availability and the controls required before operational records can be searched or changed.</p>
-          </div>
-          <a class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary hover:bg-surface-container-lowest" href="/admin/verification-review"><span class="material-symbols-outlined text-xl" aria-hidden="true">fact_check</span>Verification review</a>
-        </div>
-
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="admin-management-availability-title">
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-start gap-4">
-              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">admin_panel_settings</span>
-              <div>
-                <p class="text-label-sm font-bold uppercase text-secondary">Service unavailable</p>
-                <h2 id="admin-management-availability-title" class="mt-1 text-headline-md font-bold text-primary">Administration data is not connected</h2>
-                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">Account administration, property moderation, verification cases, payment reporting, search, pagination, mutations, and audit history do not have connected data services.</p>
-              </div>
-            </div>
-            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 actionable records</span>
-          </div>
-        </section>
-
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section aria-labelledby="admin-operational-areas-title">
-              <div class="mb-4"><h2 id="admin-operational-areas-title" class="text-headline-md font-bold text-on-surface">Operational areas</h2><p class="mt-1 text-body-sm text-on-surface-variant">Each area remains unavailable until its authoritative service and permission contract are connected.</p></div>
-              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
-                <div class="flex items-start justify-between gap-4 p-5"><dt><span class="font-bold">Account management</span><span class="mt-1 block text-on-surface-variant">Search, role review, access status, and lifecycle history.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 p-5"><dt><span class="font-bold">Property oversight</span><span class="mt-1 block text-on-surface-variant">Ownership, moderation, publication, and withdrawal records.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 p-5"><dt><span class="font-bold">Verification operations</span><span class="mt-1 block text-on-surface-variant">Provider cases, evidence access, decisions, reasons, and appeals.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 p-5"><dt><span class="font-bold">Payment reporting</span><span class="mt-1 block text-on-surface-variant">Provider events, ledger reconciliation, disputes, and exports.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-              </dl>
-            </section>
-
-            <section aria-labelledby="admin-control-foundations-title">
-              <div class="mb-4"><h2 id="admin-control-foundations-title" class="text-headline-md font-bold text-on-surface">Required administration controls</h2><p class="mt-1 text-body-sm text-on-surface-variant">Administrative access must be narrower and more auditable than ordinary workspace access.</p></div>
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">lock_person</span><h3 class="mt-3 font-bold">Least privilege</h3><p class="mt-2 text-body-sm text-on-surface-variant">Named permissions, enforced role scope, re-authentication, and safe defaults for sensitive actions.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">visibility_lock</span><h3 class="mt-3 font-bold">Data minimization</h3><p class="mt-2 text-body-sm text-on-surface-variant">Purpose-limited fields, masked sensitive values, explicit evidence access, and retention controls.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">history</span><h3 class="mt-3 font-bold">Immutable audit trail</h3><p class="mt-2 text-body-sm text-on-surface-variant">Actor, reason, source, before/after state, timestamp, correlation ID, and outcome for every change.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">rule</span><h3 class="mt-3 font-bold">Review and recovery</h3><p class="mt-2 text-body-sm text-on-surface-variant">Preview, confirmation, dual control where needed, failure recovery, correction, and appeal paths.</p></article>
-              </div>
-            </section>
-          </div>
-
-          <aside class="space-y-6 xl:col-span-4" aria-label="Administration guidance">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="admin-actions-title">
-              <h2 id="admin-actions-title" class="text-headline-md font-bold text-primary">Management actions</h2>
-              <dl class="mt-4 divide-y divide-outline-variant text-body-sm">
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Search or filter</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Change account access</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Moderate property</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Export records</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">View audit history</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
-              </dl>
-            </section>
-
-            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="admin-data-safety-title">
-              <h2 id="admin-data-safety-title" class="text-headline-md font-bold text-on-error-container">Sensitive administration data</h2>
-              <p class="mt-2 text-body-sm text-on-error-container">Do not expose passwords, secrets, full payment details, unrestricted identity evidence, or cross-account records. Every sensitive read and mutation needs authorization and an audit event.</p>
-            </section>
-
-            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="admin-data-boundary-title">
-              <h2 id="admin-data-boundary-title" class="font-bold">Data boundary</h2>
-              <p class="mt-2 text-body-sm text-on-surface-variant">No connected records means no account, property, verification, payment, risk, workload, or compliance conclusion can be shown.</p>
-            </section>
-          </aside>
-        </div>
+    <main
+      class="md:ml-[240px] min-h-screen px-4 sm:px-6 lg:px-10 pt-16 md:pt-10 pb-12"
+    >
+      <div class="max-w-7xl mx-auto">
+        <h1 class="text-headline-lg font-bold text-primary">
+          HomiFund Admin Dashboard
+        </h1>
       </div>
     </main>
-
     <script src="/js/main.js"></script>
   </body>
 </html>

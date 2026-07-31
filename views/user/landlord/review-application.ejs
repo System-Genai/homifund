@@ -3,101 +3,673 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <% const reviewUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
-    <% const displayName = reviewUser.fullName || 'Landlord'; %>
+  <body class="bg-surface text-on-surface">
     <%- include('../partials/sidebar-landlord') %>
+    <!-- Landlord dashboard sidebar -->
 
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0">
-        <p class="truncate text-label-sm font-bold text-secondary">Landlord workspace</p>
-        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
+    <!-- Landlord dashboard header -->
+    <header
+      class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center gap-3 pl-16 pr-4 sm:pr-6 md:pr-margin-desktop border-b border-outline-variant shadow-sm md:pl-[240px]"
+    >
+      <div class="hidden sm:block relative w-full max-w-md">
+        <span
+          class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+          >search</span
+        >
+        <input
+          class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+          placeholder="Search properties, applications, documents..."
+          type="text"
+        />
       </div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/user-profile" aria-label="Landlord profile" title="Landlord profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+      <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
+        <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
+          <button
+            class="relative hover:bg-surface-container-low p-2 rounded-full"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <button class="hover:bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined">settings</span>
+          </button>
+          <button class="hover:bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </button>
+        </div>
+        <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+        <button class="flex items-center gap-3 pl-2">
+          <div class="hidden lg:block text-right">
+            <p
+              class="text-sm font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+            >
+              Marcus R.<span
+                class="material-symbols-outlined text-primary text-[16px]"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >verified</span
+              >
+            </p>
+            <p class="text-xs text-on-surface-variant mt-1">
+              Verified Landlord
+            </p>
+          </div>
+          <div
+            class="w-10 h-10 rounded-full border-2 border-primary-container bg-secondary-container text-primary flex items-center justify-center font-bold"
+          >
+            MR
+          </div>
+        </button>
       </div>
     </header>
 
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-8">
-          <a class="mb-4 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/user/landlord/applicants"><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_back</span>Back to Applicants</a>
-          <p class="mb-1 text-label-md font-bold text-secondary">Accountable decision workspace</p>
-          <h1 class="text-headline-lg font-bold text-primary">Review application</h1>
-          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Application review can begin only from an authorized, persisted submission linked to a saved property listing.</p>
+    <main class="md:ml-[240px] min-h-screen px-4 sm:px-6 py-6 sm:py-8">
+      <div class="max-w-7xl mx-auto space-y-6">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
+          <button
+            class="inline-flex items-center gap-2 text-primary font-bold text-sm"
+            onclick="window.location.href = 'applicants'"
+          >
+            <span class="material-symbols-outlined text-[19px]"
+              >arrow_back</span
+            >
+            Back to applicants
+          </button>
+          <div class="flex flex-wrap gap-3">
+            <button
+              type="button"
+              data-action="message"
+              class="inline-flex items-center gap-2 border border-outline-variant bg-white px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-surface-container-low"
+              onclick="window.location.href = 'messages'"
+            >
+              <span class="material-symbols-outlined text-[19px]"
+                >chat_bubble</span
+              >
+              Message
+            </button>
+            <button
+              type="button"
+              id="shortlist-button"
+              data-action="shortlist"
+              class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-bold"
+            >
+              <span
+                id="shortlist-icon"
+                class="material-symbols-outlined text-[19px]"
+                >star</span
+              >
+              <span id="shortlist-label">Shortlist applicant</span>
+            </button>
+            <button
+              type="button"
+              data-action="viewing"
+              class="inline-flex items-center gap-2 border border-primary text-primary bg-white px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-secondary-container"
+            >
+              <span class="material-symbols-outlined text-[19px]">event</span>
+              Invite to viewing
+            </button>
+            <button
+              type="button"
+              data-action="request-info"
+              class="inline-flex items-center gap-2 border border-outline-variant bg-white px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-surface-container-low"
+            >
+              <span class="material-symbols-outlined text-[19px]"
+                >add_task</span
+              >
+              Request information
+            </button>
+          </div>
         </div>
 
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="review-status-title">
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-start gap-4">
-              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">rule</span>
+        <section
+          class="rounded-2xl bg-primary text-white overflow-hidden shadow-lg"
+        >
+          <div
+            class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+              <div
+                class="w-24 h-24 rounded-full border-4 border-white/25 bg-white/15 flex items-center justify-center text-3xl font-bold shrink-0"
+              >
+                JC
+              </div>
               <div>
-                <p class="text-label-sm font-bold uppercase text-secondary">Review status</p>
-                <h2 id="review-status-title" class="mt-1 text-headline-md font-bold text-primary">No application record to review</h2>
-                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">No submission identifier, consented evidence set, review stage, assigned reviewer, criteria policy, decision reason, or audit history is connected.</p>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 class="text-3xl font-bold">James Carter</h1>
+                  <span
+                    class="inline-flex items-center gap-1 bg-white/15 border border-white/20 rounded-full px-2.5 py-1 text-xs font-bold"
+                    ><span
+                      class="material-symbols-outlined text-[15px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >verified</span
+                    >Verified renter</span
+                  >
+                </div>
+                <p class="text-white/75 text-sm mt-2">
+                  Applied for:
+                  <span class="font-semibold text-white"
+                    >Canary Wharf Suite</span
+                  >
+                </p>
+                <div
+                  class="flex flex-wrap gap-x-5 gap-y-2 mt-4 text-sm text-white/85"
+                >
+                  <span class="inline-flex items-center gap-1.5"
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >calendar_month</span
+                    >Move-in: Immediately</span
+                  >
+                  <span class="inline-flex items-center gap-1.5"
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >payments</span
+                    >Budget: £2,800/mo</span
+                  >
+                  <span class="inline-flex items-center gap-1.5"
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >location_on</span
+                    >London</span
+                  >
+                </div>
               </div>
             </div>
-            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 review records</span>
+
+            <div class="flex items-center gap-5">
+              <div class="score-ring rounded-full p-2">
+                <div
+                  class="w-28 h-28 rounded-full bg-primary flex flex-col items-center justify-center"
+                >
+                  <span class="text-4xl font-extrabold">921</span>
+                  <span
+                    class="text-[10px] font-bold uppercase tracking-widest text-white/70"
+                    >HomiScore</span
+                  >
+                </div>
+              </div>
+              <div>
+                <p class="font-bold text-lg">Excellent</p>
+                <p class="text-sm text-white/70 mt-1">Top applicant profile</p>
+                <button
+                  class="mt-3 text-sm font-bold underline underline-offset-4"
+                >
+                  View score details
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section class="border border-outline-variant bg-surface-container-lowest px-6 py-10 text-center sm:px-8" aria-labelledby="empty-review-title">
-              <span class="material-symbols-outlined text-5xl text-primary" aria-hidden="true">assignment_late</span>
-              <h2 id="empty-review-title" class="mt-4 text-headline-md font-bold text-on-surface">Review evidence is unavailable</h2>
-              <p class="mx-auto mt-2 max-w-2xl text-body-sm text-on-surface-variant">There is no applicant, property, application version, score source, verification, document, note, comparison, activity, or decision record to display.</p>
-              <a class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-on-primary hover:opacity-90" href="/user/landlord/applicants"><span class="material-symbols-outlined text-xl" aria-hidden="true">groups</span>Open applicants</a>
+        <section
+          class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+        >
+          <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5"
+          >
+            <div>
+              <h2 class="text-lg font-bold">Application actions</h2>
+              <p class="text-sm text-on-surface-variant mt-1">
+                Manage this applicant through the review process.
+              </p>
+            </div>
+            <div class="flex flex-wrap lg:flex-nowrap gap-2">
+              <button
+                type="button"
+                data-action="compare"
+                class="inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 border border-outline-variant rounded-lg text-xs font-bold hover:bg-surface-container-low"
+              >
+                <span class="material-symbols-outlined text-[17px]"
+                  >compare_arrows</span
+                >Compare applicants
+              </button>
+              <button
+                type="button"
+                data-action="notes"
+                class="inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 border border-outline-variant rounded-lg text-xs font-bold hover:bg-surface-container-low"
+              >
+                <span class="material-symbols-outlined text-[17px]"
+                  >sticky_note_2</span
+                >Private notes
+              </button>
+              <button
+                type="button"
+                data-action="offer"
+                class="inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 bg-primary text-white rounded-lg text-xs font-bold"
+              >
+                <span class="material-symbols-outlined text-[17px]"
+                  >handshake</span
+                >Make offer
+              </button>
+              <button
+                type="button"
+                data-action="decline"
+                class="inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 border border-red-200 text-red-700 rounded-lg text-xs font-bold hover:bg-red-50"
+              >
+                <span class="material-symbols-outlined text-[17px]">close</span
+                >Decline
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-8 space-y-6">
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+            >
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                <div>
+                  <h2 class="text-lg font-bold">Application overview</h2>
+                  <p class="text-sm text-on-surface-variant mt-1">
+                    Information James has chosen to share for this application.
+                  </p>
+                </div>
+                <select
+                  id="application-stage"
+                  class="bg-secondary-container text-primary text-xs font-bold px-3 py-1.5 rounded-full border-0 focus:ring-2 focus:ring-primary/20"
+                >
+                  <option value="New application">New application</option>
+                  <option value="Screening">Screening</option>
+                  <option value="Shortlisted">Shortlisted</option>
+                  <option value="Viewing">Viewing</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Accepted">Accepted</option>
+                  <option value="Declined">Declined</option>
+                </select>
+              </div>
+
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 mt-5 divide-y divide-outline-variant"
+              >
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant">Employment status</span
+                  ><span class="font-semibold text-right"
+                    >Full-time employment</span
+                  >
+                </div>
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant">Household size</span
+                  ><span class="font-semibold text-right">1 adult</span>
+                </div>
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant">Preferred tenancy</span
+                  ><span class="font-semibold text-right">12 months</span>
+                </div>
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant">Pets</span
+                  ><span class="font-semibold text-right"
+                    >No pets declared</span
+                  >
+                </div>
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant"
+                    >Viewing availability</span
+                  ><span class="font-semibold text-right"
+                    >Weekdays after 5pm</span
+                  >
+                </div>
+                <div class="flex justify-between gap-4 py-3.5 text-sm">
+                  <span class="text-on-surface-variant"
+                    >Application submitted</span
+                  ><span class="font-semibold text-right">Today</span>
+                </div>
+              </div>
             </section>
 
-            <section aria-labelledby="review-foundations-title">
-              <div class="mb-4">
-                <h2 id="review-foundations-title" class="text-headline-md font-bold text-on-surface">Required review foundations</h2>
-                <p class="mt-1 text-body-sm text-on-surface-variant">A review workspace must make evidence, policy, actions, and accountability explicit.</p>
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+            >
+              <h2 class="text-lg font-bold">Introduction from James</h2>
+              <div class="mt-4 rounded-xl bg-surface-container-low p-4">
+                <p class="text-sm leading-6 text-on-surface-variant">
+                  “I am looking for a well-maintained home close to Canary Wharf
+                  for a long-term tenancy. I work full-time in London and can
+                  move quickly. I value clear communication and would be happy
+                  to arrange a viewing at a convenient time.”
+                </p>
               </div>
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">inbox</span><h3 class="mt-3 font-bold text-on-surface">Submission and consent</h3><p class="mt-2 text-body-sm text-on-surface-variant">Use one immutable application version with renter consent, shared-field scope, revocation rules, and correction handling.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">checklist</span><h3 class="mt-3 font-bold text-on-surface">Relevant criteria policy</h3><p class="mt-2 text-body-sm text-on-surface-variant">Apply consistent property-specific criteria, show required and optional evidence, and prohibit protected-characteristic inference.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">source_notes</span><h3 class="mt-3 font-bold text-on-surface">Evidence provenance</h3><p class="mt-2 text-body-sm text-on-surface-variant">Show source, freshness, verification status, missing data, conflicts, and correction path without converting absence into a result.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">approval</span><h3 class="mt-3 font-bold text-on-surface">Decision lifecycle</h3><p class="mt-2 text-body-sm text-on-surface-variant">Every status change needs an authorized actor, reason, confirmation, notification outcome, appeal/correction path, and audit event.</p></article>
+            </section>
+
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+            >
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                <div>
+                  <h2 class="text-lg font-bold">Application documents</h2>
+                  <p class="text-sm text-on-surface-variant mt-1">
+                    Documents shared by the renter for this application.
+                  </p>
+                </div>
+                <button class="text-primary text-sm font-bold">
+                  View all documents
+                </button>
+              </div>
+
+              <div class="mt-5 divide-y divide-outline-variant">
+                <div class="py-4 flex items-center justify-between gap-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined">description</span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold">Proof of income</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Shared by applicant
+                      </p>
+                    </div>
+                  </div>
+                  <button class="text-primary text-sm font-bold">Review</button>
+                </div>
+                <div class="py-4 flex items-center justify-between gap-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined">badge</span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold">Identity verification</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Verification status available
+                      </p>
+                    </div>
+                  </div>
+                  <button class="text-primary text-sm font-bold">Review</button>
+                </div>
+                <div class="py-4 flex items-center justify-between gap-4">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined">home</span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold">Rental reference</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Shared by applicant
+                      </p>
+                    </div>
+                  </div>
+                  <button class="text-primary text-sm font-bold">Review</button>
+                </div>
               </div>
             </section>
           </div>
 
-          <aside class="space-y-6 xl:col-span-4" aria-label="Application review boundaries">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="review-actions-title">
-              <h2 id="review-actions-title" class="text-headline-md font-bold text-primary">Action availability</h2>
-              <dl class="mt-4 divide-y divide-outline-variant text-body-sm">
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Change review stage</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Add private notes</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Request information</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Compare or shortlist</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Offer or decline</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
-              </dl>
+          <aside class="xl:col-span-4 space-y-6">
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+            >
+              <div class="flex items-center justify-between">
+                <h2 class="text-base font-bold">HomiScore summary</h2>
+                <span class="text-primary font-extrabold">921</span>
+              </div>
+              <div class="mt-5 space-y-4">
+                <div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant"
+                      >Identity verification</span
+                    ><span class="font-bold text-primary">Verified</span>
+                  </div>
+                  <div
+                    class="h-2 bg-surface-container-high rounded-full mt-2 overflow-hidden"
+                  >
+                    <div class="w-full h-full bg-primary rounded-full"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Affordability</span
+                    ><span class="font-bold text-primary">Strong</span>
+                  </div>
+                  <div
+                    class="h-2 bg-surface-container-high rounded-full mt-2 overflow-hidden"
+                  >
+                    <div class="w-[92%] h-full bg-primary rounded-full"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm">
+                    <span class="text-on-surface-variant">Rental readiness</span
+                    ><span class="font-bold text-primary">High</span>
+                  </div>
+                  <div
+                    class="h-2 bg-surface-container-high rounded-full mt-2 overflow-hidden"
+                  >
+                    <div class="w-[90%] h-full bg-primary rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs leading-5 text-on-surface-variant mt-5">
+                Use this as one input in your review. It should not be the sole
+                basis for a housing decision.
+              </p>
+              <button
+                class="w-full mt-5 border border-primary text-primary py-2.5 rounded-lg text-sm font-bold"
+               onclick="window.location.href = '/user/landlord/homiscore'">
+                View full HomiScore
+              </button>
             </section>
 
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="review-principles-title">
-              <h2 id="review-principles-title" class="text-headline-md font-bold text-primary">Review principles</h2>
-              <ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant">
-                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Treat missing information as unavailable, not negative.</span></li>
-                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Use HomiScore only with source context and never as the sole factor.</span></li>
-                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Apply the same relevant criteria to comparable applications.</span></li>
-                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Keep decisions explainable, reviewable, and correctable.</span></li>
-              </ul>
+            <section
+              class="bg-white rounded-2xl border border-outline-variant/40 p-6"
+            >
+              <h2 class="text-base font-bold">Application activity</h2>
+              <div class="mt-5 space-y-4">
+                <div class="flex gap-3">
+                  <div
+                    class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0"
+                  >
+                    <span class="material-symbols-outlined text-[17px]"
+                      >description</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold">Application submitted</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Today, 10:42
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <div
+                    class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0"
+                  >
+                    <span class="material-symbols-outlined text-[17px]"
+                      >verified</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold">Verification shared</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Today, 10:42
+                    </p>
+                  </div>
+                </div>
+              </div>
             </section>
 
-            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="review-data-title">
-              <h2 id="review-data-title" class="text-headline-md font-bold text-on-error-container">Protect review evidence</h2>
-              <p class="mt-2 text-body-sm text-on-error-container">Do not request or send identity documents, financial details, passwords, or full application evidence through Contact or Messages.</p>
+            <section
+              class="rounded-2xl bg-surface-container-low border border-outline-variant p-5"
+            >
+              <div class="flex gap-3">
+                <span class="material-symbols-outlined text-primary">info</span>
+                <div>
+                  <h2 class="text-sm font-bold">Fair application review</h2>
+                  <p class="text-xs leading-5 text-on-surface-variant mt-1">
+                    Review each applicant consistently and use relevant
+                    application information alongside your own property
+                    criteria.
+                  </p>
+                </div>
+              </div>
             </section>
           </aside>
         </div>
       </div>
     </main>
 
+    <div id="action-modal" class="action-modal" hidden>
+      <div class="action-modal-card">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold">Action</h2>
+            <p
+              id="modal-description"
+              class="text-sm text-on-surface-variant mt-1"
+            ></p>
+          </div>
+          <button
+            type="button"
+            id="modal-close"
+            class="w-9 h-9 rounded-full hover:bg-surface-container-low flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="modal-content" class="mt-5"></div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            type="button"
+            id="modal-cancel"
+            class="px-4 py-2.5 text-primary text-sm font-bold rounded-lg hover:bg-surface-container-low"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="modal-confirm"
+            class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      (function () {
+        const modal = document.getElementById("action-modal"),
+          title = document.getElementById("modal-title"),
+          description = document.getElementById("modal-description"),
+          content = document.getElementById("modal-content"),
+          confirm = document.getElementById("modal-confirm"),
+          toast = document.getElementById("toast"),
+          stage = document.getElementById("application-stage"),
+          shortlistButton = document.getElementById("shortlist-button"),
+          shortlistLabel = document.getElementById("shortlist-label"),
+          shortlistIcon = document.getElementById("shortlist-icon");
+        let action = null,
+          shortlisted = false;
+        const data = {
+          message: [
+            "Message James Carter",
+            "Write a message to the applicant.",
+            '<textarea class="w-full min-h-[120px] p-3 border border-outline-variant rounded-lg text-sm" placeholder="Write your message..."></textarea>',
+            "Send message",
+          ],
+          viewing: [
+            "Invite to viewing",
+            "Propose a viewing time for James Carter.",
+            '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><input class="p-3 border border-outline-variant rounded-lg text-sm" type="date"><input class="p-3 border border-outline-variant rounded-lg text-sm" type="time"></div><textarea class="w-full min-h-[88px] mt-3 p-3 border border-outline-variant rounded-lg text-sm" placeholder="Optional note"></textarea>',
+            "Send invitation",
+          ],
+          "request-info": [
+            "Request additional information",
+            "Ask for relevant information or documents.",
+            '<select class="w-full p-3 border border-outline-variant rounded-lg text-sm"><option>Proof of income</option><option>Guarantor information</option><option>Rental reference</option><option>Right-to-rent evidence</option><option>Other</option></select><textarea class="w-full min-h-[100px] mt-3 p-3 border border-outline-variant rounded-lg text-sm" placeholder="Explain what you need..."></textarea>',
+            "Send request",
+          ],
+          compare: [
+            "Compare applicants",
+            "Compare James with applicants in your shortlist.",
+            '<div class="rounded-lg bg-surface-container-low p-4 text-sm text-on-surface-variant">Select at least one additional shortlisted applicant to enable a side-by-side comparison of HomiScore, budget, move-in date, documents and viewing status.</div>',
+            "Open comparison",
+          ],
+          notes: [
+            "Private notes",
+            "Notes are visible only to authorised members of your landlord account.",
+            '<textarea class="w-full min-h-[140px] p-3 border border-outline-variant rounded-lg text-sm" placeholder="Add a private note..."></textarea>',
+            "Save note",
+          ],
+          offer: [
+            "Make offer",
+            "Create the next-stage offer invitation for this applicant.",
+            '<div class="space-y-3"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" placeholder="Proposed monthly rent"><input class="w-full p-3 border border-outline-variant rounded-lg text-sm" placeholder="Proposed tenancy start date"><textarea class="w-full min-h-[90px] p-3 border border-outline-variant rounded-lg text-sm" placeholder="Offer note"></textarea></div>',
+            "Create offer",
+          ],
+          decline: [
+            "Decline application",
+            "Use a neutral, relevant reason for your internal record.",
+            '<select class="w-full p-3 border border-outline-variant rounded-lg text-sm"><option>Selected another applicant</option><option>Property no longer available</option><option>Application did not meet property criteria</option><option>Other</option></select><textarea class="w-full min-h-[90px] mt-3 p-3 border border-outline-variant rounded-lg text-sm" placeholder="Optional internal note"></textarea>',
+            "Decline application",
+          ],
+        };
+        function notice(msg) {
+          toast.textContent = msg;
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 2600);
+        }
+        function close() {
+          modal.hidden = true;
+          action = null;
+        }
+        function open(a) {
+          action = a;
+          const x = data[a];
+          title.textContent = x[0];
+          description.textContent = x[1];
+          content.innerHTML = x[2];
+          confirm.textContent = x[3];
+          modal.hidden = false;
+        }
+        document.querySelectorAll("[data-action]").forEach((b) =>
+          b.addEventListener("click", () => {
+            const a = b.dataset.action;
+            if (a === "shortlist") {
+              shortlisted = !shortlisted;
+              shortlistLabel.textContent = shortlisted
+                ? "Shortlisted"
+                : "Shortlist applicant";
+              shortlistIcon.textContent = shortlisted ? "check" : "star";
+              shortlistButton.classList.toggle(
+                "bg-secondary-container",
+                shortlisted,
+              );
+              shortlistButton.classList.toggle("text-primary", shortlisted);
+              shortlistButton.classList.toggle("bg-primary", !shortlisted);
+              shortlistButton.classList.toggle("text-white", !shortlisted);
+              stage.value = shortlisted ? "Shortlisted" : "New application";
+              notice(
+                shortlisted
+                  ? "Applicant moved to shortlist."
+                  : "Applicant removed from shortlist.",
+              );
+              return;
+            }
+            open(a);
+          }),
+        );
+        stage.addEventListener("change", () =>
+          notice("Application stage updated to " + stage.value + "."),
+        );
+        document.getElementById("modal-close").addEventListener("click", close);
+        document
+          .getElementById("modal-cancel")
+          .addEventListener("click", close);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) close();
+        });
+        confirm.addEventListener("click", () => {
+          if (action === "offer") stage.value = "Offer";
+          if (action === "decline") stage.value = "Declined";
+          if (action === "viewing") stage.value = "Viewing";
+          notice(confirm.textContent + " completed.");
+          close();
+        });
+      })();
+    </script>
     <script src="/js/main.js"></script>
   </body>
 </html>

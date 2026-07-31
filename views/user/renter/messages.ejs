@@ -3,68 +3,1359 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <% const messageUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
-    <% const displayName = messageUser.fullName || 'Renter'; %>
+  <body class="bg-surface text-on-surface">
     <%- include('../partials/sidebar-renter') %>
+    <!-- SideNavBar Anchor -->
 
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0"><p class="truncate text-label-sm font-bold text-secondary">Renter workspace</p><p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p></div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/messages" aria-label="Messages" title="Messages" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/profile" aria-label="Renter profile" title="Renter profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
-      </div>
-    </header>
-
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div><p class="mb-1 text-label-md font-bold text-secondary">Communication workspace</p><h1 class="text-headline-lg font-bold text-primary">Messages</h1><p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review messaging availability and the controls required for safe renter-to-landlord communication.</p></div>
-          <a class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary px-6 font-bold text-primary hover:bg-surface-container-lowest" href="/user/renter/support"><span class="material-symbols-outlined text-xl" aria-hidden="true">support_agent</span>Message support</a>
-        </div>
-
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="renter-messaging-status-title">
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-start gap-4"><span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">forum</span><div><p class="text-label-sm font-bold uppercase text-secondary">Service unavailable</p><h2 id="renter-messaging-status-title" class="mt-1 text-headline-md font-bold text-primary">Messaging is not connected</h2><p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">No conversation, participant, message, delivery, or read-status records exist. Do not send identity documents, banking details, passwords, access codes, or other sensitive information through Contact while messaging is unavailable.</p></div></div>
-            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 conversations</span>
+    <!-- Main Viewport -->
+    <main class="md:ml-[240px] min-h-screen flex flex-col">
+      <!-- TopNavBar Anchor -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center gap-3 pl-16 pr-4 sm:pr-6 md:pl-6 md:pr-6 lg:px-10 border-b border-outline-variant shadow-sm"
+      >
+        <div class="hidden sm:flex items-center gap-4 flex-1">
+          <div class="hidden sm:block relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+              placeholder="Search properties, applications, documents..."
+              type="text"
+            />
           </div>
-        </section>
+        </div>
+        <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
+          <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
+            <a href="/user/renter/notification-bell" class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+                      </a>
+            <a href="/user/renter/settings" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">settings</span>
+          </a>
+            <div class="relative" id="messages-menu">
+              <button
+                id="messages-toggle"
+                class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors"
+                aria-label="Messages"
+                aria-expanded="false"
+                aria-controls="messages-dropdown"
+              >
+                <span class="material-symbols-outlined" data-icon="chat_bubble"
+                  >chat_bubble</span
+                >
+                <span
+                  class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border border-surface"
+                ></span>
+              </button>
 
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section aria-labelledby="renter-conversation-list-title">
-              <div class="mb-4"><h2 id="renter-conversation-list-title" class="text-headline-md font-bold text-on-surface">Conversations</h2><p class="mt-1 text-body-sm text-on-surface-variant">Search, unread filters, threads, composing, attachments, and read receipts require persisted authorized conversations.</p></div>
-              <div class="rounded-lg border border-dashed border-outline-variant px-5 py-12 text-center"><span class="material-symbols-outlined text-4xl text-outline" aria-hidden="true">chat_bubble_outline</span><h3 class="mt-3 font-bold text-on-surface">No conversations</h3><p class="mx-auto mt-2 max-w-xl text-body-sm text-on-surface-variant">No landlord, property manager, letting agent, or support thread is created by the current application.</p><a class="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary hover:bg-surface-container-low" href="/user/renter/applications"><span class="material-symbols-outlined text-xl" aria-hidden="true">assignment</span>Open applications</a></div>
-            </section>
+              <div
+                id="messages-dropdown"
+                class="hidden absolute right-0 top-12 w-[calc(100vw-2rem)] max-w-[380px] sm:w-[380px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden z-50"
+                role="dialog"
+                aria-label="Messages"
+              >
+                <div
+                  class="px-4 sm:px-5 py-4 border-b border-outline-variant flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4"
+                >
+                  <div>
+                    <h3 class="text-sm font-bold text-on-surface">Messages</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Conversations about your applications and viewings
+                    </p>
+                  </div>
+                  <button
+                    id="open-all-messages"
+                    class="text-xs text-primary font-bold hover:underline whitespace-nowrap"
+                  >
+                    Open messages
+                  </button>
+                </div>
 
-            <section aria-labelledby="renter-messaging-controls-title">
-              <div class="mb-4"><h2 id="renter-messaging-controls-title" class="text-headline-md font-bold text-on-surface">Required messaging controls</h2><p class="mt-1 text-body-sm text-on-surface-variant">Communication must be bound to real accounts and housing records, not client-only sample content.</p></div>
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">group</span><h3 class="mt-3 font-bold text-on-surface">Authorized participants</h3><p class="mt-2 text-body-sm text-on-surface-variant">Every thread must identify participants, roles, related listing or application, access scope, and membership history.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">send</span><h3 class="mt-3 font-bold text-on-surface">Durable delivery</h3><p class="mt-2 text-body-sm text-on-surface-variant">Messages need server timestamps, idempotency, ordering, delivery states, retries, duplicate prevention, and explicit failure recovery.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">report</span><h3 class="mt-3 font-bold text-on-surface">Safety and reporting</h3><p class="mt-2 text-body-sm text-on-surface-variant">Blocking, reporting, moderation escalation, rate limits, abuse evidence, and urgent-safety guidance need clear feedback.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">policy</span><h3 class="mt-3 font-bold text-on-surface">Retention and attachments</h3><p class="mt-2 text-body-sm text-on-surface-variant">Retention, deletion, export, attachment scanning, authorization, access revocation, and audit history need defined ownership.</p></article>
+                <div class="divide-y divide-outline-variant">
+                  <button
+                    class="message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
+                    data-conversation="sapphire"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
+                    >
+                      TS
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center justify-between gap-3">
+                        <p
+                          class="text-sm font-semibold text-on-surface truncate"
+                        >
+                          The Sapphire Suites
+                        </p>
+                        <span
+                          class="text-[11px] text-on-surface-variant shrink-0"
+                          >Now</span
+                        >
+                      </div>
+                      <p
+                        class="text-xs text-on-surface-variant mt-0.5 truncate"
+                      >
+                        Landlord: The viewing is confirmed for Tuesday at 2:00
+                        PM.
+                      </p>
+                    </div>
+                    <span
+                      class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"
+                    ></span>
+                  </button>
+
+                  <button
+                    class="message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
+                    data-conversation="bricklane"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
+                    >
+                      BL
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center justify-between gap-3">
+                        <p
+                          class="text-sm font-semibold text-on-surface truncate"
+                        >
+                          Brick Lane Lofts
+                        </p>
+                        <span
+                          class="text-[11px] text-on-surface-variant shrink-0"
+                          >Yesterday</span
+                        >
+                      </div>
+                      <p
+                        class="text-xs text-on-surface-variant mt-0.5 truncate"
+                      >
+                        Lettings agent: Thanks for your application. We will be
+                        in touch.
+                      </p>
+                    </div>
+                  </button>
+
+                  <button
+                    class="message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
+                    data-conversation="regents"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
+                    >
+                      RP
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center justify-between gap-3">
+                        <p
+                          class="text-sm font-semibold text-on-surface truncate"
+                        >
+                          Regent's Park Estate
+                        </p>
+                        <span
+                          class="text-[11px] text-on-surface-variant shrink-0"
+                          >Mon</span
+                        >
+                      </div>
+                      <p
+                        class="text-xs text-on-surface-variant mt-0.5 truncate"
+                      >
+                        Property team: Your application is currently under
+                        review.
+                      </p>
+                    </div>
+                  </button>
+                </div>
+
+                <div
+                  class="px-5 py-3 bg-surface-container-low border-t border-outline-variant"
+                >
+                  <button
+                    id="open-all-messages-bottom"
+                    class="text-xs text-primary font-bold hover:underline"
+                  >
+                    View all messages
+                  </button>
+                </div>
               </div>
-            </section>
-
-            <section aria-labelledby="renter-message-lifecycle-title">
-              <div class="mb-4"><h2 id="renter-message-lifecycle-title" class="text-headline-md font-bold text-on-surface">Required message lifecycle</h2><p class="mt-1 text-body-sm text-on-surface-variant">No status is available until one messaging service owns the complete history.</p></div>
-              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm"><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Thread creation and participant authorization</dt><dd class="shrink-0 whitespace-nowrap text-on-surface-variant">Unavailable</dd></div><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Message acceptance and durable storage</dt><dd class="shrink-0 whitespace-nowrap text-on-surface-variant">Unavailable</dd></div><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Delivery, read state, and notification</dt><dd class="shrink-0 whitespace-nowrap text-on-surface-variant">Unavailable</dd></div><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Failure, block, report, export, and deletion</dt><dd class="shrink-0 whitespace-nowrap text-on-surface-variant">Unavailable</dd></div></dl>
-            </section>
+            </div>
           </div>
+          <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3 lg:pl-2 group cursor-pointer shrink-0">
+            <div class="hidden lg:block text-right">
+              <p
+                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+              >
+                Marcus R.
+                <span
+                  class="material-symbols-outlined text-primary text-[16px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+              </p>
+              <p class="text-label-sm text-on-surface-variant">
+                Premium Member
+              </p>
+            </div>
+            <div
+              class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-primary-container overflow-hidden shrink-0"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Hero Section -->
+      <section class="px-margin-desktop py-10 bg-surface">
+        <div class="max-w-container-max mx-auto">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-6"
+          >
+            <div>
+              <h2
+                class="text-headline-xl font-headline-xl text-primary tracking-tight"
+              >
+                Welcome back, Marcus
+              </h2>
+              <p class="text-body-lg text-on-surface-variant max-w-2xl mt-2">
+                Your HomiScore is active and helping trusted landlords assess
+                your application faster.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 sm:flex gap-3 sm:gap-4">
+              <div
+                class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl sm:min-w-[140px] shadow-sm"
+              >
+                <p
+                  class="text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Matches
+                </p>
+                <p class="text-headline-md text-primary">12</p>
+              </div>
+              <div
+                class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl sm:min-w-[140px] shadow-sm"
+              >
+                <p
+                  class="text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  <span style="letter-spacing: 0.6px" class=""
+                    >Active Apps</span
+                  >
+                </p>
+                <p class="text-headline-md text-primary">10</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Dashboard Content Grid -->
+      <section class="px-margin-desktop pb-20">
+        <div
+          class="max-w-container-max mx-auto grid grid-cols-12 gap-gutter-desktop"
+        >
+          <!-- Main Column (Left) -->
+          <div
+            class="col-span-12 lg:col-span-8 flex flex-col gap-gutter-desktop"
+          >
+            <!-- HomiScore Card -->
+            <div
+              class="homiscore-gradient rounded-2xl p-8 text-on-primary shadow-lg flex flex-col md:flex-row items-center gap-10 relative overflow-hidden"
+            >
+              <div class="relative z-10 text-center md:text-left flex-grow">
+                <div
+                  class="flex items-center gap-3 mb-4 justify-center md:justify-start"
+                >
+                  <span
+                    class="bg-white/20 px-3 py-1 rounded-full text-label-sm font-bold backdrop-blur-md flex items-center gap-1"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[14px]"
+                      style="font-variation-settings: &quot;FILL&quot; 1"
+                      >verified</span
+                    >
+                    VERIFIED
+                  </span>
+                  <span
+                    class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-label-sm font-bold"
+                    >TRUSTED RENTER</span
+                  >
+                </div>
+                <h3 class="text-headline-lg font-bold mb-2">
+                  HomiScore Status
+                </h3>
+                <p class="text-body-md text-on-primary-container max-w-md">
+                  Your score is in the top 5% of renters in London. Landlords
+                  see you as a low-risk, premium tenant.
+                </p>
+                <button
+                  class="mt-8 bg-white text-primary px-8 py-3 rounded-lg font-bold hover:bg-surface-container-highest transition-colors active:scale-95"
+                 onclick="window.location.href = '/user/renter/homiscore'">
+                  View HomiScore
+                </button>
+              </div>
+              <div class="relative z-10 flex flex-col items-center">
+                <div
+                  class="w-48 h-48 border-[12px] border-white/10 rounded-full flex items-center justify-center relative"
+                >
+                  <div
+                    class="absolute inset-0 border-[12px] border-tertiary rounded-full"
+                    style="clip-path: polygon(0 0, 100% 0, 100% 90%, 0 90%)"
+                  ></div>
+                  <div class="text-center">
+                    <span class="text-headline-xl font-black block leading-none"
+                      >874</span
+                    >
+                    <span class="text-label-md text-on-primary-container"
+                      >Excellent</span
+                    >
+                  </div>
+                </div>
+                <p
+                  class="mt-4 text-label-sm text-on-primary-container uppercase tracking-widest"
+                >
+                  / 1000 Max Score
+                </p>
+              </div>
+              <!-- Decorative atmospheric effect -->
+              <div
+                class="absolute -right-20 -top-20 w-80 h-80 bg-tertiary/20 blur-[100px] rounded-full"
+              ></div>
+            </div>
+            <!-- Property Matches Grid -->
+            <div>
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-headline-md text-on-surface">
+                  Top Matches For You
+                </h3>
+                <button
+                  class="text-primary font-bold hover:underline flex items-center gap-1"
+                >
+                  View all matches
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Property Card 1 -->
+                <div
+                  class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group"
+                >
+                  <div class="h-40 sm:h-44 lg:h-48 relative overflow-hidden">
+                    <img
+                      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      data-alt="Luxurious modern apartment interior with floor-to-ceiling windows, minimalist furniture, soft evening light, high-end architectural photography, cool blue and neutral tones to match HomiFund branding."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuwWTNHD4HtAkdMFwEmx7fhevSnGWxUe8Oqe6sZRRv7l8CB1M4cYPKBAbw-l_uc-GR1RC6BLf6QKDyg6TOCl2dn0MRUgonsEhtqT6ZCiqVh6yK2jvRcO1OZXkKA6eoj4FlJ2X-rL2IltrijR0V4SPps2-bOx0rPwnKlYcKiEVBRdlPQenKTGAE2K6L3f_XD4r5GBeF5ppnbFNxOSt6mwZwJlzMRrZatUGXlvhtNYMnzHQlmAkgbInhGvDwlP_kq4IQPX-Az2BnFYvq"
+                    />
+                    <div
+                      class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary text-label-sm font-bold px-3 py-1 rounded-full shadow-sm"
+                    >
+                      98% Match
+                    </div>
+                    <div
+                      class="absolute bottom-3 left-3 bg-primary/80 backdrop-blur-md text-white text-label-sm font-medium px-3 py-1 rounded-md"
+                    >
+                      Landlord HomiScore: 912
+                    </div>
+                  </div>
+                  <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                      <h4 class="text-headline-md text-on-surface">
+                        The Sapphire Suites
+                      </h4>
+                      <span class="text-primary font-black"
+                        >£3,200<span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >/mo</span
+                        ></span
+                      >
+                    </div>
+                    <p
+                      class="text-body-md text-on-surface-variant mb-4 flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >location_on</span
+                      >
+                      Canary Wharf, London
+                    </p>
+                    <div class="flex items-center gap-4 mb-6">
+                      <span
+                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
+                        ><span class="material-symbols-outlined text-[16px]"
+                          >bed</span
+                        >
+                        2 Beds</span
+                      >
+                      <span
+                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
+                        ><span class="material-symbols-outlined text-[16px]"
+                          >bathtub</span
+                        >
+                        2 Baths</span
+                      >
+                      <span
+                        class="text-label-sm text-success text-on-secondary-fixed-variant flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >event_available</span
+                        >
+                        Available Oct 12
+                      </span>
+                    </div>
+                    <div class="flex gap-2">
+                      <button
+                        class="flex-1 border border-primary text-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-fixed transition-colors"
+                      >
+                        View Property
+                      </button>
+                      <button
+                        class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors"
+                      >
+                        Apply Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Property Card 2 -->
+                <div
+                  class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group"
+                >
+                  <div class="h-40 sm:h-44 lg:h-48 relative overflow-hidden">
+                    <img
+                      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      data-alt="A stylish urban loft apartment with exposed brick walls, warm industrial lighting, high ceilings, large windows, professional photography, sophisticated and trustworthy atmosphere."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPcxzbKtNPeFMyFYo-7XCIza5YmXM-JQEIdLVlOwF91X0Ss8kWclBLEozhzUteqDeKQwqh_qL7BmPHFe3H2K5ZsSJVEMG1lF1_7J_DSSuHvpEWDzH_lUEDejfimwL2gP7NmKPg2q8yQmFwyvnjIIJFEE8Ob-QP3nlbvwfLVLsQJw-S-Yn6xNbb0R2QP5srOkw-o378QMhF49AvimfVHsLgbM-xEro-nBmIQ6rzcBo3Lk1maCaI_wuPUR40GfrF00pNwYtBz04LUoTh"
+                    />
+                    <div
+                      class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary text-label-sm font-bold px-3 py-1 rounded-full shadow-sm"
+                    >
+                      95% Match
+                    </div>
+                    <div
+                      class="absolute bottom-3 left-3 bg-primary/80 backdrop-blur-md text-white text-label-sm font-medium px-3 py-1 rounded-md"
+                    >
+                      Landlord HomiScore: 885
+                    </div>
+                  </div>
+                  <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                      <h4 class="text-headline-md text-on-surface">
+                        Brick Lane Lofts
+                      </h4>
+                      <span class="text-primary font-black"
+                        >£2,850<span
+                          class="text-label-sm font-normal text-on-surface-variant"
+                          >/mo</span
+                        ></span
+                      >
+                    </div>
+                    <p
+                      class="text-body-md text-on-surface-variant mb-4 flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >location_on</span
+                      >
+                      Shoreditch, London
+                    </p>
+                    <div class="flex items-center gap-4 mb-6">
+                      <span
+                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
+                        ><span class="material-symbols-outlined text-[16px]"
+                          >bed</span
+                        >
+                        1 Bed</span
+                      >
+                      <span
+                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
+                        ><span class="material-symbols-outlined text-[16px]"
+                          >bathtub</span
+                        >
+                        1 Bath</span
+                      >
+                      <span
+                        class="text-label-sm text-success text-on-secondary-fixed-variant flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >event_available</span
+                        >
+                        Available Now
+                      </span>
+                    </div>
+                    <div class="flex gap-2">
+                      <button
+                        class="flex-1 border border-primary text-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-fixed transition-colors"
+                      >
+                        View Property
+                      </button>
+                      <button
+                        class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors"
+                      >
+                        Apply Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Applications Section -->
+            <div
+              class="bg-surface-container-low border border-outline-variant rounded-2xl p-6"
+            >
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-headline-md text-on-surface">
+                  Active Applications
+                </h3>
+                <button class="text-primary font-bold text-label-md">
+                  Manage Applications
+                </button>
+              </div>
+              <div class="flex flex-col gap-3">
+                <!-- App item 1 -->
+                <div
+                  class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex items-center justify-between"
+                >
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="w-12 h-12 bg-surface-container rounded-lg overflow-hidden"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="Small thumbnail of a modern white building facade under a clear blue sky, architecture shot."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr6Cjj3BVvAfVxQCBkHo7eCg0RISH9HXApDu4ENWdWLeFArZDgVugsT9jUJoaR4TBrJhQI8sPUHCYRacZ5R-MBUYrmTwOOcncD_HqMIBvFysuwPNLW-rp88g8go1YN6glQSdviF4Be9BWaKqCLNDb4myREUWINgyBhGwzzYEvzfoTb0UqwSpJqTrtxEYMOHbakTcRLQcBSjg4BTZCAJZS2Lw4-pTGAqBDJ3DXlrC0gps0Nzt-egm87PDhMjjBn9OQmumkZ4ynR2psL"
+                      />
+                    </div>
+                    <div>
+                      <h5 class="text-label-md font-bold text-on-surface">
+                        Regent's Park Estate
+                      </h5>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Applied: Sep 20, 2023
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-8">
+                    <div class="text-right">
+                      <p class="text-label-sm font-bold text-primary">
+                        Viewing Scheduled
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Tomorrow, 14:00
+                      </p>
+                    </div>
+                    <button class="text-on-surface-variant hover:text-primary">
+                      <span class="material-symbols-outlined"
+                        >chevron_right</span
+                      >
+                    </button>
+                  </div>
+                </div>
+                <!-- App item 2 -->
+                <div
+                  class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex items-center justify-between"
+                >
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="w-12 h-12 bg-surface-container rounded-lg overflow-hidden"
+                    >
+                      <img
+                        class="w-full h-full object-cover"
+                        data-alt="Close up of a modern door handle and apartment entrance, minimalist luxury aesthetic."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGR0D2o1C3x4LSsxTWq_GSvPZOuwvAba4Drgi4lRp1VeLGRo1ipisd-HzmuKTGl4P6Kg4KPRiZAf0JvaepYbbR5cZoLlK33RHmGLT4_TJCAWFmOM3jaji8e98DtVHf4Ii6nhPH5t2wlxuun6ya80QLZe_ghIQmDiiAg_-7RiGjgehN-xZWD3-JBl7pefsaGJqK1N4b5nfG77_RBXT846eIkJee6jhzC_jNs7POt0PToeKrfvi1gln8-cFJxUVwiKj5wiYT6Yu8hb5q"
+                      />
+                    </div>
+                    <div>
+                      <h5 class="text-label-md font-bold text-on-surface">
+                        The Penthouse, SE1
+                      </h5>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Applied: Sep 22, 2023
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-8">
+                    <div class="text-right">
+                      <p class="text-label-sm font-bold text-secondary">
+                        Under Review
+                      </p>
+                      <p class="text-label-sm text-on-surface-variant">
+                        Awaiting Landlord
+                      </p>
+                    </div>
+                    <button class="text-on-surface-variant hover:text-primary">
+                      <span class="material-symbols-outlined"
+                        >chevron_right</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar Column (Right) -->
+          <div
+            class="col-span-12 lg:col-span-4 flex flex-col gap-gutter-desktop"
+          >
+            <!-- Profile Card -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm flex flex-col items-center text-center"
+            >
+              <div
+                class="w-24 h-24 rounded-full border-4 border-primary-container p-1 mb-4 relative"
+              >
+                <img
+                  class="w-full h-full object-cover rounded-full"
+                  data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeNzvdsmgHBeOGU2OdbRGPS92zCbiN1I9qD_x05dSzDT1bJ814lnMp5Rp-gfU_aDwvhbVaYRHPaAkOWj2c6KDhKOI0UOsdd4BFRQiM--9v2Vj2zkuY63GRztfMcrEWg9DLQ9SfS1YRpVS12OYbQgS5CJLyCYqt-idTFZ6lEcyeWVUFLh6REVuvYquuH17MWiyFOQDgS-ZAj8oorDBNlPkcOaXl7t_KK1gnqRUxu8PnLrd4M4lqtXfiFKVfKVLUgj2GXkG2XgaE81pa"
+                />
+                <div
+                  class="absolute bottom-0 right-0 bg-primary border-2 border-white text-white p-1 rounded-full"
+                >
+                  <span
+                    class="material-symbols-outlined text-[16px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >verified</span
+                  >
+                </div>
+              </div>
+              <h4 class="text-headline-md text-on-surface">Marcus Reed</h4>
+              <p class="text-label-md text-primary font-bold mb-4">
+                Verified Premium Renter
+              </p>
+              <div class="w-full grid grid-cols-2 gap-2 mb-6">
+                <div class="bg-surface-container p-3 rounded-lg text-left">
+                  <p class="text-label-sm text-on-surface-variant">
+                    Budget Range
+                  </p>
+                  <p class="text-label-md font-bold text-on-surface">
+                    £2.5k - £3.5k
+                  </p>
+                </div>
+                <div class="bg-surface-container p-3 rounded-lg text-left">
+                  <p class="text-label-sm text-on-surface-variant">
+                    Move-in Date
+                  </p>
+                  <p class="text-label-md font-bold text-on-surface">
+                    Oct 15, 2023
+                  </p>
+                </div>
+              </div>
+              <button
+                class="w-full py-2 border border-outline-variant rounded-lg text-label-md font-bold hover:bg-surface-container-low transition-colors"
+              >
+                Update Budget
+              </button>
+            </div>
+            <!-- Verification Status Card -->
+            <div
+              class="bg-surface-container-low border border-outline-variant rounded-2xl p-6 shadow-sm"
+            >
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="text-label-md font-bold text-on-surface">
+                  Verification Status
+                </h4>
+                <span
+                  class="bg-secondary-container text-primary text-[11px] font-black px-2 py-0.5 rounded uppercase"
+                  >Fully Verified</span
+                >
+              </div>
+              <ul class="flex flex-col gap-3">
+                <li
+                  class="flex items-center gap-3 text-label-md text-on-surface"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  Identity (Passport/ID)
+                </li>
+                <li
+                  class="flex items-center gap-3 text-label-md text-on-surface"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  Current Address
+                </li>
+                <li
+                  class="flex items-center gap-3 text-label-md text-on-surface"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  Income &amp; Employment
+                </li>
+                <li
+                  class="flex items-center gap-3 text-label-md text-on-surface"
+                >
+                  <span
+                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >check_circle</span
+                  >
+                  Rental History
+                </li>
+              </ul>
+            </div>
+            <!-- Documents Summary -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
+            >
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="text-label-md font-bold text-on-surface">
+                  Rent Readiness
+                </h4>
+                <span class="text-primary font-bold text-label-sm"
+                  >Excellent</span
+                >
+              </div>
 
-          <aside class="space-y-6 xl:col-span-4" aria-label="Messaging guidance">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-communication-safety-title"><h2 id="renter-communication-safety-title" class="text-headline-md font-bold text-primary">Communication safety</h2><ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant"><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Keep application and tenancy discussions within authorized participants.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Never share passwords, login codes, raw bank or card details, or property access codes.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Use an approved document service for sensitive identity, income, or tenancy evidence.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>Keep message persistence, read state, and notification delivery as separate records.</span></li></ul></section>
+              <div class="space-y-4 mb-6">
+                <div class="flex justify-between items-center">
+                  <span class="text-label-sm text-on-surface-variant"
+                    >Recommended Budget</span
+                  >
+                  <span class="text-label-md font-bold text-on-surface"
+                    >£2,800</span
+                  >
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-label-sm text-on-surface-variant"
+                    >Current Eligibility</span
+                  >
+                  <span class="text-label-md font-bold text-on-surface"
+                    >£3,200</span
+                  >
+                </div>
+                <div class="h-px bg-outline-variant w-full"></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p
+                      class="text-[11px] uppercase tracking-wider text-on-surface-variant mb-1"
+                    >
+                      Affordability
+                    </p>
+                    <div class="flex items-center gap-1 text-primary">
+                      <span class="material-symbols-outlined text-[18px]"
+                        >trending_up</span
+                      >
+                      <span class="text-label-md font-bold">Strong</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p
+                      class="text-[11px] uppercase tracking-wider text-on-surface-variant mb-1"
+                    >
+                      Confidence
+                    </p>
+                    <div class="flex items-center gap-1 text-primary">
+                      <span class="material-symbols-outlined text-[18px]"
+                        >verified_user</span
+                      >
+                      <span class="text-label-md font-bold">High</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-messaging-actions-title"><h2 id="renter-messaging-actions-title" class="text-headline-md font-bold text-primary">Messaging actions</h2><dl class="mt-4 divide-y divide-outline-variant text-body-sm"><div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">New conversation</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div><div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Send or edit</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div><div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Attachments</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div><div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Search and unread</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div><div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Block or report</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div></dl><nav class="mt-5 grid grid-cols-1 gap-2" aria-label="Messaging help links"><a class="inline-flex min-h-11 items-center justify-between rounded-lg px-3 font-bold text-on-surface hover:bg-surface-container-low" href="/user/renter/applications"><span>Applications</span><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span></a><a class="inline-flex min-h-11 items-center justify-between rounded-lg px-3 font-bold text-on-surface hover:bg-surface-container-low" href="/user/renter/support"><span>Message support</span><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span></a></nav></section>
+              <p
+                class="text-label-sm text-on-surface-variant mb-6 leading-tight"
+              >
+                Based on verified income, affordability assessment, and
+                HomiScore performance.
+              </p>
 
-            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="no-message-inference-title"><h2 id="no-message-inference-title" class="font-bold text-on-surface">No unread or delivery inference</h2><p class="mt-2 text-body-sm text-on-surface-variant">Missing records do not mean sent, delivered, read, ignored, or urgent. Notification badges must be derived from durable authorized messages, never sample content.</p></section>
+              <button
+                class="w-full py-2 border border-outline-variant rounded-lg text-label-md font-bold text-on-surface hover:bg-surface-container-low transition-colors"
+              >
+                View Assessment
+              </button>
+            </div>
+            <!-- Payments Summary -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
+            >
+              <h4 class="text-label-md font-bold text-on-surface mb-4">
+                Payments
+              </h4>
+              <div class="space-y-2 mb-6">
+                <div class="flex justify-between">
+                  <span class="text-label-sm text-on-surface-variant"
+                    >Direct Debit</span
+                  >
+                  <span
+                    class="text-label-sm font-bold text-on-secondary-fixed-variant"
+                    >Active</span
+                  >
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-label-sm text-on-surface-variant"
+                    >Next Payment</span
+                  >
+                  <span class="text-label-sm font-bold text-on-surface"
+                    >Oct 1st</span
+                  >
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-label-sm text-on-surface-variant"
+                    >Status</span
+                  >
+                  <span
+                    class="text-label-sm font-bold text-on-secondary-fixed-variant"
+                    >On Track</span
+                  >
+                </div>
+              </div>
+              <button
+                class="w-full py-2 bg-surface-container text-on-surface font-bold rounded-lg text-label-md hover:bg-surface-container-high"
+              >
+                Manage Payments
+              </button>
+            </div>
+            <!-- Quick Actions -->
+
+            <!-- Recent Activity -->
+            <div
+              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
+            >
+              <div class="flex items-center gap-2 mb-4">
+                <span class="material-symbols-outlined text-primary text-[20px]"
+                  >calendar_today</span
+                >
+                <h4 class="text-label-md font-bold text-on-surface">
+                  Upcoming Viewing
+                </h4>
+              </div>
+
+              <div class="space-y-4 mb-6">
+                <div>
+                  <p class="text-label-md font-semibold text-on-surface">
+                    The Sapphire Suites
+                  </p>
+                  <p class="text-label-sm text-on-surface-variant">
+                    Canary Wharf, London
+                  </p>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <div class="flex flex-col">
+                    <span class="text-label-sm text-on-surface-variant"
+                      >Date &amp; Time</span
+                    >
+                    <span class="text-label-md font-medium text-on-surface"
+                      >Tue, 14 Oct • 2:00 PM</span
+                    >
+                  </div>
+                  <span
+                    class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] font-black px-2 py-0.5 rounded uppercase"
+                    >Confirmed</span
+                  >
+                </div>
+              </div>
+
+              <button
+                class="w-full py-2 bg-primary text-on-primary rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors active:scale-95"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      // Micro-interactions and subtle effects
+      document.querySelectorAll("button, a").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          // Simple scale effect logic already handled by tailwind classes usually,
+          // but can add JS triggers here if needed.
+        });
+      });
+
+      // Handle scroll effects for TopNavBar
+      const topBar = document.querySelector("header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+          topBar.classList.add("bg-white/90", "backdrop-blur-md");
+        } else {
+          topBar.classList.remove("bg-white/90", "backdrop-blur-md");
+        }
+      });
+    </script>
+
+    <!-- Messages workspace overlay -->
+    <div
+      id="messages-workspace"
+      class="hidden fixed inset-0 z-[70] bg-on-surface/20 backdrop-blur-[1px]"
+    >
+      <div
+        class="absolute right-0 top-0 h-full w-full max-w-[940px] bg-surface-container-lowest border-l border-outline-variant shadow-2xl flex flex-col"
+      >
+        <div
+          class="h-auto min-h-16 py-3 px-4 sm:px-6 border-b border-outline-variant flex items-start sm:items-center justify-between gap-3 shrink-0"
+        >
+          <div>
+            <p class="text-sm font-bold text-on-surface">Messages</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">
+              Chat with landlords and letting agents about your properties and
+              applications.
+            </p>
+          </div>
+          <button
+            id="close-messages-workspace"
+            class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant"
+            aria-label="Close messages"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div class="min-h-0 flex flex-1">
+          <aside
+            id="conversation-pane"
+            class="w-full md:w-[300px] lg:w-[310px] border-r border-outline-variant bg-surface shrink-0 flex flex-col min-h-0"
+          >
+            <div class="p-4 border-b border-outline-variant">
+              <div class="relative">
+                <span
+                  class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]"
+                  >search</span
+                >
+                <input
+                  id="conversation-search"
+                  class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  placeholder="Search messages"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <div id="conversation-list" class="overflow-y-auto">
+              <button
+                class="conversation-row w-full text-left p-4 border-b border-outline-variant bg-secondary-container"
+                data-conversation="sapphire"
+              >
+                <div class="flex gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shrink-0 font-bold text-xs"
+                  >
+                    TS
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex justify-between gap-2">
+                      <p class="text-sm font-semibold text-primary truncate">
+                        The Sapphire Suites
+                      </p>
+                      <span class="text-[11px] text-on-surface-variant shrink-0"
+                        >Now</span
+                      >
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
+                      Landlord · Viewing confirmed
+                    </p>
+                  </div>
+                </div>
+              </button>
+              <button
+                class="conversation-row w-full text-left p-4 border-b border-outline-variant hover:bg-surface-container-low"
+                data-conversation="bricklane"
+              >
+                <div class="flex gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
+                  >
+                    BL
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex justify-between gap-2">
+                      <p class="text-sm font-semibold text-on-surface truncate">
+                        Brick Lane Lofts
+                      </p>
+                      <span class="text-[11px] text-on-surface-variant shrink-0"
+                        >Yesterday</span
+                      >
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
+                      Lettings agent · Application update
+                    </p>
+                  </div>
+                </div>
+              </button>
+              <button
+                class="conversation-row w-full text-left p-4 border-b border-outline-variant hover:bg-surface-container-low"
+                data-conversation="regents"
+              >
+                <div class="flex gap-3">
+                  <div
+                    class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
+                  >
+                    RP
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex justify-between gap-2">
+                      <p class="text-sm font-semibold text-on-surface truncate">
+                        Regent's Park Estate
+                      </p>
+                      <span class="text-[11px] text-on-surface-variant shrink-0"
+                        >Mon</span
+                      >
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
+                      Property team · Application under review
+                    </p>
+                  </div>
+                </div>
+              </button>
+            </div>
           </aside>
+
+          <section
+            id="thread-pane"
+            class="hidden md:flex min-w-0 flex-1 flex-col"
+          >
+            <div
+              class="p-4 sm:p-5 border-b border-outline-variant flex items-center gap-3 shrink-0"
+            >
+              <button
+                id="thread-back"
+                type="button"
+                class="md:hidden -ml-2 p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low shrink-0"
+                aria-label="Back to conversations"
+              >
+                <span class="material-symbols-outlined">arrow_back</span>
+              </button>
+              <div
+                id="active-avatar"
+                class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs"
+              >
+                TS
+              </div>
+              <div class="min-w-0">
+                <p id="active-title" class="text-sm font-bold text-on-surface">
+                  The Sapphire Suites
+                </p>
+                <p
+                  id="active-subtitle"
+                  class="text-xs text-on-surface-variant mt-0.5"
+                >
+                  Landlord · Application and viewing messages
+                </p>
+              </div>
+            </div>
+
+            <div
+              id="message-thread"
+              class="flex-1 overflow-y-auto p-4 sm:p-6 bg-surface space-y-4"
+            >
+              <!-- populated by script -->
+            </div>
+
+            <div
+              class="p-4 border-t border-outline-variant bg-surface-container-lowest shrink-0"
+            >
+              <div class="flex items-end gap-3">
+                <button
+                  class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant"
+                  aria-label="Attach document"
+                >
+                  <span class="material-symbols-outlined">attach_file</span>
+                </button>
+                <textarea
+                  id="message-input"
+                  class="flex-1 min-h-[44px] max-h-28 px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  placeholder="Write a message..."
+                  rows="1"
+                ></textarea>
+                <button
+                  id="send-message"
+                  class="bg-primary text-white p-2.5 rounded-lg hover:bg-primary-container"
+                  aria-label="Send message"
+                >
+                  <span class="material-symbols-outlined">send</span>
+                </button>
+              </div>
+              <p class="text-[11px] text-on-surface-variant mt-2">
+                Messages are for property and application communication. Do not
+                share sensitive information unless it is needed for your
+                application.
+              </p>
+            </div>
+          </section>
         </div>
       </div>
-    </main>
+    </div>
+
+    <script>
+      (() => {
+        const messageMenu = document.getElementById("messages-menu");
+        const messageToggle = document.getElementById("messages-toggle");
+        const messageDropdown = document.getElementById("messages-dropdown");
+        const workspace = document.getElementById("messages-workspace");
+        const closeWorkspace = document.getElementById(
+          "close-messages-workspace",
+        );
+        const conversationRows = [
+          ...document.querySelectorAll(".conversation-row"),
+        ];
+        const previewRows = [...document.querySelectorAll(".message-preview")];
+        const openAllButtons = [
+          document.getElementById("open-all-messages"),
+          document.getElementById("open-all-messages-bottom"),
+        ];
+        const activeAvatar = document.getElementById("active-avatar");
+        const activeTitle = document.getElementById("active-title");
+        const activeSubtitle = document.getElementById("active-subtitle");
+        const thread = document.getElementById("message-thread");
+        const input = document.getElementById("message-input");
+        const sendButton = document.getElementById("send-message");
+        const conversationSearch = document.getElementById(
+          "conversation-search",
+        );
+
+        const conversations = {
+          sapphire: {
+            initials: "TS",
+            title: "The Sapphire Suites",
+            subtitle: "Landlord · Application and viewing messages",
+            messages: [
+              {
+                side: "them",
+                text: "Hello Marcus, thanks for your interest in The Sapphire Suites.",
+                time: "Today, 10:12",
+              },
+              {
+                side: "me",
+                text: "Thank you. I would like to confirm the viewing details.",
+                time: "Today, 10:18",
+              },
+              {
+                side: "them",
+                text: "The viewing is confirmed for Tuesday at 2:00 PM. Please let us know if anything changes.",
+                time: "Now",
+              },
+            ],
+          },
+          bricklane: {
+            initials: "BL",
+            title: "Brick Lane Lofts",
+            subtitle: "Lettings agent · Application messages",
+            messages: [
+              {
+                side: "them",
+                text: "Thanks for your application for Brick Lane Lofts.",
+                time: "Yesterday, 15:42",
+              },
+              {
+                side: "me",
+                text: "Thank you. Please let me know if you need anything else from me.",
+                time: "Yesterday, 16:05",
+              },
+              {
+                side: "them",
+                text: "We will be in touch once the next review step is complete.",
+                time: "Yesterday, 16:11",
+              },
+            ],
+          },
+          regents: {
+            initials: "RP",
+            title: "Regent's Park Estate",
+            subtitle: "Property team · Application messages",
+            messages: [
+              {
+                side: "them",
+                text: "Your application is currently under review.",
+                time: "Monday, 11:26",
+              },
+              {
+                side: "me",
+                text: "Thank you for the update.",
+                time: "Monday, 11:31",
+              },
+              {
+                side: "them",
+                text: "We will contact you through HomiFund when there is a further update.",
+                time: "Monday, 11:36",
+              },
+            ],
+          },
+        };
+
+        let activeConversation = "sapphire";
+
+        function setDropdownOpen(open) {
+          messageDropdown.classList.toggle("hidden", !open);
+          messageToggle.setAttribute("aria-expanded", String(open));
+          messageToggle.classList.toggle("bg-secondary-container", open);
+          messageToggle.classList.toggle("text-primary", open);
+        }
+
+
+        // --- responsive master/detail (mobile shows one pane at a time) ---
+        const listPane = document.getElementById("conversation-pane");
+        const threadPane = document.getElementById("thread-pane");
+        const backBtn = document.getElementById("thread-back");
+        const isMobilePane = () => window.matchMedia("(max-width: 767px)").matches;
+        function showThreadPane() {
+          if (!isMobilePane()) return;
+          listPane?.classList.add("hidden");
+          threadPane?.classList.remove("hidden");
+          threadPane?.classList.add("flex");
+        }
+        function showListPane() {
+          if (!isMobilePane()) return;
+          listPane?.classList.remove("hidden");
+          threadPane?.classList.add("hidden");
+          threadPane?.classList.remove("flex");
+        }
+        backBtn?.addEventListener("click", showListPane);
+        window.addEventListener("resize", () => {
+          if (!isMobilePane()) {
+            listPane?.classList.remove("hidden");
+            threadPane?.classList.remove("hidden");
+            threadPane?.classList.add("flex");
+          } else {
+            showListPane();
+          }
+        });
+
+        function renderThread() {
+          const conversation = conversations[activeConversation];
+          activeAvatar.textContent = conversation.initials;
+          activeTitle.textContent = conversation.title;
+          activeSubtitle.textContent = conversation.subtitle;
+          thread.innerHTML = conversation.messages
+            .map((message) => {
+              const own = message.side === "me";
+              return `<div class="flex ${own ? "justify-end" : "justify-start"}">
+        <div class="max-w-[75%]">
+          <div class="${own ? "bg-primary text-white" : "bg-surface-container-lowest border border-outline-variant text-on-surface"} rounded-xl px-4 py-3 text-sm">
+            ${message.text}
+          </div>
+          <p class="text-[11px] text-on-surface-variant mt-1 ${own ? "text-right" : ""}">${message.time}</p>
+        </div>
+      </div>`;
+            })
+            .join("");
+          thread.scrollTop = thread.scrollHeight;
+        }
+
+        function setActiveConversation(id) {
+          activeConversation = id;
+          conversationRows.forEach((row) => {
+            const selected = row.dataset.conversation === id;
+            row.classList.toggle("bg-secondary-container", selected);
+            row.classList.toggle("hover:bg-surface-container-low", !selected);
+            row.querySelectorAll("p").forEach((p) => {
+              p.classList.toggle(
+                "text-primary",
+                selected && p.classList.contains("font-semibold"),
+              );
+            });
+          });
+          renderThread();
+        }
+
+        function openWorkspace(id = activeConversation) {
+          setDropdownOpen(false);
+          workspace.classList.remove("hidden");
+          document.body.classList.add("overflow-hidden");
+          setActiveConversation(id);
+          if (isMobilePane()) showListPane();
+          setTimeout(() => {
+            if (!isMobilePane()) input.focus();
+          }, 60);
+        }
+
+        function closeWorkspacePanel() {
+          workspace.classList.add("hidden");
+          document.body.classList.remove("overflow-hidden");
+        }
+
+        messageToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          setDropdownOpen(messageDropdown.classList.contains("hidden"));
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!messageMenu.contains(event.target)) setDropdownOpen(false);
+        });
+
+        previewRows.forEach((row) => {
+          row.addEventListener("click", () =>
+            openWorkspace(row.dataset.conversation),
+          );
+        });
+
+        conversationRows.forEach((row) => {
+          row.addEventListener("click", () => {
+            setActiveConversation(row.dataset.conversation);
+            showThreadPane();
+          });
+        });
+
+        openAllButtons.forEach((button) =>
+          button?.addEventListener("click", () => openWorkspace()),
+        );
+        closeWorkspace.addEventListener("click", closeWorkspacePanel);
+
+        workspace.addEventListener("click", (event) => {
+          if (event.target === workspace) closeWorkspacePanel();
+        });
+
+        function sendMessage() {
+          const value = input.value.trim();
+          if (!value) return;
+          conversations[activeConversation].messages.push({
+            side: "me",
+            text: value,
+            time: "Just now",
+          });
+          input.value = "";
+          renderThread();
+        }
+
+        sendButton.addEventListener("click", sendMessage);
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+          }
+        });
+
+        conversationSearch.addEventListener("input", (event) => {
+          const query = event.target.value.toLowerCase().trim();
+          conversationRows.forEach((row) => {
+            const title = row.textContent.toLowerCase();
+            row.classList.toggle("hidden", query && !title.includes(query));
+          });
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setDropdownOpen(false);
+            closeWorkspacePanel();
+          }
+        });
+
+        renderThread();
+      })();
+    </script>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

@@ -1,46 +1,33 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
   <head>
     <%- include('partials/head') %>
   </head>
-  <body class="flex min-h-screen flex-col bg-surface text-on-surface hf-public-page">
-    <% const safeRecoveryUrl = typeof recoveryUrl === 'string' && recoveryUrl.startsWith('/') ? recoveryUrl : '/'; %>
-    <% const safeRecoveryLabel = typeof recoveryLabel === 'string' && recoveryLabel ? recoveryLabel : 'Back to home'; %>
+  <body class="bg-surface text-on-surface flex flex-col min-h-screen">
     <%- include('partials/header') %>
-
-    <main class="flex flex-grow items-center px-4 py-12 sm:px-6 sm:py-16">
-      <div class="mx-auto w-full max-w-3xl">
-        <section class="text-center" aria-labelledby="not-found-title">
-          <span class="material-symbols-outlined mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-secondary-container text-[32px] text-primary" aria-hidden="true">search_off</span>
-          <p class="mt-6 text-label-md font-bold text-secondary">Error 404</p>
-          <h1 id="not-found-title" class="mt-2 text-headline-lg font-bold text-primary">Page not found</h1>
-          <p class="mx-auto mt-4 max-w-2xl text-body-md text-on-surface-variant">The page you requested is unavailable. Its address may be incorrect, the page may have moved, or your saved link may be out of date.</p>
-
-          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href="<%= safeRecoveryUrl %>" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 font-bold text-on-primary transition-opacity hover:opacity-90">
-              <span class="material-symbols-outlined" aria-hidden="true">home</span>
-              <%= safeRecoveryLabel %>
-            </a>
-            <a href="/faqs" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-outline px-6 font-bold text-primary transition-colors hover:bg-surface-container-low">
-              <span class="material-symbols-outlined" aria-hidden="true">help</span>
-              Browse help
-            </a>
-          </div>
-        </section>
-
-        <div class="mt-10 grid grid-cols-1 border-y border-outline-variant md:grid-cols-2 md:divide-x md:divide-outline-variant">
-          <section class="px-2 py-6 text-left sm:px-6" aria-labelledby="not-found-recovery-title">
-            <h2 id="not-found-recovery-title" class="font-bold text-on-surface">Check the destination</h2>
-            <p class="mt-2 text-body-sm text-on-surface-variant">Review the address for typing mistakes, or use a known navigation link instead of repeatedly loading the unavailable page.</p>
-          </section>
-          <section class="border-t border-outline-variant px-2 py-6 text-left sm:px-6 md:border-t-0" aria-labelledby="not-found-privacy-title">
-            <h2 id="not-found-privacy-title" class="font-bold text-on-surface">Private request details</h2>
-            <p class="mt-2 text-body-sm text-on-surface-variant">The unavailable address and its query values are not displayed here. Remove sensitive values before sharing a broken link with support.</p>
-          </section>
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+      <div class="text-center">
+        <div class="text-primary font-headline-xl text-headline-xl mb-4">
+          404
         </div>
+        <h1 class="font-headline-lg text-headline-lg text-primary mb-4">
+          Page Not Found
+        </h1>
+        <p
+          class="font-body-md text-body-md text-secondary mb-8 max-w-md mx-auto"
+        >
+          The page you're looking for doesn't exist or has been moved. Let us
+          help you find your way home.
+        </p>
+        <a
+          href="/"
+          class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all inline-flex items-center gap-2"
+        >
+          <span class="material-symbols-outlined">home</span>
+          Back to Home
+        </a>
       </div>
     </main>
-
     <%- include('partials/footer') %>
     <script src="/js/main.js"></script>
   </body>

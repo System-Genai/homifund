@@ -3,90 +3,340 @@
   <head>
     <%- include('../../partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <% const mediaDetailsUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
-    <% const displayName = mediaDetailsUser.fullName || 'Landlord'; %>
+  <body class="bg-surface text-on-surface">
     <%- include('../../partials/sidebar-landlord') %>
+    <!-- Shared landlord sidebar -->
 
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0"><p class="truncate text-label-sm font-bold text-secondary">Landlord workspace</p><p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p></div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/user-profile" aria-label="Landlord profile" title="Landlord profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
-      </div>
-    </header>
-
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-8">
-          <a class="mb-4 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/user/landlord/properties"><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_back</span>Back to Properties</a>
-          <p class="mb-1 text-label-md font-bold text-secondary">Property setup</p>
-          <h1 class="text-headline-lg font-bold text-primary">Photos and documents</h1>
-          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Listing media and private property records need secure storage, explicit visibility, and a saved property draft.</p>
+    <main class="md:ml-[240px] min-h-screen flex flex-col">
+      <!-- Shared landlord header -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center gap-3 pl-16 pr-4 sm:pr-6 md:pl-6 md:pr-6 lg:px-10 border-b border-outline-variant"
+      >
+        <div class="hidden sm:block relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
         </div>
-
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="media-step-status-title">
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-start gap-4">
-              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">cloud_off</span>
-              <div><p class="text-label-sm font-bold uppercase text-secondary">Step status</p><h2 id="media-step-status-title" class="mt-1 text-headline-md font-bold text-primary">Photos and documents cannot be stored</h2><p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">There is no property draft, upload endpoint, object storage, file validation, malware scanning, media processor, access policy, or deletion lifecycle.</p></div>
+        <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
+          <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
+            <button
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span
+              ><span
+                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+              ></span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button class="hover:bg-surface-container-low p-2 rounded-full">
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+          <div class="flex items-center gap-3">
+            <div class="hidden lg:block text-right">
+              <p class="text-sm font-bold">Marcus R.</p>
+              <p class="text-xs text-on-surface-variant">Landlord</p>
             </div>
-            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">Step 4 unavailable</span>
+            <div
+              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
+            >
+              MR
+            </div>
           </div>
-        </section>
-
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section class="border border-outline-variant bg-surface-container-lowest px-6 py-10 text-center sm:px-8" aria-labelledby="media-step-title">
-              <span class="material-symbols-outlined text-5xl text-primary" aria-hidden="true">hide_image</span>
-              <p class="mt-4 text-label-sm font-bold uppercase text-secondary">Planned step 4 of 5</p>
-              <h2 id="media-step-title" class="mt-2 text-headline-md font-bold text-on-surface">Upload controls are unavailable</h2>
-              <p class="mx-auto mt-2 max-w-2xl text-body-sm text-on-surface-variant">Do not select photos, floorplans, certificates, licences, inventories, or ownership records until files can be validated, privately stored, and recovered.</p>
-              <a class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-on-primary hover:opacity-90" href="/user/landlord/properties/add/address"><span class="material-symbols-outlined text-xl" aria-hidden="true">first_page</span>Open setup start</a>
-            </section>
-
-            <section aria-labelledby="media-foundations-title">
-              <div class="mb-4"><h2 id="media-foundations-title" class="text-headline-md font-bold text-on-surface">Required media and document foundations</h2><p class="mt-1 text-body-sm text-on-surface-variant">Every file needs trustworthy ownership, validation, visibility, and lifecycle rules.</p></div>
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">folder_managed</span><h3 class="mt-3 font-bold text-on-surface">Draft-owned storage</h3><p class="mt-2 text-body-sm text-on-surface-variant">Attach every file to one landlord-owned draft with stable IDs, upload status, retry safety, timestamps, versions, and quotas.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">security</span><h3 class="mt-3 font-bold text-on-surface">Safe file ingestion</h3><p class="mt-2 text-body-sm text-on-surface-variant">Verify file signatures, MIME type, extension, size, dimensions, malware status, processing outcome, and checksum before acceptance.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">photo_library</span><h3 class="mt-3 font-bold text-on-surface">Responsible listing media</h3><p class="mt-2 text-body-sm text-on-surface-variant">Remove location metadata, support ordering and cover selection, require useful captions, and review faces, personal data, and misleading imagery.</p></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">policy</span><h3 class="mt-3 font-bold text-on-surface">Document access lifecycle</h3><p class="mt-2 text-body-sm text-on-surface-variant">Keep records private by default with authorized sharing, expiry, revocation, audit history, retention, replacement, and deletion controls.</p></article>
-              </div>
-            </section>
-
-            <section aria-labelledby="planned-media-groups-title">
-              <div class="mb-4"><h2 id="planned-media-groups-title" class="text-headline-md font-bold text-on-surface">Planned file groups</h2><p class="mt-1 text-body-sm text-on-surface-variant">These groups remain unavailable until storage and policy services are connected.</p></div>
-              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
-                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Listing photos and floorplans</dt><dd class="text-on-surface-variant">Unavailable</dd></div>
-                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Cover, order, captions, and review</dt><dd class="text-on-surface-variant">Unavailable</dd></div>
-                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Certificates, licences, and inventories</dt><dd class="text-on-surface-variant">Unavailable</dd></div>
-                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Private, applicant, and public visibility</dt><dd class="text-on-surface-variant">Unavailable</dd></div>
-              </dl>
-            </section>
-          </div>
-
-          <aside class="space-y-6 xl:col-span-4" aria-label="Media and document boundaries">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="media-actions-title">
-              <h2 id="media-actions-title" class="text-headline-md font-bold text-primary">Action availability</h2>
-              <dl class="mt-4 divide-y divide-outline-variant text-body-sm">
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Upload listing media</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Upload private documents</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Manage visibility</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div>
-                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Continue to review</dt><dd class="shrink-0 whitespace-nowrap font-bold text-on-surface">Unavailable</dd></div>
-              </dl>
-            </section>
-
-            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="sensitive-files-title"><h2 id="sensitive-files-title" class="text-headline-md font-bold text-on-error-container">Do not send sensitive files</h2><p class="mt-2 text-body-sm text-on-error-container">Do not send ownership records, identity documents, access codes, tenant data, financial evidence, or unredacted certificates through Contact or Messages.</p></section>
-
-            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="media-visibility-title"><h2 id="media-visibility-title" class="font-bold text-on-surface">Private is the default</h2><p class="mt-2 text-body-sm text-on-surface-variant">A selected file is not uploaded, verified, or public. Visibility must be explicit per file and must never carry over from a browser-only selection.</p></section>
-          </aside>
         </div>
-      </div>
-    </main>
+      </header>
 
+      <section class="px-4 sm:px-6 lg:px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Property listing setup
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">
+                Photos &amp; documents
+              </h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Add images for the listing and any useful property documents.
+                You can save as a draft without completing every upload.
+              </p>
+            </div>
+            <button
+              class="self-start md:self-auto text-primary text-sm font-bold hover:underline"
+            >
+              Save draft
+            </button>
+          </div>
+
+          <!-- Compact five-step progress -->
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4"
+          >
+            <ol class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Address &amp; type</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Listing details</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  ><span class="material-symbols-outlined text-[15px]"
+                    >check</span
+                  ></span
+                ><span class="text-xs font-bold">Rent &amp; availability</span>
+              </li>
+              <li class="flex items-center gap-2 text-primary">
+                <span
+                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
+                  >4</span
+                ><span class="text-xs font-bold">Photos &amp; documents</span>
+              </li>
+              <li class="flex items-center gap-2 text-on-surface-variant">
+                <span
+                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
+                  >5</span
+                ><span class="text-xs font-bold">Review &amp; publish</span>
+              </li>
+            </ol>
+          </section>
+
+          <section
+            class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
+          >
+            <div class="px-5 py-4 border-b border-outline-variant">
+              <h2 class="text-sm font-bold">Step 4: Photos &amp; documents</h2>
+              <p class="text-xs text-on-surface-variant mt-1">
+                Upload property photos and add relevant documents. Required
+                items can be completed before publishing.
+              </p>
+            </div>
+
+            <form class="p-5 space-y-6">
+              <section class="space-y-4">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3"
+                >
+                  <div>
+                    <h3 class="text-sm font-bold">Property photos</h3>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Add clear images of the exterior, rooms and key features.
+                      The first photo will be used as the listing cover.
+                    </p>
+                  </div>
+                  <span class="text-xs text-on-surface-variant"
+                    >0 photos added</span
+                  >
+                </div>
+
+                <label class="block cursor-pointer">
+                  <input
+                    class="sr-only"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                  />
+                  <span
+                    class="min-h-[180px] rounded-xl border-2 border-dashed border-outline-variant bg-surface flex flex-col items-center justify-center text-center px-6 hover:bg-surface-container-low hover:border-primary transition-colors"
+                  >
+                    <span
+                      class="w-11 h-11 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                      ><span class="material-symbols-outlined"
+                        >add_photo_alternate</span
+                      ></span
+                    >
+                    <span class="mt-3 text-sm font-bold text-on-surface"
+                      >Upload photos</span
+                    >
+                    <span class="mt-1 text-xs text-on-surface-variant"
+                      >Drag and drop images here, or select files from your
+                      device.</span
+                    >
+                    <span class="mt-2 text-xs text-on-surface-variant"
+                      >JPG, PNG or WEBP · Up to 10 MB each</span
+                    >
+                  </span>
+                </label>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >photo_camera</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Cover photo</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Add at least one clear exterior or main-room photo.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >bed</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Rooms</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Include bedrooms, kitchen, bathroom and living space.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="rounded-lg border border-outline-variant bg-surface px-3 py-3 flex items-center gap-3"
+                  >
+                    <span class="material-symbols-outlined text-primary"
+                      >floorplan</span
+                    >
+                    <div>
+                      <p class="text-xs font-bold">Floorplan</p>
+                      <p class="text-xs text-on-surface-variant mt-0.5">
+                        Optional, but useful for renters comparing layouts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold">Property documents</h3>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Choose a document category before uploading. Documents can
+                    remain private or later be shared where appropriate.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="document-category"
+                      >Document category</label
+                    >
+                    <select
+                      id="document-category"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option value="">Select a category</option>
+                      <option>Energy performance certificate (EPC)</option>
+                      <option>Gas safety record</option>
+                      <option>Electrical safety certificate</option>
+                      <option>HMO licence</option>
+                      <option>Floorplan</option>
+                      <option>Property inventory</option>
+                      <option>Other property document</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold mb-1.5"
+                      for="document-visibility"
+                      >Document visibility</label
+                    >
+                    <select
+                      id="document-visibility"
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option value="">Select</option>
+                      <option>Private to landlord</option>
+                      <option>Share with applicants on request</option>
+                      <option>Show on listing</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label class="block cursor-pointer">
+                  <input
+                    class="sr-only"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    multiple
+                  />
+                  <span
+                    class="min-h-[128px] rounded-xl border-2 border-dashed border-outline-variant bg-surface flex flex-col items-center justify-center text-center px-6 hover:bg-surface-container-low hover:border-primary transition-colors"
+                  >
+                    <span
+                      class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                      ><span class="material-symbols-outlined"
+                        >upload_file</span
+                      ></span
+                    >
+                    <span class="mt-3 text-sm font-bold text-on-surface"
+                      >Upload document</span
+                    >
+                    <span class="mt-1 text-xs text-on-surface-variant"
+                      >PDF, JPG or PNG · Up to 10 MB each</span
+                    >
+                  </span>
+                </label>
+              </section>
+
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <p class="text-xs font-bold">Before you publish</p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      HomiFund will show any remaining required listing
+                      information on the final review page.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </form>
+
+            <div
+              class="px-5 py-4 bg-surface-container-low border-t border-outline-variant flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
+              <button onclick="window.location.href = '/user/landlord/properties/add/rent'"
+                class="self-start px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-sm font-bold flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_back</span
+                >Back to rent &amp; availability
+              </button>
+              <button class="self-end px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold flex items-center gap-2" onclick="window.location.href = '/user/landlord/properties/add/review'">
+                Continue to review &amp; publish
+                <span class="material-symbols-outlined text-[18px]"
+                  >arrow_forward</span
+                >
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
     <script src="/js/main.js"></script>
   </body>
 </html>

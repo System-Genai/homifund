@@ -1,7 +1,5 @@
 const router = require("express").Router();
 const auth = require("../controllers/auth");
-const contact = require("../controllers/contact");
-const onboarding = require("../controllers/onboarding");
 const {
   requireAuth,
   requireRole,
@@ -17,8 +15,9 @@ router.get("/", (req, res) =>
 router.get("/about", (req, res) =>
   res.render("main/about", { title: "About Us | HomiFund" }),
 );
-router.get("/contact", contact.show);
-router.post("/contact", contact.submit);
+router.get("/contact", (req, res) =>
+  res.render("main/contact", { title: "Contact | HomiFund" }),
+);
 router.get("/faqs", (req, res) =>
   res.render("main/FAQs", { title: "FAQs | HomiFund" }),
 );
@@ -38,59 +37,41 @@ router.post("/signup", redirectIfAuth, auth.signup_post);
 router.get("/login", redirectIfAuth, auth.login_get);
 router.post("/login", redirectIfAuth, auth.login_post);
 router.get("/logout", auth.logout);
-router.get("/forget-password", auth.forget_password_get);
-router.post("/forget-password", auth.forget_password_post);
-router.get("/reset-password/:token", auth.reset_password_get);
-router.post("/reset-password/:token", auth.reset_password_post);
+router.get("/forget-password", (req, res) =>
+  res.render("main/forget-password", { title: "Forgot Password | HomiFund" }),
+);
 
 // Role selection (protected: must be logged in, no role yet)
 router.get("/role-selection", requireAuth, auth.role_selection_get);
 router.post("/role-selection", requireAuth, auth.role_selection_post);
 
 // ==================== ONBOARDING ====================
-router.get(
-  "/onboarding-landlord",
-  requireAuth,
-  requireRole("landlord"),
-  onboarding.landlord_get,
+router.get("/onboarding-landlord", requireAuth, (req, res) =>
+  res.render("main/onboarding-landlord", {
+    title: "Landlord Onboarding | HomiFund",
+  }),
 );
-router.post(
-  "/onboarding-landlord",
-  requireAuth,
-  requireRole("landlord"),
-  onboarding.landlord_post,
+router.get("/onboarding-tenant", requireAuth, (req, res) =>
+  res.render("main/onboarding-tenant", {
+    title: "Tenant Onboarding | HomiFund",
+  }),
 );
-router.get(
-  "/onboarding-tenant",
-  requireAuth,
-  requireRole("renter"),
-  onboarding.renter_get,
-);
-router.post(
-  "/onboarding-tenant",
-  requireAuth,
-  requireRole("renter"),
-  onboarding.renter_post,
-);
-router.get(
-  "/onboarding-complete",
-  requireAuth,
-  requireRole("renter", "landlord"),
-  onboarding.complete_get,
+router.get("/onboarding-complete", requireAuth, (req, res) =>
+  res.render("main/onboarding-complete", {
+    title: "Onboarding Complete | HomiFund",
+  }),
 );
 
 // ==================== VERIFICATION ====================
-router.get(
-  "/landlord-verification",
-  requireAuth,
-  requireRole("landlord"),
-  onboarding.landlord_verification_get,
+router.get("/landlord-verification", requireAuth, (req, res) =>
+  res.render("main/landlord-verification", {
+    title: "Landlord Verification | HomiFund",
+  }),
 );
-router.get(
-  "/tenant-verification",
-  requireAuth,
-  requireRole("renter"),
-  onboarding.renter_verification_get,
+router.get("/tenant-verification", requireAuth, (req, res) =>
+  res.render("main/tenant-verification", {
+    title: "Tenant Verification | HomiFund",
+  }),
 );
 
 // ==================== LANDLORD DASHBOARD ====================
@@ -102,8 +83,6 @@ router.get(
     res.render("user/landlord/dashboard", {
       title: "Dashboard | Landlord",
       currentPage: "dashboard",
-      currentUser: req.user,
-      profile: req.user.landlordProfile || null,
     }),
 );
 router.get(
@@ -114,8 +93,6 @@ router.get(
     res.render("user/landlord/HomiScore", {
       title: "HomiScore | Landlord",
       currentPage: "homiscore",
-      currentUser: req.user,
-      profile: req.user.landlordProfile || null,
     }),
 );
 router.get(
@@ -126,8 +103,6 @@ router.get(
     res.render("user/landlord/properties", {
       title: "Properties | Landlord",
       currentPage: "properties",
-      currentUser: req.user,
-      profile: req.user.landlordProfile || null,
     }),
 );
 router.get(
@@ -138,7 +113,6 @@ router.get(
     res.render("user/landlord/applicants", {
       title: "Applicants | Landlord",
       currentPage: "applicants",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -149,7 +123,6 @@ router.get(
     res.render("user/landlord/documents", {
       title: "Documents | Landlord",
       currentPage: "documents",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -160,7 +133,6 @@ router.get(
     res.render("user/landlord/payments", {
       title: "Payments | Landlord",
       currentPage: "payments",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -168,11 +140,7 @@ router.get(
   requireAuth,
   requireRole("landlord"),
   (req, res) =>
-    res.render("user/landlord/messages", {
-      title: "Messages | Landlord",
-      currentPage: "messages",
-      currentUser: req.user,
-    }),
+    res.render("user/landlord/messages", { title: "Messages | Landlord" }),
 );
 router.get(
   "/user/landlord/notification-bell",
@@ -181,8 +149,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/notification-bell", {
       title: "Notifications | Landlord",
-      currentPage: "notifications",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -190,34 +156,21 @@ router.get(
   requireAuth,
   requireRole("landlord"),
   (req, res) =>
-    res.render("user/landlord/settings", {
-      title: "Settings | Landlord",
-      currentPage: "settings",
-      currentUser: req.user,
-    }),
+    res.render("user/landlord/settings", { title: "Settings | Landlord" }),
 );
 router.get(
   "/user/landlord/support",
   requireAuth,
   requireRole("landlord"),
   (req, res) =>
-    res.render("user/landlord/support", {
-      title: "Support | Landlord",
-      currentPage: "support",
-      currentUser: req.user,
-    }),
+    res.render("user/landlord/support", { title: "Support | Landlord" }),
 );
 router.get(
   "/user/landlord/user-profile",
   requireAuth,
   requireRole("landlord"),
   (req, res) =>
-    res.render("user/landlord/user-profile", {
-      title: "Profile | Landlord",
-      currentPage: "profile",
-      currentUser: req.user,
-      profile: req.user.landlordProfile || {},
-    }),
+    res.render("user/landlord/user-profile", { title: "Profile | Landlord" }),
 );
 router.get(
   "/user/landlord/view-profile",
@@ -225,9 +178,7 @@ router.get(
   requireRole("landlord"),
   (req, res) =>
     res.render("user/landlord/view-profile", {
-      title: "Applicant Profile | Landlord",
-      currentPage: "applicants",
-      currentUser: req.user,
+      title: "View Profile | Landlord",
     }),
 );
 router.get(
@@ -235,11 +186,7 @@ router.get(
   requireAuth,
   requireRole("landlord"),
   (req, res) =>
-    res.render("user/landlord/view-calendar", {
-      title: "Calendar | Landlord",
-      currentPage: "applicants",
-      currentUser: req.user,
-    }),
+    res.render("user/landlord/view-calendar", { title: "Calendar | Landlord" }),
 );
 router.get(
   "/user/landlord/review-application",
@@ -248,8 +195,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/review-application", {
       title: "Review Application | Landlord",
-      currentPage: "applicants",
-      currentUser: req.user,
     }),
 );
 
@@ -261,8 +206,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/Add-Properties/address-and-type", {
       title: "Add Property | Landlord",
-      currentPage: "properties",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -272,8 +215,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/Add-Properties/listing-details", {
       title: "Add Property Details | Landlord",
-      currentPage: "properties",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -283,8 +224,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/Add-Properties/photos-and-documents", {
       title: "Add Property Photos | Landlord",
-      currentPage: "properties",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -294,8 +233,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/Add-Properties/rent-and-availabilty", {
       title: "Add Property Rent | Landlord",
-      currentPage: "properties",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -305,8 +242,6 @@ router.get(
   (req, res) =>
     res.render("user/landlord/Add-Properties/review-and-publish", {
       title: "Review Property | Landlord",
-      currentPage: "properties",
-      currentUser: req.user,
     }),
 );
 
@@ -319,8 +254,6 @@ router.get(
     res.render("user/renter/dashboard", {
       title: "Dashboard | Renter",
       currentPage: "dashboard",
-      currentUser: req.user,
-      renterProfile: req.user?.renterProfile || {},
     }),
 );
 router.get(
@@ -331,8 +264,6 @@ router.get(
     res.render("user/renter/HomiScore", {
       title: "HomiScore | Renter",
       currentPage: "homiscore",
-      currentUser: req.user,
-      renterProfile: req.user?.renterProfile || {},
     }),
 );
 router.get(
@@ -343,7 +274,6 @@ router.get(
     res.render("user/renter/applications", {
       title: "Applications | Renter",
       currentPage: "applications",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -354,7 +284,6 @@ router.get(
     res.render("user/renter/documents", {
       title: "Documents | Renter",
       currentPage: "documents",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -365,7 +294,6 @@ router.get(
     res.render("user/renter/Payments", {
       title: "Payments | Renter",
       currentPage: "payments",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -373,11 +301,7 @@ router.get(
   requireAuth,
   requireRole("renter"),
   (req, res) =>
-    res.render("user/renter/messages", {
-      title: "Messages | Renter",
-      currentPage: "messages",
-      currentUser: req.user,
-    }),
+    res.render("user/renter/messages", { title: "Messages | Renter" }),
 );
 router.get(
   "/user/renter/notification-bell",
@@ -386,8 +310,6 @@ router.get(
   (req, res) =>
     res.render("user/renter/notification-bell", {
       title: "Notifications | Renter",
-      currentPage: "notifications",
-      currentUser: req.user,
     }),
 );
 router.get(
@@ -395,45 +317,28 @@ router.get(
   requireAuth,
   requireRole("renter"),
   (req, res) =>
-    res.render("user/renter/profile", {
-      title: "Profile | Renter",
-      currentPage: "profile",
-      currentUser: req.user,
-      renterProfile: req.user?.renterProfile || {},
-    }),
+    res.render("user/renter/profile", { title: "Profile | Renter" }),
 );
 router.get(
   "/user/renter/settings",
   requireAuth,
   requireRole("renter"),
   (req, res) =>
-    res.render("user/renter/settings", {
-      title: "Settings | Renter",
-      currentPage: "settings",
-      currentUser: req.user,
-    }),
+    res.render("user/renter/settings", { title: "Settings | Renter" }),
 );
 router.get(
   "/user/renter/support",
   requireAuth,
   requireRole("renter"),
   (req, res) =>
-    res.render("user/renter/support", {
-      title: "Support | Renter",
-      currentPage: "support",
-      currentUser: req.user,
-    }),
+    res.render("user/renter/support", { title: "Support | Renter" }),
 );
 router.get(
   "/user/renter/view-detail",
   requireAuth,
   requireRole("renter"),
   (req, res) =>
-    res.render("user/renter/view-detail", {
-      title: "Viewing Detail | Renter",
-      currentPage: "applications",
-      currentUser: req.user,
-    }),
+    res.render("user/renter/view-detail", { title: "View Details | Renter" }),
 );
 router.get(
   "/user/renter/view-property",
@@ -441,9 +346,7 @@ router.get(
   requireRole("renter"),
   (req, res) =>
     res.render("user/renter/View-property", {
-      title: "Property Detail | Renter",
-      currentPage: "applications",
-      currentUser: req.user,
+      title: "View Property | Renter",
     }),
 );
 
@@ -452,7 +355,6 @@ router.get("/admin/management", requireAuth, requireRole("admin"), (req, res) =>
   res.render("admin/management", {
     title: "Management | Admin",
     currentPage: "management",
-    currentUser: req.user,
   }),
 );
 router.get(
@@ -463,7 +365,6 @@ router.get(
     res.render("admin/verification-review", {
       title: "Verification Review | Admin",
       currentPage: "verification-review",
-      currentUser: req.user,
     }),
 );
 

@@ -3,86 +3,773 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <% const savedRenterProfile = typeof renterProfile === 'object' && renterProfile ? renterProfile : {}; %>
-    <% const scoreUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
-    <% const displayName = scoreUser.fullName || savedRenterProfile.legalName || 'Renter'; %>
-    <% const hasSavedProfile = Boolean(savedRenterProfile.legalName || savedRenterProfile.preferredLocations || savedRenterProfile.employmentStatus || savedRenterProfile.householdSize || savedRenterProfile.monthlyBudget === 0 || savedRenterProfile.monthlyBudget); %>
-    <% const householdLabels = { one: '1 person', two: '2 people', three: '3 people', 'four-plus': '4 or more people' }; %>
-    <% const employmentLabels = { employed: 'Employed', 'self-employed': 'Self-employed', student: 'Student', retired: 'Retired', other: 'Other' }; %>
+  <body class="text-on-surface">
     <%- include('../partials/sidebar-renter') %>
+    <!-- Persistent SideNavBar -->
 
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0"><p class="truncate text-label-sm font-bold text-secondary">Renter workspace</p><p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p></div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/profile" aria-label="Renter profile" title="Renter profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+    <!-- TopNavBar -->
+    <header
+      class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center gap-3 pl-16 pr-4 sm:pr-6 md:pr-margin-desktop border-b border-outline-variant shadow-sm md:pl-[264px]"
+    >
+      <div class="hidden sm:flex items-center gap-4 flex-1">
+        <div class="hidden sm:block relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            data-icon="search"
+            >search</span
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
+        <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
+          <a href="/user/renter/notification-bell" class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+            ></span>
+                    </a>
+          <a href="/user/renter/settings" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">settings</span>
+          </a>
+          <a href="/user/renter/messages" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+            <span class="material-symbols-outlined">chat_bubble</span>
+          </a>
+        </div>
+        <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+        <div class="flex items-center gap-3 lg:pl-2 group cursor-pointer shrink-0">
+          <div class="hidden lg:block text-right">
+            <p
+              class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
+            >
+              Marcus R.
+              <span
+                class="material-symbols-outlined text-primary text-[16px]"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >verified</span
+              >
+            </p>
+            <p class="text-label-sm text-on-surface-variant">Premium Member</p>
+          </div>
+          <div
+            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-primary-container overflow-hidden shrink-0"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
+            />
+          </div>
+        </div>
       </div>
     </header>
-
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
+    <!-- Main Content -->
+    <main class="md:pl-[264px] px-4 sm:px-6 md:pr-8 pb-12 min-h-screen pt-6 md:pt-8">
+      <div class="max-w-[1100px] mx-auto">
+        <!-- Header -->
         <div class="mb-8">
-          <p class="mb-1 text-label-md font-bold text-secondary">Profile context</p>
-          <h1 class="text-headline-lg font-bold text-primary">Renter HomiScore</h1>
-          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review which source information is available before any score can be calculated, used, or shared.</p>
+          <h2 class="font-headline-lg text-headline-lg text-primary">
+            HomiScore
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Build trust. Rent smarter.
+          </p>
+        </div>
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-12 gap-6 items-start">
+          <!-- Left Column: Score and Factors -->
+          <div class="col-span-12 lg:col-span-8 space-y-6">
+            <!-- Hero Score Card -->
+            <div
+              class="homiscore-gradient rounded-2xl p-8 text-on-primary shadow-lg flex flex-col md:flex-row items-center gap-10 relative overflow-hidden"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgb(0, 35, 111) 0%,
+                  rgb(30, 58, 138) 100%
+                );
+              "
+            >
+              <div class="relative z-10 w-full">
+                <div class="flex flex-col md:flex-row items-center gap-10 mb-8">
+                  <div class="text-center md:text-left flex-grow">
+                    <div
+                      class="flex items-center gap-3 mb-3 justify-center md:justify-start"
+                    >
+                      <span
+                        class="bg-white/20 px-3 py-1 rounded-full text-label-sm font-bold backdrop-blur-md flex items-center gap-1"
+                      >
+                        <span
+                          class="material-symbols-outlined text-[14px]"
+                          style="font-variation-settings: &quot;FILL&quot; 1"
+                          >verified</span
+                        >
+                        VERIFIED
+                      </span>
+                      <span
+                        class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-label-sm font-bold"
+                        >TRUSTED RENTER</span
+                      >
+                    </div>
+                    <h3 class="text-headline-lg font-bold mb-2">
+                      HomiScore Status
+                    </h3>
+                    <p class="text-body-md text-on-primary-container max-w-md">
+                      Your score is in the top 5% of renters in London.
+                      Landlords see you as a low-risk, premium tenant.
+                    </p>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div
+                      class="w-48 h-48 border-[12px] border-white/10 rounded-full flex items-center justify-center relative"
+                    >
+                      <div
+                        class="absolute inset-0 border-[12px] border-tertiary rounded-full"
+                        style="clip-path: polygon(0 0, 100% 0, 100% 90%, 0 90%)"
+                      ></div>
+                      <div class="text-center">
+                        <span
+                          class="text-headline-xl font-black block leading-none"
+                          >874</span
+                        >
+                        <span class="text-label-md text-on-primary-container"
+                          >Excellent</span
+                        >
+                      </div>
+                    </div>
+                    <p
+                      class="mt-4 text-label-sm text-on-primary-container uppercase tracking-widest"
+                    >
+                      / 1000 MAX SCORE
+                    </p>
+                  </div>
+                </div>
+
+                <div class="border-t border-white/10 pt-8 mb-8">
+                  <div
+                    class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/10 px-2 py-1 rounded-md mb-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[12px] text-on-primary/70"
+                      >update</span
+                    >
+                    <span
+                      class="text-[10px] font-medium text-on-primary/80 uppercase tracking-wider"
+                      >Last Updated: 2 hours ago</span
+                    >
+                  </div>
+                  <h4
+                    class="text-label-sm font-bold uppercase tracking-widest text-on-primary/60 mb-3"
+                  >
+                    Verification Summary
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div
+                      class="bg-white/5 rounded-lg p-4 flex items-center gap-3 border border-white/10"
+                    >
+                      <span class="material-symbols-outlined text-green-100"
+                        >check_circle</span
+                      >
+                      <div>
+                        <p class="text-xs text-on-primary/60">Identity</p>
+                        <p class="text-sm font-semibold">
+                          Verified (Passport &amp; Biometric)
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white/5 rounded-lg p-4 flex items-center gap-3 border border-white/10"
+                    >
+                      <span class="material-symbols-outlined text-green-100"
+                        >account_balance</span
+                      >
+                      <div>
+                        <p class="text-xs text-on-primary/60">Financials</p>
+                        <p class="text-sm font-semibold">
+                          Verified (Open Banking) • Excellent
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white/5 rounded-lg p-4 flex items-center gap-3 border border-white/10"
+                    >
+                      <span class="material-symbols-outlined text-green-100"
+                        >history</span
+                      >
+                      <div>
+                        <p class="text-xs text-on-primary/60">Rental History</p>
+                        <p class="text-sm font-semibold">
+                          Verified (3+ Years Continuous)
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white/5 rounded-lg p-4 flex items-center gap-3 border border-white/10"
+                    >
+                      <span class="material-symbols-outlined text-green-100"
+                        >verified_user</span
+                      >
+                      <div>
+                        <p class="text-xs text-on-primary/60">Affordability</p>
+                        <p class="text-sm font-semibold">
+                          Low Risk (Rent-to-Income: 28%)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col md:flex-row items-center justify-between gap-4"
+                >
+                  <div class="text-center md:text-left">
+                    <button
+                      class="bg-white text-primary px-8 py-3 rounded-lg font-bold text-sm hover:bg-surface-container-highest transition-colors active:scale-95"
+                    >
+                      Share HomiScore Link (£5.00)
+                    </button>
+                    <p class="mt-2 text-xs text-on-primary/80">
+                      This is a one-time purchase for external landlords
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-2 text-on-primary/60">
+                    <span class="material-symbols-outlined text-sm">lock</span>
+                    <span
+                      class="text-[10px] uppercase tracking-widest font-bold"
+                      >Secure 256-bit Encryption</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute -right-20 -top-20 w-80 h-80 bg-tertiary/20 blur-[100px] rounded-full"
+              ></div>
+            </div>
+            <!-- Contribution Section -->
+            <div>
+              <h4
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4"
+              >
+                What Contributes to your HomiScore
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Factor Card 1 -->
+                <div
+                  class="bg-white p-3 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div class="flex items-center justify-between mb-3">
+                    <div
+                      class="w-7 h-7 bg-secondary-container rounded-lg flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >id_card</span
+                      >
+                    </div>
+                    <span
+                      class="bg-green-100 text-green-700 px-2 py-1 rounded-md text-[10px] font-bold uppercase"
+                      >Verified</span
+                    >
+                  </div>
+                  <h5 class="font-label-md text-label-md font-bold mb-1">
+                    Identity
+                  </h5>
+                  <p class="text-on-surface-variant text-sm">
+                    Passport and biometric verification complete.
+                  </p>
+                </div>
+                <!-- Factor Card 2 -->
+                <div
+                  class="bg-white p-3 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div class="flex items-center justify-between mb-3">
+                    <div
+                      class="w-7 h-7 bg-secondary-container rounded-lg flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >account_balance</span
+                      >
+                    </div>
+                    <span
+                      class="bg-green-100 text-green-700 px-2 py-1 rounded-md text-[10px] font-bold uppercase"
+                      >Verified</span
+                    >
+                  </div>
+                  <h5 class="font-label-md text-label-md font-bold mb-1">
+                    Income
+                  </h5>
+                  <p class="text-on-surface-variant text-sm">
+                    Consistent income validated via Open Banking.
+                  </p>
+                </div>
+                <!-- Factor Card 3 -->
+                <div
+                  class="bg-white p-3 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div class="flex items-center justify-between mb-3">
+                    <div
+                      class="w-7 h-7 bg-secondary-container rounded-lg flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >history_edu</span
+                      >
+                    </div>
+                    <span
+                      class="bg-secondary-container text-primary px-2 py-1 rounded-md text-[10px] font-bold uppercase"
+                      >Excellent</span
+                    >
+                  </div>
+                  <h5 class="font-label-md text-label-md font-bold mb-1">
+                    Rental History
+                  </h5>
+                  <p class="text-on-surface-variant text-sm">
+                    3 consecutive years of on-time rental payments.
+                  </p>
+                </div>
+                <!-- Factor Card 4 -->
+                <div
+                  class="bg-white p-3 rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div class="flex items-center justify-between mb-3">
+                    <div
+                      class="w-7 h-7 bg-secondary-container rounded-lg flex items-center justify-center"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >monitoring</span
+                      >
+                    </div>
+                    <span
+                      class="bg-secondary-container text-primary px-2 py-1 rounded-md text-[10px] font-bold uppercase"
+                      >Strong</span
+                    >
+                  </div>
+                  <h5 class="font-label-md text-label-md font-bold mb-1">
+                    Affordability
+                  </h5>
+                  <p class="text-on-surface-variant text-sm">
+                    Rent-to-income ratio is within safe limits.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Improvement Checklist -->
+            <div class="bg-white p-6 rounded-xl border border-outline-variant">
+              <div class="flex items-center justify-between mb-6">
+                <h4 class="font-headline-md text-headline-md text-primary">
+                  How to Improve Your Score
+                </h4>
+                <span class="text-label-sm text-on-surface-variant"
+                  >2 tasks pending</span
+                >
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border border-outline-variant hover:bg-surface transition-colors cursor-pointer group"
+                >
+                  <div
+                    class="mt-1 w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-sm text-transparent group-hover:text-primary"
+                      >check</span
+                    >
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-label-md text-label-md font-bold">
+                      Upload Previous Landlord Reference
+                    </p>
+                    <p class="text-sm text-on-surface-variant">
+                      Adding a direct reference can boost your score by up to 25
+                      points.
+                    </p>
+                  </div>
+                  <span class="text-primary font-bold text-xs">+25 pts</span>
+                </div>
+                <div
+                  class="flex items-start gap-3 p-3 rounded-lg border border-outline-variant hover:bg-surface transition-colors cursor-pointer group"
+                >
+                  <div
+                    class="mt-1 w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors"
+                  >
+                    <span
+                      class="material-symbols-outlined text-sm text-transparent group-hover:text-primary"
+                      >check</span
+                    >
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-label-md text-label-md font-bold">
+                      Link Additional Savings Account
+                    </p>
+                    <p class="text-sm text-on-surface-variant">
+                      Showcasing financial reserves improves your affordability
+                      rating.
+                    </p>
+                  </div>
+                  <span class="text-primary font-bold text-xs">+15 pts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right Column: Share, Activity, FAQs -->
+          <div class="col-span-12 lg:col-span-4 space-y-6">
+            <!-- Share Card -->
+            <div
+              class="bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden shadow-xl"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"
+              ></div>
+              <h4 class="font-headline-md text-headline-md mb-2">
+                Unlocked Premium Listings
+              </h4>
+              <p class="text-sm text-on-primary/80 mb-6">
+                Your institutional-grade score of 874 places you in our top-tier
+                'Elite' bracket. Verified landlords can now offer you priority
+                viewing slots and reduced or no security deposits.
+              </p>
+
+              <button
+                class="w-full bg-white text-primary py-3 rounded-lg font-bold hover:bg-surface-container transition-colors flex items-center justify-center gap-2 active:scale-95"
+                onclick="window.location.href = 'dashboard'"
+              >
+                <span class="material-symbols-outlined">trending_up</span
+                >Matched Properties
+              </button>
+            </div>
+            <!-- Recent Activity -->
+            <div
+              class="bg-white rounded-xl border border-outline-variant overflow-hidden"
+            >
+              <div class="p-6 border-b border-outline-variant">
+                <h4 class="font-label-md text-label-md font-bold text-primary">
+                  Recent HomiScore Activity
+                </h4>
+              </div>
+              <div
+                class="p-6 space-y-6 max-h-[300px] overflow-y-auto custom-scrollbar"
+              >
+                <div class="relative pl-8">
+                  <div
+                    class="absolute left-0 top-1 w-4 h-4 bg-primary rounded-full ring-4 ring-secondary-container"
+                  ></div>
+                  <div
+                    class="absolute left-1.5 top-5 w-[1px] h-12 bg-outline-variant"
+                  ></div>
+                  <p class="text-sm font-bold">Income Verified</p>
+                  <p class="text-xs text-on-surface-variant">
+                    Financial assessment completed by HomiFund AI.
+                  </p>
+                  <p class="text-[10px] text-on-surface-variant mt-1">
+                    2 hours ago
+                  </p>
+                </div>
+                <div class="relative pl-8">
+                  <div
+                    class="absolute left-0 top-1 w-4 h-4 bg-secondary-container rounded-full ring-4 ring-surface-container"
+                  ></div>
+                  <div
+                    class="absolute left-1.5 top-5 w-[1px] h-12 bg-outline-variant"
+                  ></div>
+                  <p class="text-sm font-bold">Credit Sync Successful</p>
+                  <p class="text-xs text-on-surface-variant">
+                    TransUnion data successfully updated.
+                  </p>
+                  <p class="text-[10px] text-on-surface-variant mt-1">
+                    Yesterday
+                  </p>
+                </div>
+                <div class="relative pl-8">
+                  <div
+                    class="absolute left-0 top-1 w-4 h-4 bg-secondary-container rounded-full ring-4 ring-surface-container"
+                  ></div>
+                  <p class="text-sm font-bold">Account Created</p>
+                  <p class="text-xs text-on-surface-variant">
+                    HomiFund profile initialized.
+                  </p>
+                  <p class="text-[10px] text-on-surface-variant mt-1">
+                    3 days ago
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- FAQ Section -->
+            <div
+              class="bg-surface-container-low p-6 rounded-xl border border-outline-variant"
+            >
+              <h4 class="font-label-md text-label-md font-bold mb-4">
+                Frequently Asked Questions
+              </h4>
+              <div class="space-y-3">
+                <details class="group">
+                  <summary
+                    class="list-none flex items-center justify-between cursor-pointer font-label-md text-sm text-primary"
+                  >
+                    <span class="">Why is there a £5 share fee?</span>
+                    <span
+                      class="material-symbols-outlined text-sm group-open:rotate-180 transition-transform"
+                      >expand_more</span
+                    >
+                  </summary>
+                  <p
+                    class="text-xs text-on-surface-variant mt-2 leading-relaxed"
+                  >
+                    The fee covers the cost of secure hosting and real-time
+                    verification of your data when accessed by external parties,
+                    ensuring your privacy is maintained.
+                  </p>
+                </details>
+                <details class="group">
+                  <summary
+                    class="list-none flex items-center justify-between cursor-pointer font-label-md text-sm text-primary"
+                  >
+                    <span class="">How often does my score update?</span>
+                    <span
+                      class="material-symbols-outlined text-sm group-open:rotate-180 transition-transform"
+                      >expand_more</span
+                    >
+                  </summary>
+                  <p
+                    class="text-xs text-on-surface-variant mt-2 leading-relaxed"
+                  >
+                    Scores are updated in real-time as you link new accounts or
+                    upload documents. Credit data is refreshed every 30 days.
+                  </p>
+                </details>
+                <details class="group">
+                  <summary
+                    class="list-none flex items-center justify-between cursor-pointer font-label-md text-sm text-primary"
+                  >
+                    <span class="">Is this a hard credit check?</span>
+                    <span
+                      class="material-symbols-outlined text-sm group-open:rotate-180 transition-transform"
+                      >expand_more</span
+                    >
+                  </summary>
+                  <p
+                    class="text-xs text-on-surface-variant mt-2 leading-relaxed"
+                  >
+                    No. We perform a "soft" check which does not impact your
+                    credit score, combined with our proprietary behavioral
+                    metrics.
+                  </p>
+                </details>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="renter-score-status-title">
-          <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex min-w-0 items-start gap-4">
-              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">pending</span>
-              <div><p class="text-label-sm font-bold uppercase text-secondary">Current status</p><h2 id="renter-score-status-title" class="mt-1 text-headline-md font-bold text-primary">Score not available</h2><p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">HomiFund does not currently have a connected scoring service or verified identity, income, tenancy, payment, application, or landlord-reference records. This page will not estimate a score from onboarding answers.</p></div>
+        <!-- HomiScore History -->
+        <section
+          class="mt-6 bg-white rounded-xl border border-outline-variant shadow-sm p-5"
+        >
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6"
+          >
+            <div>
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                HomiScore History
+              </h3>
+              <p
+                class="font-label-md text-label-md text-on-surface-variant mt-1"
+              >
+                Track how your renter HomiScore has changed over time.
+              </p>
             </div>
-            <a class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary hover:bg-surface-container-lowest" href="/tenant-verification"><span class="material-symbols-outlined text-xl" aria-hidden="true">fact_check</span>Review requirements</a>
+            <div
+              class="rounded-full bg-primary/10 px-4 py-2 text-primary font-bold text-label-sm uppercase tracking-wide"
+            >
+              +32 this month
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+            <div class="rounded-lg bg-surface-container-low p-3">
+              <p
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >
+                Current Score
+              </p>
+              <p
+                class="font-headline-md text-headline-md font-bold text-primary mt-1"
+              >
+                874
+              </p>
+            </div>
+            <div class="rounded-lg bg-surface-container-low p-3">
+              <p
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >
+                Last Month
+              </p>
+              <p
+                class="font-headline-md text-headline-md font-bold text-on-surface mt-1"
+              >
+                842
+              </p>
+            </div>
+            <div class="rounded-lg bg-surface-container-low p-3">
+              <p
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >
+                Best Score
+              </p>
+              <p
+                class="font-headline-md text-headline-md font-bold text-on-surface mt-1"
+              >
+                874
+              </p>
+            </div>
+            <div class="rounded-lg bg-surface-container-low p-3">
+              <p
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >
+                Last Updated
+              </p>
+              <p
+                class="font-headline-md text-headline-md font-bold text-on-surface mt-1"
+              >
+                Today
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class="w-3 h-3 rounded-full bg-primary mt-2"></div>
+                <div class="w-px flex-1 bg-outline-variant"></div>
+              </div>
+              <div class="flex-1 pb-3">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                  <h4 class="font-label-md text-label-md font-bold">
+                    Score increased to 874
+                  </h4>
+                  <span
+                    class="font-label-sm text-label-sm text-primary font-bold"
+                    >+12 pts</span
+                  >
+                </div>
+                <p
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                >
+                  Affordability profile improved after income verification was
+                  refreshed.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class="w-3 h-3 rounded-full bg-primary/70 mt-2"></div>
+                <div class="w-px flex-1 bg-outline-variant"></div>
+              </div>
+              <div class="flex-1 pb-3">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                  <h4 class="font-label-md text-label-md font-bold">
+                    Rental reference added
+                  </h4>
+                  <span
+                    class="font-label-sm text-label-sm text-primary font-bold"
+                    >+20 pts</span
+                  >
+                </div>
+                <p
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                >
+                  Previous landlord reference confirmed three years of positive
+                  rental history.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class="w-3 h-3 rounded-full bg-outline-variant mt-2"></div>
+              </div>
+              <div class="flex-1">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                  <h4 class="font-label-md text-label-md font-bold">
+                    Initial renter HomiScore generated
+                  </h4>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >842</span
+                  >
+                </div>
+                <p
+                  class="font-label-sm text-label-sm text-on-surface-variant mt-1"
+                >
+                  Score generated after identity, affordability, income and
+                  rental profile review.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section aria-labelledby="renter-score-coverage-title">
-              <div class="mb-4"><h2 id="renter-score-coverage-title" class="text-headline-md font-bold text-on-surface">Source coverage</h2><p class="mt-1 text-body-sm text-on-surface-variant">Only information actually available in this account is shown as present.</p></div>
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><div class="flex items-center justify-between gap-3"><span class="material-symbols-outlined text-primary" aria-hidden="true">account_circle</span><span class="rounded-full bg-surface-container-high px-3 py-1 text-label-sm font-bold text-on-surface-variant"><%= hasSavedProfile ? 'Available' : 'Missing' %></span></div><h3 class="mt-4 font-bold text-on-surface">Profile preferences</h3><p class="mt-2 text-body-sm text-on-surface-variant"><%= hasSavedProfile ? 'Saved onboarding preferences are available as self-reported account context.' : 'No renter onboarding preferences are available yet.' %></p><a class="mt-3 inline-flex min-h-11 items-center font-bold text-primary hover:underline" href="/onboarding-tenant"><%= hasSavedProfile ? 'Review preferences' : 'Complete profile' %></a></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><div class="flex items-center justify-between gap-3"><span class="material-symbols-outlined text-primary" aria-hidden="true">verified_user</span><span class="rounded-full bg-surface-container-high px-3 py-1 text-label-sm font-bold text-on-surface-variant">Not submitted</span></div><h3 class="mt-4 font-bold text-on-surface">Verification evidence</h3><p class="mt-2 text-body-sm text-on-surface-variant">Requirements can be reviewed, but secure identity, income, and reference submission is not configured.</p><a class="mt-3 inline-flex min-h-11 items-center font-bold text-primary hover:underline" href="/tenant-verification">Open checklist</a></article>
-                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><div class="flex items-center justify-between gap-3"><span class="material-symbols-outlined text-primary" aria-hidden="true">database</span><span class="rounded-full bg-surface-container-high px-3 py-1 text-label-sm font-bold text-on-surface-variant">Not connected</span></div><h3 class="mt-4 font-bold text-on-surface">Operational records</h3><p class="mt-2 text-body-sm text-on-surface-variant">Tenancy, application, payment, reference, and landlord-feedback records are not connected to a scoring model.</p><a class="mt-3 inline-flex min-h-11 items-center font-bold text-primary hover:underline" href="/user/renter/dashboard">Return to dashboard</a></article>
+        <!-- Report Footer -->
+        <div class="mt-10 pt-8 border-t border-outline-variant/30 pb-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+              <p
+                class="text-[11px] uppercase tracking-[0.18em] text-on-surface-variant mb-2"
+              >
+                Last Updated
+              </p>
+              <p class="font-semibold text-on-surface">Today, 14:20 GMT</p>
+            </div>
+            <div class="text-center">
+              <p
+                class="text-[11px] uppercase tracking-[0.18em] text-on-surface-variant mb-2"
+              >
+                Report Version
+              </p>
+              <p class="font-semibold text-on-surface">HomiScore Report v1.0</p>
+            </div>
+            <div class="text-center md:text-right">
+              <p
+                class="text-[11px] uppercase tracking-[0.18em] text-on-surface-variant mb-2"
+              >
+                Verification Status
+              </p>
+              <div
+                class="inline-flex items-center gap-2 font-semibold text-primary"
+              >
+                <span
+                  class="material-symbols-outlined text-[18px]"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >verified</span
+                >
+                Verified by HomiFund
               </div>
-            </section>
-
-            <section aria-labelledby="renter-score-principles-title">
-              <div class="mb-4"><h2 id="renter-score-principles-title" class="text-headline-md font-bold text-on-surface">How a score should be handled</h2><p class="mt-1 text-body-sm text-on-surface-variant">These safeguards are required before a score can become meaningful renter information.</p></div>
-              <ol class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest" role="list">
-                <li class="flex gap-4 p-5"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-on-primary">1</span><div><h3 class="font-bold text-on-surface">Use consented, relevant source data</h3><p class="mt-1 text-body-sm text-on-surface-variant">The calculation must identify current sources, consent scope, unavailable inputs, freshness, and the difference between self-reported and verified data.</p></div></li>
-                <li class="flex gap-4 p-5"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container-high font-bold text-on-surface-variant">2</span><div><h3 class="font-bold text-on-surface">Explain and correct the result</h3><p class="mt-1 text-body-sm text-on-surface-variant">Any future score needs a published method, factor-level explanation, effective date, access record, dispute route, and correction history.</p></div></li>
-                <li class="flex gap-4 p-5"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container-high font-bold text-on-surface-variant">3</span><div><h3 class="font-bold text-on-surface">Keep housing decisions accountable</h3><p class="mt-1 text-body-sm text-on-surface-variant">A score must never infer protected characteristics, guarantee housing, or become the sole factor in a landlord decision.</p></div></li>
-              </ol>
-            </section>
-
-            <section aria-labelledby="renter-score-history-title">
-              <div class="mb-4"><h2 id="renter-score-history-title" class="text-headline-md font-bold text-on-surface">Score history</h2><p class="mt-1 text-body-sm text-on-surface-variant">Calculated results and source changes would appear here.</p></div>
-              <div class="rounded-lg border border-dashed border-outline-variant px-5 py-10 text-center"><span class="material-symbols-outlined text-4xl text-outline" aria-hidden="true">monitoring</span><h3 class="mt-3 font-bold text-on-surface">No score history</h3><p class="mx-auto mt-2 max-w-lg text-body-sm text-on-surface-variant">No score has been generated, so there is no rank, trend, report, paid share link, or claim about landlord decisions.</p></div>
-            </section>
+            </div>
           </div>
-
-          <aside class="space-y-6 xl:col-span-4" aria-label="Renter HomiScore information">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-score-profile-context-title">
-              <p class="text-label-sm font-bold uppercase text-secondary">Saved onboarding</p><h2 id="renter-score-profile-context-title" class="mt-1 text-headline-md font-bold text-primary">Profile context</h2>
-              <dl class="mt-5 space-y-4 text-body-sm">
-                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Household</dt><dd class="text-right font-bold text-on-surface"><%= householdLabels[savedRenterProfile.householdSize] || 'Not set' %></dd></div>
-                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Employment</dt><dd class="text-right font-bold text-on-surface"><%= employmentLabels[savedRenterProfile.employmentStatus] || 'Not set' %></dd></div>
-                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Budget preference</dt><dd class="max-w-[60%] text-right font-bold text-on-surface"><%= savedRenterProfile.monthlyBudget === 0 || savedRenterProfile.monthlyBudget ? String(savedRenterProfile.monthlyBudget) + ' (currency not recorded)' : 'Not set' %></dd></div>
-                <div class="flex items-start justify-between gap-4"><dt class="text-on-surface-variant">Locations</dt><dd class="max-w-[60%] break-words text-right font-bold text-on-surface"><%= savedRenterProfile.preferredLocations || 'Not set' %></dd></div>
-              </dl>
-              <p class="mt-4 text-body-sm text-on-surface-variant">These are self-reported search preferences, not verification evidence or score inputs.</p>
-            </section>
-
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-score-boundaries-title"><h2 id="renter-score-boundaries-title" class="text-headline-md font-bold text-primary">Data boundaries</h2><ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant"><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>No credit-bureau, open-banking, biometric, or background-check data is shown or claimed.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>No income, affordability, rental performance, rank, or risk status is inferred.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">check</span><span>No report, external share link, fee, or landlord access exists without a real score and consent service.</span></li></ul><a class="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/user/renter/support"><span class="material-symbols-outlined text-xl" aria-hidden="true">help</span>HomiScore support</a></section>
-          </aside>
         </div>
       </div>
     </main>
+    <!-- Contextual FAB (Suppressed on Details as per rules, but included if viewed as 'HomiScore Home') -->
+
+    <script>
+      // Simple interaction for checkboxes
+      document.querySelectorAll(".group").forEach((item) => {
+        item.addEventListener("click", function () {
+          const icon = this.querySelector(".material-symbols-outlined");
+          if (icon && icon.classList.contains("text-transparent")) {
+            icon.classList.remove("text-transparent");
+            icon.classList.add("text-primary");
+            this.classList.add("bg-green-50");
+          }
+        });
+      });
+
+      // Search bar focus effect
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener("focus", () => {
+        searchInput.parentElement.classList.add("ring-2", "ring-primary/20");
+      });
+      searchInput.addEventListener("blur", () => {
+        searchInput.parentElement.classList.remove("ring-2", "ring-primary/20");
+      });
+    </script>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

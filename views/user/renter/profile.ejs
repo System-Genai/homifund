@@ -3,54 +3,418 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
-    <%
-      const profileUser = typeof currentUser === 'object' && currentUser ? currentUser : {};
-      const savedRenterProfile = typeof renterProfile === 'object' && renterProfile ? renterProfile : (profileUser.renterProfile || {});
-      const displayName = profileUser.fullName || 'Renter';
-      const humanizeProfileValue = (value) => value ? String(value).split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Not provided';
-      const moveInDate = savedRenterProfile.moveInDate && !Number.isNaN(new Date(savedRenterProfile.moveInDate).getTime())
-        ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(savedRenterProfile.moveInDate))
-        : 'Not provided';
-      const budget = Number.isFinite(Number(savedRenterProfile.monthlyBudget))
-        ? `${Number(savedRenterProfile.monthlyBudget).toLocaleString('en-GB')} (currency not recorded)`
-        : 'Not provided';
-    %>
+  <body class="bg-surface text-on-surface">
     <%- include('../partials/sidebar-renter') %>
+    <!-- Permanent renter dashboard sidebar -->
 
-    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
-      <div class="min-w-0"><p class="truncate text-label-sm font-bold text-secondary">Renter workspace</p><p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p></div>
-      <div class="flex items-center gap-1 sm:gap-2">
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
-        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/profile" aria-label="Renter profile" title="Renter profile" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
-      </div>
-    </header>
-
-    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-8"><p class="mb-1 text-label-md font-bold text-secondary">Account context</p><h1 class="text-headline-lg font-bold text-primary">Renter profile</h1><p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review the account identity and renter onboarding details currently saved for this workspace.</p></div>
-
-        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="renter-profile-availability-title"><div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div class="flex items-start gap-4"><span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">badge</span><div><p class="text-label-sm font-bold uppercase text-secondary">Current capability</p><h2 id="renter-profile-availability-title" class="mt-1 text-headline-md font-bold text-primary">Saved account context is available</h2><p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">Account identity comes from sign-up and renter details come from onboarding. Profile photo storage, direct account-field editing, public profile publishing, and sharing controls are not connected.</p></div></div><span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">Private account view</span></div></section>
-
-        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
-          <div class="space-y-8 xl:col-span-8">
-            <section aria-labelledby="renter-account-identity-title"><div class="mb-4"><h2 id="renter-account-identity-title" class="text-headline-md font-bold text-on-surface">Account identity</h2><p class="mt-1 text-body-sm text-on-surface-variant">These values belong to the authenticated HomiFund account.</p></div><dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm"><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Account name</dt><dd class="break-words text-on-surface-variant"><%= profileUser.fullName || 'Not available' %></dd></div><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Email address</dt><dd class="break-all text-on-surface-variant"><%= profileUser.email || 'Not available' %></dd></div><div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-center sm:justify-between"><dt class="font-bold text-on-surface">Workspace role</dt><dd class="text-on-surface-variant">Renter</dd></div></dl></section>
-
-            <section aria-labelledby="saved-renter-details-title"><div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><h2 id="saved-renter-details-title" class="text-headline-md font-bold text-on-surface">Saved renter details</h2><p class="mt-1 text-body-sm text-on-surface-variant">Self-reported household, employment, and search context from renter onboarding.</p></div><a class="inline-flex min-h-11 shrink-0 items-center gap-2 font-bold text-primary hover:underline" href="/onboarding-tenant"><span class="material-symbols-outlined text-xl" aria-hidden="true">edit</span>Update onboarding</a></div><dl class="grid grid-cols-1 gap-4 sm:grid-cols-2"><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Legal name</dt><dd class="mt-2 break-words font-bold text-on-surface"><%= savedRenterProfile.legalName || 'Not provided' %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Phone</dt><dd class="mt-2 break-all font-bold text-on-surface"><%= savedRenterProfile.phone || 'Not provided' %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Household size</dt><dd class="mt-2 font-bold text-on-surface"><%= humanizeProfileValue(savedRenterProfile.householdSize) %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Pets</dt><dd class="mt-2 font-bold text-on-surface"><%= humanizeProfileValue(savedRenterProfile.petStatus) %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Employment status</dt><dd class="mt-2 font-bold text-on-surface"><%= humanizeProfileValue(savedRenterProfile.employmentStatus) %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Job title</dt><dd class="mt-2 break-words font-bold text-on-surface"><%= savedRenterProfile.jobTitle || 'Not provided' %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Employer</dt><dd class="mt-2 break-words font-bold text-on-surface"><%= savedRenterProfile.employer || 'Not provided' %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Monthly budget preference</dt><dd class="mt-2 break-words font-bold text-on-surface"><%= budget %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Preferred locations</dt><dd class="mt-2 break-words font-bold text-on-surface"><%= savedRenterProfile.preferredLocations || 'Not provided' %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Property type</dt><dd class="mt-2 font-bold text-on-surface"><%= humanizeProfileValue(savedRenterProfile.propertyType) %></dd></div><div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5 sm:col-span-2"><dt class="text-label-sm font-bold text-secondary">Move-in date</dt><dd class="mt-2 font-bold text-on-surface"><%= moveInDate %></dd></div></dl></section>
-          </div>
-
-          <aside class="space-y-6 xl:col-span-4" aria-label="Profile guidance and actions">
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-profile-actions-title"><h2 id="renter-profile-actions-title" class="text-headline-md font-bold text-primary">Profile journeys</h2><nav class="mt-4 divide-y divide-outline-variant" aria-label="Profile actions"><a class="flex min-h-12 items-center justify-between gap-4 py-3 font-bold text-primary hover:underline" href="/onboarding-tenant"><span>Update renter details</span><span class="material-symbols-outlined shrink-0" aria-hidden="true">arrow_forward</span></a><a class="flex min-h-12 items-center justify-between gap-4 py-3 font-bold text-primary hover:underline" href="/tenant-verification"><span>Review verification preparation</span><span class="material-symbols-outlined shrink-0" aria-hidden="true">arrow_forward</span></a><a class="flex min-h-12 items-center justify-between gap-4 py-3 font-bold text-primary hover:underline" href="/user/renter/settings"><span>Open account settings</span><span class="material-symbols-outlined shrink-0" aria-hidden="true">arrow_forward</span></a><a class="flex min-h-12 items-center justify-between gap-4 py-3 font-bold text-primary hover:underline" href="/forget-password"><span>Reset password</span><span class="material-symbols-outlined shrink-0" aria-hidden="true">arrow_forward</span></a></nav></section>
-
-            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-profile-boundaries-title"><h2 id="renter-profile-boundaries-title" class="text-headline-md font-bold text-primary">Current boundaries</h2><ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant"><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>No profile photo is uploaded or stored.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>This account context is not a published renter profile or application preview.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>Onboarding answers are self-reported and are not identity, income, affordability, or tenancy verification.</span></li><li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>Contact and sharing consent are not inferred from saved profile fields.</span></li></ul></section>
-
-            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="renter-profile-help-title"><h2 id="renter-profile-help-title" class="font-bold text-on-surface">Need account help?</h2><p class="mt-2 text-body-sm text-on-surface-variant">Use Support for product guidance or Contact for an account question. Do not send identity, income, banking, or tenancy documents in the first message.</p><a class="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/user/renter/support"><span class="material-symbols-outlined text-xl" aria-hidden="true">contact_support</span>Open support</a></section>
-          </aside>
+    <main class="md:ml-[240px] min-h-screen flex flex-col">
+      <!-- Permanent renter dashboard header; profile is active -->
+      <header
+        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center gap-3 pl-16 pr-4 sm:pr-6 md:pl-6 md:pr-6 lg:px-10 border-b border-outline-variant"
+      >
+        <div class="hidden sm:block relative w-full max-w-md">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+            >search</span
+          >
+          <input
+            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Search properties, applications, documents..."
+            type="text"
+          />
         </div>
-      </div>
+        <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
+          <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
+            <button
+              aria-label="Notifications"
+              class="relative hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              aria-label="Settings"
+              class="hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">settings</span>
+            </button>
+            <button
+              aria-label="Messages"
+              class="hover:bg-surface-container-low p-2 rounded-full"
+            >
+              <span class="material-symbols-outlined">chat_bubble</span>
+            </button>
+          </div>
+          <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+          <button
+            aria-current="page"
+            aria-label="Your profile"
+            class="flex items-center gap-3 bg-secondary-container rounded-lg px-3 py-2"
+          >
+            <div class="hidden lg:block text-right">
+              <p class="text-sm font-bold text-on-surface">Alex S.</p>
+              <p class="text-xs text-on-surface-variant">Renter</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center font-bold"
+            >
+              AS
+            </div>
+          </button>
+        </div>
+      </header>
+      <section class="px-4 sm:px-6 lg:px-10 py-7">
+        <div class="max-w-[1120px] mx-auto space-y-5">
+          <div
+            class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
+              >
+                Renter profile
+              </p>
+              <h1 class="text-3xl font-semibold text-primary">Your profile</h1>
+              <p class="text-sm text-on-surface-variant mt-2">
+                Manage your account details and the information used across your
+                HomiFund account.
+              </p>
+            </div>
+            <button
+              class="px-4 py-2.5 border border-primary text-primary rounded-lg text-sm font-bold hover:bg-secondary-container"
+              onclick="window.location.href = 'settings'"
+            >
+              View renter settings
+            </button>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div class="lg:col-span-2 space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Profile photo</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Personalise your account with a profile photo.
+                  </p>
+                </div>
+                <div
+                  class="mt-5 flex flex-col sm:flex-row sm:items-center gap-5"
+                >
+                  <div
+                    class="w-20 h-20 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold text-lg shrink-0 overflow-hidden"
+                    id="profile-photo-preview"
+                  >
+                    AS
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm font-semibold">
+                      Add or update your photo
+                    </p>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Your profile photo is for your HomiFund account and is not
+                      included in rental applications by default.
+                    </p>
+                    <div class="mt-3 flex flex-wrap gap-3">
+                      <label
+                        class="profile-photo-label inline-flex items-center gap-2 px-3 py-2 border border-primary text-primary rounded-lg text-xs font-bold hover:bg-secondary-container"
+                        for="profile-photo-upload"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >upload</span
+                        >
+                        Upload photo
+                      </label>
+                      <input
+                        accept="image/png,image/jpeg,image/webp"
+                        class="profile-photo-input"
+                        id="profile-photo-upload"
+                        type="file"
+                      />
+                      <button
+                        class="px-3 py-2 text-on-surface-variant text-xs font-bold rounded-lg hover:bg-surface-container-low"
+                        id="remove-profile-photo"
+                        type="button"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mt-3">
+                      PNG, JPG or WEBP. This prototype previews the selected
+                      image only.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Account details</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Keep your personal and contact information up to date.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Full name</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your full name"
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Email address</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your email address"
+                      type="email"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Phone number</label
+                    >
+                    <input
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      placeholder="Enter your phone number"
+                      type="tel"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-on-surface-variant mb-2"
+                      >Preferred contact method</label
+                    >
+                    <select
+                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    >
+                      <option>Email</option>
+                      <option>Phone</option>
+                    </select>
+                  </div>
+                </div>
+                <div
+                  class="flex justify-end gap-3 mt-5 pt-4 border-t border-outline-variant"
+                >
+                  <button
+                    class="px-4 py-2.5 text-primary text-sm font-bold rounded-lg hover:bg-surface-container-low"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
+                  >
+                    Save profile
+                  </button>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-3">
+                  Your contact information is only included in an application
+                  when you choose to share it.
+                </p>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div>
+                  <h2 class="text-sm font-bold">Profile actions</h2>
+                  <p class="text-xs text-on-surface-variant mt-1">
+                    Use Settings to manage rental preferences, application
+                    sharing and communication choices.
+                  </p>
+                </div>
+                <div class="mt-4 divide-y divide-outline-variant">
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Renter settings</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Manage rental preferences, household details,
+                        application introduction and sharing preferences.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Open settings
+                    </button>
+                  </div>
+                  <div class="py-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-semibold">Account security</p>
+                      <p class="text-xs text-on-surface-variant mt-1">
+                        Update your password and review active sessions from
+                        Settings.
+                      </p>
+                    </div>
+                    <button
+                      class="text-primary text-xs font-bold whitespace-nowrap"
+                    >
+                      Open settings
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <aside class="space-y-5">
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold text-sm"
+                >
+                  AS
+                </div>
+                <h2 class="text-sm font-bold mt-4">Alex S.</h2>
+                <p class="text-xs text-on-surface-variant mt-1">Renter</p>
+                <div
+                  class="mt-4 pt-4 border-t border-outline-variant space-y-3 text-sm"
+                >
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="settings"
+                    ><span>View renter settings</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="flex items-center justify-between text-primary font-semibold"
+                    href="homiscore"
+                    ><span onclick="window.location.href = '/user/renter/homiscore'">View HomiScore</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">verified</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">
+                  HomiScore and verification
+                </h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Manage your HomiScore and verification information separately
+                  from your profile.
+                </p>
+                <div class="mt-4 space-y-3">
+                  <a
+                    class="flex items-center justify-between text-primary text-sm font-semibold"
+                    href="homiscore"
+                    ><span onclick="window.location.href = '/user/renter/homiscore'">View HomiScore</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                  <a
+                    class="flex items-center justify-between text-primary text-sm font-semibold"
+                    href="homiscore"
+                    ><span>Update verification</span
+                    ><span class="material-symbols-outlined text-[18px]"
+                      >arrow_forward</span
+                    ></a
+                  >
+                </div>
+              </section>
+              <section
+                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">support_agent</span>
+                </div>
+                <h2 class="text-sm font-bold mt-4">
+                  Need help with your profile?
+                </h2>
+                <p class="text-xs text-on-surface-variant mt-1">
+                  Contact HomiFund support if you need help managing your
+                  account details.
+                </p>
+                <button
+                  class="w-full mt-4 bg-primary text-white py-2.5 rounded-lg text-sm font-bold"
+                  onclick="window.location.href = 'support'"
+                >
+                  Go to Support
+                </button>
+              </section>
+              <section
+                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
+              >
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5"
+                    >info</span
+                  >
+                  <div>
+                    <h2 class="text-xs font-bold">Before you apply</h2>
+                    <p class="text-xs text-on-surface-variant mt-1">
+                      Review the information you plan to share and make sure it
+                      is relevant to the property and application.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </section>
     </main>
+    <script>
+      (function () {
+        const input = document.getElementById("profile-photo-upload");
+        const preview = document.getElementById("profile-photo-preview");
+        const remove = document.getElementById("remove-profile-photo");
+        const headerAvatar = document.querySelector(
+          "header .w-10.h-10.rounded-full",
+        );
+        const original = "AS";
+
+        function renderInitials() {
+          preview.innerHTML = original;
+          if (headerAvatar) headerAvatar.innerHTML = original;
+        }
+
+        function renderImage(file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const imageMarkup =
+              '<img src="' +
+              event.target.result +
+              '" alt="Profile photo preview" class="w-full h-full object-cover">';
+            preview.innerHTML = imageMarkup;
+            if (headerAvatar) headerAvatar.innerHTML = imageMarkup;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        input.addEventListener("change", function () {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
+            input.value = "";
+            return;
+          }
+          renderImage(file);
+        });
+
+        remove.addEventListener("click", function () {
+          input.value = "";
+          renderInitials();
+        });
+      })();
+    </script>
     <script src="/js/main.js"></script>
   </body>
 </html>

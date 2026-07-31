@@ -3,67 +3,14 @@
   <head>
     <%- include('partials/head') %>
   </head>
-  <body class="flex min-h-screen flex-col bg-surface text-on-surface hf-public-page">
-    <% const roleLabel = role === 'landlord' ? 'landlord' : 'renter'; %>
-    <% const resolvedDashboardUrl = typeof dashboardUrl === 'string' ? dashboardUrl : '/user/' + roleLabel + '/dashboard'; %>
-    <% const resolvedProfileUrl = typeof profileUrl === 'string' ? profileUrl : roleLabel === 'landlord' ? '/user/landlord/user-profile' : '/user/renter/profile'; %>
+  <body class="">
     <%- include('partials/header') %>
-
-    <main class="flex flex-grow items-center px-margin-mobile py-10 md:px-margin-desktop md:py-14">
-      <div class="mx-auto w-full max-w-3xl">
-        <div class="mb-10 text-center">
-          <div class="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-secondary-container text-primary">
-            <span class="material-symbols-outlined text-[34px]" aria-hidden="true">task_alt</span>
-          </div>
-          <p class="mb-2 text-label-md font-bold text-secondary">Profile setup complete</p>
-          <h1 class="mb-4 text-headline-lg font-bold text-primary">Your <%= roleLabel %> profile is saved</h1>
-          <p class="mx-auto max-w-2xl text-body-lg text-on-surface-variant">
-            Your workspace is ready to use. Review the dashboard for any remaining
-            verification tasks or profile updates.
-          </p>
-        </div>
-
-        <section class="mb-8 border-y border-outline-variant py-8" aria-labelledby="next-steps-title">
-          <h2 id="next-steps-title" class="mb-6 text-headline-md font-bold text-primary">Next steps</h2>
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div>
-              <span class="material-symbols-outlined mb-2 text-primary" aria-hidden="true">person</span>
-              <h3 class="mb-1 font-bold text-on-surface">Review your profile</h3>
-              <p class="text-body-sm text-on-surface-variant">Confirm that your saved account and workspace details are current.</p>
-            </div>
-            <div>
-              <span class="material-symbols-outlined mb-2 text-primary" aria-hidden="true">fact_check</span>
-              <h3 class="mb-1 font-bold text-on-surface">Check verification</h3>
-              <p class="text-body-sm text-on-surface-variant">The dashboard shows any verification information that still needs attention.</p>
-            </div>
-            <div>
-              <span class="material-symbols-outlined mb-2 text-primary" aria-hidden="true">space_dashboard</span>
-              <h3 class="mb-1 font-bold text-on-surface">Use your workspace</h3>
-              <p class="text-body-sm text-on-surface-variant">Continue with the records and tasks available for your <%= roleLabel %> account.</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a
-            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-7 font-bold text-on-primary transition-colors hover:bg-primary-container"
-            href="<%= resolvedDashboardUrl %>"
-          >
-            Open dashboard
-            <span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span>
-          </a>
-          <a
-            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-outline-variant px-7 font-bold text-primary transition-colors hover:bg-surface-container-low"
-            href="<%= resolvedProfileUrl %>"
-          >Review profile</a>
-          <a
-            class="inline-flex min-h-12 items-center justify-center px-5 font-bold text-primary hover:underline"
-            href="/contact#contact-form"
-          >Get help</a>
-        </div>
+    <main class="px-4 sm:px-6 lg:px-margin-desktop py-12">
+      <div class="max-w-container-max mx-auto">
+        <h1 class="text-headline-lg font-bold text-primary">HomiFund</h1>
       </div>
     </main>
-
+    <script src="/js/main.js"></script>
     <%- include('partials/footer') %>
     <script src="/js/main.js"></script>
   </body>
