@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body class="flex min-h-screen flex-col bg-surface text-on-surface hf-public-page">
+    <% const safeRecoveryUrl = typeof recoveryUrl === 'string' && recoveryUrl.startsWith('/') ? recoveryUrl : '/'; %>
+    <% const safeRecoveryLabel = typeof recoveryLabel === 'string' && recoveryLabel ? recoveryLabel : 'Back to home'; %>
+    <%- include('partials/header') %>
+
+    <main class="flex flex-grow items-center px-4 py-12 sm:px-6 sm:py-16">
+      <div class="mx-auto w-full max-w-3xl">
+        <section class="text-center" aria-labelledby="server-error-title">
+          <span class="material-symbols-outlined mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error-container text-[32px] text-on-error-container" aria-hidden="true">report</span>
+          <p class="mt-6 text-label-md font-bold text-error">Error 500</p>
+          <h1 id="server-error-title" class="mt-2 text-headline-lg font-bold text-primary">We could not complete this request</h1>
+          <p class="mx-auto mt-4 max-w-2xl text-body-md text-on-surface-variant">An unexpected server error interrupted the request. The application cannot confirm from this page whether an earlier step completed or partially changed a record.</p>
+
+          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="<%= safeRecoveryUrl %>" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 font-bold text-on-primary transition-opacity hover:opacity-90">
+              <span class="material-symbols-outlined" aria-hidden="true">home</span>
+              <%= safeRecoveryLabel %>
+            </a>
+            <a href="/contact#contact-form" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-outline px-6 font-bold text-primary transition-colors hover:bg-surface-container-low">
+              <span class="material-symbols-outlined" aria-hidden="true">support_agent</span>
+              Contact support
+            </a>
+          </div>
+        </section>
+
+        <div class="mt-10 grid grid-cols-1 border-y border-outline-variant md:grid-cols-2 md:divide-x md:divide-outline-variant">
+          <section class="px-2 py-6 text-left sm:px-6" aria-labelledby="server-error-recovery-title">
+            <h2 id="server-error-recovery-title" class="font-bold text-on-surface">Before trying again</h2>
+            <p class="mt-2 text-body-sm text-on-surface-variant">Return to the relevant workspace and check its current state. Do not immediately repeat a payment, submission, publication, or account change if its outcome is unclear.</p>
+          </section>
+          <section class="border-t border-outline-variant px-2 py-6 text-left sm:px-6 md:border-t-0" aria-labelledby="server-error-support-title">
+            <h2 id="server-error-support-title" class="font-bold text-on-surface">Report the failure safely</h2>
+            <p class="mt-2 text-body-sm text-on-surface-variant">Tell support when the error occurred and which action you attempted. Do not send passwords, payment details, identity documents, or provider secrets.</p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <%- include('partials/footer') %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

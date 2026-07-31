@@ -3,12 +3,105 @@
   <head>
     <%- include('partials/head') %>
   </head>
-  <body class="">
+  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
+    <% const adminUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
+    <% const displayName = adminUser.fullName || adminUser.email || 'Administrator'; %>
     <%- include('partials/sidebar-admin') %>
-    <main>
-      <h1>HomiFund Admin Dashboard</h1>
+
+    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
+      <div class="min-w-0">
+        <p class="truncate text-label-sm font-bold text-secondary">Admin workspace</p>
+        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-low" href="/admin/management" aria-label="Management overview" title="Management overview"><span class="material-symbols-outlined" aria-hidden="true">dashboard</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-low" href="/logout" aria-label="Log out" title="Log out"><span class="material-symbols-outlined" aria-hidden="true">logout</span></a>
+      </div>
+    </header>
+
+    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div class="min-w-0">
+            <p class="mb-1 text-label-md font-bold text-secondary">Verification operations</p>
+            <h1 class="text-headline-lg font-bold text-primary">Verification review</h1>
+            <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review verification-service availability and the safeguards required before identity evidence or case decisions can be accessed.</p>
+          </div>
+          <a class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary transition-colors hover:bg-surface-container-lowest" href="/admin/management"><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_back</span>Management overview</a>
+        </div>
+
+        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="verification-availability-title">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex min-w-0 items-start gap-4">
+              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">fact_check</span>
+              <div class="min-w-0">
+                <p class="text-label-sm font-bold uppercase text-secondary">Service unavailable</p>
+                <h2 id="verification-availability-title" class="mt-1 text-headline-md font-bold text-primary">Verification service is not connected</h2>
+                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">No provider cases, identity evidence, review assignments, decisions, reasons, notifications, or appeal records are available to this application.</p>
+              </div>
+            </div>
+            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 verification cases</span>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+          <div class="space-y-8 xl:col-span-8">
+            <section aria-labelledby="verification-case-record-title">
+              <div class="mb-4">
+                <h2 id="verification-case-record-title" class="text-headline-md font-bold text-on-surface">Required case record</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">A review queue must be built from authoritative provider and account records, not browser-only placeholders.</p>
+              </div>
+              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Case and subject reference</span><span class="mt-1 block text-on-surface-variant">Stable case ID, authorized account reference, verification type, and creation source.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Provider lifecycle</span><span class="mt-1 block text-on-surface-variant">Provider status, timestamps, retry state, expiry, and signed event provenance.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Evidence inventory</span><span class="mt-1 block text-on-surface-variant">Evidence category, source, access purpose, retention policy, and redaction state.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Review assignment</span><span class="mt-1 block text-on-surface-variant">Named reviewer, permission scope, conflicts, service-level target, and reassignment history.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Decision provenance</span><span class="mt-1 block text-on-surface-variant">Outcome, structured reason, evidence basis, reviewer, timestamp, and policy version.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex flex-col gap-2 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4"><dt><span class="font-bold">Notification and appeal</span><span class="mt-1 block text-on-surface-variant">Subject notice, delivery result, correction route, appeal status, and final resolution.</span></dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+              </dl>
+            </section>
+
+            <section aria-labelledby="verification-workflow-title">
+              <div class="mb-4">
+                <h2 id="verification-workflow-title" class="text-headline-md font-bold text-on-surface">Required review workflow</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Each review step needs explicit authorization, evidence boundaries, and recoverable outcomes.</p>
+              </div>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">assignment_ind</span><h3 class="mt-3 font-bold">Intake and assignment</h3><p class="mt-2 text-body-sm text-on-surface-variant">Validate provider signatures, reject duplicate events, assign eligible reviewers, and record conflicts.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">visibility_lock</span><h3 class="mt-3 font-bold">Purpose-limited evidence</h3><p class="mt-2 text-body-sm text-on-surface-variant">Reveal only evidence needed for the review, mask sensitive values, and audit every access.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">gavel</span><h3 class="mt-3 font-bold">Reasoned decision</h3><p class="mt-2 text-body-sm text-on-surface-variant">Require structured reasons, policy version, confirmation for adverse outcomes, and immutable history.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">published_with_changes</span><h3 class="mt-3 font-bold">Notice and recovery</h3><p class="mt-2 text-body-sm text-on-surface-variant">Track delivery, corrections, appeals, reassignment, provider failures, and final resolution.</p></article>
+              </div>
+            </section>
+          </div>
+
+          <aside class="space-y-6 xl:col-span-4" aria-label="Verification review guidance">
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="verification-actions-title">
+              <h2 id="verification-actions-title" class="text-headline-md font-bold text-primary">Review actions</h2>
+              <dl class="mt-4 divide-y divide-outline-variant text-body-sm">
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Search or filter cases</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Open identity evidence</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Request information</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Record a decision</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Review an appeal</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Export or view history</dt><dd class="shrink-0 font-bold">Unavailable</dd></div>
+              </dl>
+            </section>
+
+            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="verification-evidence-safety-title">
+              <h2 id="verification-evidence-safety-title" class="text-headline-md font-bold text-on-error-container">Sensitive identity evidence</h2>
+              <p class="mt-2 text-body-sm text-on-error-container">Do not expose passwords, full identity documents, biometric data, provider secrets, or unrelated account records. Every evidence view requires a documented purpose, authorization, redaction, retention control, and audit event.</p>
+            </section>
+
+            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="verification-boundary-title">
+              <h2 id="verification-boundary-title" class="font-bold">Decision boundary</h2>
+              <p class="mt-2 text-body-sm text-on-surface-variant">No connected case means no pending, approved, declined, expired, failed, risk, identity, eligibility, workload, or compliance conclusion can be shown.</p>
+            </section>
+          </aside>
+        </div>
+      </div>
     </main>
-    <script src="/js/main.js"></script>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

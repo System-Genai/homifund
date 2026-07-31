@@ -3,673 +3,106 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="bg-surface text-on-surface">
+  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
+    <% const settingsUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
+    <% const displayName = settingsUser.fullName || 'Landlord'; %>
     <%- include('../partials/sidebar-landlord') %>
-    <!-- Exact landlord dashboard sidebar -->
 
-    <main class="ml-[280px] min-h-screen flex flex-col">
-      <!-- Exact landlord dashboard header with Settings highlighted -->
-      <header
-        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
-      >
-        <div class="relative w-full max-w-md">
-          <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
-            >search</span
-          >
-          <input
-            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-            placeholder="Search properties, applications, documents..."
-            type="text"
-          />
+    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
+      <div class="min-w-0">
+        <p class="truncate text-label-sm font-bold text-secondary">Landlord workspace</p>
+        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/settings" aria-label="Settings" title="Settings" aria-current="page"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/user-profile" aria-label="Landlord profile" title="Landlord profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+      </div>
+    </header>
+
+    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-8">
+          <p class="mb-1 text-label-md font-bold text-secondary">Account controls</p>
+          <h1 class="text-headline-lg font-bold text-primary">Settings</h1>
+          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review account details and open the settings journeys currently supported by this application.</p>
         </div>
 
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-4 text-on-surface-variant">
-            <button
-              class="relative hover:bg-surface-container-low p-2 rounded-full"
-              aria-label="Notifications"
-            >
-              <span class="material-symbols-outlined">notifications</span>
-              <span
-                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
-              ></span>
-            </button>
-            <button
-              class="bg-secondary-container text-primary p-2 rounded-full"
-              aria-label="Settings"
-              aria-current="page"
-            >
-              <span class="material-symbols-outlined">settings</span>
-            </button>
-            <button
-              class="hover:bg-surface-container-low p-2 rounded-full"
-              aria-label="Messages"
-            >
-              <span class="material-symbols-outlined">chat_bubble</span>
-            </button>
-          </div>
-          <div class="h-8 w-px bg-outline-variant"></div>
-          <div class="flex items-center gap-3">
-            <div class="text-right">
-              <p class="text-sm font-bold">Marcus R.</p>
-              <p class="text-xs text-on-surface-variant">Landlord</p>
+        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="settings-availability-title">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">settings</span>
+              <div>
+                <p class="text-label-sm font-bold uppercase text-secondary">Current capability</p>
+                <h2 id="settings-availability-title" class="mt-1 text-headline-md font-bold text-primary">Profile and access journeys are available</h2>
+                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">Listing defaults, application-review preferences, notification preferences, email changes, data exports, and account deletion do not have persisted settings handlers yet.</p>
+              </div>
             </div>
-            <div
-              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
-            >
-              MR
-            </div>
+            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">Read-only summary</span>
           </div>
+        </section>
+
+        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+          <div class="space-y-8 xl:col-span-8">
+            <section aria-labelledby="account-settings-title">
+              <div class="mb-4">
+                <h2 id="account-settings-title" class="text-headline-md font-bold text-on-surface">Account</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">These values come from the authenticated account.</p>
+              </div>
+              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
+                <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between"><div><dt class="font-bold text-on-surface">Email address</dt><dd class="mt-1 break-all text-on-surface-variant"><%= settingsUser.email || 'Not available' %></dd></div><span class="font-bold text-on-surface-variant">Change unavailable</span></div>
+                <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between"><div><dt class="font-bold text-on-surface">Workspace role</dt><dd class="mt-1 text-on-surface-variant">Landlord</dd></div><span class="font-bold text-on-surface-variant">Role change unavailable</span></div>
+                <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between"><div><dt class="font-bold text-on-surface">Password access</dt><dd class="mt-1 text-on-surface-variant">Use the email-based recovery journey to set a new password.</dd></div><a class="inline-flex min-h-11 shrink-0 items-center font-bold text-primary hover:underline" href="/forget-password">Reset password</a></div>
+              </dl>
+            </section>
+
+            <section aria-labelledby="profile-settings-title">
+              <div class="mb-4">
+                <h2 id="profile-settings-title" class="text-headline-md font-bold text-on-surface">Profile and portfolio</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Use the existing account and onboarding pages for saved profile context.</p>
+              </div>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <a class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5 transition-colors hover:border-primary" href="/user/landlord/user-profile"><span class="material-symbols-outlined text-primary" aria-hidden="true">person</span><h3 class="mt-3 font-bold text-on-surface">Account profile</h3><p class="mt-2 text-body-sm text-on-surface-variant">Review the landlord profile workspace and account presentation.</p><span class="mt-4 inline-flex min-h-11 items-center font-bold text-primary">Open profile</span></a>
+                <a class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5 transition-colors hover:border-primary" href="/onboarding-landlord"><span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span><h3 class="mt-3 font-bold text-on-surface">Onboarding details</h3><p class="mt-2 text-body-sm text-on-surface-variant">Update saved account type, portfolio estimate, locations, and management context.</p><span class="mt-4 inline-flex min-h-11 items-center font-bold text-primary">Update details</span></a>
+              </div>
+            </section>
+
+            <section aria-labelledby="preference-status-title">
+              <div class="mb-4">
+                <h2 id="preference-status-title" class="text-headline-md font-bold text-on-surface">Preference status</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Controls are shown only when the server can store and enforce their value.</p>
+              </div>
+              <dl class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
+                <div class="flex items-start justify-between gap-4 p-5"><dt class="text-on-surface-variant">Listing defaults</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 p-5"><dt class="text-on-surface-variant">Application review preferences</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 p-5"><dt class="text-on-surface-variant">In-app notification preferences</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 p-5"><dt class="text-on-surface-variant">Email notification preferences</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+              </dl>
+            </section>
+          </div>
+
+          <aside class="space-y-6 xl:col-span-4" aria-label="Account settings guidance">
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="privacy-requests-title">
+              <h2 id="privacy-requests-title" class="text-headline-md font-bold text-primary">Privacy requests</h2>
+              <p class="mt-2 text-body-sm text-on-surface-variant">Automated data export and account deletion are not configured. Contact support for the current request process and do not send identity documents in the first message.</p>
+              <a class="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary hover:bg-surface-container-low" href="/contact#contact-form"><span class="material-symbols-outlined text-xl" aria-hidden="true">contact_support</span>Contact support</a>
+            </section>
+
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="settings-boundaries-title">
+              <h2 id="settings-boundaries-title" class="text-headline-md font-bold text-primary">Current boundaries</h2>
+              <ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant">
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>No unsaved toggle is presented as an account preference.</span></li>
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>Email and role changes need separate verified workflows.</span></li>
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span><span>Account deletion needs confirmation, re-authentication, and lifecycle cleanup.</span></li>
+              </ul>
+              <a class="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/logout"><span class="material-symbols-outlined text-xl" aria-hidden="true">logout</span>Sign out</a>
+            </section>
+          </aside>
         </div>
-      </header>
-
-      <section class="px-10 py-7">
-        <div class="max-w-[1120px] mx-auto space-y-5">
-          <div>
-            <p
-              class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
-            >
-              Account settings
-            </p>
-            <h1 class="text-3xl font-semibold text-primary">Settings</h1>
-            <p class="text-sm text-on-surface-variant mt-2">
-              Manage your property, application, communication and security
-              preferences.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-            <div class="lg:col-span-2 space-y-5">
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div>
-                  <h2 class="text-sm font-bold">
-                    Listing and application preferences
-                  </h2>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    Set the default preferences you want to review when
-                    preparing listings and handling applications.
-                  </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                  <div>
-                    <label
-                      class="block text-xs font-semibold text-on-surface-variant mb-2"
-                      >Preferred listing contact method</label
-                    >
-                    <select
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>HomiFund messages</option>
-                      <option>Email</option>
-                      <option>Phone</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-semibold text-on-surface-variant mb-2"
-                      >Default listing workflow</label
-                    >
-                    <select
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>Save as draft</option>
-                      <option>Review before publishing</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-semibold text-on-surface-variant mb-2"
-                      >Viewing enquiry preference</label
-                    >
-                    <select
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>Review requests in HomiFund</option>
-                      <option>Review requests by email</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-semibold text-on-surface-variant mb-2"
-                      >Application review preference</label
-                    >
-                    <select
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>Review each application manually</option>
-                      <option>Save for later review</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="mt-5 pt-5 border-t border-outline-variant">
-                  <p class="text-xs font-bold">Application review</p>
-                  <div class="mt-3 divide-y divide-outline-variant">
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          Renter contact details
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Review contact information included by a renter when
-                          it is relevant to an application.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review renter contact details"
-                      />
-                    </div>
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          HomiScore and verification information
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Choose whether this information is shown by default
-                          when reviewing applications.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review HomiScore and verification information"
-                      />
-                    </div>
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          Supporting documents
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Review documents only when they are relevant to the
-                          property or application.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review supporting documents"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  class="mt-4 rounded-lg bg-surface-container-low p-4 flex gap-3"
-                >
-                  <span
-                    class="material-symbols-outlined text-primary text-[19px]"
-                    >info</span
-                  >
-                  <p class="text-xs text-on-surface-variant">
-                    <span class="font-bold text-on-surface"
-                      >Use HomiScore fairly.</span
-                    >
-                    HomiScore can support your review process, but it should not
-                    be the only factor used when considering an application.
-                  </p>
-                </div>
-                <div class="flex justify-end mt-4">
-                  <button
-                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
-                  >
-                    Save listing preferences
-                  </button>
-                </div>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div>
-                  <h2 class="text-sm font-bold">
-                    Application communication and sharing
-                  </h2>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    Manage the default communication and sharing choices you
-                    want to review for each property and application.
-                  </p>
-                </div>
-
-                <div class="mt-5">
-                  <label
-                    class="block text-xs font-semibold text-on-surface-variant mb-2"
-                    >Listing communication note</label
-                  >
-                  <textarea
-                    class="w-full min-h-[116px] px-3 py-3 bg-surface border border-outline-variant rounded-lg text-sm resize-y focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="Add a short note renters may see about how you handle enquiries, viewings or application communication."
-                  ></textarea>
-                  <div
-                    class="mt-3 rounded-lg bg-surface-container-low p-3 flex gap-3"
-                  >
-                    <span
-                      class="material-symbols-outlined text-primary text-[19px]"
-                      >info</span
-                    >
-                    <p class="text-xs text-on-surface-variant">
-                      <span class="font-bold text-on-surface"
-                        >Keep it relevant.</span
-                      >
-                      Focus on practical property, viewing and application
-                      communication. Avoid requesting unnecessary personal or
-                      sensitive information.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="mt-5 pt-5 border-t border-outline-variant">
-                  <p class="text-xs font-bold">Default sharing preferences</p>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    You can review these again before publishing a listing or
-                    reviewing an application.
-                  </p>
-
-                  <div class="mt-3 divide-y divide-outline-variant">
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          Property listing information
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Review the details you choose to show when publishing
-                          a property listing.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review property listing information"
-                      />
-                    </div>
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          Application information
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Review renter information only when it is relevant to
-                          the application.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review application information"
-                      />
-                    </div>
-                    <div class="py-3 flex items-center justify-between gap-4">
-                      <div>
-                        <p class="text-sm font-semibold">
-                          Property and tenancy documents
-                        </p>
-                        <p class="text-xs text-on-surface-variant mt-1">
-                          Share documents only when they are needed for the
-                          relevant property or application.
-                        </p>
-                      </div>
-                      <input
-                        class="toggle shrink-0"
-                        type="checkbox"
-                        aria-label="Review property and tenancy documents"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex justify-end gap-3 mt-5">
-                  <button
-                    class="px-4 py-2.5 text-primary text-sm font-bold rounded-lg hover:bg-surface-container-low"
-                  >
-                    Clear
-                  </button>
-                  <button
-                    class="px-4 py-2.5 bg-primary text-white text-sm font-bold rounded-lg"
-                  >
-                    Save application preferences
-                  </button>
-                </div>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div class="flex items-end justify-between gap-4">
-                  <div>
-                    <h2 class="text-sm font-bold">Notifications</h2>
-                    <p class="text-xs text-on-surface-variant mt-1">
-                      Choose how you would like to receive updates from
-                      HomiFund.
-                    </p>
-                  </div>
-                  <div
-                    class="hidden sm:flex gap-4 text-xs font-semibold text-on-surface-variant"
-                  >
-                    <span class="w-10 text-center">In-app</span
-                    ><span class="w-10 text-center">Email</span>
-                  </div>
-                </div>
-
-                <div class="mt-4 divide-y divide-outline-variant">
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Application updates</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Updates about applications, viewings and renter
-                        responses.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="In-app application updates"
-                      /><input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="Email application updates"
-                      />
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">
-                        Property listing updates
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Updates about listing drafts, publishing and property
-                        changes.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="In-app property listing updates"
-                      /><input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="Email property listing updates"
-                      />
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Document reminders</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Reminders when property or tenancy documents may need
-                        updating.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="In-app document reminders"
-                      /><input
-                        class="toggle"
-                        type="checkbox"
-                        aria-label="Email document reminders"
-                      />
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">
-                        HomiScore and verification updates
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Updates about verification information and HomiScore
-                        activity.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="In-app HomiScore updates"
-                      /><input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="Email HomiScore updates"
-                      />
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">
-                        Payment record updates
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Updates related to payment records and receipts.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        checked
-                        type="checkbox"
-                        aria-label="In-app payment record updates"
-                      /><input
-                        class="toggle"
-                        type="checkbox"
-                        aria-label="Email payment record updates"
-                      />
-                    </div>
-                  </div>
-                  <div class="py-3 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">
-                        Product updates
-                        <span class="font-normal text-on-surface-variant"
-                          >(optional)</span
-                        >
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        News and optional updates about HomiFund.
-                      </p>
-                    </div>
-                    <div class="flex gap-4 shrink-0">
-                      <input
-                        class="toggle"
-                        type="checkbox"
-                        aria-label="In-app product updates"
-                      /><input
-                        class="toggle"
-                        type="checkbox"
-                        aria-label="Email product updates"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div>
-                  <h2 class="text-sm font-bold">Account security</h2>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    Review the key settings used to protect access to your
-                    account.
-                  </p>
-                </div>
-                <div class="mt-4 divide-y divide-outline-variant">
-                  <div class="py-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Password</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Update your password to keep your account secure.
-                      </p>
-                    </div>
-                    <button
-                      class="text-primary text-xs font-bold whitespace-nowrap"
-                    >
-                      Change password
-                    </button>
-                  </div>
-                  <div class="py-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Email address</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Your account email is used for important account
-                        updates.
-                      </p>
-                    </div>
-                    <button
-                      class="text-primary text-xs font-bold whitespace-nowrap"
-                    >
-                      Update email
-                    </button>
-                  </div>
-                  <div class="py-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Active sessions</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Review devices currently signed in to your HomiFund
-                        account.
-                      </p>
-                    </div>
-                    <button
-                      class="text-primary text-xs font-bold whitespace-nowrap"
-                    >
-                      Review sessions
-                    </button>
-                  </div>
-                </div>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div>
-                  <h2 class="text-sm font-bold">Account management</h2>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    Manage requests connected to your HomiFund account.
-                  </p>
-                </div>
-                <div class="mt-4 divide-y divide-outline-variant">
-                  <div class="py-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">
-                        Request your information
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Request a copy of information associated with your
-                        HomiFund account.
-                      </p>
-                    </div>
-                    <button
-                      class="text-primary text-xs font-bold whitespace-nowrap"
-                    >
-                      Request information
-                    </button>
-                  </div>
-                  <div class="py-4 flex items-center justify-between gap-4">
-                    <div>
-                      <p class="text-sm font-semibold">Close account</p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Closing your account may affect active properties,
-                        applications and access to your HomiFund records.
-                      </p>
-                    </div>
-                    <button
-                      class="text-error text-xs font-bold whitespace-nowrap"
-                    >
-                      Contact support
-                    </button>
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            <aside class="space-y-5">
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <h2 class="text-sm font-bold">Your account</h2>
-                <div class="mt-4 space-y-3 text-sm">
-                  <div class="flex justify-between gap-3">
-                    <span class="text-on-surface-variant">Role</span
-                    ><span class="font-semibold">Landlord</span>
-                  </div>
-                  <a
-                    class="flex items-center justify-between text-primary font-semibold"
-                    href="homiscore"
-                    ><span onclick="window.location.href = '/user/landlord/homiscore'">View HomiScore</span
-                    ><span class="material-symbols-outlined text-[18px]"
-                      >arrow_forward</span
-                    ></a
-                  >
-                  <a
-                    class="flex items-center justify-between text-primary font-semibold"
-                    href="homiscore"
-                    ><span>Update verification</span
-                    ><span class="material-symbols-outlined text-[18px]"
-                      >arrow_forward</span
-                    ></a
-                  >
-                </div>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5"
-              >
-                <div
-                  class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center"
-                >
-                  <span class="material-symbols-outlined">support_agent</span>
-                </div>
-                <h2 class="text-sm font-bold mt-4">Need help with settings?</h2>
-                <p class="text-xs text-on-surface-variant mt-1">
-                  Contact HomiFund support if you need help managing your
-                  account preferences.
-                </p>
-                <button
-                  class="w-full mt-4 bg-primary text-white py-2.5 rounded-lg text-sm font-bold"
-                >
-                  Go to Support
-                </button>
-              </section>
-
-              <section
-                class="rounded-xl border border-outline-variant bg-surface-container-low p-4"
-              >
-                <div class="flex items-start gap-3">
-                  <span class="material-symbols-outlined text-primary mt-0.5"
-                    >info</span
-                  >
-                  <div>
-                    <h2 class="text-xs font-bold">
-                      Before changing your details
-                    </h2>
-                    <p class="text-xs text-on-surface-variant mt-1">
-                      Review information before you save it. You can also review
-                      details again before publishing a property or reviewing an
-                      application.
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </aside>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
-    <script src="/js/main.js"></script>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

@@ -4,9 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "pnpm run build:css",
+    "build:css": "tailwindcss -i ./public/css/tailwind-input.css -o ./public/css/tailwind.css --minify",
+    "prestart": "pnpm run build:css",
     "start": "node server.js",
+    "predev": "pnpm run build:css",
     "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "audit:ui": "node scripts/ui-audit-server.js",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +29,7 @@
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "crypto": "^1.0.1",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
@@ -31,5 +37,9 @@
     "mime-types": "^3.0.2",
     "mongoose": "^9.7.4",
     "nodemailer": "^9.0.3"
-  }
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  },
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }

@@ -3,576 +3,267 @@
   <head>
     <%- include('partials/head') %>
   </head>
-  <body
-    class="text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed"
-  >
+  <body class="flex min-h-screen flex-col bg-surface text-on-surface hf-public-page">
+    <% const landlordForm = typeof form === 'object' && form ? form : {}; %>
+    <% const landlordErrors = typeof fieldErrors === 'object' && fieldErrors ? fieldErrors : {}; %>
+    <% const selectedPropertyTypes = Array.isArray(landlordForm.propertyTypes) ? landlordForm.propertyTypes : []; %>
     <%- include('partials/header') %>
-    
-    <main class="max-w-container-max mx-auto px-margin-desktop py-12">
-      <!-- Progress Bar -->
-      <div class="mb-12 w-full max-w-4xl mx-auto">
-        <div class="relative flex items-center justify-between">
-          <div
-            class="absolute top-1/2 left-0 w-full h-0.5 bg-surface-container-high -translate-y-1/2 z-0"
-          ></div>
-          <div
-            class="absolute top-1/2 left-0 w-[16%] h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-500"
-          ></div>
-          <!-- Step 1: Active -->
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md shadow-lg border-4 border-surface"
-            >
-              1
+
+    <main class="mx-auto w-full max-w-6xl flex-grow px-margin-mobile py-8 md:px-margin-desktop md:py-12">
+      <nav class="hf-auth-stepper mx-auto mb-8 max-w-3xl md:mb-10" aria-label="Landlord onboarding progress">
+        <ol class="hf-auth-stepper-list" role="list">
+          <li class="hf-auth-stepper-step is-current" aria-current="step">
+            <span class="hf-auth-stepper-marker">1</span>
+            <span class="hf-auth-stepper-label">Profile</span>
+          </li>
+          <li class="hf-auth-stepper-step">
+            <span class="hf-auth-stepper-marker">2</span>
+            <span class="hf-auth-stepper-label">Verification</span>
+          </li>
+          <li class="hf-auth-stepper-step">
+            <span class="hf-auth-stepper-marker">3</span>
+            <span class="hf-auth-stepper-label">Finish</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-8">
+          <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5 shadow-sm sm:p-8">
+            <div class="mb-8">
+              <p class="mb-2 text-label-md font-bold text-secondary">Step 1 of 3</p>
+              <h1 class="mb-3 text-headline-lg font-bold text-primary">Set up your landlord profile</h1>
+              <p class="max-w-2xl text-body-md text-on-surface-variant">
+                Add the account and portfolio details used to organize your landlord workspace.
+                Fields marked required must be complete before verification.
+              </p>
             </div>
-            <span
-              class="mt-2 font-label-md text-label-md text-primary font-bold"
-              >Profile Setup</span
-            >
-          </div>
-          <!-- Step 2 -->
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-label-md border-4 border-surface"
-            >
-              2
-            </div>
-            <span
-              class="mt-2 font-label-md text-label-md text-on-surface-variant font-medium"
-              >Verification</span
-            >
-          </div>
-          <!-- Step 3 -->
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-label-md border-4 border-surface"
-            >
-              3
-            </div>
-            <span
-              class="mt-2 font-label-md text-label-md text-on-surface-variant font-medium"
-              >HomiScore</span
-            >
-          </div>
-          <!-- Step 4 -->
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-label-md border-4 border-surface"
-            >
-              4
-            </div>
-            <span
-              class="mt-2 font-label-md text-label-md text-on-surface-variant font-medium"
-              >Dashboard</span
-            >
-          </div>
-        </div>
-      </div>
-      <div
-        class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start"
-      >
-        <!-- Form Area (Left) -->
-        <div class="lg:col-span-8 space-y-8">
-          <div
-            class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 shadow-[0_4px_12px_rgba(30,58,138,0.04)]"
-          >
-            <h1 class="font-headline-lg text-headline-lg text-primary mb-2">
-              Complete Your Landlord Profile
-            </h1>
-            <p class="font-body-md text-body-md text-on-surface-variant mb-10">
-              Provide your portfolio details to establish institutional trust
-              within our network.
-            </p>
-            <form class="space-y-12">
-              <!-- Section 1: Identity -->
-              <section>
-                <div class="flex items-center gap-3 mb-6">
-                  <span class="material-symbols-outlined text-primary"
-                    >badge</span
-                  >
-                  <h2 class="font-headline-md text-headline-md text-on-surface">
-                    Identity &amp; Professional Profile
-                  </h2>
+
+            <% if (error) { %>
+              <div
+                class="mb-6 rounded-lg bg-error-container px-4 py-3 text-body-sm text-on-error-container"
+                data-focus-feedback
+                role="alert"
+                tabindex="-1"
+              ><%= error %></div>
+            <% } else if (success) { %>
+              <div
+                class="mb-6 rounded-lg bg-secondary-container px-4 py-3 text-body-sm text-on-secondary-container"
+                data-focus-feedback
+                role="status"
+                tabindex="-1"
+              ><%= success %></div>
+            <% } %>
+
+            <form action="/onboarding-landlord" method="POST" data-submit-feedback>
+              <section class="border-b border-outline-variant pb-8" aria-labelledby="landlord-account-heading">
+                <div class="mb-6 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary" aria-hidden="true">badge</span>
+                  <h2 id="landlord-account-heading" class="text-headline-md font-bold text-on-surface">Account details</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Full Legal Name</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="legalName">Legal name <span class="text-error">*</span></label>
                     <input
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
-                      placeholder="Johnathan Doe"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="legalName"
+                      name="legalName"
                       type="text"
+                      autocomplete="name"
+                      maxlength="120"
+                      required
+                      value="<%= landlordForm.legalName || '' %>"
+                      aria-invalid="<%= landlordErrors.legalName ? 'true' : 'false' %>"
+                      <%- landlordErrors.legalName ? 'aria-describedby="legalName-error"' : '' %>
                     />
+                    <% if (landlordErrors.legalName) { %><p class="text-body-sm text-error" id="legalName-error"><%= landlordErrors.legalName %></p><% } %>
                   </div>
+
                   <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Landlord Type</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="landlordType">Account type <span class="text-error">*</span></label>
                     <select
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="landlordType"
+                      name="landlordType"
+                      required
+                      aria-invalid="<%= landlordErrors.landlordType ? 'true' : 'false' %>"
+                      <%- landlordErrors.landlordType ? 'aria-describedby="landlordType-error"' : '' %>
                     >
-                      <option>Individual</option>
-                      <option>Company / Trust</option>
-                      <option>Institutional Fund</option>
+                      <option value="">Choose an account type</option>
+                      <option value="individual" <%= landlordForm.landlordType === 'individual' ? 'selected' : '' %>>Individual</option>
+                      <option value="company" <%= landlordForm.landlordType === 'company' ? 'selected' : '' %>>Company</option>
+                      <option value="partnership" <%= landlordForm.landlordType === 'partnership' ? 'selected' : '' %>>Partnership or trust</option>
                     </select>
+                    <% if (landlordErrors.landlordType) { %><p class="text-body-sm text-error" id="landlordType-error"><%= landlordErrors.landlordType %></p><% } %>
                   </div>
+
                   <div class="flex flex-col gap-2 md:col-span-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Business Name (Optional)</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="businessName">Business name <span class="font-normal text-on-surface-variant">(optional)</span></label>
                     <input
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
-                      placeholder="Doe Property Group LTD"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="businessName"
+                      name="businessName"
                       type="text"
+                      autocomplete="organization"
+                      maxlength="120"
+                      value="<%= landlordForm.businessName || '' %>"
+                      aria-invalid="<%= landlordErrors.businessName ? 'true' : 'false' %>"
+                      <%- landlordErrors.businessName ? 'aria-describedby="businessName-error"' : '' %>
                     />
+                    <% if (landlordErrors.businessName) { %><p class="text-body-sm text-error" id="businessName-error"><%= landlordErrors.businessName %></p><% } %>
                   </div>
                 </div>
               </section>
-              <hr class="border-surface-container" />
-              <!-- Section 2: Portfolio -->
-              <section>
-                <div class="flex items-center gap-3 mb-6">
-                  <span class="material-symbols-outlined text-primary"
-                    >domain</span
-                  >
-                  <h2 class="font-headline-md text-headline-md text-on-surface">
-                    Portfolio &amp; Strategy
-                  </h2>
+
+              <section class="border-b border-outline-variant py-8" aria-labelledby="landlord-portfolio-heading">
+                <div class="mb-6 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary" aria-hidden="true">domain</span>
+                  <h2 id="landlord-portfolio-heading" class="text-headline-md font-bold text-on-surface">Portfolio details</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Number of Properties</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="propertyCount">Properties managed <span class="text-error">*</span></label>
                     <input
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
-                      placeholder="e.g. 15"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="propertyCount"
+                      name="propertyCount"
                       type="number"
+                      inputmode="numeric"
+                      min="0"
+                      max="100000"
+                      step="1"
+                      required
+                      value="<%= landlordForm.propertyCount ?? '' %>"
+                      aria-invalid="<%= landlordErrors.propertyCount ? 'true' : 'false' %>"
+                      <%- landlordErrors.propertyCount ? 'aria-describedby="propertyCount-error"' : '' %>
                     />
+                    <% if (landlordErrors.propertyCount) { %><p class="text-body-sm text-error" id="propertyCount-error"><%= landlordErrors.propertyCount %></p><% } %>
                   </div>
+
                   <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Primary Locations</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="primaryLocations">Operating locations <span class="text-error">*</span></label>
                     <input
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
-                      placeholder="London, Manchester, Birmingham"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="primaryLocations"
+                      name="primaryLocations"
                       type="text"
+                      maxlength="250"
+                      required
+                      value="<%= landlordForm.primaryLocations || '' %>"
+                      aria-invalid="<%= landlordErrors.primaryLocations ? 'true' : 'false' %>"
+                      aria-describedby="<%= landlordErrors.primaryLocations ? 'primaryLocations-help primaryLocations-error' : 'primaryLocations-help' %>"
                     />
+                    <p class="text-body-sm text-on-surface-variant" id="primaryLocations-help">Enter cities or regions separated by commas.</p>
+                    <% if (landlordErrors.primaryLocations) { %><p class="text-body-sm text-error" id="primaryLocations-error"><%= landlordErrors.primaryLocations %></p><% } %>
                   </div>
-                  <div class="flex flex-col gap-2 md:col-span-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Property Types Managed</label
-                    >
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-1">
-                      <label
-                        class="flex items-center gap-2 cursor-pointer p-3 border border-outline-variant rounded-lg hover:bg-surface transition-colors"
-                      >
-                        <input
-                          class="rounded text-primary focus:ring-primary"
-                          type="checkbox"
-                        />
-                        <span class="font-body-md text-on-surface-variant"
-                          >Apartments</span
-                        >
-                      </label>
-                      <label
-                        class="flex items-center gap-2 cursor-pointer p-3 border border-outline-variant rounded-lg hover:bg-surface transition-colors"
-                      >
-                        <input
-                          class="rounded text-primary focus:ring-primary"
-                          type="checkbox"
-                        />
-                        <span class="font-body-md text-on-surface-variant"
-                          >Houses</span
-                        >
-                      </label>
-                      <label
-                        class="flex items-center gap-2 cursor-pointer p-3 border border-outline-variant rounded-lg hover:bg-surface transition-colors"
-                      >
-                        <input
-                          class="rounded text-primary focus:ring-primary"
-                          type="checkbox"
-                        />
-                        <span class="font-body-md text-on-surface-variant"
-                          >HMOs</span
-                        >
-                      </label>
-                      <label
-                        class="flex items-center gap-2 cursor-pointer p-3 border border-outline-variant rounded-lg hover:bg-surface transition-colors"
-                      >
-                        <input
-                          class="rounded text-primary focus:ring-primary"
-                          type="checkbox"
-                        />
-                        <span class="font-body-md text-on-surface-variant"
-                          >Commercial</span
-                        >
-                      </label>
+
+                  <fieldset class="md:col-span-2" aria-describedby="<%= landlordErrors.propertyTypes ? 'propertyTypes-error' : '' %>">
+                    <legend class="mb-3 font-label-md font-bold text-on-surface">Property types <span class="text-error">*</span></legend>
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <% [['apartments', 'Apartments'], ['houses', 'Houses'], ['hmos', 'Shared homes (HMOs)'], ['commercial', 'Commercial property']].forEach(([value, label]) => { %>
+                        <label class="flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border border-outline-variant px-4 py-3 transition-colors hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-fixed">
+                          <input class="h-5 w-5 accent-primary" name="propertyTypes" type="checkbox" value="<%= value %>" <%= selectedPropertyTypes.includes(value) ? 'checked' : '' %> />
+                          <span class="text-body-md text-on-surface"><%= label %></span>
+                        </label>
+                      <% }) %>
                     </div>
-                  </div>
+                    <% if (landlordErrors.propertyTypes) { %><p class="mt-2 text-body-sm text-error" id="propertyTypes-error"><%= landlordErrors.propertyTypes %></p><% } %>
+                  </fieldset>
                 </div>
               </section>
-              <hr class="border-surface-container" />
-              <!-- Section 3: Preferences -->
-              <section>
-                <div class="flex items-center gap-3 mb-6">
-                  <span class="material-symbols-outlined text-primary"
-                    >groups</span
-                  >
-                  <h2 class="font-headline-md text-headline-md text-on-surface">
-                    Tenant &amp; Management Preferences
-                  </h2>
+
+              <section class="pt-8" aria-labelledby="landlord-preferences-heading">
+                <div class="mb-6 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary" aria-hidden="true">tune</span>
+                  <h2 id="landlord-preferences-heading" class="text-headline-md font-bold text-on-surface">Workspace preferences</h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6">
                   <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Preferred Tenant Profile</label
-                    >
+                    <label class="font-label-md font-bold text-on-surface" for="managementStyle">Management style <span class="text-error">*</span></label>
                     <select
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
+                      class="min-h-12 rounded-lg border border-outline-variant bg-surface px-3 text-body-md focus:border-primary focus:ring-2 focus:ring-primary"
+                      id="managementStyle"
+                      name="managementStyle"
+                      required
+                      aria-invalid="<%= landlordErrors.managementStyle ? 'true' : 'false' %>"
+                      <%- landlordErrors.managementStyle ? 'aria-describedby="managementStyle-error"' : '' %>
                     >
-                      <option>Working Professionals</option>
-                      <option>Students</option>
-                      <option>Families</option>
-                      <option>Corporate Housing</option>
+                      <option value="">Choose a management style</option>
+                      <option value="self-managed" <%= landlordForm.managementStyle === 'self-managed' ? 'selected' : '' %>>Self-managed</option>
+                      <option value="agency-managed" <%= landlordForm.managementStyle === 'agency-managed' ? 'selected' : '' %>>Managed by an agency</option>
+                      <option value="hybrid" <%= landlordForm.managementStyle === 'hybrid' ? 'selected' : '' %>>A mix of both</option>
                     </select>
+                    <% if (landlordErrors.managementStyle) { %><p class="text-body-sm text-error" id="managementStyle-error"><%= landlordErrors.managementStyle %></p><% } %>
                   </div>
-                  <div class="flex flex-col gap-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Management Style</label
-                    >
-                    <select
-                      class="rounded-lg border-outline-variant p-3 focus:ring-2 focus:ring-primary focus:border-primary font-body-md"
-                    >
-                      <option>Self-managed</option>
-                      <option>Agency-managed</option>
-                      <option>Hybrid</option>
-                    </select>
-                  </div>
-                  <div class="flex flex-col gap-2 md:col-span-2">
-                    <label
-                      class="font-label-md text-label-md text-on-surface-variant"
-                      >Primary Rental Goal</label
-                    >
-                    <div class="flex gap-4">
-                      <label
-                        class="flex-1 flex items-center justify-center gap-2 cursor-pointer p-4 border border-outline-variant rounded-lg hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-primary-fixed"
-                      >
-                        <input
-                          checked=""
-                          class="hidden"
-                          name="goal"
-                          type="radio"
-                        />
-                        <span class="font-label-md text-label-md"
-                          >High Yield</span
-                        >
-                      </label>
-                      <label
-                        class="flex-1 flex items-center justify-center gap-2 cursor-pointer p-4 border border-outline-variant rounded-lg hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-primary-fixed"
-                      >
-                        <input class="hidden" name="goal" type="radio" />
-                        <span class="font-label-md text-label-md"
-                          >Capital Stability</span
-                        >
-                      </label>
+
+                  <fieldset aria-describedby="<%= landlordErrors.primaryGoal ? 'primaryGoal-error' : '' %>">
+                    <legend class="mb-3 font-label-md font-bold text-on-surface">First workspace goal <span class="text-error">*</span></legend>
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                      <% [['manage-properties', 'Manage properties'], ['review-applicants', 'Review applicants'], ['organize-rent', 'Organize rent records']].forEach(([value, label]) => { %>
+                        <label class="flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border border-outline-variant px-4 py-3 transition-colors hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary-fixed">
+                          <input class="h-5 w-5 shrink-0 accent-primary" name="primaryGoal" type="radio" value="<%= value %>" required <%= landlordForm.primaryGoal === value ? 'checked' : '' %> />
+                          <span class="text-body-sm font-bold text-on-surface"><%= label %></span>
+                        </label>
+                      <% }) %>
                     </div>
-                  </div>
+                    <% if (landlordErrors.primaryGoal) { %><p class="mt-2 text-body-sm text-error" id="primaryGoal-error"><%= landlordErrors.primaryGoal %></p><% } %>
+                  </fieldset>
                 </div>
               </section>
-              <div class="flex flex-col sm:flex-row items-center gap-6 pt-6">
-                <a
-                  id="landlord-continue-btn"
-                  class="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-md active:scale-95"
-                  href="dashboards/landlord/dashboard.html"
+
+              <div class="mt-8 flex flex-col gap-3 border-t border-outline-variant pt-6 sm:flex-row">
+                <button
+                  class="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-6 font-label-md font-bold text-on-primary transition-colors hover:bg-primary-container disabled:cursor-wait disabled:opacity-70"
+                  name="intent"
+                  type="submit"
+                  value="continue"
+                  data-pending-label="Saving profile..."
                 >
-                  Continue to Verification
-                  <span class="material-symbols-outlined">arrow_forward</span>
-                </a>
-                <a
-                  class="text-on-surface-variant font-label-md text-label-md font-semibold hover:text-primary transition-colors cursor-pointer"
-                  href="/"
-                >
-                  Save and Finish Later
-                </a>
+                  Continue to verification
+                  <span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span>
+                </button>
+                <button
+                  class="inline-flex min-h-12 items-center justify-center rounded-lg border border-outline-variant px-6 font-label-md font-bold text-primary transition-colors hover:bg-surface-container-low disabled:cursor-wait disabled:opacity-70"
+                  name="intent"
+                  type="submit"
+                  value="draft"
+                  formnovalidate
+                  data-pending-label="Saving draft..."
+                >Save draft</button>
               </div>
             </form>
           </div>
         </div>
-        <!-- Sticky Summary Card (Right) -->
-        <aside class="lg:col-span-4 sticky top-28 mt-40">
-          <div
-            class="bg-surface-container-lowest rounded-xl border-2 border-primary/10 overflow-hidden shadow-xl"
-          >
-            <!-- Card Header -->
-            <div
-              class="bg-primary p-6 text-on-primary relative overflow-hidden"
-            >
-              <div
-                class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"
-              ></div>
-              <p
-                class="font-label-sm text-label-sm uppercase tracking-widest opacity-80 mb-1"
-              >
-                Landlord Passport
+
+        <aside class="lg:sticky lg:top-28 lg:col-span-4" aria-labelledby="onboarding-next-heading">
+          <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6 shadow-sm">
+            <p class="mb-2 text-label-sm font-bold uppercase text-secondary">Your setup</p>
+            <h2 id="onboarding-next-heading" class="mb-4 text-headline-md font-bold text-primary">What happens next</h2>
+            <ol class="space-y-5" role="list">
+              <li class="flex gap-3">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-on-primary">1</span>
+                <div><p class="font-bold text-on-surface">Save this profile</p><p class="mt-1 text-body-sm text-on-surface-variant">Your answers are stored on your account and can be updated later.</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-container-high text-sm font-bold text-on-surface-variant">2</span>
+                <div><p class="font-bold text-on-surface">Review verification</p><p class="mt-1 text-body-sm text-on-surface-variant">The next screen explains the information requested before you submit anything.</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-container-high text-sm font-bold text-on-surface-variant">3</span>
+                <div><p class="font-bold text-on-surface">Open your workspace</p><p class="mt-1 text-body-sm text-on-surface-variant">Use the dashboard to manage the records available for your account.</p></div>
+              </li>
+            </ol>
+            <div class="mt-6 border-t border-outline-variant pt-5">
+              <p class="flex items-start gap-2 text-body-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">info</span>
+                Save draft lets you leave required fields incomplete and resume from this page later.
               </p>
-              <div class="flex items-center gap-4 mt-4">
-                <div
-                  class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-md"
-                >
-                  <span class="material-symbols-outlined !text-4xl"
-                    >account_circle</span
-                  >
-                </div>
-                <div>
-                  <h3
-                    class="font-headline-md text-headline-md font-bold leading-tight"
-                  >
-                    Johnathan Doe
-                  </h3>
-                  <p class="font-label-md text-label-md opacity-90">
-                    Individual Landlord
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="p-6 space-y-6">
-              <!-- Progress Section -->
-              <div class="space-y-2">
-                <div class="flex justify-between items-end">
-                  <span
-                    class="font-label-md text-label-md text-on-surface-variant"
-                    >Profile Progress</span
-                  >
-                  <span class="font-bold text-primary text-label-md">25%</span>
-                </div>
-                <div
-                  class="w-full h-2 bg-surface-container rounded-full overflow-hidden"
-                >
-                  <div class="w-1/4 h-full bg-primary rounded-full"></div>
-                </div>
-                <p class="text-[12px] text-on-surface-variant italic">
-                  Step 1 of 4: Profile Setup
-                </p>
-              </div>
-              <!-- Metrics Section -->
-              <div class="space-y-3">
-                <div
-                  class="flex justify-between items-center py-2 border-b border-surface-variant/50"
-                >
-                  <span
-                    class="text-on-surface-variant font-label-md text-label-md"
-                    >Portfolio Size</span
-                  >
-                  <span class="text-on-surface font-semibold font-body-md"
-                    >0 Properties</span
-                  >
-                </div>
-                <div
-                  class="flex justify-between items-center py-2 border-b border-surface-variant/50"
-                >
-                  <span
-                    class="text-on-surface-variant font-label-md text-label-md"
-                    >Operating Region</span
-                  >
-                  <span
-                    class="text-on-surface-variant italic font-body-md text-sm"
-                    >Not Selected</span
-                  >
-                </div>
-                <div
-                  class="flex justify-between items-center py-2 border-b border-surface-variant/50"
-                >
-                  <span
-                    class="text-on-surface-variant font-label-md text-label-md"
-                    >Management Style</span
-                  >
-                  <span
-                    class="text-on-surface-variant italic font-body-md text-sm"
-                    >Not Selected</span
-                  >
-                </div>
-                <div
-                  class="flex justify-between items-center py-2 border-b border-surface-variant/50"
-                >
-                  <span
-                    class="text-on-surface-variant font-label-md text-label-md"
-                    >Tenant Preference</span
-                  >
-                  <span
-                    class="text-on-surface-variant italic font-body-md text-sm"
-                    >Not Selected</span
-                  >
-                </div>
-              </div>
-              <!-- Verification Status Grid -->
-              <div class="grid grid-cols-2 gap-2">
-                <div
-                  class="p-2 rounded bg-surface-container-low border border-outline-variant/30 flex items-center gap-2"
-                >
-                  <span class="material-symbols-outlined !text-sm text-outline"
-                    >pending</span
-                  >
-                  <span
-                    class="text-[11px] font-bold uppercase tracking-tighter text-on-surface-variant"
-                    >Identity</span
-                  >
-                </div>
-                <div
-                  class="p-2 rounded bg-surface-container-low border border-outline-variant/30 flex items-center gap-2"
-                >
-                  <span class="material-symbols-outlined !text-sm text-outline"
-                    >pending</span
-                  >
-                  <span
-                    class="text-[11px] font-bold uppercase tracking-tighter text-on-surface-variant"
-                    >Property</span
-                  >
-                </div>
-                <div
-                  class="p-2 rounded bg-surface-container-low border border-outline-variant/30 flex items-center gap-2"
-                >
-                  <span class="material-symbols-outlined !text-sm text-outline"
-                    >pending</span
-                  >
-                  <span
-                    class="text-[11px] font-bold uppercase tracking-tighter text-on-surface-variant"
-                    >Business</span
-                  >
-                </div>
-                <div
-                  class="p-2 rounded bg-surface-container-low border border-outline-variant/30 flex items-center gap-2"
-                >
-                  <span class="material-symbols-outlined !text-sm text-outline"
-                    >pending</span
-                  >
-                  <span
-                    class="text-[11px] font-bold uppercase tracking-tighter text-on-surface-variant"
-                    >Payment</span
-                  >
-                </div>
-              </div>
-              <!-- Trust Score Explainer -->
-              <div
-                class="bg-primary-container/10 p-4 rounded-lg border border-primary/10"
-              >
-                <div class="flex gap-3">
-                  <span class="material-symbols-outlined text-primary !text-xl"
-                    >verified_user</span
-                  >
-                  <div class="space-y-1">
-                    <p
-                      class="font-label-md text-label-md font-bold text-primary"
-                    >
-                      Institutional Trust Score
-                    </p>
-                    <p
-                      class="font-body-md text-[13px] leading-relaxed text-on-surface-variant"
-                    >
-                      Complete verification to unlock your HomiScore Profile and
-                      improve visibility to high-quality tenants.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- Benefits Section -->
-              <div class="pt-2">
-                <p
-                  class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-3"
-                >
-                  Verification Benefits
-                </p>
-                <ul class="space-y-2">
-                  <li
-                    class="flex items-center gap-2 text-[13px] text-on-surface-variant"
-                  >
-                    <span
-                      class="material-symbols-outlined text-primary !text-sm"
-                      >check_circle</span
-                    >
-                    Verified Landlord Badge
-                  </li>
-                  <li
-                    class="flex items-center gap-2 text-[13px] text-on-surface-variant"
-                  >
-                    <span
-                      class="material-symbols-outlined text-primary !text-sm"
-                      >check_circle</span
-                    >
-                    Priority Listing Visibility
-                  </li>
-                  <li
-                    class="flex items-center gap-2 text-[13px] text-on-surface-variant"
-                  >
-                    <span
-                      class="material-symbols-outlined text-primary !text-sm"
-                      >check_circle</span
-                    >
-                    Higher Tenant Match Quality
-                  </li>
-                </ul>
-              </div>
-              <div class="pt-4 text-center border-t border-surface-variant/50">
-                <p class="font-label-sm text-label-sm text-outline">
-                  Verified Member ID: HF-LL-000000
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Trust Badges -->
-          <div class="mt-6 flex justify-center gap-6 grayscale opacity-40">
-            <div class="flex flex-col items-center gap-1">
-              <span class="material-symbols-outlined !text-4xl">security</span>
-              <span class="font-label-sm text-[10px] uppercase">AES-256</span>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-              <span class="material-symbols-outlined !text-4xl">verified</span>
-              <span class="font-label-sm text-[10px] uppercase">AML/KYC</span>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-              <span class="material-symbols-outlined !text-4xl"
-                >cloud_done</span
-              >
-              <span class="font-label-sm text-[10px] uppercase">SOC2</span>
             </div>
           </div>
         </aside>
       </div>
     </main>
-    <!-- Footer -->
-    <script>
-      // Simple interactivity for form fields to show 'live' feedback in the summary card (mockup)
-      const inputs = document.querySelectorAll("input, select");
-      inputs.forEach((input) => {
-        input.addEventListener("change", () => {
-          // Future implementation: update summary card values
-          console.log("Update summary card with:", input.value);
-        });
-      });
-    </script>
 
-    <script>
-      const landlordContinueBtn = document.getElementById(
-        "landlord-continue-btn",
-      );
-      if (landlordContinueBtn) {
-        landlordContinueBtn.addEventListener("click", (event) => {
-          event.preventDefault();
-          window.location.href = "dashboards/landlord/dashboard";
-        });
-      }
-    </script>
-    <script src="/js/main.js"></script>
     <%- include('partials/footer') %>
     <script src="/js/main.js"></script>
   </body>

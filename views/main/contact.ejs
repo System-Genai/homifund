@@ -4,25 +4,17 @@
     <%- include('partials/head') %>
   </head>
   <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <% const contactErrors = fieldErrors || {}; %>
     <%- include('partials/header') %>
 
-    <main class="pt-24 pb-16">
+    <main class="pb-16">
       <!-- Hero Section -->
       <section
-        class="relative overflow-hidden bg-surface-container-low py-20 px-margin-desktop lg:py-32 transition-standard duration-700 opacity-100 translate-y-0"
+        class="relative overflow-hidden bg-surface-container-low py-16 lg:py-24 px-margin-mobile md:px-margin-desktop"
       >
-        <!-- Background Decorative Element -->
-        <div
-          class="absolute right-0 top-0 w-1/3 h-full opacity-5 pointer-events-none"
-        >
-          <span
-            class="material-symbols-outlined text-[400px] text-primary rotate-12"
-            >verified_user</span
-          >
-        </div>
         <div class="max-w-container-max mx-auto text-center relative z-10">
           <h1
-            class="font-headline-xl text-headline-xl mb-6 brand-gradient-text"
+            class="font-headline-xl text-headline-xl mb-6 text-primary"
           >
             Let's Build Rental Trust Together.
           </h1>
@@ -36,7 +28,7 @@
       </section>
       <!-- Main Content: Get in Touch & Form -->
       <section
-        class="max-w-container-max mx-auto px-margin-desktop mt-16 transition-standard duration-700 opacity-100 translate-y-0"
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-16"
       >
         <div
           class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start"
@@ -44,7 +36,7 @@
           <!-- Contact Details & FAQ Sidebar (4 columns) -->
           <div class="lg:col-span-4 space-y-8">
             <div
-              class="bg-surface p-8 rounded-xl border border-outline-variant shadow-sm"
+              class="bg-surface p-6 md:p-8 rounded-lg border border-outline-variant shadow-sm"
             >
               <h2 class="font-headline-md text-headline-md mb-6 text-primary">
                 Get in Touch
@@ -53,6 +45,7 @@
                 <li class="flex items-start gap-4">
                   <span
                     class="material-symbols-outlined text-primary-container p-2 bg-secondary-container rounded-lg"
+                    aria-hidden="true"
                     >mail</span
                   >
                   <div>
@@ -62,7 +55,7 @@
                       Email Us
                     </p>
                     <a
-                      class="text-primary font-semibold hover:underline"
+                      class="inline-flex min-h-11 items-center text-sm sm:text-base text-primary font-semibold hover:underline break-all"
                       href="mailto:support@homifund.com"
                       >support@homifund.com</a
                     >
@@ -71,6 +64,7 @@
                 <li class="flex items-start gap-4">
                   <span
                     class="material-symbols-outlined text-primary-container p-2 bg-secondary-container rounded-lg"
+                    aria-hidden="true"
                     >call</span
                   >
                   <div>
@@ -79,12 +73,13 @@
                     >
                       Call Us
                     </p>
-                    <p class="text-on-surface font-semibold">+44 7721712498</p>
+                    <a class="inline-flex min-h-11 items-center text-primary font-semibold hover:underline" href="tel:+447721712498">+44 7721 712498</a>
                   </div>
                 </li>
                 <li class="flex items-start gap-4">
                   <span
                     class="material-symbols-outlined text-primary-container p-2 bg-secondary-container rounded-lg"
+                    aria-hidden="true"
                     >location_on</span
                   >
                   <div>
@@ -93,31 +88,37 @@
                     >
                       Visit
                     </p>
-                    <p class="text-on-surface font-semibold">
+                    <a
+                      class="inline-flex min-h-11 items-center text-primary font-semibold hover:underline"
+                      href="https://www.google.com/maps/search/?api=1&amp;query=287%20Underhill%20Road%2C%20London%20SE22%200AN"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       287 Underhill Road, SE22 0AN
-                    </p>
+                    </a>
                   </div>
                 </li>
               </ul>
             </div>
             <!-- FAQ Quick Links -->
             <div
-              class="bg-primary text-on-primary p-8 rounded-xl shadow-lg relative overflow-hidden group"
+              class="bg-primary text-on-primary p-6 md:p-8 rounded-lg shadow-lg"
             >
-              <h3 class="font-headline-md text-headline-md mb-4">
+              <h2 class="font-headline-md text-headline-md mb-4">
                 Quick Resources
-              </h3>
+              </h2>
               <ul class="space-y-4 relative z-10">
                 <li class="">
                   <a
                     class="flex items-center justify-between p-3 rounded-lg bg-primary-container hover:bg-on-primary-fixed-variant transition-standard group/item"
-                    href="/FAQs"
+                  href="/faqs"
                   >
                     <span class="font-label-md text-label-md"
                       >How Verification Works</span
                     >
                     <span
                       class="material-symbols-outlined text-sm transition-transform group-hover/item:translate-x-1"
+                      aria-hidden="true"
                       >arrow_forward</span
                     >
                   </a>
@@ -125,13 +126,14 @@
                 <li class="">
                   <a
                     class="flex items-center justify-between p-3 rounded-lg bg-primary-container hover:bg-on-primary-fixed-variant transition-standard group/item"
-                    href="/FAQs"
+                  href="/faqs"
                   >
                     <span class="font-label-md text-label-md"
                       >Managing Your HomiScore</span
                     >
                     <span
                       class="material-symbols-outlined text-sm transition-transform group-hover/item:translate-x-1"
+                      aria-hidden="true"
                       >arrow_forward</span
                     >
                   </a>
@@ -139,64 +141,84 @@
                 <li class="">
                   <a
                     class="flex items-center justify-between p-3 rounded-lg bg-primary-container hover:bg-on-primary-fixed-variant transition-standard group/item"
-                    href="/FAQs"
+                  href="/faqs"
                   >
                     <span class="font-label-md text-label-md"
                       >Property Matching Guide</span
                     >
                     <span
                       class="material-symbols-outlined text-sm transition-transform group-hover/item:translate-x-1"
+                      aria-hidden="true"
                       >arrow_forward</span
                     >
                   </a>
                 </li>
               </ul>
-              <!-- Decorative Abstract Shape -->
-              <div
-                class="absolute -bottom-10 -right-10 w-32 h-32 bg-on-primary opacity-10 rounded-full blur-2xl"
-              ></div>
             </div>
           </div>
           <!-- Contact Form (8 columns) -->
           <div
-            class="lg:col-span-8 bg-surface p-8 md:p-12 rounded-xl border border-outline-variant shadow-sm"
+            class="lg:col-span-8 bg-surface p-6 md:p-12 rounded-lg border border-outline-variant shadow-sm"
           >
-            <h2 class="font-headline-md text-headline-md mb-8">
+            <h2 class="font-headline-md text-headline-md mb-8" id="contact-form-title">
               Send Us a Message
             </h2>
             <form
               class="grid grid-cols-1 md:grid-cols-2 gap-6"
               id="contact-form"
+              action="/contact#contact-form"
+              method="POST"
+              aria-labelledby="contact-form-title"
+              data-submit-feedback
+              data-submit-label="Sending..."
             >
+              <% if (error) { %>
+                <div id="contact-error-summary" role="alert" tabindex="-1" data-focus-feedback class="md:col-span-2 rounded-lg bg-error-container px-4 py-3 text-on-error-container"><%= error %></div>
+              <% } %>
+              <% if (success) { %>
+                <div role="status" tabindex="-1" data-focus-feedback class="md:col-span-2 rounded-lg bg-secondary-container px-4 py-3 text-on-secondary-container"><%= success %></div>
+              <% } %>
               <div class="space-y-2">
                 <label
                   class="font-label-md text-label-md text-on-surface-variant"
                   for="name"
-                  >Full Name</label
+                  >Full Name <span class="text-error" aria-hidden="true">*</span><span class="sr-only"> required</span></label
                 >
                 <input
-                  class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
+                  class="w-full px-4 py-3 bg-white border <%= contactErrors.name ? 'border-error' : 'border-outline-variant' %> rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
                   id="name"
                   name="name"
                   placeholder="Enter your name"
                   required=""
                   type="text"
+                  autocomplete="name"
+                  maxlength="120"
+                  aria-invalid="<%= contactErrors.name ? 'true' : 'false' %>"
+                  <% if (contactErrors.name) { %>aria-describedby="name-error"<% } %>
+                  value="<%= form.name || '' %>"
                 />
+                <% if (contactErrors.name) { %><p id="name-error" class="text-sm text-error"><%= contactErrors.name %></p><% } %>
               </div>
               <div class="space-y-2">
                 <label
                   class="font-label-md text-label-md text-on-surface-variant"
                   for="email"
-                  >Email Address</label
+                  >Email Address <span class="text-error" aria-hidden="true">*</span><span class="sr-only"> required</span></label
                 >
                 <input
-                  class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
+                  class="w-full px-4 py-3 bg-white border <%= contactErrors.email ? 'border-error' : 'border-outline-variant' %> rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
                   id="email"
                   name="email"
                   placeholder="email@example.com"
                   required=""
                   type="email"
+                  autocomplete="email"
+                  maxlength="254"
+                  aria-invalid="<%= contactErrors.email ? 'true' : 'false' %>"
+                  <% if (contactErrors.email) { %>aria-describedby="email-error"<% } %>
+                  value="<%= form.email || '' %>"
                 />
+                <% if (contactErrors.email) { %><p id="email-error" class="text-sm text-error"><%= contactErrors.email %></p><% } %>
               </div>
               <div class="md:col-span-2 space-y-2">
                 <label
@@ -205,38 +227,45 @@
                   >Subject</label
                 >
                 <select
-                  class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard appearance-none"
+                  class="w-full px-4 py-3 bg-white border <%= contactErrors.subject ? 'border-error' : 'border-outline-variant' %> rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard appearance-none"
                   id="subject"
                   name="subject"
+                  aria-invalid="<%= contactErrors.subject ? 'true' : 'false' %>"
+                  <% if (contactErrors.subject) { %>aria-describedby="subject-error"<% } %>
                 >
-                  <option value="general">General Inquiry</option>
-                  <option value="renter">Renter Support</option>
-                  <option value="landlord">Landlord Support</option>
-                  <option value="billing">HomiScore Verification</option>
+                  <option value="general" <%= form.subject === 'general' ? 'selected' : '' %>>General Inquiry</option>
+                  <option value="renter" <%= form.subject === 'renter' ? 'selected' : '' %>>Renter Support</option>
+                  <option value="landlord" <%= form.subject === 'landlord' ? 'selected' : '' %>>Landlord Support</option>
+                  <option value="homiscore" <%= form.subject === 'homiscore' ? 'selected' : '' %>>HomiScore Verification</option>
                 </select>
+                <% if (contactErrors.subject) { %><p id="subject-error" class="text-sm text-error"><%= contactErrors.subject %></p><% } %>
               </div>
               <div class="md:col-span-2 space-y-2">
                 <label
                   class="font-label-md text-label-md text-on-surface-variant"
                   for="message"
-                  >Your Message</label
+                  >Your Message <span class="text-error" aria-hidden="true">*</span><span class="sr-only"> required</span></label
                 >
                 <textarea
-                  class="w-full px-4 py-3 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
+                  class="w-full px-4 py-3 bg-white border <%= contactErrors.message ? 'border-error' : 'border-outline-variant' %> rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-standard"
                   id="message"
                   name="message"
                   placeholder="How can we help you build reputation today?"
                   required=""
                   rows="6"
-                ></textarea>
+                  maxlength="4000"
+                  aria-invalid="<%= contactErrors.message ? 'true' : 'false' %>"
+                  <% if (contactErrors.message) { %>aria-describedby="message-error"<% } %>
+                ><%= form.message || '' %></textarea>
+                <% if (contactErrors.message) { %><p id="message-error" class="text-sm text-error"><%= contactErrors.message %></p><% } %>
               </div>
               <div class="md:col-span-2">
                 <button
-                  class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-md hover:shadow-lg transition-standard transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2"
+                  class="w-full md:w-auto min-w-40 px-10 py-4 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-md hover:shadow-lg transition-standard transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2 disabled:cursor-wait disabled:opacity-60"
                   type="submit"
                 >
                   Send Message
-                  <span class="material-symbols-outlined text-sm">send</span>
+                  <span class="material-symbols-outlined text-sm" aria-hidden="true">send</span>
                 </button>
               </div>
             </form>
@@ -245,7 +274,7 @@
       </section>
       <!-- Bento Grid: Support for Every Member -->
       <section
-        class="max-w-container-max mx-auto px-margin-desktop mt-24 transition-standard duration-700 opacity-100 translate-y-0"
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-24"
       >
         <div class="mb-12 text-center">
           <h2 class="font-headline-lg text-headline-lg text-primary mb-4">
@@ -259,13 +288,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-desktop">
           <!-- Renter Card -->
           <div
-            class="group relative bg-white border border-outline-variant rounded-xl p-10 overflow-hidden transition-standard hover:shadow-xl hover:border-primary/20"
+            class="group relative bg-white border border-outline-variant rounded-lg p-6 md:p-10 overflow-hidden transition-standard hover:shadow-xl hover:border-primary/20"
           >
-            <div
-              class="absolute top-0 right-0 w-32 h-32 bg-secondary-container rounded-bl-full opacity-30 group-hover:opacity-50 transition-standard"
-            ></div>
             <div class="relative z-10">
               <span class="material-symbols-outlined text-4xl text-primary mb-6"
+                aria-hidden="true"
                 >person_check</span
               >
               <h3
@@ -280,39 +307,41 @@
               <ul class="space-y-3 mb-10">
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Help with rental applications
                 </li>
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Reputation building tools
                 </li>
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Account &amp; HomiScore verification
                 </li>
               </ul>
-              <button
-                class="font-label-md text-label-md px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary-fixed transition-standard"
+              <a
+                class="inline-flex min-h-11 items-center justify-center font-label-md text-label-md px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary-fixed transition-standard"
+              href="/faqs"
               >
                 Visit Renter Help Center
-              </button>
+              </a>
             </div>
           </div>
           <!-- Landlord Card -->
           <div
-            class="group relative bg-white border border-outline-variant rounded-xl p-10 overflow-hidden transition-standard hover:shadow-xl hover:border-primary/20"
+            class="group relative bg-white border border-outline-variant rounded-lg p-6 md:p-10 overflow-hidden transition-standard hover:shadow-xl hover:border-primary/20"
           >
-            <div
-              class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full group-hover:bg-primary-container/20 transition-standard"
-            ></div>
             <div class="relative z-10">
               <span class="material-symbols-outlined text-4xl text-primary mb-6"
+                aria-hidden="true"
                 >home_work</span
               >
               <h3
@@ -321,123 +350,72 @@
                 For Landlords
               </h3>
               <p class="font-body-md text-body-md text-on-surface-variant mb-8">
-                High-fidelity tools for property managers and owners to
+                Practical tools for property managers and owners to
                 streamline operations with verified data.
               </p>
               <ul class="space-y-3 mb-10">
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Optimized property listings
                 </li>
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Seamless applicant screening
                 </li>
                 <li class="flex items-center gap-3 text-on-surface-variant">
                   <span class="material-symbols-outlined text-primary text-xl"
+                    aria-hidden="true"
                     >check_circle</span
                   >
                   Automated rental payment flows
                 </li>
               </ul>
-              <button
-                class="font-label-md text-label-md px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary-fixed transition-standard"
+              <a
+                class="inline-flex min-h-11 items-center justify-center font-label-md text-label-md px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary-fixed transition-standard"
+              href="/faqs"
               >
                 Visit Landlord Support
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
-      <!-- Dynamic Map Mockup -->
+      <!-- Location -->
       <section
-        class="max-w-container-max mx-auto px-margin-desktop mt-24 transition-standard duration-700 opacity-100 translate-y-0"
+        class="mt-24 bg-surface-container-low px-margin-mobile md:px-margin-desktop py-20"
+        id="visit-us"
       >
-        <div
-          class="rounded-2xl overflow-hidden shadow-sm border border-outline-variant h-[400px] relative"
-        >
-          <div
-            class="absolute inset-0 bg-surface-container flex items-center justify-center"
-          >
-            <div
-              class="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
-              data-alt="A high-fidelity minimalist digital map of San Francisco's Financial District, showing clean white streets, soft blue-tinted building blocks, and a prominent brand-colored pin marking the headquarters of a modern PropTech firm. The map style is sleek, corporate, and focuses on clarity and urban precision."
-              style="
-                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCAw0U6YCq6NKsf7dsGM--Y6ouUurtNf03su-3zjUATSipm2FwP3UFMX_3wwFUcA8oJ0rfc8rDV-fH2zv3d5c6YF_mdWyziU7KkTl229rG0NFWXzZm89xVCquuhCTXc7Bu47ykkBxT8MsLIFzkt9kJVsnbreh8fyhAvvNOLZfGHM67JwfT4z6wZVjrndfp8gXf86nJgsYwffYVGq1Sr8Qh7bSwxbLPUEYy8ZszOEfgrh3hAQy-ycXRpLRWDCdPYrpORQjKv9qqfdMqa&quot;);
-              "
-            ></div>
-          </div>
-          <div
-            class="absolute bottom-6 left-6 bg-white p-6 rounded-xl shadow-lg border border-outline-variant max-w-sm"
-          >
-            <h4 class="font-headline-md text-headline-md text-primary mb-2">
-              Our Headquarters
-            </h4>
-            <p class="font-body-md text-body-md text-on-surface-variant">
-              Join us at our San Francisco hub where we're redefining rental
-              accountability every day.
+        <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p class="font-label-sm text-label-sm uppercase text-primary mb-3">Visit HomiFund</p>
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Our London location</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+              For an in-person conversation, contact us first so the right team member can be available to help.
             </p>
           </div>
+          <address class="not-italic md:border-l md:border-outline-variant md:pl-10">
+            <p class="font-headline-md text-headline-md text-on-surface mb-2">287 Underhill Road</p>
+            <p class="text-on-surface-variant mb-6">London SE22 0AN, United Kingdom</p>
+            <a
+              class="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-6 py-3 text-on-primary font-label-md text-label-md hover:opacity-90"
+              href="https://www.google.com/maps/search/?api=1&amp;query=287%20Underhill%20Road%2C%20London%20SE22%200AN"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+              <span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
+            </a>
+          </address>
         </div>
       </section>
     </main>
     <!-- Footer -->
-    <script>
-      // Form micro-interaction
-      document
-        .getElementById("contact-form")
-        ?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const btn = e.target.querySelector("button");
-          const originalText = btn.innerHTML;
-
-          btn.innerHTML =
-            '<span class="material-symbols-outlined animate-spin">sync</span> Sending...';
-          btn.disabled = true;
-
-          setTimeout(() => {
-            btn.innerHTML =
-              '<span class="material-symbols-outlined">check_circle</span> Message Sent';
-            btn.classList.replace("bg-primary", "bg-tertiary-container");
-            e.target.reset();
-
-            setTimeout(() => {
-              btn.innerHTML = originalText;
-              btn.classList.replace("bg-tertiary-container", "bg-primary");
-              btn.disabled = false;
-            }, 3000);
-          }, 1500);
-        });
-
-      // Simple Fade-in Observer
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("opacity-100", "translate-y-0");
-              entry.target.classList.remove("opacity-0", "translate-y-10");
-            }
-          });
-        },
-        { threshold: 0.1 },
-      );
-
-      document.querySelectorAll("section").forEach((section) => {
-        section.classList.add(
-          "transition-standard",
-          "duration-700",
-          "opacity-0",
-          "translate-y-10",
-        );
-        observer.observe(section);
-      });
-    </script>
-
-    <script src="/js/main.js"></script>
     <%- include('partials/footer') %>
     <script src="/js/main.js"></script>
   </body>

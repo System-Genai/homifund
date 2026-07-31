@@ -3,886 +3,108 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="bg-surface text-on-surface">
+  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
+    <% const documentUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
+    <% const displayName = documentUser.fullName || 'Landlord'; %>
     <%- include('../partials/sidebar-landlord') %>
-    <!-- Shared landlord sidebar -->
 
-    <main class="ml-[280px] min-h-screen flex flex-col">
-      <!-- Shared landlord header -->
-      <header
-        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant shadow-sm"
-      >
-        <div class="flex items-center gap-4 flex-1">
-          <div class="relative w-full max-w-md">
-            <span
-              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
-              >search</span
-            >
-            <input
-              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
-              placeholder="Search documents, properties, applications..."
-              type="text"
-            />
+    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
+      <div class="min-w-0">
+        <p class="truncate text-label-sm font-bold text-secondary">Landlord workspace</p>
+        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/user-profile" aria-label="Landlord profile" title="Landlord profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+      </div>
+    </header>
+
+    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="mb-1 text-label-md font-bold text-secondary">Record workspace</p>
+            <h1 class="text-headline-lg font-bold text-primary">Documents</h1>
+            <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review document availability and the safeguards required before private files can be stored.</p>
           </div>
+          <a class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary px-6 font-bold text-primary hover:bg-surface-container-lowest" href="/landlord-verification"><span class="material-symbols-outlined text-xl" aria-hidden="true">fact_check</span>Review requirements</a>
         </div>
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-4 text-on-surface-variant">
-            <button
-              class="relative hover:bg-surface-container-low p-2 rounded-full"
-            >
-              <span class="material-symbols-outlined">notifications</span
-              ><span
-                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
-              ></span>
-            </button>
-            <button class="hover:bg-surface-container-low p-2 rounded-full">
-              <span class="material-symbols-outlined">settings</span>
-            </button>
-            <button class="hover:bg-surface-container-low p-2 rounded-full">
-              <span class="material-symbols-outlined">chat_bubble</span>
-            </button>
-          </div>
-          <div class="h-8 w-px bg-outline-variant"></div>
-          <div class="flex items-center gap-3 pl-2">
-            <div class="text-right">
-              <p
-                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
-              >
-                Alex S.<span
-                  class="material-symbols-outlined text-primary text-[16px]"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >verified</span
-                >
-              </p>
-              <p class="text-label-sm text-on-surface-variant">Landlord</p>
-            </div>
-            <div
-              class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden"
-            >
-              <img
-                class="w-full h-full object-cover"
-                alt="Landlord profile"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfyUFPpHlltwY4uywYn1y_PdsiR3BFgIQ8VUhvXeDCSgjOLZl3tkCG2TdD8QP4NeMEfIPjcpydGkPiXvbClt3upnyuxsKrQK3RLUTutPWQ4XwDwPm3bb7tkbq7Scl7Nxy0N7gUwynESqZXR7Ei82p-XdYbtNAVKzar-sOCoQPj3LNbR3RFENcBKzzijFNKbIQGnOii3YA8rfmGg0Xx5RWmyydwVu3prhMmiGZlClH4Oq_A9oXezeCgAw"
-              />
-            </div>
-          </div>
-        </div>
-      </header>
 
-      <section class="px-margin-desktop py-7 bg-surface">
-        <div class="max-w-[1120px] mx-auto space-y-5">
-          <div
-            class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4"
-          >
-            <div>
-              <p
-                class="text-label-sm uppercase tracking-[0.14em] text-on-surface-variant font-bold mb-1"
-              >
-                Property and tenancy records
-              </p>
-              <h2 class="text-headline-lg text-primary">Documents</h2>
-              <p class="text-body-md text-on-surface-variant mt-2">
-                Keep your property, compliance and tenancy documents organised
-                and ready when you need them.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-3">
-              <button
-                class="px-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
-              >
-                Manage access
-              </button>
-              <button
-                class="px-4 py-2.5 rounded-lg bg-primary text-on-primary text-label-sm font-bold hover:opacity-90 flex items-center gap-2"
-              >
-                <span class="material-symbols-outlined text-[18px]"
-                  >upload_file</span
-                >Upload document
-              </button>
-            </div>
-          </div>
-
-          <!-- Compact status strip -->
-          <section class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div
-              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
-            >
-              <span class="material-symbols-outlined text-primary"
-                >description</span
-              >
+        <section class="mb-8 border-y border-error/40 bg-error-container/30 px-5 py-6 sm:px-6" aria-labelledby="document-storage-status-title">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-error text-on-error" aria-hidden="true">lock</span>
               <div>
-                <p
-                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
-                >
-                  Active documents
-                </p>
-                <p class="text-label-sm font-bold text-on-surface mt-0.5">
-                  18 stored across 3 properties
-                </p>
+                <p class="text-label-sm font-bold uppercase text-error">Storage unavailable</p>
+                <h2 id="document-storage-status-title" class="mt-1 text-headline-md font-bold text-on-surface">Secure document storage is not configured</h2>
+                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">Do not upload or send identity, ownership, tenancy, banking, or compliance documents through Contact or Messages. No private file-storage service is connected to this application.</p>
               </div>
             </div>
-            <div
-              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
-            >
-              <span class="material-symbols-outlined text-error">warning</span>
-              <div>
-                <p
-                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
-                >
-                  Needs attention
-                </p>
-                <p class="text-label-sm font-bold text-on-surface mt-0.5">
-                  2 documents expire soon
-                </p>
+            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 stored documents</span>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+          <div class="space-y-8 xl:col-span-8">
+            <section aria-labelledby="document-records-title">
+              <div class="mb-4">
+                <h2 id="document-records-title" class="text-headline-md font-bold text-on-surface">Document records</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Search, category filters, expiry tracking, downloads, and sharing require persisted private records.</p>
               </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 px-4 py-3 flex items-center gap-3"
-            >
-              <span class="material-symbols-outlined text-primary"
-                >verified</span
-              >
-              <div>
-                <p
-                  class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
-                >
-                  Compliance status
-                </p>
-                <p class="text-label-sm font-bold text-on-surface mt-0.5">
-                  3 properties checked
-                </p>
+              <div class="rounded-lg border border-dashed border-outline-variant px-5 py-12 text-center">
+                <span class="material-symbols-outlined text-4xl text-outline" aria-hidden="true">folder_off</span>
+                <h3 class="mt-3 font-bold text-on-surface">No documents stored</h3>
+                <p class="mx-auto mt-2 max-w-xl text-body-sm text-on-surface-variant">This workspace will remain read-only until secure upload, storage, access, retention, and deletion services are implemented.</p>
+                <a class="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary hover:bg-surface-container-low" href="/user/landlord/support"><span class="material-symbols-outlined text-xl" aria-hidden="true">help</span>Document support</a>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-            <!-- Documents workspace -->
-            <div class="lg:col-span-8 space-y-4">
-              <section
-                class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl overflow-hidden"
-              >
-                <div
-                  class="px-5 pt-4 border-b border-outline-variant/70 flex flex-wrap gap-x-5 gap-y-2"
-                >
-                  <button
-                    class="pb-3 text-label-sm font-bold text-primary border-b-2 border-primary"
-                  >
-                    All documents
-                  </button>
-                  <button
-                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
-                  >
-                    Property &amp; compliance
-                  </button>
-                  <button
-                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
-                  >
-                    Tenancies
-                  </button>
-                  <button
-                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
-                  >
-                    Financial records
-                  </button>
-                  <button
-                    class="pb-3 text-label-sm font-bold text-on-surface-variant hover:text-primary"
-                  >
-                    Shared documents
-                  </button>
-                </div>
-                <div class="overflow-x-auto">
-                  <table class="w-full min-w-[820px] text-left">
-                    <thead class="bg-surface-container-low">
-                      <tr
-                        class="text-[10px] uppercase tracking-wider text-on-surface-variant"
-                      >
-                        <th class="px-4 py-3 font-bold">Document</th>
-                        <th class="px-3 py-3 font-bold">Property</th>
-                        <th class="px-3 py-3 font-bold">Category</th>
-                        <th class="px-3 py-3 font-bold">Status</th>
-                        <th class="px-3 py-3 font-bold">Last updated</th>
-                        <th class="px-3 py-3 font-bold">Expiry</th>
-                        <th class="px-4 py-3 font-bold text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody class="divide-y divide-outline-variant/50">
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >verified_user</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Gas Safety Certificate
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          The Glass House
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Property &amp; compliance
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
-                            ><span class="material-symbols-outlined text-[14px]"
-                              >check_circle</span
-                            >Valid</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          03 Jun 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          03 Jun 2027
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >electrical_services</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Electrical Installation Condition Report
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          The Glass House
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Property &amp; compliance
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
-                            ><span class="material-symbols-outlined text-[14px]"
-                              >check_circle</span
-                            >Valid</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          14 Jan 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          14 Jan 2031
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >energy_savings_leaf</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Energy Performance Certificate
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Hudson Lofts
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Property &amp; compliance
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex items-center gap-1 bg-[#fff4e5] text-[#b45309] px-2 py-1 rounded-full text-[10px] font-bold"
-                            ><span class="material-symbols-outlined text-[14px]"
-                              >warning</span
-                            >Expiring soon</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          21 Jul 2016
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-[#b45309] font-bold"
-                        >
-                          21 Jul 2026
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >signature</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Tenancy Agreement — Sarah Mitchell
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          The Glass House
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Tenancies
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
-                            >Active</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          01 Jun 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          31 May 2027
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >account_balance</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Deposit Protection Certificate
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          The Glass House
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Tenancies
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
-                            >Confirmed</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          01 Jun 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          No expiry
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >receipt_long</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Rent Statement — May 2026
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Hudson Lofts
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Financial records
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex bg-primary/10 text-primary px-2 py-1 rounded-full text-[10px] font-bold"
-                            >Current</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          31 May 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          No expiry
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="hover:bg-surface-container-low/60">
-                        <td class="px-4 py-3.5">
-                          <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary"
-                              >fact_check</span
-                            >
-                            <p class="text-label-sm font-bold">
-                              Inventory and Check-in Report
-                            </p>
-                          </div>
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Hudson Lofts
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          Tenancies
-                        </td>
-                        <td class="px-3 py-3.5">
-                          <span
-                            class="inline-flex bg-surface-container text-on-surface-variant px-2 py-1 rounded-full text-[10px] font-bold"
-                            >Ready</span
-                          >
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          29 May 2026
-                        </td>
-                        <td
-                          class="px-3 py-3.5 text-label-sm text-on-surface-variant"
-                        >
-                          No expiry
-                        </td>
-                        <td class="px-4 py-3.5 text-right">
-                          <div class="inline-flex gap-2">
-                            <button
-                              class="text-primary text-label-sm font-bold hover:underline"
-                            >
-                              View</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Update</button
-                            ><button
-                              class="text-on-surface-variant text-label-sm font-bold hover:text-primary"
-                            >
-                              Share
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </section>
+            <section aria-labelledby="storage-controls-title">
+              <div class="mb-4">
+                <h2 id="storage-controls-title" class="text-headline-md font-bold text-on-surface">Required storage controls</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Each control must be implemented and tested before file upload is enabled.</p>
+              </div>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">encrypted</span><h3 class="mt-3 font-bold text-on-surface">Private storage and access</h3><p class="mt-2 text-body-sm text-on-surface-variant">Tenant-scoped storage, encryption, least-privilege access, and auditable authorization are required.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">shield</span><h3 class="mt-3 font-bold text-on-surface">File safety</h3><p class="mt-2 text-body-sm text-on-surface-variant">Type, size, content, and malware checks must complete before any file becomes available.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">event_busy</span><h3 class="mt-3 font-bold text-on-surface">Retention and deletion</h3><p class="mt-2 text-body-sm text-on-surface-variant">Every category needs a documented retention period, owner-controlled deletion, and recovery policy.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">manage_accounts</span><h3 class="mt-3 font-bold text-on-surface">Consent and sharing</h3><p class="mt-2 text-body-sm text-on-surface-variant">Sharing needs recipient scope, purpose, expiry, revocation, download history, and clear consent.</p></article>
+              </div>
+            </section>
+          </div>
 
-              <!-- Compact upload flow -->
-              <section
-                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
-              >
-                <div class="flex flex-col gap-3">
-                  <div
-                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-                  >
-                    <div>
-                      <h3 class="text-label-md font-bold">
-                        Add a property document
-                      </h3>
-                      <p class="text-label-sm text-on-surface-variant mt-1">
-                        Upload PDF, JPG or PNG files up to 10 MB.
-                      </p>
-                    </div>
-                    <select
-                      class="border border-outline-variant bg-surface rounded-lg px-3 py-2 text-label-sm text-on-surface"
-                    >
-                      <option>Select property or tenancy</option>
-                      <option>The Glass House</option>
-                      <option>Hudson Lofts</option>
-                      <option>Riverside Court</option>
-                      <option>Sarah Mitchell tenancy</option>
-                    </select>
-                  </div>
-                  <select
-                    class="w-full border border-outline-variant bg-surface rounded-lg px-3 py-2 text-label-sm text-on-surface"
-                  >
-                    <option selected>Choose document type</option>
-                    <optgroup label="Property & compliance">
-                      <option>Gas Safety Certificate</option>
-                      <option>Electrical Installation Condition Report</option>
-                      <option>Energy Performance Certificate</option>
-                      <option>Smoke Alarm Record</option>
-                      <option>Carbon Monoxide Alarm Record</option>
-                      <option>Fire Risk Assessment</option>
-                      <option>HMO Licence</option>
-                      <option>Selective Licence</option>
-                      <option>Landlord Insurance Certificate</option>
-                      <option>Buildings Insurance Certificate</option>
-                      <option>Property Inspection Report</option>
-                      <option>Maintenance Certificate</option>
-                      <option>Appliance Warranty</option>
-                      <option>Planning Permission</option>
-                      <option>Building Regulations Certificate</option>
-                    </optgroup>
-                    <optgroup label="Tenancies">
-                      <option>Tenancy Agreement</option>
-                      <option>Tenancy Renewal Agreement</option>
-                      <option>Deposit Protection Certificate</option>
-                      <option>Prescribed Information</option>
-                      <option>Inventory and Check-in Report</option>
-                      <option>Check-out Report</option>
-                      <option>Guarantor Agreement</option>
-                      <option>Rent Arrears Notice</option>
-                      <option>Notice to Tenant</option>
-                      <option>End-of-Tenancy Letter</option>
-                      <option>Tenant Reference Document</option>
-                      <option>Tenant Document Shared With Permission</option>
-                    </optgroup>
-                    <optgroup label="Financial records">
-                      <option>Rent Statement</option>
-                      <option>Rent Payment Record</option>
-                      <option>Deposit Record</option>
-                      <option>Service Charge Statement</option>
-                      <option>Mortgage Statement</option>
-                      <option>Council Tax Record</option>
-                      <option>Utility Bill</option>
-                      <option>Maintenance Invoice</option>
-                      <option>Contractor Invoice</option>
-                      <option>Other Financial Record</option>
-                    </optgroup>
-                    <optgroup label="Other">
-                      <option>Property Photograph</option>
-                      <option>Floor Plan</option>
-                      <option>Agent Agreement</option>
-                      <option>Management Agreement</option>
-                      <option>Other Supporting Document</option>
-                    </optgroup>
-                  </select>
-                  <div
-                    class="border-2 border-dashed border-outline-variant rounded-lg px-4 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:border-primary transition-colors"
-                  >
-                    <div class="flex items-center gap-3">
-                      <span
-                        class="material-symbols-outlined text-primary text-[24px]"
-                        >upload_file</span
-                      >
-                      <p class="text-label-sm text-on-surface-variant">
-                        Drag and drop a file here, or choose one from your
-                        device.
-                      </p>
-                    </div>
-                    <button
-                      class="w-fit px-4 py-2 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary"
-                    >
-                      Browse files
-                    </button>
-                  </div>
-                </div>
-              </section>
-            </div>
+          <aside class="space-y-6 xl:col-span-4" aria-label="Document workspace guidance">
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="prepare-offline-title">
+              <h2 id="prepare-offline-title" class="text-headline-md font-bold text-primary">Prepare offline</h2>
+              <p class="mt-2 text-body-sm text-on-surface-variant">Keep required files in a storage location you control until HomiFund provides an approved upload process.</p>
+              <ul class="mt-4 space-y-3 text-body-sm text-on-surface-variant">
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">description</span><span>Identity and address evidence</span></li>
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">description</span><span>Ownership or management authority</span></li>
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">description</span><span>Property safety and compliance records</span></li>
+                <li class="flex gap-3"><span class="material-symbols-outlined text-xl text-primary" aria-hidden="true">description</span><span>Tenancy records with appropriate access</span></li>
+              </ul>
+            </section>
 
-            <!-- Supporting panel -->
-            <aside class="lg:col-span-4 space-y-4">
-              <section
-                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
-              >
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary"
-                      >checklist</span
-                    >
-                    <h3 class="text-label-md font-bold">
-                      Compliance readiness
-                    </h3>
-                  </div>
-                  <span class="text-label-sm font-bold text-primary"
-                    >7 of 9</span
-                  >
-                </div>
-                <div
-                  class="h-2 w-full bg-surface-container-high rounded-full mt-4 overflow-hidden"
-                >
-                  <div class="h-full bg-primary w-[78%] rounded-full"></div>
-                </div>
-                <div class="mt-4 space-y-2.5 text-label-sm">
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Gas safety certificate</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Electrical safety report</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-[#b45309] text-[16px]"
-                        >warning</span
-                      >EPC</span
-                    ><span class="text-[#b45309] font-bold">Update soon</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Smoke alarm record</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Carbon monoxide record</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Deposit protection</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Property insurance</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-on-surface-variant text-[16px]"
-                        >remove_circle_outline</span
-                      >HMO / local licence</span
-                    ><span class="text-on-surface-variant font-bold"
-                      >Not required</span
-                    >
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="flex items-center gap-2"
-                      ><span
-                        class="material-symbols-outlined text-primary text-[16px]"
-                        >check_circle</span
-                      >Inventory report</span
-                    ><span class="text-primary font-bold">Complete</span>
-                  </div>
-                </div>
-                <button
-                  class="w-full mt-4 py-2.5 rounded-lg border border-primary text-primary text-label-sm font-bold hover:bg-primary hover:text-on-primary"
-                >
-                  Review compliance
-                </button>
-              </section>
-
-              <section
-                class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 p-4"
-              >
-                <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-primary"
-                    >share</span
-                  >
-                  <h3 class="text-label-md font-bold">Document access</h3>
-                </div>
-                <p class="text-label-sm text-on-surface-variant mt-3">
-                  Control who can view shared tenancy and property documents.
-                </p>
-                <div class="mt-4 space-y-2.5 text-label-sm">
-                  <div class="flex justify-between">
-                    <span class="text-on-surface-variant"
-                      >Shared with active tenancies</span
-                    ><span class="font-bold">2</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-on-surface-variant"
-                      >Shared with property managers</span
-                    ><span class="font-bold">1</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-on-surface-variant">
-                    <span class="material-symbols-outlined text-[16px]"
-                      >undo</span
-                    >Access can be revoked anytime
-                  </div>
-                </div>
-                <button
-                  class="w-full mt-4 py-2.5 rounded-lg border border-outline-variant text-primary text-label-sm font-bold hover:bg-surface-container-low"
-                >
-                  Manage access
-                </button>
-              </section>
-
-              <section
-                class="bg-surface-container-low rounded-xl border border-outline-variant/60 px-4 py-3 flex items-start gap-3"
-              >
-                <span class="material-symbols-outlined text-primary mt-0.5"
-                  >lock</span
-                >
-                <div>
-                  <h3 class="text-label-sm font-bold">
-                    Your records stay protected
-                  </h3>
-                  <p class="text-label-sm text-on-surface-variant mt-1">
-                    Documents are stored securely and only shared when you give
-                    access to a tenancy, property manager or team member.
-                  </p>
-                </div>
-              </section>
-            </aside>
-          </section>
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="document-actions-title">
+              <h2 id="document-actions-title" class="text-headline-md font-bold text-primary">Document actions</h2>
+              <dl class="mt-4 space-y-4 text-body-sm">
+                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Upload</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Download</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 border-b border-outline-variant pb-3"><dt class="text-on-surface-variant">Share or revoke</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4"><dt class="text-on-surface-variant">Expiry reminders</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+              </dl>
+              <nav class="mt-5 grid grid-cols-1 gap-2" aria-label="Document help links">
+                <a class="inline-flex min-h-11 items-center justify-between rounded-lg px-3 font-bold text-on-surface hover:bg-surface-container-low" href="/landlord-verification"><span>Verification checklist</span><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span></a>
+                <a class="inline-flex min-h-11 items-center justify-between rounded-lg px-3 font-bold text-on-surface hover:bg-surface-container-low" href="/user/landlord/properties"><span>Properties</span><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_forward</span></a>
+              </nav>
+            </section>
+          </aside>
         </div>
-      </section>
+      </div>
     </main>
 
-    <script>
-      document.querySelectorAll("aside nav a").forEach((item) => {
-        item.addEventListener("mouseenter", () => {
-          if (!item.classList.contains("bg-secondary-container"))
-            item.style.transform = "translateX(4px)";
-        });
-        item.addEventListener(
-          "mouseleave",
-          () => (item.style.transform = "translateX(0px)"),
-        );
-      });
-    </script>
-    <script src="/js/main.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>

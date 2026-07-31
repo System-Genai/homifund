@@ -3,420 +3,111 @@
   <head>
     <%- include('../../partials/head') %>
   </head>
-  <body class="bg-surface text-on-surface">
+  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
+    <% const propertyAddressUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
+    <% const displayName = propertyAddressUser.fullName || 'Landlord'; %>
     <%- include('../../partials/sidebar-landlord') %>
-    <!-- Shared landlord sidebar -->
 
-    <main class="ml-[280px] min-h-screen flex flex-col">
-      <!-- Shared landlord header -->
-      <header
-        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-10 border-b border-outline-variant"
-      >
-        <div class="relative w-full max-w-md">
-          <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
-            >search</span
-          >
-          <input
-            class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-            placeholder="Search properties, applications, documents..."
-            type="text"
-          />
+    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
+      <div class="min-w-0">
+        <p class="truncate text-label-sm font-bold text-secondary">Landlord workspace</p>
+        <p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p>
+      </div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/landlord/user-profile" aria-label="Landlord profile" title="Landlord profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+      </div>
+    </header>
+
+    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-8">
+          <a class="mb-4 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/user/landlord/properties"><span class="material-symbols-outlined text-xl" aria-hidden="true">arrow_back</span>Back to Properties</a>
+          <p class="mb-1 text-label-md font-bold text-secondary">Property setup</p>
+          <h1 class="text-headline-lg font-bold text-primary">Add property</h1>
+          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Property creation can begin only when private draft storage and a resumable, validated setup workflow are connected.</p>
         </div>
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-4 text-on-surface-variant">
-            <button
-              class="relative hover:bg-surface-container-low p-2 rounded-full"
-            >
-              <span class="material-symbols-outlined">notifications</span
-              ><span
-                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
-              ></span>
-            </button>
-            <button class="hover:bg-surface-container-low p-2 rounded-full">
-              <span class="material-symbols-outlined">settings</span>
-            </button>
-            <button class="hover:bg-surface-container-low p-2 rounded-full">
-              <span class="material-symbols-outlined">chat_bubble</span>
-            </button>
-          </div>
-          <div class="h-8 w-px bg-outline-variant"></div>
-          <div class="flex items-center gap-3">
-            <div class="text-right">
-              <p class="text-sm font-bold">Marcus R.</p>
-              <p class="text-xs text-on-surface-variant">Landlord</p>
+
+        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="property-draft-status-title">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">add_home_work</span>
+              <div>
+                <p class="text-label-sm font-bold uppercase text-secondary">Draft status</p>
+                <h2 id="property-draft-status-title" class="mt-1 text-headline-md font-bold text-primary">Property drafts are not connected</h2>
+                <p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">No PropertyDraft model, save endpoint, validation contract, ownership policy, resume state, or publishing lifecycle exists. Address fields are hidden to prevent silent data loss.</p>
+              </div>
             </div>
-            <div
-              class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center font-bold"
-            >
-              MR
-            </div>
+            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 property drafts</span>
           </div>
+        </section>
+
+        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+          <div class="space-y-8 xl:col-span-8">
+            <section class="border border-outline-variant bg-surface-container-lowest px-6 py-10 text-center sm:px-8" aria-labelledby="address-step-title">
+              <span class="material-symbols-outlined text-5xl text-primary" aria-hidden="true">location_off</span>
+              <p class="mt-4 text-label-sm font-bold uppercase text-secondary">Planned step 1 of 5</p>
+              <h2 id="address-step-title" class="mt-2 text-headline-md font-bold text-on-surface">Address and property type are unavailable</h2>
+              <p class="mx-auto mt-2 max-w-2xl text-body-sm text-on-surface-variant">Do not enter a property name, full address, postcode, type, occupancy, or furnishing details until the application can save them privately and recover failed submissions.</p>
+              <a class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-on-primary hover:opacity-90" href="/user/landlord/properties"><span class="material-symbols-outlined text-xl" aria-hidden="true">home_work</span>Return to properties</a>
+            </section>
+
+            <section aria-labelledby="property-draft-foundations-title">
+              <div class="mb-4">
+                <h2 id="property-draft-foundations-title" class="text-headline-md font-bold text-on-surface">Required draft foundations</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">The first step needs durable ownership and privacy before collecting a real address.</p>
+              </div>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">database</span><h3 class="mt-3 font-bold text-on-surface">Private draft record</h3><p class="mt-2 text-body-sm text-on-surface-variant">Create a landlord-owned draft with immutable ID, created/updated timestamps, versioning, and tenant-scoped authorization.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">rule</span><h3 class="mt-3 font-bold text-on-surface">Validated property identity</h3><p class="mt-2 text-body-sm text-on-surface-variant">Define supported countries, address schema, postcode rules, property types, residential fields, limits, and field-level errors.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">privacy_tip</span><h3 class="mt-3 font-bold text-on-surface">Address privacy</h3><p class="mt-2 text-body-sm text-on-surface-variant">Separate private full address and access rules from any approximate location intentionally displayed in a published listing.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">save</span><h3 class="mt-3 font-bold text-on-surface">Save and resume</h3><p class="mt-2 text-body-sm text-on-surface-variant">Support partial saves, validation errors, duplicate handling, retries, stale-version conflicts, and safe continuation to the next step.</p></article>
+              </div>
+            </section>
+
+            <section aria-labelledby="planned-property-steps-title">
+              <div class="mb-4">
+                <h2 id="planned-property-steps-title" class="text-headline-md font-bold text-on-surface">Planned setup sequence</h2>
+                <p class="mt-1 text-body-sm text-on-surface-variant">Every later step depends on the same saved draft identifier.</p>
+              </div>
+              <ol class="divide-y divide-outline-variant rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm">
+                <li class="flex items-start gap-4 p-5"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary font-bold text-on-primary">1</span><div><h3 class="font-bold text-on-surface">Address and property type</h3><p class="mt-1 text-on-surface-variant">Private identity, location, property category, and core residential details.</p></div></li>
+                <li class="flex items-start gap-4 p-5"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container-high font-bold text-on-surface">2</span><div><h3 class="font-bold text-on-surface">Listing details</h3><p class="mt-1 text-on-surface-variant">Public description, amenities, policies, and structured listing content.</p></div></li>
+                <li class="flex items-start gap-4 p-5"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container-high font-bold text-on-surface">3</span><div><h3 class="font-bold text-on-surface">Rent and availability</h3><p class="mt-1 text-on-surface-variant">Pricing, deposit, bills, tenancy terms, and authoritative availability.</p></div></li>
+                <li class="flex items-start gap-4 p-5"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container-high font-bold text-on-surface">4</span><div><h3 class="font-bold text-on-surface">Photos and documents</h3><p class="mt-1 text-on-surface-variant">Validated media plus private compliance-document storage and access.</p></div></li>
+                <li class="flex items-start gap-4 p-5"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-container-high font-bold text-on-surface">5</span><div><h3 class="font-bold text-on-surface">Review and publish</h3><p class="mt-1 text-on-surface-variant">Completeness, previews, confirmations, moderation, and publish history.</p></div></li>
+              </ol>
+            </section>
+          </div>
+
+          <aside class="space-y-6 xl:col-span-4" aria-label="Property draft boundaries">
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="draft-actions-title">
+              <h2 id="draft-actions-title" class="text-headline-md font-bold text-primary">Action availability</h2>
+              <dl class="mt-4 divide-y divide-outline-variant text-body-sm">
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Enter address details</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Save draft</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Resume draft</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+                <div class="flex items-start justify-between gap-4 py-3"><dt class="text-on-surface-variant">Continue to step 2</dt><dd class="font-bold text-on-surface">Unavailable</dd></div>
+              </dl>
+            </section>
+
+            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="address-safety-title">
+              <h2 id="address-safety-title" class="text-headline-md font-bold text-on-error-container">Keep addresses private</h2>
+              <p class="mt-2 text-body-sm text-on-error-container">Do not send a full property address, ownership file, access code, tenant detail, or compliance document through Contact or Messages.</p>
+            </section>
+
+            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="property-context-title">
+              <h2 id="property-context-title" class="font-bold text-on-surface">Portfolio context is not a listing</h2>
+              <p class="mt-2 text-body-sm text-on-surface-variant">The property count saved during onboarding is a self-reported estimate. It does not create property records or publish listings.</p>
+              <a class="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-primary hover:underline" href="/onboarding-landlord"><span class="material-symbols-outlined text-xl" aria-hidden="true">domain</span>Review onboarding</a>
+            </section>
+          </aside>
         </div>
-      </header>
-
-      <section class="px-10 py-7">
-        <div class="max-w-[1120px] mx-auto space-y-5">
-          <div
-            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-          >
-            <div>
-              <p
-                class="text-xs uppercase tracking-[.14em] text-on-surface-variant font-bold mb-1"
-              >
-                Property listing setup
-              </p>
-              <h1 class="text-3xl font-semibold text-primary">Add Property</h1>
-              <p class="text-sm text-on-surface-variant mt-2">
-                Add a rental property so you can create a listing, manage
-                applications and organise tenancy records.
-              </p>
-            </div>
-            <button
-              class="self-start md:self-auto text-primary text-sm font-bold hover:underline"
-            >
-              Save draft
-            </button>
-          </div>
-
-          <!-- Compact five-step progress -->
-          <section
-            class="bg-surface-container-lowest border border-outline-variant rounded-xl px-5 py-4"
-          >
-            <ol class="grid grid-cols-1 sm:grid-cols-5 gap-3">
-              <li class="flex items-center gap-2 text-primary">
-                <span
-                  class="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center"
-                  >1</span
-                ><span class="text-xs font-bold">Address &amp; type</span>
-              </li>
-              <li class="flex items-center gap-2 text-on-surface-variant">
-                <span
-                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
-                  >2</span
-                ><span class="text-xs font-bold">Listing details</span>
-              </li>
-              <li class="flex items-center gap-2 text-on-surface-variant">
-                <span
-                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
-                  >3</span
-                ><span class="text-xs font-bold">Rent &amp; availability</span>
-              </li>
-              <li class="flex items-center gap-2 text-on-surface-variant">
-                <span
-                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
-                  >4</span
-                ><span class="text-xs font-bold">Photos &amp; documents</span>
-              </li>
-              <li class="flex items-center gap-2 text-on-surface-variant">
-                <span
-                  class="w-6 h-6 rounded-full bg-surface-container-high border border-outline-variant text-xs font-bold flex items-center justify-center"
-                  >5</span
-                ><span class="text-xs font-bold">Review &amp; publish</span>
-              </li>
-            </ol>
-          </section>
-
-          <section
-            class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden"
-          >
-            <div class="px-5 py-4 border-b border-outline-variant">
-              <h2 class="text-sm font-bold">
-                Step 1: Address &amp; property type
-              </h2>
-              <p class="text-xs text-on-surface-variant mt-1">
-                Start with the property’s identity and core residential details.
-              </p>
-            </div>
-
-            <form class="p-5 space-y-5">
-              <p class="text-xs text-on-surface-variant">
-                Fields marked <span class="text-error font-bold">*</span> are
-                required.
-              </p>
-
-              <section class="space-y-4">
-                <div class="flex items-center justify-between gap-3">
-                  <h3 class="text-sm font-bold">Property identity</h3>
-                  <span class="text-xs text-on-surface-variant"
-                    >Private to your landlord account</span
-                  >
-                </div>
-                <div>
-                  <label
-                    class="block text-xs font-bold mb-1.5"
-                    for="property-name"
-                    >Property name <span class="text-error">*</span></label
-                  >
-                  <input
-                    id="property-name"
-                    class="w-full max-w-2xl px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="e.g. The Glass House, Flat 402"
-                    type="text"
-                  />
-                  <p class="text-xs text-on-surface-variant mt-1.5">
-                    Use a clear name to help you identify this property in
-                    HomiFund.
-                  </p>
-                </div>
-              </section>
-
-              <section class="space-y-4 pt-1">
-                <h3 class="text-sm font-bold">Property address</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div class="md:col-span-2">
-                    <label
-                      class="block text-xs font-bold mb-1.5"
-                      for="address-1"
-                      >Address line 1 <span class="text-error">*</span></label
-                    ><input
-                      id="address-1"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      type="text"
-                    />
-                  </div>
-                  <div class="md:col-span-2">
-                    <label
-                      class="block text-xs font-bold mb-1.5"
-                      for="address-2"
-                      >Address line 2
-                      <span class="text-on-surface-variant font-normal"
-                        >(optional)</span
-                      ></label
-                    ><input
-                      id="address-2"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      type="text"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold mb-1.5" for="city"
-                      >Town / city <span class="text-error">*</span></label
-                    ><input
-                      id="city"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      type="text"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold mb-1.5" for="postcode"
-                      >Postcode <span class="text-error">*</span></label
-                    ><input
-                      id="postcode"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm uppercase focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      placeholder="e.g. E14 5AB"
-                      type="text"
-                    />
-                    <p class="hidden text-xs text-error mt-1">
-                      Enter a valid UK postcode.
-                    </p>
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold mb-1.5" for="country"
-                      >Country</label
-                    ><select
-                      id="country"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    >
-                      <option>United Kingdom</option>
-                    </select>
-                  </div>
-                </div>
-                <p class="text-xs text-on-surface-variant">
-                  Your full property address is not shown publicly until you
-                  choose how the listing is displayed.
-                </p>
-              </section>
-
-              <section class="space-y-3 pt-1">
-                <h3 class="text-sm font-bold">
-                  Property type <span class="text-error">*</span>
-                </h3>
-                <div
-                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-                >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >apartment</span
-                      ><span class="text-sm font-semibold"
-                        >Flat / Apartment</span
-                      ></span
-                    ></label
-                  >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >house</span
-                      ><span class="text-sm font-semibold">House</span></span
-                    ></label
-                  >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >bed</span
-                      ><span class="text-sm font-semibold">Room</span></span
-                    ></label
-                  >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >meeting_room</span
-                      ><span class="text-sm font-semibold"
-                        >HMO / Shared house</span
-                      ></span
-                    ></label
-                  >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >home</span
-                      ><span class="text-sm font-semibold">Studio</span></span
-                    ></label
-                  >
-                  <label class="cursor-pointer"
-                    ><input
-                      class="peer sr-only"
-                      name="property-type"
-                      type="radio"
-                    /><span
-                      class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg bg-surface hover:bg-surface-container-low peer-checked:border-primary peer-checked:bg-secondary-container"
-                      ><span class="material-symbols-outlined text-primary"
-                        >more_horiz</span
-                      ><span class="text-sm font-semibold"
-                        >Other residential</span
-                      ></span
-                    ></label
-                  >
-                </div>
-              </section>
-
-              <section class="space-y-4 pt-1">
-                <h3 class="text-sm font-bold">Core residential details</h3>
-                <div
-                  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-                >
-                  <div>
-                    <label class="block text-xs font-bold mb-1.5" for="bedrooms"
-                      >Bedrooms <span class="text-error">*</span></label
-                    ><select
-                      id="bedrooms"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
-                    >
-                      <option value="">Select</option>
-                      <option>Studio</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4+</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-bold mb-1.5"
-                      for="bathrooms"
-                      >Bathrooms</label
-                    ><select
-                      id="bathrooms"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
-                    >
-                      <option value="">Select</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3+</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-bold mb-1.5"
-                      for="occupants"
-                      >Maximum occupants</label
-                    ><select
-                      id="occupants"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
-                    >
-                      <option value="">Select</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4+</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-xs font-bold mb-1.5"
-                      for="furnished"
-                      >Furnished status</label
-                    ><select
-                      id="furnished"
-                      class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
-                    >
-                      <option value="">Select</option>
-                      <option>Furnished</option>
-                      <option>Part-furnished</option>
-                      <option>Unfurnished</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="max-w-sm">
-                  <label class="block text-xs font-bold mb-1.5" for="status"
-                    >Property status</label
-                  ><select
-                    id="status"
-                    class="w-full px-3 py-2.5 bg-surface border border-outline-variant rounded-lg text-sm"
-                  >
-                    <option>Available now</option>
-                    <option>Occupied</option>
-                    <option>Coming soon</option>
-                  </select>
-                </div>
-              </section>
-            </form>
-
-            <div
-              class="px-5 py-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between gap-3"
-            >
-              <p class="text-xs text-on-surface-variant">
-                You can save this property as a draft now. Add photos and
-                required documents before publishing.
-              </p>
-              <button class="shrink-0 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold flex items-center gap-2" onclick="window.location.href = '/user/landlord/properties/add/listing-details'">
-                Continue to listing details
-                <span class="material-symbols-outlined text-[18px]"
-                  >arrow_forward</span
-                >
-              </button>
-            </div>
-          </section>
-        </div>
-      </section>
+      </div>
     </main>
-    <script src="../../../js/main.js"></script>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

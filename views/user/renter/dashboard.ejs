@@ -3,820 +3,94 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body class="bg-surface text-on-surface">
+  <body class="min-h-screen bg-surface-bright text-on-surface hf-dashboard">
+    <% const dashboardUser = typeof currentUser === 'object' && currentUser ? currentUser : {}; %>
+    <% const savedProfile = typeof renterProfile === 'object' && renterProfile ? renterProfile : {}; %>
+    <% const displayName = dashboardUser.fullName || 'Renter'; %>
+    <% const householdLabels = { one: '1 person', two: '2 people', three: '3 people', 'four-plus': '4 or more people' }; %>
+    <% const petLabels = { none: 'No pets', one: 'One pet', multiple: 'Multiple pets' }; %>
+    <% const employmentLabels = { employed: 'Employed', 'self-employed': 'Self-employed', student: 'Student', retired: 'Retired', other: 'Other' }; %>
+    <% const propertyLabels = { apartment: 'Apartment', house: 'House', studio: 'Studio', 'shared-home': 'Shared home', flexible: 'Flexible' }; %>
     <%- include('../partials/sidebar-renter') %>
-    <!-- SideNavBar Anchor -->
 
-    <!-- Main Viewport -->
-    <main class="md:ml-[240px] min-h-screen flex flex-col">
-      <!-- TopNavBar Anchor -->
-      <header
-        class="sticky top-0 z-40 h-16 bg-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant shadow-sm"
-      >
-        <div class="flex items-center gap-4 flex-1">
-          <div class="relative w-full max-w-md">
-            <span
-              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
-              data-icon="search"
-              >search</span
-            >
-            <input
-              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
-              placeholder="Search properties, applications, documents..."
-              type="text"
-            />
-          </div>
+    <header class="sticky top-0 z-40 flex min-h-16 items-center justify-between border-b border-outline-variant bg-surface px-4 shadow-sm md:pl-[264px] md:pr-8">
+      <div class="min-w-0"><p class="truncate text-label-sm font-bold text-secondary">Renter workspace</p><p class="truncate text-body-sm text-on-surface-variant"><%= displayName %></p></div>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/notification-bell" aria-label="Notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/messages" aria-label="Messages" title="Messages"><span class="material-symbols-outlined" aria-hidden="true">chat_bubble</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/settings" aria-label="Settings" title="Settings"><span class="material-symbols-outlined" aria-hidden="true">settings</span></a>
+        <a class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="/user/renter/profile" aria-label="Renter profile" title="Renter profile"><span class="material-symbols-outlined" aria-hidden="true">person</span></a>
+      </div>
+    </header>
+
+    <main class="w-full px-4 py-6 md:ml-[240px] md:w-[calc(100%-240px)] md:px-8 md:py-8 hf-dashboard-main">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-8">
+          <p class="mb-1 text-label-md font-bold text-secondary">Renter workspace</p>
+          <h1 class="text-headline-lg font-bold text-primary">Renter dashboard</h1>
+          <p class="mt-2 max-w-3xl text-body-md text-on-surface-variant">Review your saved account and search preferences. Property discovery, matching, applications, documents, payments, messages, and viewings need their own persisted services.</p>
         </div>
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-4 text-on-surface-variant">
-            <a
-              class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors"
-              href="/user/renter/notification-bell"
-            >
-              <span class="material-symbols-outlined" data-icon="notifications"
-                >notifications</span
-              >
-              <span
-                class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
-              ></span>
-            </a>
-            <a
-              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
-              href="/user/renter/settings"
-            >
-              <span class="material-symbols-outlined" data-icon="settings"
-                >settings</span
-              >
-            </a>
-            <a
-              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
-              href="/user/renter/messages"
-            >
-              <span class="material-symbols-outlined" data-icon="chat_bubble"
-                >chat_bubble</span
-              >
-            </a>
+
+        <section class="mb-8 border-y border-outline-variant bg-surface-container-low px-5 py-6 sm:px-6" aria-labelledby="renter-dashboard-status-title">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-on-primary" aria-hidden="true">space_dashboard</span>
+              <div><p class="text-label-sm font-bold uppercase text-secondary">Workspace status</p><h2 id="renter-dashboard-status-title" class="mt-1 text-headline-md font-bold text-primary">Renter activity is not connected</h2><p class="mt-2 max-w-3xl text-body-sm text-on-surface-variant">This application has no Property, Match, Application, Viewing, Message, Document, Payment, or Notification records to summarize.</p></div>
+            </div>
+            <span class="inline-flex min-h-11 shrink-0 items-center rounded-full bg-surface-container-high px-4 text-label-sm font-bold text-on-surface-variant">0 linked activity records</span>
           </div>
-          <div class="h-8 w-px bg-outline-variant"></div>
-          <a
-            class="flex items-center gap-3 pl-2 group cursor-pointer"
-            href="/user/renter/profile"
-          >
-            <div class="text-right">
-              <p
-                class="text-label-md font-bold text-on-surface leading-none flex items-center gap-1 justify-end"
-              >
-                Marcus R.
-                <span
-                  class="material-symbols-outlined text-primary text-[16px]"
-                  style="font-variation-settings: &quot;FILL&quot; 1"
-                  >verified</span
-                >
-              </p>
-              <p class="text-label-sm text-on-surface-variant">
-                Premium Member
-              </p>
-            </div>
-            <div
-              class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden"
-            >
-              <img
-                class="w-full h-full object-cover"
-                data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-K-ZZ89ru1SWv-PEdlTck1PFzK0rEckAq1tIhzdaNziZzV6IR6qu1yFTugsZtGCb8Gtz__AVoHptbp6WcnYRfz5gN32QFNpWUD5Kv6KGncaGDgAaFLqeBErnudLzR0tWbMVknKadoN_FU4tlBlt_sBYAWVnJm2BYHceYG_WSfoWBEkX44SZEPWF_67iBx_wS6OeBMds5keqwJWPc9myWl6dw-S_VApHflgfTATnUwhjHwDgU5Lk51nTX49yptiULVd_LkGsUjHpFe"
-              />
-            </div>
-          </a>
+        </section>
+
+        <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+          <div class="space-y-8 xl:col-span-8">
+            <section class="border border-outline-variant bg-surface-container-lowest p-6 sm:p-8" aria-labelledby="saved-renter-profile-title">
+              <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div><p class="text-label-sm font-bold uppercase text-secondary">Saved account context</p><h2 id="saved-renter-profile-title" class="mt-1 text-headline-md font-bold text-on-surface"><%= displayName %></h2><p class="mt-1 break-words text-body-sm text-on-surface-variant"><%= dashboardUser.email || 'Email unavailable' %></p></div>
+                <div class="flex flex-col gap-3 sm:items-end"><a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 font-bold text-on-primary hover:opacity-90" href="/onboarding-tenant"><span class="material-symbols-outlined text-xl" aria-hidden="true">edit</span>Update renter profile</a><a class="inline-flex min-h-11 items-center justify-center gap-2 font-bold text-primary hover:underline" href="/tenant-verification">Prepare verification</a></div>
+              </div>
+              <dl class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Legal name</dt><dd class="mt-1 break-words text-body-sm text-on-surface"><%= savedProfile.legalName || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Phone</dt><dd class="mt-1 break-words text-body-sm text-on-surface"><%= savedProfile.phone || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Household</dt><dd class="mt-1 text-body-sm text-on-surface"><%= householdLabels[savedProfile.householdSize] || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Pets</dt><dd class="mt-1 text-body-sm text-on-surface"><%= petLabels[savedProfile.petStatus] || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Employment</dt><dd class="mt-1 text-body-sm text-on-surface"><%= employmentLabels[savedProfile.employmentStatus] || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Property preference</dt><dd class="mt-1 text-body-sm text-on-surface"><%= propertyLabels[savedProfile.propertyType] || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Preferred locations</dt><dd class="mt-1 break-words text-body-sm text-on-surface"><%= savedProfile.preferredLocations || 'Not saved' %></dd></div>
+                <div class="rounded-lg bg-surface-container-low p-4"><dt class="text-label-sm font-bold text-secondary">Monthly budget preference</dt><dd class="mt-1 text-body-sm text-on-surface"><%= savedProfile.monthlyBudget !== undefined && savedProfile.monthlyBudget !== null ? String(savedProfile.monthlyBudget) + ' (currency not recorded)' : 'Not saved' %></dd></div>
+              </dl>
+            </section>
+
+            <section aria-labelledby="renter-workspace-foundations-title">
+              <div class="mb-4"><h2 id="renter-workspace-foundations-title" class="text-headline-md font-bold text-on-surface">Required renter-workspace foundations</h2><p class="mt-1 text-body-sm text-on-surface-variant">Dashboard summaries should come from explicit records, never decorative sample data.</p></div>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">manage_accounts</span><h3 class="mt-3 font-bold text-on-surface">Profile-owned preferences</h3><p class="mt-2 text-body-sm text-on-surface-variant">Search preferences remain renter-owned, editable, separately consented, and distinct from verification evidence or application criteria.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">travel_explore</span><h3 class="mt-3 font-bold text-on-surface">Authoritative discovery</h3><p class="mt-2 text-body-sm text-on-surface-variant">Matches require published listings, current availability, renter-selected filters, explainable ranking, saved state, and correction controls.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">assignment</span><h3 class="mt-3 font-bold text-on-surface">Application lifecycle</h3><p class="mt-2 text-body-sm text-on-surface-variant">Applications need listing identity, consented submission versions, delivery, landlord receipt, status history, withdrawal, and decision explanations.</p></article>
+                <article class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><span class="material-symbols-outlined text-primary" aria-hidden="true">shield_lock</span><h3 class="mt-3 font-bold text-on-surface">Protected activity services</h3><p class="mt-2 text-body-sm text-on-surface-variant">Documents, messages, payments, notifications, and viewings require scoped authorization, secure storage, delivery state, and audit history.</p></article>
+              </div>
+            </section>
+
+            <section aria-labelledby="renter-record-counts-title">
+              <div class="mb-4"><h2 id="renter-record-counts-title" class="text-headline-md font-bold text-on-surface">Current linked records</h2><p class="mt-1 text-body-sm text-on-surface-variant">Zero means no connected record was found. It is not a risk, rejection, or eligibility result.</p></div>
+              <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Property matches</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Applications</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Viewings</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Messages</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Documents</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+                <div class="rounded-lg border border-outline-variant bg-surface-container-lowest p-5"><dt class="text-label-sm font-bold text-secondary">Payments</dt><dd class="mt-2 text-headline-md font-bold text-primary">0</dd></div>
+              </dl>
+            </section>
+          </div>
+
+          <aside class="space-y-6 xl:col-span-4" aria-label="Renter dashboard boundaries">
+            <section class="rounded-lg border border-outline-variant bg-surface-container-lowest p-6" aria-labelledby="renter-journeys-title"><h2 id="renter-journeys-title" class="text-headline-md font-bold text-primary">Available account journeys</h2><nav class="mt-4 flex flex-col"><a class="inline-flex min-h-11 items-center justify-between gap-3 border-b border-outline-variant py-3 font-bold text-primary hover:underline" href="/onboarding-tenant">Update saved profile<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a><a class="inline-flex min-h-11 items-center justify-between gap-3 border-b border-outline-variant py-3 font-bold text-primary hover:underline" href="/tenant-verification">Prepare verification<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a><a class="inline-flex min-h-11 items-center justify-between gap-3 py-3 font-bold text-primary hover:underline" href="/user/renter/homiscore">Review HomiScore readiness<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a></nav></section>
+            <section class="rounded-lg border border-error bg-error-container p-6" aria-labelledby="renter-dashboard-privacy-title"><h2 id="renter-dashboard-privacy-title" class="text-headline-md font-bold text-on-error-container">Keep sensitive evidence private</h2><p class="mt-2 text-body-sm text-on-error-container">Do not send identity files, income evidence, bank details, card information, access credentials, or complete applications through Contact or unverified channels.</p></section>
+            <section class="border-l-4 border-primary bg-surface-container-low px-5 py-4" aria-labelledby="zero-record-meaning-title"><h2 id="zero-record-meaning-title" class="font-bold text-on-surface">No inferred outcomes</h2><p class="mt-2 text-body-sm text-on-surface-variant">Missing activity remains unavailable. The dashboard does not invent matches, scores, verification, affordability, payment health, or landlord decisions.</p></section>
+          </aside>
         </div>
-      </header>
-      <!-- Hero Section -->
-      <section class="px-margin-desktop py-10 bg-surface">
-        <div class="max-w-container-max mx-auto">
-          <div
-            class="flex flex-col md:flex-row md:items-end justify-between gap-6"
-          >
-            <div>
-              <h2
-                class="text-headline-xl font-headline-xl text-primary tracking-tight"
-              >
-                Welcome back, Marcus
-              </h2>
-              <p class="text-body-lg text-on-surface-variant max-w-2xl mt-2">
-                Your HomiScore is active and helping trusted landlords assess
-                your application faster.
-              </p>
-            </div>
-            <div class="flex gap-4">
-              <div
-                class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl min-w-[140px] shadow-sm"
-              >
-                <p
-                  class="text-label-sm text-on-surface-variant uppercase tracking-wider"
-                >
-                  Matches
-                </p>
-                <p class="text-headline-md text-primary">12</p>
-              </div>
-              <div
-                class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl min-w-[140px] shadow-sm"
-              >
-                <p
-                  class="text-label-sm text-on-surface-variant uppercase tracking-wider"
-                >
-                  <span class="" style="letter-spacing: 0.6px"
-                    >Active Apps</span
-                  >
-                </p>
-                <p class="text-headline-md text-primary">10</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Dashboard Content Grid -->
-      <section class="px-margin-desktop pb-20">
-        <div
-          class="max-w-container-max mx-auto grid grid-cols-12 gap-gutter-desktop"
-        >
-          <!-- Main Column (Left) -->
-          <div
-            class="col-span-12 lg:col-span-8 flex flex-col gap-gutter-desktop"
-          >
-            <!-- HomiScore Card -->
-            <div
-              class="homiscore-gradient rounded-2xl p-8 text-on-primary shadow-lg flex flex-col md:flex-row items-center gap-10 relative overflow-hidden"
-            >
-              <div class="relative z-10 text-center md:text-left flex-grow">
-                <div
-                  class="flex items-center gap-3 mb-4 justify-center md:justify-start"
-                >
-                  <span
-                    class="bg-white/20 px-3 py-1 rounded-full text-label-sm font-bold backdrop-blur-md flex items-center gap-1"
-                  >
-                    <span
-                      class="material-symbols-outlined text-[14px]"
-                      style="font-variation-settings: &quot;FILL&quot; 1"
-                      >verified</span
-                    >
-                    VERIFIED
-                  </span>
-                  <span
-                    class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-label-sm font-bold"
-                    >TRUSTED RENTER</span
-                  >
-                </div>
-                <h3 class="text-headline-lg font-bold mb-2">
-                  HomiScore Status
-                </h3>
-                <p class="text-body-md text-on-primary-container max-w-md">
-                  Your score is in the top 5% of renters in London. Landlords
-                  see you as a low-risk, premium tenant.
-                </p>
-                <button
-                  class="mt-8 bg-white text-primary px-8 py-3 rounded-lg font-bold hover:bg-surface-container-highest transition-colors active:scale-95"
-                  onclick="window.location.href = '/user/renter/homiscore'"
-                >
-                  View HomiScore
-                </button>
-              </div>
-              <div class="relative z-10 flex flex-col items-center">
-                <div
-                  class="w-48 h-48 border-[12px] border-white/10 rounded-full flex items-center justify-center relative"
-                >
-                  <div
-                    class="absolute inset-0 border-[12px] border-tertiary rounded-full"
-                    style="clip-path: polygon(0 0, 100% 0, 100% 90%, 0 90%)"
-                  ></div>
-                  <div class="text-center">
-                    <span class="text-headline-xl font-black block leading-none"
-                      >874</span
-                    >
-                    <span class="text-label-md text-on-primary-container"
-                      >Excellent</span
-                    >
-                  </div>
-                </div>
-                <p
-                  class="mt-4 text-label-sm text-on-primary-container uppercase tracking-widest"
-                >
-                  / 1000 Max Score
-                </p>
-              </div>
-              <!-- Decorative atmospheric effect -->
-              <div
-                class="absolute -right-20 -top-20 w-80 h-80 bg-tertiary/20 blur-[100px] rounded-full"
-              ></div>
-            </div>
-            <!-- Property Matches Grid -->
-            <div>
-              <div class="flex justify-between items-center mb-6">
-                <h3 class="text-headline-md text-on-surface">
-                  Top Matches For You
-                </h3>
-                <button
-                  class="text-primary font-bold hover:underline flex items-center gap-1"
-                >
-                  View all matches
-                  <span class="material-symbols-outlined">arrow_forward</span>
-                </button>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Property Card 1 -->
-                <div
-                  class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group"
-                >
-                  <div class="h-48 relative overflow-hidden">
-                    <img
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      data-alt="Luxurious modern apartment interior with floor-to-ceiling windows, minimalist furniture, soft evening light, high-end architectural photography, cool blue and neutral tones to match HomiFund branding."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuwWTNHD4HtAkdMFwEmx7fhevSnGWxUe8Oqe6sZRRv7l8CB1M4cYPKBAbw-l_uc-GR1RC6BLf6QKDyg6TOCl2dn0MRUgonsEhtqT6ZCiqVh6yK2jvRcO1OZXkKA6eoj4FlJ2X-rL2IltrijR0V4SPps2-bOx0rPwnKlYcKiEVBRdlPQenKTGAE2K6L3f_XD4r5GBeF5ppnbFNxOSt6mwZwJlzMRrZatUGXlvhtNYMnzHQlmAkgbInhGvDwlP_kq4IQPX-Az2BnFYvq"
-                    />
-                    <div
-                      class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary text-label-sm font-bold px-3 py-1 rounded-full shadow-sm"
-                    >
-                      98% Match
-                    </div>
-                    <div
-                      class="absolute bottom-3 left-3 bg-primary/80 backdrop-blur-md text-white text-label-sm font-medium px-3 py-1 rounded-md"
-                    >
-                      Landlord HomiScore: 912
-                    </div>
-                  </div>
-                  <div class="p-5">
-                    <div class="flex justify-between items-start mb-2">
-                      <h4 class="text-headline-md text-on-surface">
-                        The Sapphire Suites
-                      </h4>
-                      <span class="text-primary font-black"
-                        >£3,200<span
-                          class="text-label-sm font-normal text-on-surface-variant"
-                          >/mo</span
-                        ></span
-                      >
-                    </div>
-                    <p
-                      class="text-body-md text-on-surface-variant mb-4 flex items-center gap-1"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >location_on</span
-                      >
-                      Canary Wharf, London
-                    </p>
-                    <div class="flex items-center gap-4 mb-6">
-                      <span
-                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
-                        ><span class="material-symbols-outlined text-[16px]"
-                          >bed</span
-                        >
-                        2 Beds</span
-                      >
-                      <span
-                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
-                        ><span class="material-symbols-outlined text-[16px]"
-                          >bathtub</span
-                        >
-                        2 Baths</span
-                      >
-                      <span
-                        class="text-label-sm text-success text-on-secondary-fixed-variant flex items-center gap-1"
-                      >
-                        <span class="material-symbols-outlined text-[16px]"
-                          >event_available</span
-                        >
-                        Available Oct 12
-                      </span>
-                    </div>
-                    <div class="flex gap-2">
-                      <button
-                        class="flex-1 border border-primary text-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-fixed transition-colors"
-                        onclick="
-                          window.location.href = '/user/renter/view-property'
-                        "
-                      >
-                        View Property
-                      </button>
-                      <button
-                        aria-pressed="false"
-                        class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors apply-now-button"
-                        data-application-id="1"
-                        type="button"
-                        onclick="window.location.href = 'applications'"
-                      >
-                        Apply Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Property Card 2 -->
-                <div
-                  class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group"
-                >
-                  <div class="h-48 relative overflow-hidden">
-                    <img
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      data-alt="A stylish urban loft apartment with exposed brick walls, warm industrial lighting, high ceilings, large windows, professional photography, sophisticated and trustworthy atmosphere."
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPcxzbKtNPeFMyFYo-7XCIza5YmXM-JQEIdLVlOwF91X0Ss8kWclBLEozhzUteqDeKQwqh_qL7BmPHFe3H2K5ZsSJVEMG1lF1_7J_DSSuHvpEWDzH_lUEDejfimwL2gP7NmKPg2q8yQmFwyvnjIIJFEE8Ob-QP3nlbvwfLVLsQJw-S-Yn6xNbb0R2QP5srOkw-o378QMhF49AvimfVHsLgbM-xEro-nBmIQ6rzcBo3Lk1maCaI_wuPUR40GfrF00pNwYtBz04LUoTh"
-                    />
-                    <div
-                      class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-primary text-label-sm font-bold px-3 py-1 rounded-full shadow-sm"
-                    >
-                      95% Match
-                    </div>
-                    <div
-                      class="absolute bottom-3 left-3 bg-primary/80 backdrop-blur-md text-white text-label-sm font-medium px-3 py-1 rounded-md"
-                    >
-                      Landlord HomiScore: 885
-                    </div>
-                  </div>
-                  <div class="p-5">
-                    <div class="flex justify-between items-start mb-2">
-                      <h4 class="text-headline-md text-on-surface">
-                        Brick Lane Lofts
-                      </h4>
-                      <span class="text-primary font-black"
-                        >£2,850<span
-                          class="text-label-sm font-normal text-on-surface-variant"
-                          >/mo</span
-                        ></span
-                      >
-                    </div>
-                    <p
-                      class="text-body-md text-on-surface-variant mb-4 flex items-center gap-1"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >location_on</span
-                      >
-                      Shoreditch, London
-                    </p>
-                    <div class="flex items-center gap-4 mb-6">
-                      <span
-                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
-                        ><span class="material-symbols-outlined text-[16px]"
-                          >bed</span
-                        >
-                        1 Bed</span
-                      >
-                      <span
-                        class="text-label-sm text-on-surface-variant flex items-center gap-1"
-                        ><span class="material-symbols-outlined text-[16px]"
-                          >bathtub</span
-                        >
-                        1 Bath</span
-                      >
-                      <span
-                        class="text-label-sm text-success text-on-secondary-fixed-variant flex items-center gap-1"
-                      >
-                        <span class="material-symbols-outlined text-[16px]"
-                          >event_available</span
-                        >
-                        Available Now
-                      </span>
-                    </div>
-                    <div class="flex gap-2">
-                      <button
-                        class="flex-1 border border-primary text-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-fixed transition-colors"
-                        onclick="
-                          window.location.href = '/user/renter/view-property'
-                        "
-                      >
-                        View Property
-                      </button>
-                      <button
-                        aria-pressed="false"
-                        class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors apply-now-button"
-                        data-application-id="2"
-                        type="button"
-                        onclick="window.location.href = 'applications'"
-                      >
-                        Apply Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Applications Section -->
-            <div
-              class="bg-surface-container-low border border-outline-variant rounded-2xl p-6"
-            >
-              <div class="flex justify-between items-center mb-6">
-                <h3 class="text-headline-md text-on-surface">
-                  Active Applications
-                </h3>
-                <button class="text-primary font-bold text-label-md">
-                  Manage Applications
-                </button>
-              </div>
-              <div class="flex flex-col gap-3">
-                <!-- App item 1 -->
-                <div
-                  class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex items-center justify-between"
-                >
-                  <div class="flex items-center gap-4">
-                    <div
-                      class="w-12 h-12 bg-surface-container rounded-lg overflow-hidden"
-                    >
-                      <img
-                        class="w-full h-full object-cover"
-                        data-alt="Small thumbnail of a modern white building facade under a clear blue sky, architecture shot."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr6Cjj3BVvAfVxQCBkHo7eCg0RISH9HXApDu4ENWdWLeFArZDgVugsT9jUJoaR4TBrJhQI8sPUHCYRacZ5R-MBUYrmTwOOcncD_HqMIBvFysuwPNLW-rp88g8go1YN6glQSdviF4Be9BWaKqCLNDb4myREUWINgyBhGwzzYEvzfoTb0UqwSpJqTrtxEYMOHbakTcRLQcBSjg4BTZCAJZS2Lw4-pTGAqBDJ3DXlrC0gps0Nzt-egm87PDhMjjBn9OQmumkZ4ynR2psL"
-                      />
-                    </div>
-                    <div>
-                      <h5 class="text-label-md font-bold text-on-surface">
-                        Regent's Park Estate
-                      </h5>
-                      <p class="text-label-sm text-on-surface-variant">
-                        Applied: Sep 20, 2023
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-8">
-                    <div class="text-right">
-                      <p class="text-label-sm font-bold text-primary">
-                        Viewing Scheduled
-                      </p>
-                      <p class="text-label-sm text-on-surface-variant">
-                        Tomorrow, 14:00
-                      </p>
-                    </div>
-                    <button class="text-on-surface-variant hover:text-primary">
-                      <span class="material-symbols-outlined"
-                        >chevron_right</span
-                      >
-                    </button>
-                  </div>
-                </div>
-                <!-- App item 2 -->
-                <div
-                  class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex items-center justify-between"
-                >
-                  <div class="flex items-center gap-4">
-                    <div
-                      class="w-12 h-12 bg-surface-container rounded-lg overflow-hidden"
-                    >
-                      <img
-                        class="w-full h-full object-cover"
-                        data-alt="Close up of a modern door handle and apartment entrance, minimalist luxury aesthetic."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGR0D2o1C3x4LSsxTWq_GSvPZOuwvAba4Drgi4lRp1VeLGRo1ipisd-HzmuKTGl4P6Kg4KPRiZAf0JvaepYbbR5cZoLlK33RHmGLT4_TJCAWFmOM3jaji8e98DtVHf4Ii6nhPH5t2wlxuun6ya80QLZe_ghIQmDiiAg_-7RiGjgehN-xZWD3-JBl7pefsaGJqK1N4b5nfG77_RBXT846eIkJee6jhzC_jNs7POt0PToeKrfvi1gln8-cFJxUVwiKj5wiYT6Yu8hb5q"
-                      />
-                    </div>
-                    <div>
-                      <h5 class="text-label-md font-bold text-on-surface">
-                        The Penthouse, SE1
-                      </h5>
-                      <p class="text-label-sm text-on-surface-variant">
-                        Applied: Sep 22, 2023
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-8">
-                    <div class="text-right">
-                      <p class="text-label-sm font-bold text-secondary">
-                        Under Review
-                      </p>
-                      <p class="text-label-sm text-on-surface-variant">
-                        Awaiting Landlord
-                      </p>
-                    </div>
-                    <button class="text-on-surface-variant hover:text-primary">
-                      <span class="material-symbols-outlined"
-                        >chevron_right</span
-                      >
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Sidebar Column (Right) -->
-          <div
-            class="col-span-12 lg:col-span-4 flex flex-col gap-gutter-desktop"
-          >
-            <!-- Profile Card -->
-            <div
-              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm flex flex-col items-center text-center"
-            >
-              <div
-                class="w-24 h-24 rounded-full border-4 border-primary-container p-1 mb-4 relative"
-              >
-                <img
-                  class="w-full h-full object-cover rounded-full"
-                  data-alt="A professional studio headshot of a young adult man with a friendly expression, soft cinematic lighting, warm office background, high-resolution photography style consistent with a modern corporate PropTech platform."
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeNzvdsmgHBeOGU2OdbRGPS92zCbiN1I9qD_x05dSzDT1bJ814lnMp5Rp-gfU_aDwvhbVaYRHPaAkOWj2c6KDhKOI0UOsdd4BFRQiM--9v2Vj2zkuY63GRztfMcrEWg9DLQ9SfS1YRpVS12OYbQgS5CJLyCYqt-idTFZ6lEcyeWVUFLh6REVuvYquuH17MWiyFOQDgS-ZAj8oorDBNlPkcOaXl7t_KK1gnqRUxu8PnLrd4M4lqtXfiFKVfKVLUgj2GXkG2XgaE81pa"
-                />
-                <div
-                  class="absolute bottom-0 right-0 bg-primary border-2 border-white text-white p-1 rounded-full"
-                >
-                  <span
-                    class="material-symbols-outlined text-[16px]"
-                    style="font-variation-settings: &quot;FILL&quot; 1"
-                    >verified</span
-                  >
-                </div>
-              </div>
-              <h4 class="text-headline-md text-on-surface">Marcus Reed</h4>
-              <p class="text-label-md text-primary font-bold mb-4">
-                Verified Premium Renter
-              </p>
-              <div class="w-full grid grid-cols-2 gap-2 mb-6">
-                <div class="bg-surface-container p-3 rounded-lg text-left">
-                  <p class="text-label-sm text-on-surface-variant">
-                    Budget Range
-                  </p>
-                  <p class="text-label-md font-bold text-on-surface">
-                    £2.5k - £3.5k
-                  </p>
-                </div>
-                <div class="bg-surface-container p-3 rounded-lg text-left">
-                  <p class="text-label-sm text-on-surface-variant">
-                    Move-in Date
-                  </p>
-                  <p class="text-label-md font-bold text-on-surface">
-                    Oct 15, 2023
-                  </p>
-                </div>
-              </div>
-              <button
-                class="w-full py-2 border border-outline-variant rounded-lg text-label-md font-bold hover:bg-surface-container-low transition-colors"
-              >
-                Update Budget
-              </button>
-            </div>
-            <!-- Verification Status Card -->
-            <div
-              class="bg-surface-container-low border border-outline-variant rounded-2xl p-6 shadow-sm"
-            >
-              <div class="flex justify-between items-center mb-4">
-                <h4 class="text-label-md font-bold text-on-surface">
-                  Verification Status
-                </h4>
-                <span
-                  class="bg-secondary-container text-primary text-[11px] font-black px-2 py-0.5 rounded uppercase"
-                  >Fully Verified</span
-                >
-              </div>
-              <ul class="flex flex-col gap-3">
-                <li
-                  class="flex items-center gap-3 text-label-md text-on-surface"
-                >
-                  <span
-                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
-                    style="font-variation-settings: &quot;FILL&quot; 1"
-                    >check_circle</span
-                  >
-                  Identity (Passport/ID)
-                </li>
-                <li
-                  class="flex items-center gap-3 text-label-md text-on-surface"
-                >
-                  <span
-                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
-                    style="font-variation-settings: &quot;FILL&quot; 1"
-                    >check_circle</span
-                  >
-                  Current Address
-                </li>
-                <li
-                  class="flex items-center gap-3 text-label-md text-on-surface"
-                >
-                  <span
-                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
-                    style="font-variation-settings: &quot;FILL&quot; 1"
-                    >check_circle</span
-                  >
-                  Income &amp; Employment
-                </li>
-                <li
-                  class="flex items-center gap-3 text-label-md text-on-surface"
-                >
-                  <span
-                    class="material-symbols-outlined text-on-secondary-fixed-variant text-[20px]"
-                    style="font-variation-settings: &quot;FILL&quot; 1"
-                    >check_circle</span
-                  >
-                  Rental History
-                </li>
-              </ul>
-            </div>
-            <!-- Documents Summary -->
-            <div
-              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
-            >
-              <div class="flex justify-between items-center mb-4">
-                <h4 class="text-label-md font-bold text-on-surface">
-                  Rent Readiness
-                </h4>
-                <span class="text-primary font-bold text-label-sm"
-                  >Excellent</span
-                >
-              </div>
-              <div class="space-y-4 mb-6">
-                <div class="flex justify-between items-center">
-                  <span class="text-label-sm text-on-surface-variant"
-                    >Recommended Budget</span
-                  >
-                  <span class="text-label-md font-bold text-on-surface"
-                    >£2,800</span
-                  >
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-label-sm text-on-surface-variant"
-                    >Current Eligibility</span
-                  >
-                  <span class="text-label-md font-bold text-on-surface"
-                    >£3,200</span
-                  >
-                </div>
-                <div class="h-px bg-outline-variant w-full"></div>
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <p
-                      class="text-[11px] uppercase tracking-wider text-on-surface-variant mb-1"
-                    >
-                      Affordability
-                    </p>
-                    <div class="flex items-center gap-1 text-primary">
-                      <span class="material-symbols-outlined text-[18px]"
-                        >trending_up</span
-                      >
-                      <span class="text-label-md font-bold">Strong</span>
-                    </div>
-                  </div>
-                  <div>
-                    <p
-                      class="text-[11px] uppercase tracking-wider text-on-surface-variant mb-1"
-                    >
-                      Confidence
-                    </p>
-                    <div class="flex items-center gap-1 text-primary">
-                      <span class="material-symbols-outlined text-[18px]"
-                        >verified_user</span
-                      >
-                      <span class="text-label-md font-bold">High</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p
-                class="text-label-sm text-on-surface-variant mb-6 leading-tight"
-              >
-                Based on verified income, affordability assessment, and
-                HomiScore performance.
-              </p>
-              <button
-                class="w-full py-2 border border-outline-variant rounded-lg text-label-md font-bold text-on-surface hover:bg-surface-container-low transition-colors"
-              >
-                View Assessment
-              </button>
-            </div>
-            <!-- Payments Summary -->
-            <div
-              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
-            >
-              <h4 class="text-label-md font-bold text-on-surface mb-4">
-                Payments
-              </h4>
-              <div class="space-y-2 mb-6">
-                <div class="flex justify-between">
-                  <span class="text-label-sm text-on-surface-variant"
-                    >Direct Debit</span
-                  >
-                  <span
-                    class="text-label-sm font-bold text-on-secondary-fixed-variant"
-                    >Active</span
-                  >
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-label-sm text-on-surface-variant"
-                    >Next Payment</span
-                  >
-                  <span class="text-label-sm font-bold text-on-surface"
-                    >Oct 1st</span
-                  >
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-label-sm text-on-surface-variant"
-                    >Status</span
-                  >
-                  <span
-                    class="text-label-sm font-bold text-on-secondary-fixed-variant"
-                    >On Track</span
-                  >
-                </div>
-              </div>
-              <button
-                class="w-full py-2 bg-surface-container text-on-surface font-bold rounded-lg text-label-md hover:bg-surface-container-high"
-              >
-                Manage Payments
-              </button>
-            </div>
-            <!-- Quick Actions -->
-            <!-- Recent Activity -->
-            <div
-              class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm"
-            >
-              <div class="flex items-center gap-2 mb-4">
-                <span class="material-symbols-outlined text-primary text-[20px]"
-                  >calendar_today</span
-                >
-                <h4 class="text-label-md font-bold text-on-surface">
-                  Upcoming Viewing
-                </h4>
-              </div>
-              <div class="space-y-4 mb-6">
-                <div>
-                  <p class="text-label-md font-semibold text-on-surface">
-                    The Sapphire Suites
-                  </p>
-                  <p class="text-label-sm text-on-surface-variant">
-                    Canary Wharf, London
-                  </p>
-                </div>
-                <div class="flex justify-between items-center">
-                  <div class="flex flex-col">
-                    <span class="text-label-sm text-on-surface-variant"
-                      >Date &amp; Time</span
-                    >
-                    <span class="text-label-md font-medium text-on-surface"
-                      >Tue, 14 Oct • 2:00 PM</span
-                    >
-                  </div>
-                  <span
-                    class="bg-secondary-container text-on-secondary-fixed-variant text-[11px] font-black px-2 py-0.5 rounded uppercase"
-                    >Confirmed</span
-                  >
-                </div>
-              </div>
-              <button
-                class="w-full py-2 bg-primary text-on-primary rounded-lg text-label-md font-bold hover:bg-primary-container transition-colors active:scale-95"
-              >
-                View Details
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
-    <script>
-      // Micro-interactions and subtle effects
-      document.querySelectorAll("button, a").forEach((el) => {
-        el.addEventListener("click", (e) => {
-          const ripple = document.createElement("span");
-          ripple.classList.add("ripple");
-          // Simple scale effect logic already handled by tailwind classes usually,
-          // but can add JS triggers here if needed.
-        });
-      });
-
-      // Handle scroll effects for TopNavBar
-      const topBar = document.querySelector("header");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 20) {
-          topBar.classList.add("bg-white/90", "backdrop-blur-md");
-        } else {
-          topBar.classList.remove("bg-white/90", "backdrop-blur-md");
-        }
-      });
-    </script>
-    <script>
-      (function () {
-        document
-          .querySelectorAll(".apply-now-button")
-          .forEach(function (button) {
-            button.addEventListener("click", function () {
-              var isApplied = button.getAttribute("aria-pressed") === "true";
-
-              if (isApplied) {
-                button.setAttribute("aria-pressed", "false");
-                button.textContent = "Apply Now";
-                button.classList.remove(
-                  "bg-secondary-container",
-                  "text-primary",
-                );
-                button.classList.add("bg-primary", "text-on-primary");
-              } else {
-                button.setAttribute("aria-pressed", "true");
-                button.innerHTML =
-                  '<span class="material-symbols-outlined text-[16px] mr-1">check</span>Applied';
-                button.classList.remove("bg-primary", "text-on-primary");
-                button.classList.add("bg-secondary-container", "text-primary");
-              }
-            });
-          });
-      })();
-    </script>
-    <script>
-      document.querySelectorAll("a, button").forEach((element) => {
-        const label = element.textContent?.trim() || "";
-        if (label === "Log Out") {
-          element.addEventListener("click", (event) => {
-            event.preventDefault();
-            window.location.href = "/logout";
-          });
-        }
-      });
-    </script>
     <script src="/js/main.js"></script>
   </body>
 </html>

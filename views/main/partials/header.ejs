@@ -33,16 +33,27 @@
       >
     </nav>
     <div class="flex items-center space-x-4">
-      <a
-        class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary cursor-pointer"
-        href="/login"
-        >Login</a
-      >
-      <a
-        class="font-body-md text-body-md bg-primary text-on-primary px-6 py-2 rounded-lg hover:opacity-90 transition-all"
-        href="/signup"
-        >Sign Up</a
-      >
+      <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+        <span class="hidden lg:inline text-body-sm text-on-surface-variant">
+          Signed in as <strong class="font-semibold text-on-surface"><%= currentUser.email %></strong>
+        </span>
+        <a
+          class="inline-flex min-h-11 items-center justify-center rounded-lg border border-outline-variant px-4 font-body-md font-bold text-primary transition-colors hover:bg-surface-container-low"
+          href="/logout"
+          >Sign out</a
+        >
+      <% } else { %>
+        <a
+          class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold cursor-pointer"
+          href="/login"
+          >Login</a
+        >
+        <a
+          class="font-body-md text-body-md bg-primary text-on-primary px-6 py-2 rounded-lg hover:opacity-90 transition-all"
+          href="/signup"
+          >Sign Up</a
+        >
+      <% } %>
     </div>
   </div>
 </header>

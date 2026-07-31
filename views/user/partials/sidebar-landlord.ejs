@@ -1,79 +1,104 @@
 <!-- Landlord Dashboard Sidebar -->
 <aside
-  class="fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant/30 hidden md:flex flex-col py-6 px-4 gap-8 z-50"
+  id="dashboard-navigation"
+  aria-label="Landlord dashboard navigation"
+  class="hf-sidebar fixed left-0 top-0 h-screen w-[240px] bg-white border-r border-outline-variant/30 hidden md:flex flex-col py-6 px-4 gap-8 z-50"
 >
   <div class="px-2">
-    <h1 class="text-headline-md font-bold text-primary">HomiFund</h1>
+    <div class="text-headline-md font-bold text-primary">HomiFund</div>
     <p class="text-[11px] text-secondary font-medium tracking-tight">
       Landlord Dashboard
     </p>
   </div>
   <nav class="flex-1 flex flex-col gap-1">
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'dashboard' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'dashboard' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
       href="/user/landlord/dashboard"
+      <%- locals.currentPage === 'dashboard' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">dashboard</span>
       <span class="text-label-md">Dashboard</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'homiscore' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'homiscore' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
       href="/user/landlord/homiscore"
+      <%- locals.currentPage === 'homiscore' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]">verified</span>
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">verified</span>
       <span class="text-label-md">HomiScore</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'properties' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'properties' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
       href="/user/landlord/properties"
+      <%- locals.currentPage === 'properties' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]">home_work</span>
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">home_work</span>
       <span class="text-label-md">Properties</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'applicants' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'applicants' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
       href="/user/landlord/applicants"
+      <%- locals.currentPage === 'applicants' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]">assignment</span>
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">assignment</span>
       <span class="text-label-md">Applicants</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'documents' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
-      href="/user/landlord/documents"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'messages' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
+      href="/user/landlord/messages"
+      <%- locals.currentPage === 'messages' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]">description</span>
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">chat_bubble</span>
+      <span class="text-label-md">Messages</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'documents' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
+      href="/user/landlord/documents"
+      <%- locals.currentPage === 'documents' ? 'aria-current="page"' : '' %>
+    >
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">description</span>
       <span class="text-label-md">Documents</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'payments' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-all"
+      class="flex items-center gap-3 px-4 py-2.5 <%= locals.currentPage === 'payments' ? 'bg-primary/10 rounded-lg text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' %> rounded-lg transition-colors"
       href="/user/landlord/payments"
+      <%- locals.currentPage === 'payments' ? 'aria-current="page"' : '' %>
     >
-      <span class="material-symbols-outlined text-[20px]"
+      <span class="material-symbols-outlined text-[20px]" aria-hidden="true"
         >account_balance_wallet</span
       >
       <span class="text-label-md">Payments</span>
     </a>
   </nav>
   <div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-1">
-    <button
-      class="w-full mb-4 py-3 px-4 bg-primary text-on-primary rounded-lg font-semibold text-label-md hover:opacity-90 transition-opacity"
-      onclick="window.location.href = '/user/landlord/properties/add/address'"
-    >
-      Add Property
-    </button>
     <a
-      class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all rounded-lg"
-      href="/user/landlord/support"
+      class="mb-4 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-primary px-4 font-semibold text-label-md text-on-primary transition-opacity hover:opacity-90"
+      href="/user/landlord/properties/add/address"
     >
-      <span class="material-symbols-outlined">contact_support</span>
+      Add property
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 <%= locals.currentPage === 'settings' ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' %> transition-colors rounded-lg"
+      href="/user/landlord/settings"
+      <%- locals.currentPage === 'settings' ? 'aria-current="page"' : '' %>
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">settings</span>
+      <span class="text-label-md">Settings</span>
+    </a>
+    <a
+      class="flex items-center gap-3 px-4 py-3 <%= locals.currentPage === 'support' ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface' %> transition-colors rounded-lg"
+      href="/user/landlord/support"
+      <%- locals.currentPage === 'support' ? 'aria-current="page"' : '' %>
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
       <span class="text-label-md">Support</span>
     </a>
     <a
-      class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all rounded-lg"
+      class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors rounded-lg"
       href="/logout"
     >
-      <span class="material-symbols-outlined">logout</span>
-      <span class="text-label-md">Log Out</span>
+      <span class="material-symbols-outlined" aria-hidden="true">logout</span>
+      <span class="text-label-md">Log out</span>
     </a>
   </div>
 </aside>
