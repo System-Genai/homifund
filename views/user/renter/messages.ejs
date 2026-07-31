@@ -1065,6 +1065,7 @@
         let activeConversation = "sapphire";
 
         function setDropdownOpen(open) {
+          if (!messageDropdown || !messageToggle) return;
           messageDropdown.classList.toggle("hidden", !open);
           messageToggle.setAttribute("aria-expanded", String(open));
           messageToggle.classList.toggle("bg-secondary-container", open);
@@ -1153,14 +1154,16 @@
           document.body.classList.remove("overflow-hidden");
         }
 
-        messageToggle.addEventListener("click", (event) => {
-          event.stopPropagation();
-          setDropdownOpen(messageDropdown.classList.contains("hidden"));
-        });
+        if (messageMenu && messageToggle && messageDropdown) {
+          messageToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            setDropdownOpen(messageDropdown.classList.contains("hidden"));
+          });
 
-        document.addEventListener("click", (event) => {
-          if (!messageMenu.contains(event.target)) setDropdownOpen(false);
-        });
+          document.addEventListener("click", (event) => {
+            if (!messageMenu.contains(event.target)) setDropdownOpen(false);
+          });
+        }
 
         previewRows.forEach((row) => {
           row.addEventListener("click", () =>
