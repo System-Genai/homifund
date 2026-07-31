@@ -29,137 +29,28 @@
         </div>
         <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
           <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
-            <div class="relative">
-              <button
-                id="notification-toggle"
-                class="relative bg-secondary-container text-primary p-2 rounded-full transition-colors"
-                aria-label="Notifications"
-                aria-expanded="true"
-                aria-controls="notification-dropdown"
-              >
-                <span
-                  class="material-symbols-outlined"
-                  data-icon="notifications"
-                  >notifications</span
-                >
-                <span
-                  class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-secondary-container"
-                ></span>
-              </button>
-
-              <div
-                id="notification-dropdown"
-                class="absolute right-0 top-12 w-[calc(100vw-2rem)] max-w-[360px] sm:w-[360px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden z-50"
-                role="dialog"
-                aria-label="Notifications"
-              >
-                <div
-                  class="px-5 py-4 border-b border-outline-variant flex items-center justify-between"
-                >
-                  <div>
-                    <h3 class="text-sm font-bold text-on-surface">
-                      Notifications
-                    </h3>
-                    <p class="text-xs text-on-surface-variant mt-1">
-                      Recent updates from HomiFund
-                    </p>
-                  </div>
-                  <button
-                    class="text-xs text-primary font-bold hover:underline"
-                  >
-                    Mark all as read
-                  </button>
-                </div>
-
-                <div class="divide-y divide-outline-variant">
-                  <a
-                    href="applications"
-                    class="flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  >
-                    <div
-                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >assignment</span
-                      >
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-semibold text-on-surface">
-                        Application update
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        You have an update in your Applications workspace.
-                      </p>
-                    </div>
-                    <span
-                      class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"
-                    ></span>
-                  </a>
-
-                  <a
-                    href="dashboard"
-                    class="flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  >
-                    <div
-                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >search</span
-                      >
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-semibold text-on-surface">
-                        Property match
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        A property may match your rental preferences.
-                      </p>
-                    </div>
-                    <span
-                      class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"
-                    ></span>
-                  </a>
-
-                  <a
-                    href="documents"
-                    class="flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  >
-                    <div
-                      class="w-9 h-9 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0"
-                    >
-                      <span class="material-symbols-outlined text-[18px]"
-                        >description</span
-                      >
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-semibold text-on-surface">
-                        Document reminder
-                      </p>
-                      <p class="text-xs text-on-surface-variant mt-1">
-                        Review any documents needed for your active
-                        applications.
-                      </p>
-                    </div>
-                  </a>
-                </div>
-
-                <div
-                  class="px-5 py-3 bg-surface-container-low border-t border-outline-variant"
-                >
-                  <button
-                    class="text-xs text-primary font-bold hover:underline"
-                  >
-                    View all notifications
-                  </button>
-                </div>
-              </div>
-            </div>
-            <a href="/user/renter/settings" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
-            <span class="material-symbols-outlined">settings</span>
-          </a>
-            <a href="/user/renter/messages" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
-            <span class="material-symbols-outlined">chat_bubble</span>
-          </a>
+            <a
+              class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors"
+              href="/user/renter/notification-bell"
+              aria-label="Notifications"
+            >
+              <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+              <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+            </a>
+            <a
+              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
+              href="/user/renter/settings"
+              aria-label="Settings"
+            >
+              <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            </a>
+            <a
+              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
+              href="/user/renter/messages"
+              aria-label="Messages"
+            >
+              <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+            </a>
           </div>
           <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
           <div class="flex items-center gap-3 lg:pl-2 group cursor-pointer shrink-0">

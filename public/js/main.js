@@ -286,9 +286,7 @@
       }
     });
 
-    const profileCandidates = header.querySelectorAll(
-      ".cursor-pointer, button, div",
-    );
+    const profileCandidates = header.querySelectorAll(".cursor-pointer, button");
     Array.from(profileCandidates).forEach((element) => {
       if (
         element.querySelector(".text-right") &&
@@ -377,6 +375,12 @@
     element.dataset.hfNavBound = target;
     element.addEventListener("click", (event) => {
       const tagName = element.tagName;
+      const nestedLink = event.target.closest && event.target.closest("a[href]");
+
+      if (nestedLink && nestedLink !== element && element.contains(nestedLink)) {
+        return;
+      }
+
       if (tagName !== "A") {
         event.preventDefault();
       }

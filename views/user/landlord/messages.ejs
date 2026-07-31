@@ -30,152 +30,30 @@
       </div>
       <div class="flex items-center gap-1 sm:gap-3 lg:gap-6 ml-auto">
         <div class="flex items-center gap-0.5 sm:gap-2 lg:gap-4 text-on-surface-variant">
-          <a
-            href="/user/landlord/notification-bell"
-            class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors"
-          >
-            <span class="material-symbols-outlined">notifications</span>
-            <span
-              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
-            ></span>
-          </a>
-          <a
-            href="/user/landlord/settings"
-            class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
-          >
-            <span class="material-symbols-outlined">settings</span>
-          </a>
-          <div class="relative" id="landlord-messages-menu">
-            <button
-              id="landlord-messages-toggle"
+            <a
               class="relative hover:bg-surface-container-low p-2 rounded-full transition-colors"
-              aria-label="Messages"
-              aria-expanded="false"
-              aria-controls="landlord-messages-dropdown"
+              href="/user/landlord/notification-bell"
+              aria-label="Notifications"
             >
-              <span class="material-symbols-outlined" data-icon="chat_bubble"
-                >chat_bubble</span
-              >
-              <span
-                class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border border-surface"
-              ></span>
-            </button>
-
-            <div
-              id="landlord-messages-dropdown"
-              class="hidden absolute right-0 top-12 w-[calc(100vw-2rem)] max-w-[380px] sm:w-[380px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden z-50"
-              role="dialog"
+              <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+              <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+            </a>
+            <a
+              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
+              href="/user/landlord/settings"
+              aria-label="Settings"
+            >
+              <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            </a>
+            <a
+              class="hover:bg-surface-container-low p-2 rounded-full transition-colors"
+              href="/user/landlord/messages"
               aria-label="Messages"
             >
-              <div
-                class="px-4 sm:px-5 py-4 border-b border-outline-variant flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4"
-              >
-                <div>
-                  <h3 class="text-sm font-bold text-on-surface">Messages</h3>
-                  <p class="text-xs text-on-surface-variant mt-1">
-                    Conversations with renters and letting agents
-                  </p>
-                </div>
-                <button
-                  id="landlord-open-all-messages"
-                  class="text-xs text-primary font-bold hover:underline whitespace-nowrap"
-                >
-                  Open messages
-                </button>
-              </div>
-
-              <div class="divide-y divide-outline-variant">
-                <button
-                  class="landlord-message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  data-conversation="james"
-                >
-                  <div
-                    class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
-                  >
-                    JC
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center justify-between gap-3">
-                      <p class="text-sm font-semibold text-on-surface truncate">
-                        James Carter
-                      </p>
-                      <span class="text-[11px] text-on-surface-variant shrink-0"
-                        >Now</span
-                      >
-                    </div>
-                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
-                      Applicant: Thank you, I can attend the viewing tomorrow.
-                    </p>
-                  </div>
-                  <span
-                    class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"
-                  ></span>
-                </button>
-
-                <button
-                  class="landlord-message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  data-conversation="elena"
-                >
-                  <div
-                    class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
-                  >
-                    ER
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center justify-between gap-3">
-                      <p class="text-sm font-semibold text-on-surface truncate">
-                        Elena Rossi
-                      </p>
-                      <span class="text-[11px] text-on-surface-variant shrink-0"
-                        >Yesterday</span
-                      >
-                    </div>
-                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
-                      Applicant: I have uploaded the requested application
-                      document.
-                    </p>
-                  </div>
-                </button>
-
-                <button
-                  class="landlord-message-preview w-full text-left flex gap-3 px-5 py-4 hover:bg-surface-container-low transition-colors"
-                  data-conversation="agent"
-                >
-                  <div
-                    class="w-10 h-10 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 font-bold text-xs"
-                  >
-                    LA
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center justify-between gap-3">
-                      <p class="text-sm font-semibold text-on-surface truncate">
-                        Lettings agent
-                      </p>
-                      <span class="text-[11px] text-on-surface-variant shrink-0"
-                        >Mon</span
-                      >
-                    </div>
-                    <p class="text-xs text-on-surface-variant mt-0.5 truncate">
-                      Agent: A viewing request has been added to your calendar.
-                    </p>
-                  </div>
-                </button>
-              </div>
-
-              <div
-                class="px-5 py-3 bg-surface-container-low border-t border-outline-variant"
-              >
-                <button
-                  id="landlord-open-all-messages-bottom"
-                  class="text-xs text-primary font-bold hover:underline"
-                >
-                  View all messages
-                </button>
-              </div>
-            </div>
+              <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+            </a>
           </div>
-        </div>
-        <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
+          <div class="hidden sm:block h-8 w-px bg-outline-variant"></div>
         <div class="flex items-center gap-3 lg:pl-2 group cursor-pointer shrink-0">
           <div class="hidden lg:block text-right">
             <p
