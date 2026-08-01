@@ -330,7 +330,7 @@
 
     const dropdown = document.createElement("div");
     dropdown.className =
-      "hidden absolute right-0 top-12 w-[calc(100vw-2rem)] max-w-[450px] sm:w-[450px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden z-50";
+      "hidden fixed w-[calc(100vw-2rem)] max-w-[450px] sm:w-[450px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden z-50";
     dropdown.setAttribute("role", "dialog");
     dropdown.setAttribute("aria-label", label);
     dropdown.dataset.hfHeaderDropdown = label.toLowerCase();
@@ -349,9 +349,32 @@
     link.setAttribute("aria-haspopup", "dialog");
     link.setAttribute("aria-expanded", "false");
 
+    // Anchors the dropdown under its trigger using fixed positioning, then
+    // clamps it so it always stays fully within the viewport. Anchoring with
+    // plain `absolute right-0` broke on small screens because the dropdown's
+    // right edge was pinned to whichever icon opened it (not the screen edge),
+    // pushing the panel off the left side of the viewport.
+    function positionDropdown() {
+      const margin = 12;
+      const rect = link.getBoundingClientRect();
+      const ddWidth = dropdown.offsetWidth;
+      const maxLeft = window.innerWidth - ddWidth - margin;
+      const minLeft = margin;
+      let left = rect.right - ddWidth;
+      left = Math.min(left, maxLeft);
+      left = Math.max(left, minLeft);
+      dropdown.style.left = `${left}px`;
+      dropdown.style.top = `${rect.bottom + 8}px`;
+    }
+
     function setOpen(open) {
       closeHeaderDropdowns(dropdown);
-      dropdown.classList.toggle("hidden", !open);
+      if (open) {
+        dropdown.classList.remove("hidden");
+        positionDropdown();
+      } else {
+        dropdown.classList.add("hidden");
+      }
       link.setAttribute("aria-expanded", String(open));
       link.classList.toggle("bg-secondary-container", open);
       link.classList.toggle("text-primary", open);
@@ -365,6 +388,12 @@
 
     dropdown.addEventListener("click", (event) => {
       event.stopPropagation();
+    });
+
+    window.addEventListener("resize", () => {
+      if (!dropdown.classList.contains("hidden")) {
+        positionDropdown();
+      }
     });
 
     document.addEventListener("click", () => setOpen(false));
@@ -538,6 +567,32 @@
     workspace.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
     setHeaderWorkspaceConversation(workspace, role, conversationId);
+    showHeaderWorkspaceListPane(workspace);
+  }
+
+  // Mobile shows one pane at a time (list, then thread) - mirrors the
+  // master/detail behavior on the dedicated /messages page. Without this,
+  // the thread pane (which is `hidden` below the `md` breakpoint) never
+  // becomes visible on phones/small tablets, so tapping a conversation
+  // looked like nothing happened.
+  function isHeaderWorkspaceMobile() {
+    return window.matchMedia("(max-width: 767px)").matches;
+  }
+
+  function showHeaderWorkspaceThreadPane(workspace) {
+    if (!isHeaderWorkspaceMobile()) return;
+    workspace.querySelector("[data-conversation-pane]")?.classList.add("hidden");
+    const threadPane = workspace.querySelector("[data-thread-pane]");
+    threadPane?.classList.remove("hidden");
+    threadPane?.classList.add("flex");
+  }
+
+  function showHeaderWorkspaceListPane(workspace) {
+    if (!isHeaderWorkspaceMobile()) return;
+    workspace.querySelector("[data-conversation-pane]")?.classList.remove("hidden");
+    const threadPane = workspace.querySelector("[data-thread-pane]");
+    threadPane?.classList.add("hidden");
+    threadPane?.classList.remove("flex");
   }
 
   function ensureHeaderMessagesWorkspace(role) {
@@ -563,14 +618,18 @@
       }
     });
     workspace.querySelectorAll("[data-conversation]").forEach((row) => {
-      row.addEventListener("click", () =>
+      row.addEventListener("click", () => {
         setHeaderWorkspaceConversation(
           workspace,
           role,
           row.dataset.conversation,
-        ),
-      );
+        );
+        showHeaderWorkspaceThreadPane(workspace);
+      });
     });
+    workspace
+      .querySelector("[data-message-back]")
+      ?.addEventListener("click", () => showHeaderWorkspaceListPane(workspace));
     workspace
       .querySelector("[data-message-send]")
       ?.addEventListener("click", () => sendHeaderWorkspaceMessage(workspace));
@@ -582,6 +641,17 @@
           sendHeaderWorkspaceMessage(workspace);
         }
       });
+    window.addEventListener("resize", () => {
+      if (workspace.classList.contains("hidden")) return;
+      if (!isHeaderWorkspaceMobile()) {
+        workspace.querySelector("[data-conversation-pane]")?.classList.remove("hidden");
+        const threadPane = workspace.querySelector("[data-thread-pane]");
+        threadPane?.classList.remove("hidden");
+        threadPane?.classList.add("flex");
+      } else {
+        showHeaderWorkspaceListPane(workspace);
+      }
+    });
 
     return workspace;
   }
@@ -687,7 +757,7 @@
           </button>
         </div>
         <div class="min-h-0 flex flex-1">
-          <aside class="w-full md:w-[300px] lg:w-[310px] border-r border-outline-variant bg-surface shrink-0 flex flex-col min-h-0">
+          <aside data-conversation-pane class="w-full md:w-[300px] lg:w-[310px] border-r border-outline-variant bg-surface shrink-0 flex flex-col min-h-0">
             <div class="p-4 border-b border-outline-variant">
               <div class="relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
@@ -715,8 +785,11 @@
                 .join("")}
             </div>
           </aside>
-          <section class="hidden md:flex min-w-0 flex-1 flex-col">
+          <section data-thread-pane class="hidden md:flex min-w-0 flex-1 flex-col">
             <div class="p-4 sm:p-5 border-b border-outline-variant flex items-center gap-3 shrink-0">
+              <button type="button" data-message-back class="md:hidden -ml-2 p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low shrink-0" aria-label="Back to conversations">
+                <span class="material-symbols-outlined">arrow_back</span>
+              </button>
               <span data-active-avatar class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs"></span>
               <span class="min-w-0">
                 <span data-active-title class="block text-sm font-bold text-on-surface"></span>
